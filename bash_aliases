@@ -14,3 +14,6 @@ alias db='diary-backup'
 alias ds='diary-search'
 alias dsw='diary-search -w'
 alias de='diary-edit'
+
+# Misc
+alias free='free -m'
