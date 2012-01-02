@@ -102,65 +102,6 @@ PATH=$PATH:/home/david/bin
 export PATH
 
 # Custom prompt
-#function update_time_initiate {
-#	# Make pipe to receive times from
-#	pipe="$1"
-#	[ $pipe ] || exit 1
-#	trap "echo 'trap called' > /dev/pts/2 ; rm -f $pipe" 1 2 3 15 ERR
-#	trap "echo 'other trap called' > /dev/pts/2" EXIT
-#	mkfifo $pipe
-#	
-#	# Schedule first update
-#	at now + 1 minute <<< "echo time > $pipe" 2>/dev/null
-#	
-#	# Read in times to print
-#	enabled="y"
-#	while read line < $pipe; do 
-#		case "$line" in 
-#			"time" ) [ enabled ] && echo -en "\033[s\033[1000D\e[1;31m[$(date "+%I:%M:%S %p")]\e[0m\033[u"; at now + 1 minute <<< "echo time > $pipe" 2>/dev/null ;; 
-#			disable ) enabled="" ;;
-#			enable ) enabled="y" ;;
-#			* ) echo -en "\033[s\033[1000D[$line]\033[u" ;;
-#		esac
-#	done
-#
-#	# Clean up
-#	rm -f $pipe
-#
-#}
-
-# Note that the pid in the following variable is not the pid of the background
-# process but the pid of the process running this .bashrc.
-#pipe="/tmp/update-time-pipe-$$"
-#update_time_initiate $pipe &
-
-#update_time_PID="$!"
-#function nth {
-#	kill $update_time_PID
-#}
-
-#function update_time_enable { 
-#	echo "enable" > $pipe
-#}
-
-#function update_time_disable { 
-#	echo "disable" > $pipe
-#}
-
-
-# The string to preceed the working directory in the square brackets
-function time_string { date '+%I:%M %p'; }
-
-# PS1: <RED>[HH:MM AM] \w$ </RED>
-#PS1='\[\e]0;\u@\h: \w\a\]\[\e[1;31m\][$(time_string)] \w\$\[\e[0m\] $(update_time_enable)'
-PS1='\[\e]0;\u@\h: \w\a\]\[\e[1;31m\][$(time_string)] \w\$\[\e[0m\] '
-
-# PS2: <RED>> </RED>
-#PS2='\[\e[1;31m\]>\[\e[0m\] $(update_time_disable)'
+#PS1='\[\e]0;\u@\h: \w\a\]\[\e[1;31m\]\w\$\[\e[0m\] '
+PS1='\[\e]0;\u@\h: \w\a\]\[\e[1;31m\]\w\$\[\e[0m\] '
 PS2='\[\e[1;31m\]>\[\e[0m\] '
-
-# The prompt will automatically update its time when ever a new command is entered. 
-#trap 'update_time_disable; echo -en "\033[s\033[1A\e[1;31m[$(time_string)]\e[0m\033[u"' DEBUG
-#trap 'update_time_disable' DEBUG
-trap 'echo -en "\033[s\033[1A\e[1;31m[$(time_string)]\e[0m\033[u"' DEBUG
-
