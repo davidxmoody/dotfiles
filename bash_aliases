@@ -10,10 +10,10 @@ function mkcd { mkdir "$@"; cd "$@"; }
 # Diary
 alias dr='diary'
 alias dl='diary-list'
-alias db='diary-backup'
 alias ds='diary-search'
 alias dsw='diary-search -w'
 alias de='diary-edit'
+alias dc='diary-checklist'
 
 # Misc
 alias free='free -m'
