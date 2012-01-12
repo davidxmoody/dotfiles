@@ -97,11 +97,10 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-# Add ~/bin to PATH
-PATH=$PATH:/home/david/bin
+# Add ~/.bin to PATH
+PATH=$PATH:/home/david/.bin
 export PATH
 
 # Custom prompt
-#PS1='\[\e]0;\u@\h: \w\a\]\[\e[1;31m\]\w\$\[\e[0m\] '
 PS1='\[\e]0;\u@\h: \w\a\]\[\e[1;31m\]\w\$\[\e[0m\] '
 PS2='\[\e[1;31m\]>\[\e[0m\] '
