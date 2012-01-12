@@ -18,6 +18,9 @@
 " Alternate binding for going from insert mode to normal mode.
 :inoremap <Tab> <ESC>
 
+" Quick way to save and exit from insert mode.
+:inoremap ZZ <ESC>ZZ
+
 " Tabs and indenting
 :set tabstop=4
 :set softtabstop=4
