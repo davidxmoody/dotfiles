@@ -1,8 +1,12 @@
 # List
-alias l='ls -FCBH'
-alias ll='ls -ohFH'
-alias la='ls -ohFAH'
-alias lg='ls -ohFH | grep'
+alias   l='ls -FCBH'
+alias  la='ls -FCBHA'
+
+alias  ll='ls -ohFH'
+alias lal='ls -ohFHA'
+alias  lt='ls -ohFHt'
+alias lat='ls -ohFHtA'
+alias  lg='ls -ohFH | grep'
 alias lag='ls -ohFAH | grep'
 function cdl { cd "$@"; l; }
 function mkcd { mkdir "$@"; cd "$@"; }
