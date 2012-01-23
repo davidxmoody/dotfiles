@@ -21,7 +21,7 @@ alias de='diary edit'
 alias dc='diary checklist'
 
 # Mercurial
-alial hgl='hg glog | less'
+alias hgl='hg glog | less'
 
 # Misc
 alias free='free -m'
