@@ -6,17 +6,11 @@
 :set smartcase
 :set report=0
 :set scrolloff=4
+:set directory=~/tmp,/var/tmp,/tmp,.
 
-" Wrap at word boundaries.
-:set wrap
-:set linebreak
-:set nolist
-:set textwidth=0
-:set wrapmargin=0
-:set display=lastline
-
-" Alternate binding for going from insert mode to normal mode.
+" Alternate binding for going from insert mode to normal mode and vice versa.
 :inoremap <Tab> <ESC>
+:noremap <Tab> A
 
 " Quick way to save and exit from insert mode.
 :inoremap ZZ <ESC>ZZ
@@ -28,6 +22,14 @@
 :set expandtab
 :set smarttab
 :set autoindent
+
+" Wrap at word boundaries.
+:set wrap
+:set linebreak
+:set nolist
+:set textwidth=0
+:set wrapmargin=0
+:set display=lastline
 
 " Navigation with htns.
 :noremap t j
