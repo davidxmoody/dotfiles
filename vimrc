@@ -6,7 +6,9 @@
 :set smartcase
 :set report=0
 :set scrolloff=4
+:set mouse=vin
 :set directory=~/tmp,/var/tmp,/tmp,.
+:set clipboard=unnamedplus
 
 " Alternate binding for going from insert mode to normal mode and vice versa.
 :inoremap <Tab> <ESC>
