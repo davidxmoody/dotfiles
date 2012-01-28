@@ -16,7 +16,7 @@
 
 " Quick way to save and/or exit from insert mode.
 :inoremap ZZ <ESC>ZZ
-:inoremap SS <C-o>:update<CR>
+:inoremap SS <ESC>:update<CR>
 :noremap SS :update<CR>
 
 " Tabs and indenting
