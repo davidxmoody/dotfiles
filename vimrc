@@ -9,10 +9,14 @@
 :set mouse=vin
 :set directory=~/tmp,/var/tmp,/tmp,.
 :set clipboard=unnamedplus
+":set shellcmdflag=-ic
 
 " Alternate binding for going from insert mode to normal mode and vice versa.
 :inoremap <Tab> <ESC>
 :noremap <Tab> A
+
+" Bind enter to add a new list item.
+:noremap <CR> o-<Space>
 
 " Quick way to save and/or exit from insert mode.
 :inoremap ZZ <ESC>ZZ
