@@ -6,7 +6,7 @@
 :set smartcase
 :set report=0
 :set scrolloff=4
-:set mouse=vin
+":set mouse=vin
 :set directory=~/tmp,/var/tmp,/tmp,.
 :set clipboard=unnamedplus
 ":set shellcmdflag=-ic
