@@ -15,8 +15,9 @@
 :inoremap <Tab> <ESC>
 :noremap <Tab> A
 
-" Bind enter to add a new list item.
-:noremap <CR> o-<Space>
+" Bind enter to 'o' and '-' to add a new list item.
+:noremap <CR> o
+:noremap - o-<Space>
 
 " Quick way to save and/or exit from insert mode.
 :inoremap ZZ <ESC>ZZ
