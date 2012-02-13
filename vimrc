@@ -10,10 +10,11 @@
 :set directory=~/tmp,/var/tmp,/tmp,.
 :set clipboard=unnamedplus
 ":set shellcmdflag=-ic
+:set nojoinspaces
 
 " Alternate binding for going from insert mode to normal mode and vice versa.
 :inoremap <Tab> <ESC>
-:noremap <Tab> A
+:noremap <Space> A
 
 " Bind enter to 'o' and '-' to add a new list item.
 :noremap <CR> o
@@ -45,17 +46,23 @@
 :noremap n k
 :noremap s l
 
-:noremap T J
-:noremap N K
+:noremap T gj
+:noremap N gk
 :noremap S L
 
 :noremap j n
-:noremap k S
+:noremap k J
 :noremap l t
 
 :noremap J N
-:noremap K s
+:noremap K gJ
 :noremap L T
+
+" n is next and prev search results
+" t is until
+" s is substitute
+" J is join
+" K is lookup keyword
 
 " Make t and n go up and down in wrapped lines instead of actual lines.
 :map t gj
