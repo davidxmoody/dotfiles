@@ -30,3 +30,4 @@ alias hgl='hg glog | less'
 
 # Misc
 alias free='free -m'
+alias vims='vim "+set spell"'
