@@ -11,8 +11,11 @@ alias lat='ls -ohFHtA'
 alias  lg='ls -ohFH | grep'
 alias lag='ls -ohFAH | grep'
 
-function cdl { cd "$@" && l; }
-function mkcd { mkdir "$@" && cd "$@"; }
+# Functions
+cdl() { cd "$@" && l; }
+mkcd() { mkdir "$@" && cd "$@"; }
+mkscript() { touch "$@" && chmod +x "$@"; }
+mkproj() { [ "$1" ] && mkdir "$HOME/space/$1" && cd "$HOME/space/$1" && hg init; }
 
 # Diary
 alias dr='diary new'
