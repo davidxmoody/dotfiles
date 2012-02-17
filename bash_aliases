@@ -23,6 +23,7 @@ alias dl='diary list'
 alias ds='diary search'
 alias dsw='diary search -w'
 alias de='diary edit'
+alias det='diary edit -t'
 alias dc='diary checklist'
 
 # Mercurial
