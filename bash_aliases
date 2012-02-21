@@ -14,7 +14,8 @@ alias lag='ls -ohFAH | grep'
 # Functions
 cdl() { cd "$@" && l; }
 mkcd() { mkdir "$@" && cd "$@"; }
-mkscript() { touch "$@" && chmod +x "$@"; }
+mkscript() { touch "$@" && chmod +x "$@" && \
+             { echo '#!/bin/bash' | tee -a "$@" > /dev/null; }; }
 mkproj() { [ "$1" ] && mkdir "$HOME/space/$1" && cd "$HOME/space/$1" && hg init; }
 
 # Diary
