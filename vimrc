@@ -63,8 +63,3 @@
 " s is substitute
 " J is join
 " K is lookup keyword
-
-" Make t and n go up and down in wrapped lines instead of actual lines.
-:map t gj
-:map n gk
-
