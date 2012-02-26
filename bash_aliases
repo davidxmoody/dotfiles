@@ -14,6 +14,7 @@ alias lag='ls -ohFAH | grep'
 # Functions
 cdl() { cd "$@" && l; }
 cdp() { cd "$HOME/space/$1" && l; }
+upl() { cd ".." && l; }
 mkcd() { mkdir "$@" && cd "$@"; }
 mkscript() { touch "$@" && chmod +x "$@" && \
              { echo '#!/bin/bash' | tee -a "$@" > /dev/null; }; }
