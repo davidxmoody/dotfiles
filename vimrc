@@ -6,6 +6,8 @@
 :set smartcase
 :set report=0
 :set scrolloff=4
+:set sidescrolloff=1
+:set listchars=extends:>,precedes:<
 ":set mouse=vin
 :set directory=~/tmp,/var/tmp,/tmp,.
 :set clipboard=unnamedplus
@@ -34,12 +36,13 @@
 :set autoindent
 
 " Wrap at word boundaries.
-:set wrap
+":set wrap
 :set linebreak
-:set nolist
-:set textwidth=0
-:set wrapmargin=0
+:set breakat=\ 
 :set display=lastline
+
+" No wrapping
+:set nowrap
 
 " Navigation with htns.
 :noremap t j
