@@ -13,13 +13,21 @@ alias lag='ls -ohFAH | grep'
 
 # Functions
 cdl() { cd "$@" && l; }
+
 cdp() { cd "$HOME/space/$1" && l; }
+
 upl() { cd ".." && l; }
+
 mkcd() { mkdir "$@" && cd "$@"; }
+
 mkbash() { touch "$@" && chmod +x "$@" && \
            { echo '#!/bin/bash' | tee -a "$@" > /dev/null; }; }
+
 mkpython() { touch "$@" && chmod +x "$@" && \
              { echo '#!/usr/bin/env python' | tee -a "$@" > /dev/null; }; }
+
+alias mkpy=mkpython
+
 mkproj() { [ "$1" ] && mkdir "$HOME/space/$1" && cd "$HOME/space/$1" && hg init; }
 
 # Diary
