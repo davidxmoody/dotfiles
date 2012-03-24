@@ -16,8 +16,10 @@ cdl() { cd "$@" && l; }
 cdp() { cd "$HOME/space/$1" && l; }
 upl() { cd ".." && l; }
 mkcd() { mkdir "$@" && cd "$@"; }
-mkscript() { touch "$@" && chmod +x "$@" && \
-             { echo '#!/bin/bash' | tee -a "$@" > /dev/null; }; }
+mkbash() { touch "$@" && chmod +x "$@" && \
+           { echo '#!/bin/bash' | tee -a "$@" > /dev/null; }; }
+mkpython() { touch "$@" && chmod +x "$@" && \
+             { echo '#!/usr/bin/env python' | tee -a "$@" > /dev/null; }; }
 mkproj() { [ "$1" ] && mkdir "$HOME/space/$1" && cd "$HOME/space/$1" && hg init; }
 
 # Diary
