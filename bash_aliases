@@ -24,7 +24,7 @@ mkbash() { touch "$@" && chmod +x "$@" && \
            { echo '#!/bin/bash' | tee -a "$@" > /dev/null; }; }
 
 mkpython() { touch "$@" && chmod +x "$@" && \
-             { echo '#!/usr/bin/env python' | tee -a "$@" > /dev/null; }; }
+             { echo '#!/usr/bin/env python3' | tee -a "$@" > /dev/null; }; }
 
 alias mkpy=mkpython
 
