@@ -66,3 +66,7 @@
 " s is substitute
 " J is join
 " K is lookup keyword
+
+" Abbreviations
+:iab rss RSS
+:iab ssd SSD
