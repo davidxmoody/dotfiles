@@ -70,3 +70,4 @@
 " Abbreviations
 :iab rss RSS
 :iab ssd SSD
+:iab ssh SSH
