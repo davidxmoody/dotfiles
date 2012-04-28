@@ -47,6 +47,6 @@ alias hgl='hg glog | less'
 
 # Misc
 alias free='free -m'
-alias vims='vim "+syntax off" "+set spell" "+set wrap" "+set linebreak" "+set breakat=\ " "+set display=lastline"'
+alias vims='vim "+set syntax=markdown" "+set spell" "+set wrap" "+set linebreak" "+set breakat=\ " "+set display=lastline"'
 alias up='cd ..'
 alias dus='du -Dhs'
