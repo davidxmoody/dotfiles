@@ -51,3 +51,4 @@ alias vims='vim "+set syntax=markdown" "+set spell" "+set wrap" "+set linebreak"
 alias up='cd ..'
 alias dus='du -Dhs'
 alias py='python3'
+alias pyi='python3 -i'
