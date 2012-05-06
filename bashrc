@@ -102,7 +102,7 @@ PATH=$PATH:/home/david/.bin
 export PATH
 
 # Set CDPATH
-CDPATH="$HOME:$HOME/space"
+CDPATH="$HOME/space"
 export CDPATH
 
 # Custom prompt
