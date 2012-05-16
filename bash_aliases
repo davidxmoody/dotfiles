@@ -32,15 +32,13 @@ mkproj() { [ "$1" ] && mkdir "$HOME/space/$1" && cd "$HOME/space/$1" && hg init;
 
 # Diary
 alias dr='diary'
-alias drd='diary-dev'
-alias drs='diary-stable'
 alias dn='diary new'
 alias dl='diary list'
 alias ds='diary search'
 alias dsw='diary search -w'
 alias de='diary edit'
 alias det='diary edit -t'
-alias dc='diary checklist'
+alias dc='diary chain'
 
 # Mercurial
 alias hgl='hg glog | less'
@@ -52,3 +50,4 @@ alias up='cd ..'
 alias dus='du -Dhs'
 alias py='python3'
 alias pyi='python3 -i'
+alias back='cd -'
