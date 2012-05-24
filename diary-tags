@@ -1,9 +1,9 @@
 exercise exer.*
-piano piano.*
 meditation medi.*
-programming prog.*
-writing writ.*|wrot.*
-driving driv.*|drov.*
-cooking cook.*
 ideas idea.*
 outside out.*
+piano piano.*|learn-piano.*
+programming prog.*|learn-prog.*
+writing writ.*|wrot.*|learn-writ.*
+driving driv.*|drov.*|learn-driv.*
+cooking cook.*|learn-cook*
