@@ -1,5 +1,4 @@
-exercise exer.*
-exercise2 exer.*2|tor|learn-exer.*
+exercise exer.*|tor
 meditation medi.*
 ideas idea.*
 outside out.*
