@@ -41,7 +41,9 @@ alias det='diary edit -t'
 alias dc='diary chain'
 
 # Mercurial
-alias hgl='hg glog | less'
+alias hl='hg glog | less'
+alias hs='hg st'
+alias hc='hg ci'
 
 # Misc
 alias free='free -m'
