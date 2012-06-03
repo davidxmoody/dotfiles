@@ -71,3 +71,16 @@
 :iab rss RSS
 :iab ssd SSD
 :iab ssh SSH
+:iab latek LaTeX
+
+" Surrounds
+" TODO make this work in visual mode
+:map S <Nop>
+:map S` sBi`<ESC>Ea`<ESC>
+:map S' sBi'<ESC>Ea'<ESC>
+:map S" sBi"<ESC>Ea"<ESC>
+:map Sb sBi(<ESC>Ea)<ESC>
+:map S[ sBi[<ESC>Ea]<ESC>
+:map S] sBi[<ESC>Ea]<ESC>
+:map S{ sBi{<ESC>Ea}<ESC>
+:map S} sBi{<ESC>Ea}<ESC>
