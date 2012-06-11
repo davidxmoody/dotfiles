@@ -79,6 +79,7 @@
 :map S` sBi`<ESC>Ea`<ESC>
 :map S' sBi'<ESC>Ea'<ESC>
 :map S" sBi"<ESC>Ea"<ESC>
+:map S* sBi*<ESC>Ea*<ESC>
 :map Sb sBi(<ESC>Ea)<ESC>
 :map S[ sBi[<ESC>Ea]<ESC>
 :map S] sBi[<ESC>Ea]<ESC>
