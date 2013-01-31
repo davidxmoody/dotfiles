@@ -16,6 +16,10 @@
 
 " Alternate binding for going from insert mode to normal mode and vice versa.
 ":inoremap <Tab> <ESC>
+:inoremap kj <ESC>
+:inoremap kkj <ESC>:update<CR>
+:inoremap jk <ESC>l
+:inoremap jjk <ESC>:update<CR>:q<CR>
 :noremap <Space> A
 
 :noremap <CR> o
