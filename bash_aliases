@@ -11,6 +11,9 @@ alias lat='ls -ohFHtA'
 alias  lg='ls -ohFH | grep'
 alias lag='ls -ohFAH | grep'
 
+alias  lr='ls -FCBHR'
+alias lar='ls -FCBHAR'
+
 # Functions
 cdl() { cd "$@" && l; }
 
