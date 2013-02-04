@@ -1,18 +1,18 @@
 # List
-alias   l='ls -FCBH'
-alias  la='ls -FCBHA'
+alias   l='ls -FCBH --group-directories-first'
+alias  la='ls -FCBHA --group-directories-first'
 
-alias  ll='ls -ohFH'
-alias lal='ls -ohFHA'
+alias  ll='ls -ohFH --group-directories-first'
+alias lal='ls -ohFHA --group-directories-first'
 
-alias  lt='ls -ohFHt'
-alias lat='ls -ohFHtA'
+alias  lt='ls -ohFHt --group-directories-first'
+alias lat='ls -ohFHtA --group-directories-first'
 
-alias  lg='ls -ohFH | grep'
-alias lag='ls -ohFAH | grep'
+alias  lg='ls -ohFH | grep --group-directories-first'
+alias lag='ls -ohFAH | grep --group-directories-first'
 
-alias  lr='ls -FCBHR'
-alias lar='ls -FCBHAR'
+alias  lr='ls -FCBHR --group-directories-first'
+alias lar='ls -FCBHAR --group-directories-first'
 
 # Functions
 cdl() { cd "$@" && l; }
