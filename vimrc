@@ -8,15 +8,13 @@
 :set scrolloff=4
 :set sidescrolloff=1
 :set listchars=extends:>,precedes:<
-":set mouse=vin
 :set directory=~/tmp,/var/tmp,/tmp,.
 :set clipboard=unnamedplus
-":set shellcmdflag=-ic
 :set nojoinspaces
 :set number
 
 " Alternate binding for going from insert mode to normal mode and vice versa.
-:inoremap <Tab> <ESC>
+":inoremap <Tab> <ESC>
 :noremap <Space> A
 
 " Bind enter to 'o' and '-' to add a new list item.
@@ -41,7 +39,6 @@
 :set autoindent
 
 " Wrap at word boundaries.
-":set wrap
 :set linebreak
 :set breakat=\ 
 :set display=lastline
@@ -73,7 +70,4 @@
 " K is lookup keyword
 
 " Abbreviations
-:iab rss RSS
-:iab ssd SSD
-:iab ssh SSH
 :iab latek LaTeX
