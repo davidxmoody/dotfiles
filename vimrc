@@ -13,22 +13,23 @@
 :set clipboard=unnamedplus
 ":set shellcmdflag=-ic
 :set nojoinspaces
+:set number
 
 " Alternate binding for going from insert mode to normal mode and vice versa.
-":inoremap <Tab> <ESC>
-:inoremap kj <ESC>
-:inoremap kkj <ESC>:update<CR>
-:inoremap jk <ESC>l
-:inoremap jjk <ESC>:update<CR>:q<CR>
+:inoremap <Tab> <ESC>
 :noremap <Space> A
 
+" Bind enter to 'o' and '-' to add a new list item.
 :noremap <CR> o
 :noremap - o-<Space>
 
 " Quick way to save and/or exit from insert mode.
-":inoremap ZZ <ESC>ZZ
-":inoremap SS <ESC>:update<CR>
-":noremap SS :update<CR>
+:inoremap SS <ESC>ZZ
+:noremap SS ZZ
+:noremap S <Nop>
+:inoremap HH <ESC>:update<CR>
+:noremap HH :update<CR>
+:noremap H <Nop>
 
 " Tabs and indenting
 :set tabstop=4
@@ -38,28 +39,31 @@
 :set smarttab
 :set autoindent
 
-" Wrapping
+" Wrap at word boundaries.
+":set wrap
 :set linebreak
 :set breakat=\ 
 :set display=lastline
+
+" No wrapping
 :set nowrap
 
 " Navigation with htns.
-":noremap t j
-":noremap n k
-":noremap s l
+:noremap t j
+:noremap n k
+:noremap s l
 
-":noremap T gj
-":noremap N gk
-":noremap S L
+:noremap T 
+:noremap N 
+:noremap S L
 
-":noremap j n
-":noremap k J
-":noremap l t
+:noremap j n
+:noremap k J
+:noremap l t
 
-":noremap J N
-":noremap K gJ
-":noremap L T
+:noremap J N
+:noremap K gJ
+:noremap L T
 
 " n is next and prev search results
 " t is until
@@ -68,20 +72,7 @@
 " K is lookup keyword
 
 " Abbreviations
-":iab rss RSS
-":iab ssd SSD
-":iab ssh SSH
-":iab latek LaTeX
-
-" Surrounds
-" TODO make this work in visual mode
-":map S <Nop>
-":map S` sBi`<ESC>Ea`<ESC>
-":map S' sBi'<ESC>Ea'<ESC>
-":map S" sBi"<ESC>Ea"<ESC>
-":map S* sBi*<ESC>Ea*<ESC>
-":map Sb sBi(<ESC>Ea)<ESC>
-":map S[ sBi[<ESC>Ea]<ESC>
-":map S] sBi[<ESC>Ea]<ESC>
-":map S{ sBi{<ESC>Ea}<ESC>
-":map S} sBi{<ESC>Ea}<ESC>
+:iab rss RSS
+:iab ssd SSD
+:iab ssh SSH
+:iab latek LaTeX
