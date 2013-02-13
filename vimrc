@@ -24,11 +24,12 @@
 :noremap - o-<Space>
 
 " Quick way to save and/or exit from insert mode.
-:inoremap SS <ESC>ZZ
-:noremap SS ZZ
-:noremap S <Nop>
+:inoremap MM <ESC>ZZ
+:noremap MM ZZ
 :inoremap HH <ESC>:update<CR>
 :noremap HH :update<CR>
+:noremap M <Nop>
+:noremap S <Nop>
 :noremap H <Nop>
 
 " Tabs and indenting
