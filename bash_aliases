@@ -51,10 +51,12 @@ alias dc='diary chain'
 alias hl='hg glog | less'
 alias hs='hg st'
 alias hc='hg ci'
+alias hd='hg diff'
 
 # Misc
 alias free='free -m'
-alias vims='vim "+set syntax=markdown" "+set spell" "+set wrap" "+set linebreak" "+set breakat=\ " "+set display=lastline"'
+alias v='vim'
+alias vv='vim "+set syntax=markdown" "+set spell" "+set wrap" "+set linebreak" "+set breakat=\ " "+set display=lastline"'
 alias up='cd ..'
 alias dus='du -Dhs'
 alias py='python3'
