@@ -14,6 +14,9 @@ alias lag='ls -ohFAH | grep --group-directories-first'
 alias  lr='ls -FCBHR --group-directories-first'
 alias lar='ls -FCHAR --group-directories-first'
 
+alias  lv='ls -FCBHv --group-directories-first'
+alias lav='ls -FCHAv --group-directories-first'
+
 # Functions
 cdl() { cd "$@" && l; }
 
