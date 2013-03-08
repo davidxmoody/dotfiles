@@ -108,3 +108,6 @@ export CDPATH
 # Custom prompt
 PS1='\[\e]0;\u@\h: \w\a\]\[\e[0;31m\]\w\$\[\e[0m\] '
 PS2='\[\e[0;31m\]>\[\e[0m\] '
+
+# Sorting order
+export LC_COLLATE=C

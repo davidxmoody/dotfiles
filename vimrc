@@ -14,7 +14,6 @@
 :set number
 
 " Alternate binding for going from insert mode to normal mode and vice versa.
-":inoremap <Tab> <ESC>
 :noremap <Space> A
 
 " Bind enter to 'o' and '-' to add a new list item.
