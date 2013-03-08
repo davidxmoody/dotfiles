@@ -34,6 +34,7 @@ alias mkpy=mkpython
 mkproj() { [ "$1" ] && mkdir "$HOME/space/$1" && cd "$HOME/space/$1" && hg init; }
 
 # Diary
+alias diary='~/space/diary/stable/src/diary'
 alias dr='diary'
 alias dn='diary new'
 alias dl='diary list'

@@ -1,4 +1,4 @@
 dir_diary="$HOME/.diary"
 
-diary_edit_default_editor='vim "+set syntax=markdown" "+set spell" "+set wrap" "+set linebreak" "+set breakat=\ " "+set display=lastline"'
+diary_edit_default_editor='vim "+set syntax=markdown" "+set spell" "+set wrap" "+set linebreak" "+set breakat=\ " "+set display=lastline" "+set nonumber"'
 diary_new_entry_default_editor=$diary_edit_default_editor' "+startinsert"'
