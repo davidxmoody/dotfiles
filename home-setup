@@ -5,6 +5,7 @@ DBOX="$HOME/.dbox/Dropbox"
 [ -d "$DBOX" ] || { echo "$(basename $0): Dropbox folder does not exist, please create it at: $DBOX" >&2; exit 1; }
 
 # Setup directories in home dir
+asked=
 for dir in $(cat dirs-to-sync); do
     dbox_dir="$DBOX/$dir"
     dbox_dir_canon=$(readlink -e "$dbox_dir")
@@ -12,8 +13,8 @@ for dir in $(cat dirs-to-sync); do
     if [ -L "$dbox_dir" -a "$dbox_dir_canon" = "$target" ]; then
         : # Success, do nothing
     elif [ -d "$dbox_dir" -a ! -e "$target" ]; then
-        #TODO: wait here
-       mv -b "$dbox_dir" "$target" && \
+        [ -z "$asked" ] && { read -rs -N1 -p "Please stop Dropbox then press any key to continue" && echo && asked=true; }
+        mv -b "$dbox_dir" "$target" && \
            ln -sv "$target" "$dbox_dir"
     else
         echo "$(basename $0): Could not process directory: \"$dir\"" >&2
