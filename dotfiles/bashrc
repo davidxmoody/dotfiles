@@ -111,3 +111,6 @@ PS2='\[\e[0;31m\]>\[\e[0m\] '
 
 # Sorting order
 export LC_COLLATE=C
+
+DBOX="$HOME/.dbox/Dropbox"
+[ -d "$DBOX" ] && export DBOX
