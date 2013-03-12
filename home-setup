@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# Check Dropbox dir exists
+DBOX="$HOME/.dbox/Dropbox"
+[ -d "$DBOX" ] || { echo "Dropbox folder does not exist, please create it at: $DBOX" >&2; exit 1; }
+
+# Create symlinks to all dotfiles (in home dir), also add dot to their names
+for file in dotfiles/*; do
+    target="$HOME/.${file#dotfiles/}"
+    target_canon=$(readlink -f "$target")
+    file_canon=$(readlink -f "$file")
+    [ "$target_canon" = "$file_canon" ] && continue
+    ln -sbv "$file_canon" "$target"
+done
