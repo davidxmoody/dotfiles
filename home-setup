@@ -4,6 +4,11 @@
 DBOX="$HOME/.dbox/Dropbox"
 [ -d "$DBOX" ] || { echo "$(basename $0): Dropbox folder does not exist, please create it at: $DBOX" >&2; exit 1; }
 
+# Create directories
+for dir in $(cat dirs-to-make); do
+    mkdir -pv "$HOME/$dir" 
+done
+
 # Setup directories in home dir
 asked=
 for dir in $(cat dirs-to-sync); do
