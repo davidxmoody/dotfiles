@@ -46,6 +46,7 @@ alias dsw='diary search -w'
 alias de='diary edit'
 alias det='diary edit -t'
 alias dc='diary chain'
+alias di='$DBOX/diary-data/android-import'
 
 # Mercurial
 alias hl='hg glog | less'
