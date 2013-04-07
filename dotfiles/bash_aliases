@@ -8,8 +8,8 @@ alias lal='ls -ohFHA --group-directories-first'
 alias  lt='ls -ohFBHt --group-directories-first'
 alias lat='ls -ohFHtA --group-directories-first'
 
-alias  lg='ls -ohFBH | grep --group-directories-first'
-alias lag='ls -ohFAH | grep --group-directories-first'
+alias  lg='ls -ohFBH --group-directories-first | grep'
+alias lag='ls -ohFAH --group-directories-first | grep'
 
 alias  lr='ls -FCBHR --group-directories-first'
 alias lar='ls -FCHAR --group-directories-first'
