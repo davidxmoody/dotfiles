@@ -1,5 +1,6 @@
 [ui]
 username = David Moody <david.doomy@gmail.com>
+editor = vim +startinsert
 
 [extensions]
 hgext.graphlog = 
