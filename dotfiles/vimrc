@@ -12,6 +12,7 @@
 :set clipboard=unnamedplus
 :set nojoinspaces
 :set number
+:syntax on
 
 " Alternate binding for going from insert mode to normal mode and vice versa.
 :noremap <Space> A
