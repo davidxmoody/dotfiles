@@ -50,6 +50,7 @@ alias de='diary edit'
 alias det='diary edit -t'
 alias dc='diary chain'
 alias di='$DBOX/diary-data/android-import'
+des() { diary edit -s "#$1"; }
 
 # Mercurial
 alias hl='hg glog | less'
@@ -83,3 +84,5 @@ alias single='/home/david/.screenlayout/single-monitor.sh'
 alias u='l'
 alias wifi='sudo wifi-menu'
 alias sticky='xkbset sticky -twokey'
+alias ssctl='sudo systemctl'
+alias spm='sudo pacman'
