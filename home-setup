@@ -4,6 +4,11 @@
 DBOX="$HOME/.dbox/Dropbox"
 [ -d "$DBOX" ] || { echo "$(basename $0): Dropbox folder does not exist, please create it at: $DBOX" >&2; exit 1; }
 
+# Remove directories
+for dir in $(cat dirs-to-delete); do 
+    [ -d "$HOME/$dir" ] && rmdir -v "$HOME/$dir"
+done
+
 # Create directories
 for dir in $(cat dirs-to-make); do
     mkdir -pv "$HOME/$dir" 
