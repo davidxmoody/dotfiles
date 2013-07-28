@@ -125,3 +125,6 @@ export LC_COLLATE=C
 
 DBOX="$HOME/.dbox/Dropbox"
 [ -d "$DBOX" ] && export DBOX
+
+# Launch diary chain script on every new terminal
+dc
