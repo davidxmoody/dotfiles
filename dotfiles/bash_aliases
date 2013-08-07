@@ -48,8 +48,8 @@ alias ds='diary search'
 alias dsw='diary search -w'
 alias de='diary edit'
 alias det='diary edit -t'
-alias dc='diary chain'
 alias di='$DBOX/diary-data/android-import'
+alias dc='di; diary chain'
 des() { diary edit -s "#$1"; }
 
 # Mercurial
