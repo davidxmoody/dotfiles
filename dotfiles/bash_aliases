@@ -53,7 +53,7 @@ alias det='diary edit -t'
 alias di='$DBOX/diary-data/android-import'
 alias dc='di; diary chain'
 des() { diary edit -s "#$1"; }
-#alias done='echo "#done" >> "$(diary range --new)"'
+alias don='echo "#done" >> "$(diary range --new)"'
 
 # Mercurial
 alias hl='hg glog | less'
