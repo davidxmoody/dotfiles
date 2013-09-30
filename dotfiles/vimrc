@@ -69,5 +69,71 @@
 " J is join
 " K is lookup keyword
 
-" Abbreviations
-:iab latek LaTeX
+" English abbreviations
+iab i I
+iab im I'm
+iab iv I've
+iab il I'll
+iab id I'd
+
+iab dont don't
+iab didnt didn't
+iab cant can't
+iab isnt isn't
+iab wont won't
+iab havent haven't
+iab hasnt hasn't
+iab wasnt wasn't
+iab doesnt doesn't
+iab couldnt couldn't
+iab wouldnt wouldn't
+iab arent aren't
+iab werent weren't
+iab thats that's
+
+" pound symbol?
+iab mum Mum
+iab dad Dad
+iab mums Mum's
+iab dads Dad's
+iab shes she's
+iab hes he's
+iab ben Ben
+
+iab anki Anki
+iab dropbox Dropbox
+iab ubuntu Ubuntu
+iab youtube YouTube
+iab tor Tor
+iab java Java
+iab linux Linux
+iab cambridge Cambridge
+iab christmas Christmas
+iab 3ds 3DS
+iab tv TV
+iab sainsburys Sainsbury's
+iab facebook Facebook
+iab dvd DVD
+iab amazon Amazon
+iab bluetooth Bluetooth
+iab ebay eBay
+iab ssd SSD
+iab dvorak Dvorak
+iab greek Greek
+iab strode Strode
+iab microsoft Microsoft
+iab bristol Bristol
+iab ok OK
+iab euler Euler
+
+iab monday Monday
+iab tuesday Tuesday
+iab wednesday Wednesday
+iab thursday Thursday
+iab friday Friday
+iab saturday Saturday
+iab sunday Sunday
+
+iab latek LaTeX
+iab cof CoffeeScript
+iab jsc JavaScript
