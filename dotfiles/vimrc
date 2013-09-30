@@ -73,6 +73,7 @@
 iab i I
 iab im I'm
 iab iv I've
+iab ive I've
 iab il I'll
 iab id I'd
 
@@ -125,6 +126,7 @@ iab microsoft Microsoft
 iab bristol Bristol
 iab ok OK
 iab euler Euler
+iab nikon Nikon
 
 iab monday Monday
 iab tuesday Tuesday
@@ -137,3 +139,45 @@ iab sunday Sunday
 iab latek LaTeX
 iab cof CoffeeScript
 iab jsc JavaScript
+
+" Autocomplete script (http://vim.wikia.com/wiki/Autocapitalize_the_start_of_every_sentence)
+fun! CapWait(prev)
+	redraw
+	let next=nr2char(getchar())
+	if next=~'[.?!\r\n[:blank:]()]'
+		exe 'normal! i' . next . "\<Right>"
+		return CapWait(next)
+	elseif next=~'[\e]'
+		return "\<del>"
+	elseif a:prev=~'[\r\n[:blank:]]'
+		return toupper(next) . "\<del>"
+	else
+		return next . "\<del>"
+	endif
+endfun
+fun! CapHere()
+	let trunc = getline(".")[0:col(".")-2] 
+	return col(".")==1 ? CapWait("\r")
+	\ : trunc=~'[?!.]\s*$\|^\s*$' ? CapWait(trunc[-1:-1]) : "\<del>"
+endfun
+fun! InitTextFile()
+	im <buffer> <silent> . ._<Left><C-R>=CapWait('.')<CR>
+	im <buffer> <silent> ? ?_<Left><C-R>=CapWait('?')<CR>
+	im <buffer> <silent> ! !_<Left><C-R>=CapWait('!')<CR>
+	im <buffer> <silent> <CR> <CR>_<Left><C-R>=CapWait("\r")<R>
+	im <buffer> <silent> <NL> <NL>_<Left><C-R>=CapWait("\n")<CR>
+	nm <buffer> <silent> O O_<Left><C-R>=CapWait("\r")<CR>
+	nm <buffer> <silent> o o_<Left><C-R>=CapWait("\r")<CR>
+	nm <buffer> <silent> a a_<Left><C-R>=CapHere()<CR>
+	nm <buffer> <silent> A $a_<Left><C-R>=CapHere()<CR>
+	nm <buffer> <silent> i i_<Left><C-R>=CapHere()<CR>
+	nm <buffer> <silent> I I_<Left><C-R>=CapHere()<CR>
+	nm <buffer> <silent> s s_<Left><C-R>=CapHere()<CR>
+	nm <buffer> <silent> cc cc_<Left><C-R>=CapHere()<CR>
+	nm <buffer> <silent> cw cw_<Left><C-R>=CapHere()<CR>
+	nm <buffer> <silent> R R_<Left><C-R>=CapHere()<CR>
+	nm <buffer> <silent> C C_<Left><C-R>=CapHere()<CR>
+endfun
+au BufNewFile,BufRead *.txt call InitTextFile()
+au BufNewFile,BufRead *.md call InitTextFile()
+au BufNewFile,BufRead *.mkd call InitTextFile()
