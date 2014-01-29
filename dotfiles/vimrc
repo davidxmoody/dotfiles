@@ -17,14 +17,16 @@ set nojoinspaces
 set number
 syntax on
 
-" Alternate binding for going from insert mode to normal mode and vice versa.
-noremap <Space> A
+" Auto wrap comments
+set textwidth=79
+set formatoptions=crqn1j
 
-" Bind enter to 'o' and '-' to add a new list item.
+" Some custom navigation bindings
+noremap <Space> A
 noremap <CR> o
 noremap - o-<Space>
 
-" Quick way to save and/or exit from insert mode.
+" Quick way to save and/or exit from insert mode
 inoremap MM <ESC>ZZ
 noremap MM ZZ
 inoremap HH <ESC>:update<CR>
@@ -44,7 +46,7 @@ set autoindent
 " No wrapping
 set nowrap
 
-" Navigation with htns.
+" Navigation with htns
 noremap t j
 noremap n k
 noremap s l
@@ -52,6 +54,9 @@ noremap s l
 noremap T 
 noremap N 
 noremap S L
+
+noremap gt gj
+noremap gn gk
 
 noremap j n
 noremap k J
@@ -79,12 +84,15 @@ au BufNewFile,BufRead *.py call PythonMode()
 func! WordProcessorMode()
   " Set syntax to markdown?
   syntax off
-  set spell
+  set spell spelllang=en_gb
   set nonumber
   set wrap
   set linebreak
   set breakat=\ 
   set display=lastline
+  set tabstop=4
+  set softtabstop=4
+  set shiftwidth=4
   source ~/.vim/abbreviations.vim
 endfu
 
