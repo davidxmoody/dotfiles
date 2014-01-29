@@ -1,145 +1,89 @@
+" Function for editing English text
+func! WordProcessorMode()
+  " Set syntax to markdown?
+  syntax off
+  set spell
+  set nonumber
+  set wrap
+  set linebreak
+  set breakat=\ 
+  set display=lastline
+  source ~/.vim/abbreviations.vim
+endfu
+
+com! WP call WordProcessorMode()
+au BufNewFile,BufRead *.mkd call WordProcessorMode()
+au BufNewFile,BufRead *.md call WordProcessorMode()
+au BufNewFile,BufRead diary-*.txt call WordProcessorMode()
+
+" Open new files in insert mode
+au BufNewFile * startinsert
+
 " Miscellaneous 
-:set nocompatible
-:set ruler
-:set autoread
-:set ignorecase
-:set smartcase
-:set report=0
-:set scrolloff=4
-:set sidescrolloff=1
-:set listchars=extends:>,precedes:<
-:set directory=~/tmp,/var/tmp,/tmp,.
-:set clipboard=unnamedplus
-:set nojoinspaces
-:set number
-:syntax on
+set nocompatible
+set ruler
+set autoread
+set ignorecase
+set smartcase
+set report=0
+set scrolloff=4
+set sidescrolloff=1
+set listchars=extends:>,precedes:<
+set directory=~/tmp,/var/tmp,/tmp,.
+set clipboard=unnamedplus
+set nojoinspaces
+set number
+syntax on
 
 " Alternate binding for going from insert mode to normal mode and vice versa.
-:noremap <Space> A
+noremap <Space> A
 
 " Bind enter to 'o' and '-' to add a new list item.
-:noremap <CR> o
-:noremap - o-<Space>
+noremap <CR> o
+noremap - o-<Space>
 
 " Quick way to save and/or exit from insert mode.
-:inoremap MM <ESC>ZZ
-:noremap MM ZZ
-:inoremap HH <ESC>:update<CR>
-:noremap HH :update<CR>
-:noremap M <Nop>
-:noremap S <Nop>
-:noremap H <Nop>
+inoremap MM <ESC>ZZ
+noremap MM ZZ
+inoremap HH <ESC>:update<CR>
+noremap HH :update<CR>
+noremap M <Nop>
+noremap S <Nop>
+noremap H <Nop>
 
 " Tabs and indenting
-:set tabstop=4
-:set softtabstop=4
-:set shiftwidth=4
-:set expandtab
-:set smarttab
-:set autoindent
-
-" Wrap at word boundaries.
-:set linebreak
-:set breakat=\ 
-:set display=lastline
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
+set expandtab
+set smarttab
+set autoindent
 
 " No wrapping
-:set nowrap
+set nowrap
 
 " Navigation with htns.
-:noremap t j
-:noremap n k
-:noremap s l
+noremap t j
+noremap n k
+noremap s l
 
-:noremap T 
-:noremap N 
-:noremap S L
+noremap T 
+noremap N 
+noremap S L
 
-:noremap j n
-:noremap k J
-:noremap l t
+noremap j n
+noremap k J
+noremap l t
 
-:noremap J N
-:noremap K gJ
-:noremap L T
+noremap J N
+noremap K gJ
+noremap L T
 
 " n is next and prev search results
 " t is until
 " s is substitute
 " J is join
 " K is lookup keyword
-
-" English abbreviations
-iab i I
-iab im I'm
-iab iv I've
-iab ive I've
-iab il I'll
-iab id I'd
-
-iab dont don't
-iab didnt didn't
-iab cant can't
-iab isnt isn't
-iab wont won't
-iab havent haven't
-iab hasnt hasn't
-iab wasnt wasn't
-iab doesnt doesn't
-iab couldnt couldn't
-iab wouldnt wouldn't
-iab arent aren't
-iab werent weren't
-iab thats that's
-iab hadnt hadn't
-
-" pound symbol?
-iab mum Mum
-iab dad Dad
-iab mums Mum's
-iab dads Dad's
-iab shes she's
-iab hes he's
-iab ben Ben
-
-iab anki Anki
-iab dropbox Dropbox
-iab ubuntu Ubuntu
-iab youtube YouTube
-iab tor Tor
-iab java Java
-iab linux Linux
-iab cambridge Cambridge
-iab christmas Christmas
-iab 3ds 3DS
-iab tv TV
-iab sainsburys Sainsbury's
-iab facebook Facebook
-iab dvd DVD
-iab amazon Amazon
-iab bluetooth Bluetooth
-iab ebay eBay
-iab ssd SSD
-iab dvorak Dvorak
-iab greek Greek
-iab strode Strode
-iab microsoft Microsoft
-iab bristol Bristol
-iab ok OK
-iab euler Euler
-iab nikon Nikon
-
-iab monday Monday
-iab tuesday Tuesday
-iab wednesday Wednesday
-iab thursday Thursday
-iab friday Friday
-iab saturday Saturday
-iab sunday Sunday
-
-iab latek LaTeX
-iab cof CoffeeScript
-iab jsc JavaScript
 
 " Autocomplete script (http://vim.wikia.com/wiki/Autocapitalize_the_start_of_every_sentence)
 "fun! CapWait(prev)
