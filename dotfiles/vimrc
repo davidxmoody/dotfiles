@@ -1,21 +1,3 @@
-" Function for editing English text
-func! WordProcessorMode()
-  " Set syntax to markdown?
-  syntax off
-  set spell
-  set nonumber
-  set wrap
-  set linebreak
-  set breakat=\ 
-  set display=lastline
-  source ~/.vim/abbreviations.vim
-endfu
-
-com! WP call WordProcessorMode()
-au BufNewFile,BufRead *.mkd call WordProcessorMode()
-au BufNewFile,BufRead *.md call WordProcessorMode()
-au BufNewFile,BufRead diary-*.txt call WordProcessorMode()
-
 " Open new files in insert mode
 au BufNewFile * startinsert
 
@@ -84,6 +66,32 @@ noremap L T
 " s is substitute
 " J is join
 " K is lookup keyword
+
+" Function for editing Python code
+func! PythonMode()
+  set tabstop=4
+  set softtabstop=4
+  set shiftwidth=4
+endfu
+au BufNewFile,BufRead *.py call PythonMode()
+
+" Function for editing English text
+func! WordProcessorMode()
+  " Set syntax to markdown?
+  syntax off
+  set spell
+  set nonumber
+  set wrap
+  set linebreak
+  set breakat=\ 
+  set display=lastline
+  source ~/.vim/abbreviations.vim
+endfu
+
+com! WP call WordProcessorMode()
+au BufNewFile,BufRead *.mkd call WordProcessorMode()
+au BufNewFile,BufRead *.md call WordProcessorMode()
+au BufNewFile,BufRead diary-*.txt call WordProcessorMode()
 
 " Autocomplete script (http://vim.wikia.com/wiki/Autocapitalize_the_start_of_every_sentence)
 "fun! CapWait(prev)
