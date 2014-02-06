@@ -54,6 +54,9 @@ alias di='$DBOX/diary-data/android-import'
 alias dt='diary list --asc --after today'
 alias dsum='ds \#dsum'
 
+# Display some random diary entries
+dr() { diary list --asc --after $(date -d @$((1356998400+(RANDOM*(1391548892-1356998400)/32700) )) +%F); }
+
 # Mercurial
 alias hl='hg glog | less'
 alias hs='hg st'
@@ -70,7 +73,6 @@ alias e='cd'
 # Misc
 alias free='free -m'
 alias v='vim'
-alias vv='vim "+set syntax=markdown" "+set spell" "+set wrap" "+set linebreak" "+set breakat=\ " "+set display=lastline"'
 alias dus='du -Dhs'
 alias py='python3'
 alias pyi='python3 -i'
