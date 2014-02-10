@@ -17,6 +17,9 @@ set nojoinspaces
 set number
 syntax on
 
+" '.' in visual mode repeats the last change on every line
+vnoremap . :norm.<CR>
+
 " Auto wrap comments
 set textwidth=79
 set formatoptions=crqn1j
