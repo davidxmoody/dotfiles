@@ -70,6 +70,10 @@ alias cddb='cd $DBOX'
 alias cdrc='cd ~/space/rc'
 alias e='cd'
 
+# Random functions
+alias coin='if ((RANDOM%2 == 0)); then echo yes; else echo no; fi'
+alias dice='echo $((RANDOM%6+1))'
+
 # Misc
 alias free='free -m'
 alias v='vim'
