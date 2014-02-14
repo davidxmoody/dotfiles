@@ -72,7 +72,9 @@ alias e='cd'
 
 # Random functions
 alias coin='if ((RANDOM%2 == 0)); then echo yes; else echo no; fi'
+ncoin() { n=$1; while [ $((n-=1)) -ge 0 ]; do coin; done; }
 alias dice='echo $((RANDOM%6+1))'
+ndice() { n=$1; while [ $((n-=1)) -ge 0 ]; do dice; done; }
 
 # Misc
 alias free='free -m'
