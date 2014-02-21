@@ -44,9 +44,20 @@ mkalias() { alias_command="alias ${1%%=*}='${1#*=}'" && eval "$alias_command" &&
 greppy() { grep -n "$1" *.py; }
 grepc() { grep -n "$1" *.coffee; }
 
+countdown() {
+  local seconds=$1
+  while [[ "$seconds" -gt 0 ]]; do
+    printf "\r%02d" "$seconds"
+    sleep 1
+    let seconds--
+  done
+  printf "\r00\n"
+}
+
 # Diary
 alias diary='~/space/diary/stable/src/diary -b ~/.dbox/Dropbox/diary-data'
-alias dn='diary new'
+#alias dn='diary new'
+alias dn='countdown 60; diary new'
 alias dl='diary list'
 alias ds='diary search'
 alias de='diary edit'
