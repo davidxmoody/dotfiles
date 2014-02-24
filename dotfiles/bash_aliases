@@ -63,14 +63,12 @@ countdown() {
 
 # Diary
 alias diary='~/space/diary/stable/src/diary -b ~/.dbox/Dropbox/diary-data'
-#alias dn='diary new'
-alias dn='countdown 60 "diary new"'
+alias dn='diary new'
 alias dl='diary list'
 alias ds='diary search'
 alias de='diary edit'
 alias di='$DBOX/diary-data/android-import'
 alias dt='diary list --asc --after today'
-alias dsum='ds \#dsum'
 
 # Display some random diary entries
 dr() { diary list --asc --after $(date -d @$((1356998400+(RANDOM*(1391548892-1356998400)/32700) )) +%F); }
