@@ -62,8 +62,8 @@ fi
 #export PATH
 
 # Set CDPATH
-CDPATH="$HOME/space"
-export CDPATH
+#CDPATH="$HOME/space"
+#export CDPATH
 
 # Custom prompt
 PS1='\[\e[0;31m\]\w\[\e[0m\] '
