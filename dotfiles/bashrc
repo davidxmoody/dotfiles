@@ -39,11 +39,6 @@ fi
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
-# Alias definitions.
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
-
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
@@ -56,15 +51,6 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# Add ~/.bin to PATH
-#TODO create a .bin dir and start using it
-#PATH=$PATH:/home/david/.bin
-#export PATH
-
-# Set CDPATH
-#CDPATH="$HOME/space"
-#export CDPATH
-
 # Custom prompt
 PS1='\[\e[0;31m\]\w\[\e[0m\] '
 PS2='\[\e[0;31m\]>\[\e[0m\] '
@@ -72,5 +58,19 @@ PS2='\[\e[0;31m\]>\[\e[0m\] '
 # Sorting order
 export LC_COLLATE=C
 
+# Set some custom frequently used directories
 DBOX="$HOME/.dbox/Dropbox"
 [ -d "$DBOX" ] && export DBOX
+RCDIR="$HOME/space/rc"
+[ -d "$RCDIR" ] && export RCDIR
+
+# Add custom bin dir to PATH
+[ -d "$RCDIR/bin" ] && export PATH=$PATH:$RCDIR/bin
+
+# Source all custom bash completion files
+for f in $RCDIR/completion/*; do
+  [ -f "$f" ] && source "$f" && echo $f
+done
+
+# Alias definitions
+[ -f ~/.bash_aliases ] && source ~/.bash_aliases
