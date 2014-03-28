@@ -69,7 +69,7 @@ RCDIR="$HOME/space/rc"
 
 # Source all custom bash completion files
 for f in $RCDIR/completion/*; do
-  [ -f "$f" ] && source "$f" && echo $f
+  [ -f "$f" ] && source "$f"
 done
 
 # Alias definitions

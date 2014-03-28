@@ -58,9 +58,11 @@ alias di='$DBOX/diary-data/android-import; dx'
 alias dt='diary list --asc --after today'
 
 # Todo
-#alias t='vim +WP "+set number" $DBOX/diary-data/todo.txt'
+alias te='vim +WP "+set number" $DBOX/diary-data/todo.txt'
 alias t='todo.sh'
+#alias ta='t add'
 complete -F _todo t
+export TODOTXT_DEFAULT_ACTION=list
 
 # Display some random diary entries
 alias dr='chromium-browser $(shuf -n1 -e /home/david/.dbox/Dropbox/diary-data/html/*.html)'
