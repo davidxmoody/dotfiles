@@ -17,6 +17,11 @@ set nojoinspaces
 set number
 syntax on
 
+" Trying out new way to exit normal mode
+nmap + <Nop>
+imap + <Esc>s
+vmap + <Esc><Esc>
+
 " '.' in visual mode repeats the last change on every line
 vnoremap . :norm.<CR>
 
@@ -50,6 +55,7 @@ set autoindent
 set nowrap
 
 " Navigation with htns
+"TODO: remap these keys with the onoremap command too
 noremap t j
 noremap n k
 noremap s l
