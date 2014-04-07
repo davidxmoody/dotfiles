@@ -49,12 +49,11 @@ countdown() {
 
 # Diary
 alias diary='~/space/diary/stable/src/diary -b ~/.dbox/Dropbox/diary-data'
-alias dx='diary export'
-alias dn='diary new; dx'
 alias dl='diary list'
 alias ds='diary search'
-alias de='diary edit; dx'
-alias di='$DBOX/diary-data/android-import; dx'
+dn() { diary new "$@"; diary export; }
+de() { diary edit "$@"; diary export; }
+alias di='$DBOX/diary-data/android-import; diary export'
 alias dt='diary list --asc --after today'
 
 # Todo
