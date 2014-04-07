@@ -1,8 +1,31 @@
+" Setup Vundle
+set nocompatible
+filetype off
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+Bundle 'gmarik/vundle'
+
+Bundle 'scrooloose/nerdtree'
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'kchmck/vim-coffee-script'
+
+" Setup Markdown syntax highlighting
+Bundle 'plasticboy/vim-markdown'
+let g:vim_markdown_folding_disabled=1
+"let g:vim_markdown_initial_foldlevel=1
+let g:markdown_no_default_key_mappings=1
+
+" End of Vundle setup
+syntax on
+filetype plugin indent on
+
+"set background=dark
+"colorscheme solarized
+
 " Open new files in insert mode
 au BufNewFile * startinsert
 
 " Miscellaneous 
-set nocompatible
 set ruler
 set autoread
 set ignorecase
@@ -15,12 +38,11 @@ set directory=~/tmp,/var/tmp,/tmp,.
 set clipboard=unnamedplus
 set nojoinspaces
 set number
-syntax on
 
 " Trying out new way to exit normal mode
-nmap + <Nop>
-imap + <Esc>s
-vmap + <Esc><Esc>
+"nmap + <Nop>
+"imap + <Esc>s
+"vmap + <Esc><Esc>
 
 " '.' in visual mode repeats the last change on every line
 vnoremap . :norm.<CR>
@@ -91,8 +113,10 @@ au BufNewFile,BufRead *.py call PythonMode()
 
 " Function for editing English text
 func! WordProcessorMode()
-  " Set syntax to markdown?
-  syntax off
+  " Load Markdown syntax highlighting but with custom hashtag support
+  " TODO add mood tracking numbers highlighting
+  set filetype=mkd
+  syn match htmlBoldItalic "#[-_a-zA-Z0-9]\+"
   set spell spelllang=en_gb
   set nonumber
   set wrap
@@ -110,45 +134,3 @@ com! WP call WordProcessorMode()
 au BufNewFile,BufRead *.mkd call WordProcessorMode()
 au BufNewFile,BufRead *.md call WordProcessorMode()
 au BufNewFile,BufRead diary-*.txt call WordProcessorMode()
-
-" Autocomplete script (http://vim.wikia.com/wiki/Autocapitalize_the_start_of_every_sentence)
-"fun! CapWait(prev)
-"	redraw
-"	let next=nr2char(getchar())
-"	if next=~'[.?!\r\n[:blank:]()]'
-"		exe 'normal! i' . next . "\<Right>"
-"		return CapWait(next)
-"	elseif next=~'[\e]'
-"		return "\<del>"
-"	elseif a:prev=~'[\r\n[:blank:]]'
-"		return toupper(next) . "\<del>"
-"	else
-"		return next . "\<del>"
-"	endif
-"endfun
-"fun! CapHere()
-"	let trunc = getline(".")[0:col(".")-2] 
-"	return col(".")==1 ? CapWait("\r")
-"	\ : trunc=~'[?!.]\s*$\|^\s*$' ? CapWait(trunc[-1:-1]) : "\<del>"
-"endfun
-"fun! InitTextFile()
-"	im <buffer> <silent> . ._<Left><C-R>=CapWait('.')<CR>
-"	im <buffer> <silent> ? ?_<Left><C-R>=CapWait('?')<CR>
-"	im <buffer> <silent> ! !_<Left><C-R>=CapWait('!')<CR>
-"	im <buffer> <silent> <CR> <CR>_<Left><C-R>=CapWait("\r")<R>
-"	im <buffer> <silent> <NL> <NL>_<Left><C-R>=CapWait("\n")<CR>
-"	nm <buffer> <silent> O O_<Left><C-R>=CapWait("\r")<CR>
-"	nm <buffer> <silent> o o_<Left><C-R>=CapWait("\r")<CR>
-"	nm <buffer> <silent> a a_<Left><C-R>=CapHere()<CR>
-"	nm <buffer> <silent> A $a_<Left><C-R>=CapHere()<CR>
-"	nm <buffer> <silent> i i_<Left><C-R>=CapHere()<CR>
-"	nm <buffer> <silent> I I_<Left><C-R>=CapHere()<CR>
-"	nm <buffer> <silent> s s_<Left><C-R>=CapHere()<CR>
-"	nm <buffer> <silent> cc cc_<Left><C-R>=CapHere()<CR>
-"	nm <buffer> <silent> cw cw_<Left><C-R>=CapHere()<CR>
-"	nm <buffer> <silent> R R_<Left><C-R>=CapHere()<CR>
-"	nm <buffer> <silent> C C_<Left><C-R>=CapHere()<CR>
-"endfun
-"au BufNewFile,BufRead *.txt call InitTextFile()
-"au BufNewFile,BufRead *.md call InitTextFile()
-"au BufNewFile,BufRead *.mkd call InitTextFile()
