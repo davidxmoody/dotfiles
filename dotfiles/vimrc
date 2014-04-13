@@ -9,6 +9,13 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'kchmck/vim-coffee-script'
 
+" Emmet for expanding html stuff
+Bundle "mattn/emmet-vim"
+nnoremap <C-F> <Nop>
+inoremap <C-F> <Nop>
+vnoremap <C-F> <Nop>
+let g:user_emmet_leader_key='<C-F>'
+
 " Setup Markdown syntax highlighting
 Bundle 'plasticboy/vim-markdown'
 let g:vim_markdown_folding_disabled=1

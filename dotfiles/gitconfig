@@ -1,0 +1,7 @@
+[user]
+	name = David Moody
+	email = david.doomy@gmail.com
+[core]
+	editor = vim +startinsert
+[merge]
+	tool = vimdiff
