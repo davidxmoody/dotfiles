@@ -45,6 +45,7 @@ set directory=~/tmp,/var/tmp,/tmp,.
 set clipboard=unnamedplus
 set nojoinspaces
 set number
+set showcmd
 
 " Trying out new way to exit normal mode
 "nmap + <Nop>
