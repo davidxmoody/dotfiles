@@ -53,8 +53,7 @@ alias dl='diary list'
 alias ds='diary search'
 dn() { diary new "$@"; diary export; }
 de() { diary edit "$@"; diary export; }
-alias di='$DBOX/diary-data/android-import; diary export'
-alias dt='diary list --asc --after today'
+alias di='diary-import; diary export'
 
 # Todo
 alias te='vim +WP "+set number" $DBOX/diary-data/todo/todo.txt'

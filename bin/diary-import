@@ -1,0 +1,42 @@
+#!/bin/bash
+set -o errexit nounset
+
+DIARY_DIR=~/.dbox/Dropbox/diary-data
+
+# Import all video entries
+cd ~/media/videos/Webcam
+for video in ????-??-??-??????.webm; do
+  [ ! -f "$video" ] && continue
+
+  # Extract date
+  date=$(sed -e 's/-\([0-9][0-9]\)\([0-9][0-9]\)\([0-9][0-9]\).webm/ \1:\2:\3/g' <<< "$video")
+  timestamp=$(date -d "$date" +%s)
+
+  # Move video to the video directory
+  video_target=$DIARY_DIR/video/$video
+  mv -iv "$video" "$video_target"
+
+  # Cheat a little bit by highjacking the below android-import bit
+  #TODO could do this better by creating a diary entry correctly with the -m option once that is supported
+  diary_file=$DIARY_DIR/android-entries/diary-$timestamp-$(hostname).txt
+  cat > "$diary_file" << END
+<video controls preload="metadata">
+  <source src="video/$video" type="video/webm">
+</video>
+END
+done
+
+# Import all text entries in android-entries/
+cd "$DIARY_DIR"
+for entry in android-entries/diary-*.txt; do
+  [ ! -f "$entry" ] && continue
+  [ ! -s "$entry" ] && echo "Empty file not copied: $entry" && continue
+  [[ "$entry" == *conflicted* ]] && echo "Dropbox conflicted file not copied: $entry" && continue
+  timestamp=${entry#android-entries/diary-}
+  timestamp=${timestamp%%-*.txt}
+  month=$(date -d "@$timestamp" "+%Y-%m")
+
+  touch "$entry"
+  mkdir -p "entries/$month"
+  mv -iv "$entry" "entries/$month/"
+done
