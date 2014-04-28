@@ -1,0 +1,4 @@
+#!/bin/bash
+
+output_file=~/.dbox/Dropbox/diary-data/webcam/webcam-$(date +%s)-$(hostname).jpg
+fswebcam --quiet --resolution 1280x720 --jpeg 85 --flip h --no-banner "$output_file"
