@@ -1,0 +1,21 @@
+#!/usr/bin/env python3
+
+import mailbox
+import dateutil.parser
+
+def get_timestamp(message):
+    date_string = message.get('Date')
+    return dateutil.parser.parse(date_string, fuzzy=True).strftime('%s')
+
+def get_content(message):
+    for part in message.walk():
+        if part.get_content_type() == 'text/plain':
+            return part.get_payload()
+
+mbox = mailbox.mbox('~/tmp/mail/all-mail.mbox')
+for message in mbox:
+    if message.get('To') == message.get('From') == 'David Moody <david.doomy@gmail.com>':
+        filename = 'diary-{}-gmail.txt'.format(get_timestamp(message))
+        content = get_content(message)
+        with open(filename, 'w') as f:
+            f.write(content)
