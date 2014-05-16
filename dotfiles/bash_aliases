@@ -51,7 +51,7 @@ countdown() {
 alias diary='~/space/diary/stable/src/diary -b ~/.dbox/Dropbox/diary-data'
 alias dl='diary list'
 alias ds='diary search'
-dn() { diary new "$@"; diary export; }
+dn() { ( sleep $((RANDOM%10+2)) && webcamframe & ); diary new "$@"; diary export; }
 de() { diary edit "$@"; diary export; }
 alias di='diary-import; diary export'
 
