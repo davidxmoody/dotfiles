@@ -1,0 +1,8 @@
+#!/bin/bash
+
+cd ~/.dbox/Dropbox/diary-data/tracking/
+for file in activity-*.txt; do
+  date=${file:9:10}
+  num_lines=$(wc -l < "$file")
+  printf '%s: %3s\n' "$date" "$num_lines"
+done
