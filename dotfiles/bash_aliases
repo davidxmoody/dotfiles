@@ -47,6 +47,12 @@ countdown() {
   )
 }
 
+mkbash() {
+  echo -e "#!/bin/bash\n\n" > "$1" && \
+  chmod +x "$1" && \
+  vim + +startinsert "$1"
+}
+
 # Diary
 alias diary='~/space/diary/stable/src/diary -b ~/.dbox/Dropbox/diary-data'
 alias dl='diary list'
