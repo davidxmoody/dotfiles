@@ -64,8 +64,18 @@ DBOX="$HOME/.dbox/Dropbox"
 RCDIR="$HOME/space/rc"
 [ -d "$RCDIR" ] && export RCDIR
 
+# NPM
+NPM_PACKAGES="$HOME/.npm-packages"
+if [ -d "$NPM_PACKAGES" ]; then
+  export NPM_PACKAGES
+  export NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
+  export PATH="$NPM_PACKAGES/bin:$PATH"
+  unset MANPATH
+  export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
+fi
+
 # Add custom bin dir to PATH
-[ -d "$RCDIR/bin" ] && export PATH=$PATH:$RCDIR/bin
+[ -d "$RCDIR/bin" ] && export PATH="$RCDIR/bin:$PATH"
 
 # Source all custom bash completion files
 for f in $RCDIR/completion/*; do
