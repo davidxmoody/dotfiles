@@ -6,5 +6,9 @@ for file in activity-*.txt; do
   num_lines=$(wc -l < "$file")
   hours=$((num_lines/60))
   minutes=$((num_lines%60))
-  printf '%s: %02dh %02dm\n' "$date" "$hours" "$minutes"
+  num_bars=$((num_lines/30))
+  
+  bar=$(printf "%${num_bars}s" '#')
+  bar=${bar// /\#}
+  printf '%s: [%-24s] %02dh %02dm\n' "$date" "$bar" "$hours" "$minutes"
 done
