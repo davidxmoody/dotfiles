@@ -4,5 +4,7 @@ cd ~/.dbox/Dropbox/diary-data/tracking/
 for file in activity-*.txt; do
   date=${file:9:10}
   num_lines=$(wc -l < "$file")
-  printf '%s: %3s\n' "$date" "$num_lines"
+  hours=$((num_lines/60))
+  minutes=$((num_lines%60))
+  printf '%s: %02dh %02dm\n' "$date" "$hours" "$minutes"
 done
