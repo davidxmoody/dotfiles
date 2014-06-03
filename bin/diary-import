@@ -30,8 +30,8 @@ done
 cd "$DIARY_DIR"
 for entry in android-entries/diary-*.txt; do
   [ ! -f "$entry" ] && continue
-  [ ! -s "$entry" ] && echo "Empty file not copied: $entry" && continue
-  [[ "$entry" == *conflicted* ]] && echo "Dropbox conflicted file not copied: $entry" && continue
+  [ ! -s "$entry" ] && echo "Empty file not copied: $DIARY_DIR/$entry" && continue
+  [[ "$entry" == *conflicted* ]] && echo "Dropbox conflicted file not copied: $DIARY_DIR/$entry" && continue
   timestamp=${entry#android-entries/diary-}
   timestamp=${timestamp%%-*.txt}
   month=$(date -d "@$timestamp" "+%Y-%m")

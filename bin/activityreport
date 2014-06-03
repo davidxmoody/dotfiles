@@ -10,5 +10,5 @@ for file in activity-*.txt; do
   
   bar=$(printf "%${num_bars}s" '#')
   bar=${bar// /\#}
-  printf '%s: [%-24s] %02dh %02dm\n' "$date" "$bar" "$hours" "$minutes"
+  printf '%s: [%-28s] %02dh %02dm\n' "$date" "$bar" "$hours" "$minutes"
 done

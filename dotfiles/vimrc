@@ -8,6 +8,7 @@ Bundle 'gmarik/vundle'
 Bundle 'scrooloose/nerdtree'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'kchmck/vim-coffee-script'
+Bundle 'AndrewRadev/vim-eco'
 
 " Emmet for expanding html stuff
 Bundle "mattn/emmet-vim"
