@@ -1,7 +1,7 @@
 #!/bin/bash
 
 cd ~/.dbox/Dropbox/diary-data/tracking/
-for file in activity-*.txt; do
+for file in $(ls -1 | tail -n 7); do
   date=${file:9:10}
   num_lines=$(wc -l < "$file")
   hours=$((num_lines/60))
