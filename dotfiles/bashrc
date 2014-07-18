@@ -82,5 +82,8 @@ for f in $RCDIR/completion/*; do
   [ -f "$f" ] && source "$f"
 done
 
+# Amazon S3 completion
+complete -C aws_completer aws
+
 # Alias definitions
 [ -f ~/.bash_aliases ] && source ~/.bash_aliases
