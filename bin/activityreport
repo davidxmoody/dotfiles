@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd ~/.dbox/Dropbox/diary-data/tracking/
+cd $DIARY_DIR/tracking/
 for file in $(ls -1 | tail -n 7); do
   date=${file:9:10}
   num_lines=$(wc -l < "$file")

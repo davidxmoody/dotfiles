@@ -1,8 +1,6 @@
 #!/bin/bash
 set -o errexit nounset
 
-DIARY_DIR=~/.dbox/Dropbox/diary-data
-
 ## Import all video entries
 #cd ~/media/videos/Webcam
 #for video in ????-??-??-??????.webm; do

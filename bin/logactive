@@ -1,4 +1,4 @@
 #!/bin/bash
 
-output_file=~/.dbox/Dropbox/diary-data/tracking/activity-$(date +%F).txt
+output_file=~/sync/diary-data/tracking/activity-$(date +%F).txt
 echo "$(date +%H:%M)" >> "$output_file"
