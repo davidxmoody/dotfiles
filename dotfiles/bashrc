@@ -56,8 +56,10 @@ export LC_COLLATE=C
 # Set some custom frequently used directories
 DBOX="$HOME/.dbox/Dropbox"
 [ -d "$DBOX" ] && export DBOX
-RCDIR="$HOME/space/rc"
-[ -d "$RCDIR" ] && export RCDIR
+RC_DIR="$HOME/space/rc"
+[ -d "$RC_DIR" ] && export RC_DIR
+DIARY_DIR="$HOME/sync/diary-data"
+[ -d "$DIARY_DIR" ] && export DIARY_DIR
 
 # NPM
 NPM_PACKAGES="$HOME/.npm-packages"
