@@ -74,7 +74,6 @@ alias di='diary-import; diary generate'
 
 alias dr='chromium-browser $(shuf -n1 -e $DIARY_DIR/html/*.html)'
 alias dw='diary wc -d --after $(date -d "6 days ago" +%F)'
-alias dt='activityreport'
 
 # Todo
 alias te='v +WP "+set number" $DIARY_DIR/todo/todo.txt'

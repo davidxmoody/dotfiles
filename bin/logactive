@@ -1,4 +1,0 @@
-#!/bin/bash
-
-output_file=~/sync/diary-data/tracking/activity-$(date +%F).txt
-echo "$(date +%H:%M)" >> "$output_file"
