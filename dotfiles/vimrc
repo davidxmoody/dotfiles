@@ -123,9 +123,9 @@ au BufNewFile,BufRead *.py call PythonMode()
 " Function for editing English text
 func! WordProcessorMode()
   " Load Markdown syntax highlighting but with custom hashtag support
-  " TODO add mood tracking numbers highlighting
   set filetype=mkd
   syn match htmlBoldItalic "#[-_a-zA-Z0-9]\+"
+
   set spell spelllang=en_gb
   set nonumber
   set wrap

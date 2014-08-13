@@ -65,7 +65,7 @@ mkbash() {
 }
 
 # Diary
-alias diary='~/space/diary/stable/rundiary -b $DIARY_DIR'
+alias diary='~/sync/space/diary/stable/rundiary -b $DIARY_DIR'
 alias dl='diary list'
 alias ds='diary search'
 dn() { ( sleep $((RANDOM%10+2)) && webcamframe & ); diary new "$@"; diary generate; }
@@ -91,6 +91,7 @@ alias hd='hg diff | less'
 alias gs='git status'
 alias gc='git commit'
 alias gl='git log'
+alias gsl='git shortlog'
 
 # cd shortcuts
 alias up='cd ..'

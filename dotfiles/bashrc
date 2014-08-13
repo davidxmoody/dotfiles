@@ -56,7 +56,7 @@ export LC_COLLATE=C
 # Set some custom frequently used directories
 DBOX="$HOME/.dbox/Dropbox"
 [ -d "$DBOX" ] && export DBOX
-RC_DIR="$HOME/space/rc"
+RC_DIR="$HOME/sync/space/dotfiles"
 [ -d "$RC_DIR" ] && export RC_DIR
 DIARY_DIR="$HOME/sync/diary-data"
 [ -d "$DIARY_DIR" ] && export DIARY_DIR
