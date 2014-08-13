@@ -72,10 +72,10 @@ if [ -d "$NPM_PACKAGES" ]; then
 fi
 
 # Add custom bin dir to PATH
-[ -d "$RCDIR/bin" ] && export PATH="$RCDIR/bin:$PATH"
+[ -d "$RC_DIR/bin" ] && export PATH="$RC_DIR/bin:$PATH"
 
 # Source all custom bash completion files
-for f in $RCDIR/completion/*; do
+for f in $RC_DIR/completion/*; do
   [ -f "$f" ] && source "$f"
 done
 
