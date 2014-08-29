@@ -127,7 +127,7 @@ func! WordProcessorMode()
   set filetype=mkd
   syn match htmlBoldItalic "#[-_a-zA-Z0-9]\+"
 
-  set spell spelllang=en_gb
+  " Other options
   set nonumber
   set wrap
   set linebreak
@@ -137,7 +137,14 @@ func! WordProcessorMode()
   set softtabstop=4
   set shiftwidth=4
   set formatoptions=
+  set spell spelllang=en_gb
   source ~/.vim/abbreviations.vim
+
+  " Auto-capitalize script
+  augroup SENTENCES
+    au!
+    autocmd InsertCharPre * if search('\v(%^|[.!?]\_s+|\_^\-\s|\_^title\:\s|\n\n)%#', 'bcnw') != 0 | let v:char = toupper(v:char) | endif
+  augroup END
 endfu
 
 com! WP call WordProcessorMode()
