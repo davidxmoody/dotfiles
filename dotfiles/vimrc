@@ -66,6 +66,7 @@ noremap <Space> A
 noremap <CR> o
 noremap - o-<Space>
 inoremap <C-B> <ESC>b
+noremap <C-B> b
 inoremap <C-Space> <ESC>A
 
 " Quick way to save and/or exit from insert mode
