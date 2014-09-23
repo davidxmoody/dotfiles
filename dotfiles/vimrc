@@ -116,6 +116,9 @@ noremap L T
 " J is join
 " K is lookup keyword
 
+" X to cross off todo items
+noremap X A<Space>X<Esc>
+
 " Function for editing Python code
 func! PythonMode()
   set tabstop=4
