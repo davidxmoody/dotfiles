@@ -121,6 +121,10 @@ ncoin() { n=$1; while [ $((n-=1)) -ge 0 ]; do coin; done; }
 alias dice='echo $((RANDOM%6+1))'
 ndice() { n=$1; while [ $((n-=1)) -ge 0 ]; do dice; done; }
 
+# Jekyll blog
+alias jeks='jekyll server --watch --port 4000 --drafts'
+alias jekk='pkill -9 jekyll'
+
 # Misc
 alias free='free -m'
 alias dus='du -Dhs'
@@ -142,5 +146,12 @@ alias cdb='cd ~/sync/space/blog'
 alias dsp='diary search \#plan'
 alias mkdir='mkdir -pv'
 alias dsr='diary search \#review'
-alias jeks='jekyll server -w'
-alias jeksd='jekyll server -w --drafts'
+alias pushups='vim + /home/david/sync/space/blog/_posts/2014-09-29-100-push-ups-the-ultimate-slow-gains-experiment.md'
+alias cdt='cd ~/tmp'
+alias cdd='cd $DIARY_DIR'
+alias gd='git diff'
+alias te='v + +WP "+set number" $DIARY_DIR/todo/todo.txt'
+alias morning='vim + /home/david/sync/space/blog/_posts/2014-10-09-writing-before-breakfast.md'
+alias cds='cd /home/david/sync/space/'
+alias vid='vim ~/sync/space/blog/_ideas.md'
+alias wsum='diary search \#wsum'
