@@ -127,8 +127,9 @@ noremap L T
 " J is join
 " K is lookup keyword
 
-" X to cross off todo items
-noremap X A<Space>X<Esc>
+" todo.txt shortcuts
+noremap XX A<Space>X<Esc>
+noremap Xx :.s/^\(([A-Z])<Space>\)\?/<CR>Ix<Space><C-R>=strftime("%Y-%m-%d")<CR><Space><Esc>$
 
 " Function for editing Python code
 func! PythonMode()
