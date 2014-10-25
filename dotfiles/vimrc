@@ -68,6 +68,9 @@ imap + <Esc>s
 vmap + <Esc><Esc>
 imap  <Nop>
 
+noremap + :update<CR>
+noremap ]] ZZ
+
 imap  <Nop>
 inoremap @ 
 
@@ -75,16 +78,17 @@ inoremap @ 
 noremap <Space> A
 noremap <CR> o
 noremap - o-<Space>
+
 "inoremap <C-B> <ESC>b
 "noremap <C-B> b
 inoremap <C-B> <Nop>
 noremap <C-B> <Nop>
 
 " Quick way to save and/or exit from insert mode
-inoremap MM <ESC>ZZ
-noremap MM ZZ
-inoremap HH <ESC>:update<CR>
-noremap HH :update<CR>
+"inoremap MM <ESC>ZZ
+"noremap MM ZZ
+"inoremap HH <ESC>:update<CR>
+"noremap HH :update<CR>
 noremap M <Nop>
 noremap S <Nop>
 noremap H <Nop>
