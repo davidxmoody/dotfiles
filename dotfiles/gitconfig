@@ -5,3 +5,5 @@
 	editor = vim +startinsert
 [merge]
 	tool = vimdiff
+[push]
+	default = matching
