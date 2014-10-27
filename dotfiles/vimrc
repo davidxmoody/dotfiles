@@ -72,7 +72,7 @@ noremap + :update<CR>
 noremap ]] ZZ
 
 imap  <Nop>
-inoremap @ 
+inoremap ! 
 
 " Some custom navigation bindings
 noremap <Space> A

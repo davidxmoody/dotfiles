@@ -95,6 +95,7 @@ alias te='v + +WP "+set number" $DIARY_DIR/todo/todo.txt'
 alias tes='v + +WP "+set number" $DIARY_DIR/todo/someday.txt'
 alias ted='v + +WP "+set number" $DIARY_DIR/todo/done.txt'
 alias td='t ls @td'
+function tx() { t append $1 X; }
 complete -F _todo t
 
 # Mercurial
