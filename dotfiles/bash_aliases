@@ -131,6 +131,15 @@ ndice() { n=$1; while [ $((n-=1)) -ge 0 ]; do dice; done; }
 alias jeks='jekyll server --watch --port 4000 --drafts'
 alias jekk='pkill -9 jekyll'
 
+# Image resize and strip
+alias stripjpg='exiftool -all= '
+resize800() {
+  stripjpg "$@" && \
+  for f in "$@"; do
+    convert "$f" -resize 800x "$f"
+  done
+}
+
 # Misc
 alias free='free -m'
 alias dus='du -Dhs'
@@ -140,7 +149,6 @@ alias df='df -hT'
 alias cake='cake.coffeescript'
 alias dsimages='ds "\]\(images/scanned/"'
 alias gulp='./node_modules/gulp/bin/gulp.js --require coffee-script/register'
-alias stripjpg='exiftool -all= '
 alias op='xdg-open'
 alias webcamview='xdg-open $DIARY_DIR/webcam/webcam-1400251812-david-x220.jpg'
 removekernels() {

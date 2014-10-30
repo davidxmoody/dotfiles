@@ -4,3 +4,4 @@ editor = vim +startinsert
 
 [extensions]
 hgext.graphlog = 
+hgext.convert =
