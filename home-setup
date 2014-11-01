@@ -2,7 +2,7 @@
 
 # Remove unused empty directories commonly found on new installs
 for dir in Downloads Documents Music Pictures Video; do 
-    [ -d "$HOME/$dir" ] && rmdir -pv "$HOME/$dir"
+    [ -d "$HOME/$dir" ] && rmdir -v "$HOME/$dir"
 done
 
 # Create custom directories
