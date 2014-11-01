@@ -1,35 +1,14 @@
 #!/bin/bash
 
-# Check Dropbox dir exists
-DBOX="$HOME/.dbox/Dropbox"
-[ -d "$DBOX" ] || { echo "$(basename $0): Dropbox folder does not exist, please create it at: $DBOX" >&2; exit 1; }
-
-# Remove directories
-for dir in $(cat dirs-to-delete); do 
-    [ -d "$HOME/$dir" ] && rmdir -v "$HOME/$dir"
+# Remove unused empty directories commonly found on new installs
+for dir in Downloads Documents Music Pictures Video; do 
+    [ -d "$HOME/$dir" ] && rmdir -pv "$HOME/$dir"
 done
 
-# Create directories
-for dir in $(cat dirs-to-make); do
+# Create custom directories
+for dir in sync tmp .npm-packages; do
     mkdir -pv "$HOME/$dir" 
 done
-
-## Setup directories in home dir
-#asked=
-#for dir in $(cat dirs-to-sync); do
-#    dbox_dir="$DBOX/$dir"
-#    dbox_dir_canon=$(readlink -e "$dbox_dir")
-#    target="$HOME/$dir"
-#    if [ -L "$dbox_dir" -a "$dbox_dir_canon" = "$target" ]; then
-#        : # Success, do nothing
-#    elif [ -d "$dbox_dir" -a ! -e "$target" ]; then
-#        [ -z "$asked" ] && { read -rs -N1 -p "Please stop Dropbox then press any key to continue" && echo && asked=true; }
-#        mv -b "$dbox_dir" "$target" && \
-#           ln -sv "$target" "$dbox_dir"
-#    else
-#        echo "$(basename $0): Could not process directory: \"$dir\"" >&2
-#    fi
-#done
 
 # Create symlinks to all dotfiles (in home dir), also add dot to their names
 for file in dotfiles/*; do
