@@ -25,6 +25,9 @@ alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
+greppy() { grep -n "$1" *.py; }
+grepc() { grep -n "$1" *.coffee; }
+
 # Vim
 alias v='vim -w $DIARY_DIR/vim-logs/vim-$(date +%F).log'
 alias vv='v +WP'
@@ -50,9 +53,6 @@ mkalias() {
   eval "$alias_command" && \
   alias "$alias_name" | tee -a "$HOME/.bash_aliases"
 }
-
-greppy() { grep -n "$1" *.py; }
-grepc() { grep -n "$1" *.coffee; }
 
 countdown() {
   (
@@ -96,7 +96,6 @@ alias tes='vv "+set number" $DIARY_DIR/todo/someday.txt'
 alias tew='vv "+set number" $DIARY_DIR/todo/week.txt'
 alias tey='vv "+set number" $DIARY_DIR/todo/year.txt'
 alias ted='vv + "+set number" $DIARY_DIR/todo/done.txt'
-#function tx() { t append $1 X; }
 complete -F _todo t
 
 # Other quick vim editing
@@ -135,9 +134,8 @@ ncoin() { n=$1; while [ $((n-=1)) -ge 0 ]; do coin; done; }
 alias dice='echo $((RANDOM%6+1))'
 ndice() { n=$1; while [ $((n-=1)) -ge 0 ]; do dice; done; }
 
-# Jekyll blog
+# Jekyll
 alias jeks='jekyll server --watch --port 4000 --drafts'
-alias jekk='pkill -9 jekyll'
 
 # Image resize and strip
 alias stripjpg='exiftool -all= '
