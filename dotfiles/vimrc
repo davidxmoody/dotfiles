@@ -25,10 +25,10 @@ vnoremap <C-F> <Nop>
 let g:user_emmet_leader_key='<C-F>'
 
 " Setup Markdown syntax highlighting
-Bundle 'plasticboy/vim-markdown'
-let g:vim_markdown_folding_disabled=1
+"Bundle 'plasticboy/vim-markdown'
+"let g:vim_markdown_folding_disabled=1
 "let g:vim_markdown_initial_foldlevel=1
-let g:markdown_no_default_key_mappings=1
+"let g:markdown_no_default_key_mappings=1
 
 " End of Vundle setup
 syntax on
@@ -132,8 +132,10 @@ noremap L T
 " K is lookup keyword
 
 " todo.txt shortcuts
+noremap X <Nop>
 noremap XX A<Space>X<Esc>
-noremap Xx :.s/^\(([A-Z])<Space>\)\?/<CR>Ix<Space><C-R>=strftime("%Y-%m-%d")<CR><Space><Esc>$
+noremap Xx :.s/^\(([A-Z])<Space>\)\?/<CR>Ix<Space><C-R>=strftime("%F")<CR><Space><Esc>$
+noremap Xt I<C-V>t:<C-R>=strftime("%F")<CR><Space><Esc>hh
 
 " Function for editing Python code
 func! PythonMode()
