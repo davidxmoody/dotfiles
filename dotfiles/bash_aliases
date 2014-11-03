@@ -91,11 +91,12 @@ alias dsp='diary search \#plan'
 
 # Todo
 alias t='todo.sh'
-alias te='v + +WP "+set number" $DIARY_DIR/todo/todo.txt'
-alias tes='v + +WP "+set number" $DIARY_DIR/todo/someday.txt'
-alias ted='v + +WP "+set number" $DIARY_DIR/todo/done.txt'
-alias td='t ls @td'
-function tx() { t append $1 X; }
+alias te='vv "+set number" $DIARY_DIR/todo/todo.txt'
+alias tes='vv "+set number" $DIARY_DIR/todo/someday.txt'
+alias tew='vv "+set number" $DIARY_DIR/todo/week.txt'
+alias tey='vv "+set number" $DIARY_DIR/todo/year.txt'
+alias ted='vv + "+set number" $DIARY_DIR/todo/done.txt'
+#function tx() { t append $1 X; }
 complete -F _todo t
 
 # Other quick vim editing
