@@ -116,6 +116,8 @@ alias gc='git commit'
 alias gl='git log'
 alias gsl='git shortlog'
 alias gd='git diff'
+alias gdh='git diff HEAD'
+alias gaa='git add -A'
 
 # cd shortcuts
 alias up='cd ..'
@@ -155,8 +157,9 @@ alias op='xdg-open'
 alias webcamview='xdg-open $DIARY_DIR/webcam/webcam-1400251812-david-x220.jpg'
 alias mkdir='mkdir -pv'
 alias simplehttp='python -m SimpleHTTPServer'
-alias xbox='sudo xboxdrv --silent'
 alias nis='npm install --save'
+alias resolution='xdpyinfo  | grep dimensions:'
+alias npmls='npm ls --depth 0'
 removekernels() {
   sudo apt-get remove --purge $(dpkg -l 'linux-*' | sed '/^ii/!d;/'"$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]* [^ ]* \([^ ]*\).*/\1/;/[0-9]/!d')
 }

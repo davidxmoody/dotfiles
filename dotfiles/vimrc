@@ -31,6 +31,9 @@ let g:vim_markdown_folding_disabled=1
 let g:markdown_no_default_key_mappings=1
 let g:vim_markdown_frontmatter=1
 
+" Syntastic
+Bundle 'scrooloose/syntastic'
+
 " End of Vundle setup
 syntax on
 filetype plugin indent on
@@ -64,6 +67,7 @@ set textwidth=79
 set formatoptions=crqn1j
 
 " Trying out new way to exit normal mode
+" TODO figure out why using + in macros wont continue recording the macro
 nmap + <Nop>
 imap + <Esc>s
 vmap + <Esc><Esc>
@@ -163,6 +167,9 @@ func! WordProcessorMode()
   set formatoptions=
   set spell spelllang=en_gb
   source ~/.vim/abbreviations.vim
+
+  " Disable auto-indenting
+  setl noai nocin nosi inde=
 
   " Auto-capitalize script
   augroup SENTENCES
