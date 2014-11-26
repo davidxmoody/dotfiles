@@ -1,4 +1,0 @@
-#!/bin/bash
-
-output_file=~/sync/diary-data/webcam/webcam-$(date +%s)-$(hostname).jpg
-fswebcam --quiet --resolution 1280x720 --flip h --no-banner "$output_file"

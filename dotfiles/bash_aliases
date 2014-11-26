@@ -81,7 +81,7 @@ mkbash() {
 alias diary='~/sync/space/diary/stable/rundiary -b $DIARY_DIR'
 alias dl='diary list'
 alias ds='diary search'
-dn() { ( sleep $((RANDOM%10+2)) && webcamframe & ); diary new "$@"; diary generate; }
+dn() { diary new "$@"; diary generate; }
 de() { diary edit "$@"; diary generate; }
 alias di='diary-import; diary generate'
 alias dr='chromium-browser $(shuf -n1 -e $DIARY_DIR/html/*.html)'
@@ -154,7 +154,6 @@ alias cake='cake.coffeescript'
 alias dsimages='ds "\]\(images/scanned/"'
 alias gulp='./node_modules/gulp/bin/gulp.js --require coffee-script/register'
 alias op='xdg-open'
-alias webcamview='xdg-open $DIARY_DIR/webcam/webcam-1400251812-david-x220.jpg'
 alias mkdir='mkdir -pv'
 alias simplehttp='python -m SimpleHTTPServer'
 alias nis='npm install --save'
