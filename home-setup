@@ -6,7 +6,7 @@ for dir in Downloads Documents Music Pictures Video; do
 done
 
 # Create custom directories
-for dir in sync tmp .npm-packages; do
+for dir in sync tmp .npm-packages .vim-swap; do
     mkdir -pv "$HOME/$dir" 
 done
 

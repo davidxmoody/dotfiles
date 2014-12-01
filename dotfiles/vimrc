@@ -53,7 +53,7 @@ set report=0
 set scrolloff=4
 set sidescrolloff=1
 set listchars=extends:>,precedes:<
-set directory=~/tmp,/var/tmp,/tmp,.
+set directory=~/.vim-swap,~/tmp,/var/tmp,/tmp,.
 set clipboard=unnamedplus
 set nojoinspaces
 set number
