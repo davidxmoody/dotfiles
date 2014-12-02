@@ -78,7 +78,7 @@ mkbash() {
 }
 
 # Diary
-alias diary='~/sync/space/diary/stable/rundiary -b $DIARY_DIR'
+alias diary='~/sync/space/diary/rundiary -b $DIARY_DIR'
 alias dl='diary list'
 alias ds='diary search'
 dn() { diary new "$@"; diary generate; }
@@ -101,7 +101,7 @@ complete -F _todo t
 # Other quick vim editing
 alias vimrc='v ~/.vimrc'
 alias vba='vim ~/.bash_aliases'
-alias pushups='vim + /home/david/sync/space/blog/src/posts/2014-09-29-100-push-ups-the-ultimate-slow-gains-experiment.md'
+alias pushups='vim + ~/sync/space/blog/src/posts/2014-09-29-100-push-ups-the-ultimate-slow-gains-experiment.md'
 alias vid='vim ~/sync/space/blog/ideas.md'
 
 # Mercurial
@@ -118,6 +118,7 @@ alias gsl='git shortlog'
 alias gd='git diff'
 alias gdh='git diff HEAD'
 alias gaa='git add -A'
+alias gaac='git add -A && git commit'
 
 # cd shortcuts
 alias up='cd ..'
@@ -144,21 +145,22 @@ resize800() {
   done
 }
 
+# NPM
+alias npmls='npm ls --depth 0'
+alias nis='npm install --save'
+alias nus='npm uninstall --save'
+alias nig='npm install -g'
+alias nug='npm uninstall -g'
+
 # Misc
 alias free='free -m'
 alias dus='du -Dhs'
 alias py='python3'
 alias pyi='python3 -i'
 alias df='df -hT'
-alias cake='cake.coffeescript'
-alias dsimages='ds "\]\(images/scanned/"'
-alias gulp='./node_modules/gulp/bin/gulp.js --require coffee-script/register'
 alias op='xdg-open'
-alias mkdir='mkdir -pv'
-alias simplehttp='python -m SimpleHTTPServer'
-alias nis='npm install --save'
-alias resolution='xdpyinfo  | grep dimensions:'
-alias npmls='npm ls --depth 0'
+alias mkdir='mkdir -p'
+alias resolution='xdpyinfo | grep dimensions:'
 removekernels() {
   sudo apt-get remove --purge $(dpkg -l 'linux-*' | sed '/^ii/!d;/'"$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]* [^ ]* \([^ ]*\).*/\1/;/[0-9]/!d')
 }
