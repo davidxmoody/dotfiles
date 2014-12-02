@@ -11,6 +11,15 @@ Bundle 'kchmck/vim-coffee-script'
 Bundle 'AndrewRadev/vim-eco'
 Bundle 'tpope/vim-abolish'
 Bundle 'tpope/vim-speeddating'
+Bundle 'pangloss/vim-javascript'
+
+" Completion
+Bundle 'Valloric/YouCompleteMe'
+let g:ycm_filetype_blacklist = { 'md': 1, 'mkd': 1, 'markdown': 1, 'text': 1 , 'gitcommit': 1 }
+
+" Bracket expansion
+Bundle 'Raimondi/delimitMate'
+let delimitMate_expand_cr = 1
 
 " EasyMotion
 Bundle 'Lokaltog/vim-easymotion'
@@ -172,6 +181,7 @@ func! WordProcessorMode()
 endfu
 
 com! WP call WordProcessorMode()
-au BufNewFile,BufRead *.mkd call WordProcessorMode()
 au BufNewFile,BufRead *.md call WordProcessorMode()
+au BufNewFile,BufRead *.mkd call WordProcessorMode()
+au BufNewFile,BufRead *.markdown call WordProcessorMode()
 au BufNewFile,BufRead diary-*.txt call WordProcessorMode()
