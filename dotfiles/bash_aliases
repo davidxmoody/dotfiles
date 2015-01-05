@@ -103,6 +103,7 @@ alias vimrc='v ~/.vimrc'
 alias vba='vim ~/.bash_aliases'
 alias pushups='vim + ~/sync/space/blog/src/posts/2014-09-29-100-push-ups-the-ultimate-slow-gains-experiment.md'
 alias vid='vim ~/sync/space/blog/ideas.md'
+alias vab='vim ~/.vim/abbreviations.vim'
 
 # Mercurial
 alias hl='hg glog | less'
@@ -151,6 +152,7 @@ alias nis='npm install --save'
 alias nus='npm uninstall --save'
 alias nig='npm install -g'
 alias nug='npm uninstall -g'
+alias nr='npm run'
 
 # Misc
 alias free='free -m'

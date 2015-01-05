@@ -163,15 +163,20 @@ func! WordProcessorMode()
   set linebreak
   set breakat=\ 
   set display=lastline
-  set tabstop=4
-  set softtabstop=4
-  set shiftwidth=4
   set formatoptions=
   set spell spelllang=en_gb
   source ~/.vim/abbreviations.vim
 
-  " Disable auto-indenting
-  setl noai nocin nosi inde=
+  " Indenting
+  setl tabstop=4
+  setl softtabstop=0
+  setl shiftwidth=4
+  setl expandtab
+  setl nosmarttab
+  setl noautoindent
+  setl nocindent
+  setl nosmartindent
+  setl indentexpr=
 
   " Auto-capitalize script
   augroup SENTENCES
