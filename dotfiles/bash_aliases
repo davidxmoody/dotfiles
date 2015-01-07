@@ -29,7 +29,7 @@ greppy() { grep -n "$1" *.py; }
 grepc() { grep -n "$1" *.coffee; }
 
 # Vim
-alias v='vim -w $DIARY_DIR/vim-logs/vim-$(date +%F).log'
+alias v='vim'
 alias vv='v +WP'
 
 # Functions
