@@ -54,23 +54,6 @@ mkalias() {
   alias "$alias_name" | tee -a "$HOME/.bash_aliases"
 }
 
-countdown() {
-  (
-  trap "tput cnorm" EXIT
-  local seconds=$1
-  local success=$2
-  while [[ "$seconds" -gt 0 ]]; do
-    tput civis
-    printf "\r%02d" "$seconds"
-    sleep 1
-    let seconds--
-  done
-  printf "\r00\n"
-  tput cnorm
-  eval "$success"
-  )
-}
-
 mkbash() {
   echo -e "#!/bin/bash\n\n" > "$1" && \
   chmod +x "$1" && \
@@ -84,7 +67,7 @@ alias ds='diary search'
 dn() { diary new "$@"; diary generate; }
 de() { diary edit "$@"; diary generate; }
 alias di='diary-import; diary generate'
-alias dr='chromium-browser $(shuf -n1 -e $DIARY_DIR/html/*.html)'
+alias dr='xdg-open $(shuf -n1 -e $DIARY_DIR/html/*.html)'
 alias dw='diary wc -d --after $(date -d "6 days ago" +%F)'
 alias wsum='diary search \#wsum'
 alias dsp='diary search \#plan'
@@ -99,11 +82,10 @@ alias ted='vv + "+set number" $DIARY_DIR/todo/done.txt'
 complete -F _todo t
 
 # Other quick vim editing
-alias vimrc='v ~/.vimrc'
+alias vimrc='vim ~/.vimrc'
 alias vba='vim ~/.bash_aliases'
-alias pushups='vim + ~/sync/space/blog/src/posts/2014-09-29-100-push-ups-the-ultimate-slow-gains-experiment.md'
-alias vid='vim ~/sync/space/blog/ideas.md'
 alias vab='vim ~/.vim/abbreviations.vim'
+alias vid='vim ~/sync/space/blog/ideas.md'
 
 # Mercurial
 alias hl='hg glog | less'
@@ -133,9 +115,7 @@ alias cds='cd ~/sync/space/'
 
 # Random functions
 alias coin='if ((RANDOM%2 == 0)); then echo yes; else echo no; fi'
-ncoin() { n=$1; while [ $((n-=1)) -ge 0 ]; do coin; done; }
 alias dice='echo $((RANDOM%6+1))'
-ndice() { n=$1; while [ $((n-=1)) -ge 0 ]; do dice; done; }
 
 # Image resize and strip
 alias stripjpg='exiftool -all= '
@@ -157,6 +137,7 @@ alias nr='npm run'
 # Misc
 alias free='free -m'
 alias dus='du -Dhs'
+alias dust='dus --time'
 alias py='python3'
 alias pyi='python3 -i'
 alias df='df -hT'
