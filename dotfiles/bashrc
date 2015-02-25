@@ -47,8 +47,16 @@ if ! shopt -oq posix; then
 fi
 
 # Custom prompt
-PS1='\[\e[0;31m\]\w\[\e[0m\] '
-PS2='\[\e[0;31m\]>\[\e[0m\] '
+case $TERM in
+  xterm*)
+    PS1='\[\033]0;\w $(history 1)\007\]\[\e[0;31m\]\w\[\e[0m\] '
+    PS2='\[\e[0;31m\]>\[\e[0m\] '
+    ;;
+  *)
+    PS1='\w '
+    PS2='> '
+    ;;
+esac
 
 # Sorting order
 export LC_COLLATE=C
