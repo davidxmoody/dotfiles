@@ -19,6 +19,7 @@ let g:ycm_filetype_blacklist = { 'md': 1, 'mkd': 1, 'markdown': 1, 'text': 1 , '
 
 " Bracket expansion
 Bundle 'Raimondi/delimitMate'
+set backspace=indent,eol,start
 let delimitMate_expand_cr = 1
 
 " EasyMotion
