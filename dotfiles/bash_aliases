@@ -29,6 +29,7 @@ greppy() { grep -n "$1" *.py; }
 grepc() { grep -n "$1" *.coffee; }
 
 # Vim
+alias vim='gvim -v'
 alias v='vim'
 alias vv='v +WP'
 
@@ -127,12 +128,13 @@ resize800() {
 }
 
 # NPM
-alias npmls='npm ls --depth 0'
+alias npmls='npm ls --depth=0'
 alias nis='npm install --save'
 alias nus='npm uninstall --save'
 alias nig='npm install -g'
 alias nug='npm uninstall -g'
 alias nr='npm run'
+alias nodemon='nodemon -e md,sass,scss,css,html,js,coffee --ignore build/'
 
 # Misc
 alias free='free -m'

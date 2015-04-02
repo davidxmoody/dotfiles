@@ -1,48 +1,48 @@
 " Setup Vundle
 set nocompatible
 filetype off
-set rtp+=~/.vim/bundle/vundle/
+set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#rc()
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/vundle'
 
-Bundle 'scrooloose/nerdtree'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'AndrewRadev/vim-eco'
-Bundle 'tpope/vim-abolish'
-Bundle 'tpope/vim-speeddating'
-Bundle 'pangloss/vim-javascript'
+Plugin 'scrooloose/nerdtree'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'AndrewRadev/vim-eco'
+Plugin 'tpope/vim-abolish'
+Plugin 'tpope/vim-speeddating'
+Plugin 'pangloss/vim-javascript'
 
 " Completion
-Bundle 'Valloric/YouCompleteMe'
+Plugin 'Valloric/YouCompleteMe'
 let g:ycm_filetype_blacklist = { 'md': 1, 'mkd': 1, 'markdown': 1, 'text': 1 , 'gitcommit': 1 }
 
 " Bracket expansion
-Bundle 'Raimondi/delimitMate'
+Plugin 'Raimondi/delimitMate'
 set backspace=indent,eol,start
 let delimitMate_expand_cr = 1
 
 " EasyMotion
-Bundle 'Lokaltog/vim-easymotion'
+Plugin 'Lokaltog/vim-easymotion'
 "map <Space> <Leader>
 "map <Space><Space> <Leader><Leader>
 
 " Emmet for expanding html stuff
-Bundle "mattn/emmet-vim"
+Plugin 'mattn/emmet-vim'
 nnoremap <C-F> <Nop>
 inoremap <C-F> <Nop>
 vnoremap <C-F> <Nop>
 let g:user_emmet_leader_key='<C-F>'
 
 " Setup Markdown syntax highlighting
-Bundle 'plasticboy/vim-markdown'
+Plugin 'plasticboy/vim-markdown'
 let g:vim_markdown_folding_disabled=1
 "let g:vim_markdown_initial_foldlevel=1
 let g:markdown_no_default_key_mappings=1
 let g:vim_markdown_frontmatter=1
 
 " Syntastic
-Bundle 'scrooloose/syntastic'
+Plugin 'scrooloose/syntastic'
 
 " End of Vundle setup
 syntax on
