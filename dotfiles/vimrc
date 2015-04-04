@@ -152,6 +152,8 @@ func! PythonMode()
 endfu
 au BufNewFile,BufRead *.py call PythonMode()
 
+set spellfile=~/sync/diary-data/vim/en.utf-8.add
+
 " Function for editing English text
 func! WordProcessorMode()
   " Load Markdown syntax highlighting but with custom hashtag support
@@ -166,7 +168,7 @@ func! WordProcessorMode()
   set display=lastline
   set formatoptions=
   set spell spelllang=en_gb
-  source ~/.vim/abbreviations.vim
+  source ~/sync/diary-data/vim/abbreviations.vim
 
   " Indenting
   setl tabstop=4
