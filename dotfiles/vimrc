@@ -2,7 +2,7 @@
 set nocompatible
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#rc()
+call vundle#begin()
 Plugin 'gmarik/vundle'
 
 Plugin 'scrooloose/nerdtree'
@@ -12,6 +12,7 @@ Plugin 'AndrewRadev/vim-eco'
 Plugin 'tpope/vim-abolish'
 Plugin 'tpope/vim-speeddating'
 Plugin 'pangloss/vim-javascript'
+Plugin 'scrooloose/syntastic'
 
 " Completion
 Plugin 'Valloric/YouCompleteMe'
@@ -24,8 +25,6 @@ let delimitMate_expand_cr = 1
 
 " EasyMotion
 Plugin 'Lokaltog/vim-easymotion'
-"map <Space> <Leader>
-"map <Space><Space> <Leader><Leader>
 
 " Emmet for expanding html stuff
 Plugin 'mattn/emmet-vim'
@@ -34,22 +33,16 @@ inoremap <C-F> <Nop>
 vnoremap <C-F> <Nop>
 let g:user_emmet_leader_key='<C-F>'
 
-" Setup Markdown syntax highlighting
+" Markdown syntax highlighting
 Plugin 'plasticboy/vim-markdown'
 let g:vim_markdown_folding_disabled=1
-"let g:vim_markdown_initial_foldlevel=1
 let g:markdown_no_default_key_mappings=1
 let g:vim_markdown_frontmatter=1
 
-" Syntastic
-Plugin 'scrooloose/syntastic'
-
 " End of Vundle setup
-syntax on
+call vundle#end()
 filetype plugin indent on
-
-"set background=dark
-"colorscheme solarized
+syntax on
 
 " Open new files in insert mode
 au BufNewFile * startinsert
@@ -76,15 +69,13 @@ vnoremap . :norm.<CR>
 set textwidth=79
 set formatoptions=crqn1j
 
-" Trying out new way to exit normal mode
-" TODO figure out why using + in macros wont continue recording the macro
+" New way to exit normal mode
 nmap + <Nop>
 imap + <Esc>s
 vmap + <Esc><Esc>
 imap  <Nop>
 
 nnoremap ; :
-nnoremap : :echo "USE ; INSTEAD"<CR>
 
 noremap + :update<CR>
 noremap ## ZZ
@@ -132,12 +123,6 @@ noremap l t
 noremap J N
 noremap K gJ
 noremap L T
-
-" n is next and prev search results
-" t is until
-" s is substitute
-" J is join
-" K is lookup keyword
 
 " todo.txt shortcuts
 noremap X <Nop>
