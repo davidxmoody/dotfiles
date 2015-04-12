@@ -13,6 +13,8 @@ Plugin 'tpope/vim-abolish'
 Plugin 'tpope/vim-speeddating'
 Plugin 'pangloss/vim-javascript'
 Plugin 'scrooloose/syntastic'
+Plugin 'mustache/vim-mustache-handlebars'
+Plugin 'mtscout6/vim-cjsx'
 
 " Completion
 Plugin 'Valloric/YouCompleteMe'
