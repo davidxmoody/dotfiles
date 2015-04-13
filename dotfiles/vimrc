@@ -12,9 +12,9 @@ Plugin 'AndrewRadev/vim-eco'
 Plugin 'tpope/vim-abolish'
 Plugin 'tpope/vim-speeddating'
 Plugin 'pangloss/vim-javascript'
-Plugin 'scrooloose/syntastic'
 Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'mtscout6/vim-cjsx'
+Plugin 'scrooloose/syntastic'
 
 " Completion
 Plugin 'Valloric/YouCompleteMe'
@@ -138,6 +138,8 @@ func! PythonMode()
   set shiftwidth=4
 endfu
 au BufNewFile,BufRead *.py call PythonMode()
+
+au BufNewFile,BufRead *.cjsx SyntasticToggleMode
 
 set spellfile=~/sync/diary-data/vim/en.utf-8.add
 
