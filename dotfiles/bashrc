@@ -46,10 +46,30 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# Custom prompt
+# Custom prompt (with git support)
+git_status() {
+  local branch
+  if branch=$(git rev-parse --abbrev-ref HEAD 2> /dev/null); then
+    if [[ "$branch" == "HEAD" ]]; then
+      branch='detached*'
+    fi
+
+    local status=$(git status --porcelain 2> /dev/null)
+    if [[ "$status" != "" ]]; then
+      echo "($branch*) "
+    else
+      echo "($branch) "
+    fi
+
+  else
+    echo ""
+  fi
+}
+
 case $TERM in
   xterm*)
-    PS1='\[\033]0;\w $(history 1)\007\]\[\e[0;31m\]\w\[\e[0m\] '
+    # Could also use \e[0;91 for an orange colour that looks good too
+    PS1='\[\033]0;\w\007\]\[\e[0;31m\]\w\[\e[0m\] \[\e[0;33m\]$(git_status)\[\e[0m\]'
     PS2='\[\e[0;31m\]>\[\e[0m\] '
     ;;
   *)
