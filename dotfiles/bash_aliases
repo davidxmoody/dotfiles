@@ -97,12 +97,13 @@ alias hd='hg diff | less'
 # Git
 alias gs='git status'
 alias gc='git commit'
-alias gl='git log'
+alias gl='git lg'
+alias glp='git lg -p'
 alias gsl='git shortlog'
 alias gd='git diff'
 alias gdh='git diff HEAD'
-alias gaa='git add -A'
-alias gaac='git add -A && git commit'
+alias gaa='git add -A :/'
+alias gaac='git add -A :/ && git commit'
 
 # cd shortcuts
 alias up='cd ..'
