@@ -25,15 +25,6 @@ shopt -s globstar
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-# enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-fi
-
-# Add an "alert" alias for long running commands.  Use like so:
-#   sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
@@ -99,19 +90,16 @@ if [ -d "$NPM_PACKAGES" ]; then
   export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
 fi
 
-# Add custom bin dir to PATH
-[ -d "$RC_DIR/bin" ] && export PATH="$RC_DIR/bin:$PATH"
+export NVM_DIR="/home/david/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
-# Source all custom bash completion files
+# Alias definitions
+[ -f ~/.bash_aliases ] && source ~/.bash_aliases
+
+# Source all custom bash completion files (for todo.txt mostly)
 for f in $RC_DIR/completion/*; do
   [ -f "$f" ] && source "$f"
 done
 
 # Amazon S3 completion
 complete -C aws_completer aws
-
-# Alias definitions
-[ -f ~/.bash_aliases ] && source ~/.bash_aliases
-
-export NVM_DIR="/home/david/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
