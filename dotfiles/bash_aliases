@@ -26,11 +26,6 @@ alias grep='grep --color=auto -r'
 greppy() { grep -n "$1" *.py; }
 grepc() { grep -n "$1" *.coffee; }
 
-# Vim
-alias vim='gvim -v'
-alias v='vim'
-alias vv='v +WP'
-
 # Functions
 cdl() { cd "$@" && l; }
 
@@ -59,38 +54,37 @@ mkbash() {
   v + +startinsert "$1"
 }
 
-# Todo
-alias t='todo.sh'
-alias te='vv "+set number" $DIARY_DIR/todo/todo.txt'
-alias tes='vv "+set number" $DIARY_DIR/todo/someday.txt'
-alias tew='vv "+set number" $DIARY_DIR/todo/week.txt'
-alias tey='vv "+set number" $DIARY_DIR/todo/year.txt'
-alias ted='vv + "+set number" $DIARY_DIR/todo/done.txt'
-complete -F _todo t
+# Vim
+alias vim='gvim -v'
+alias v='vim'
+alias vv='vim +WP'
 
 # Other quick vim editing
 alias vimrc='vim ~/.vimrc'
 alias vba='vim ~/.bash_aliases'
 alias vab='vim ~/.vim/abbreviations.vim'
-alias vid='vim ~/sync/space/blog/ideas.md'
 
-# Mercurial
-alias hl='hg glog | less'
-alias hs='hg st'
-alias hc='hg ci'
-alias hd='hg diff | less'
+# Todo
+alias t='todo.sh'
+alias te='vv "+set number" $DIARY_DIR/todo/todo.txt'
+alias tes='vv "+set number" $DIARY_DIR/todo/someday.txt'
+alias ted='vv + "+set number" $DIARY_DIR/todo/done.txt'
+complete -F _todo t
 
 # Git
+alias g='git'
 alias gs='git status'
 alias gc='git commit'
 alias gl='git lg'
-alias glp='git lg -p'
-alias gls='git lg --stat'
 alias gd='git diff'
-alias gdh='git diff HEAD'
 alias gaa='git add -A :/'
 alias gaac='git add -A :/ && git commit'
 alias gco='git checkout'
+alias gm='git merge'
+alias gpl='git pull'
+alias gps='git push'
+alias gpsa='git push --all'
+alias gpsat='git push --all --follow-tags'
 
 # cd shortcuts
 alias up='cd ..'
@@ -122,8 +116,8 @@ alias nus='npm uninstall --save'
 alias nig='npm install -g'
 alias nug='npm uninstall -g'
 alias nr='npm run'
-alias nodemon='nodemon -e md,sass,scss,css,html,js,coffee --ignore build/'
-alias npm-exec='PATH=$(npm bin):$PATH'
+alias nv='npm version'
+alias nodemon='nodemon -e md,sass,scss,css,html,hbs,js,coffee,jsx,cjsx,json,yaml --ignore build/ --ignore dist/'
 
 # Misc
 alias free='free -m'
