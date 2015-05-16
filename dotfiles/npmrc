@@ -1,1 +1,4 @@
 prefix=~/.npm-packages
+init.author.name=David Moody
+init.author.email=david@davidxmoody.com
+init.author.url=https://davidxmoody.com/
