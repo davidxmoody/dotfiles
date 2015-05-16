@@ -21,7 +21,7 @@ alias lav='ls -CHAv'
 alias u='l'
 
 # Grep
-alias grep='grep --color=auto -r'
+alias grep='grep --color=auto --exclude-dir=node_modules --exclude-dir=build --exclude-dir=dist --exclude-dir=.git -riI'
 
 greppy() { grep -n "$1" *.py; }
 grepc() { grep -n "$1" *.coffee; }
