@@ -59,18 +59,6 @@ mkbash() {
   v + +startinsert "$1"
 }
 
-# Diary
-alias diary='~/sync/old-projects/diary/rundiary -b $DIARY_DIR'
-alias dl='diary list'
-alias ds='diary search'
-dn() { diary new "$@"; diary generate; }
-de() { diary edit "$@"; diary generate; }
-alias di='diary-import; diary generate'
-alias dr='xdg-open $(shuf -n1 -e $DIARY_DIR/html/*.html)'
-alias dw='diary wc -d --after $(date -d "6 days ago" +%F)'
-alias wsum='diary search \#wsum'
-alias dsp='diary search \#plan'
-
 # Todo
 alias t='todo.sh'
 alias te='vv "+set number" $DIARY_DIR/todo/todo.txt'
@@ -102,6 +90,7 @@ alias gd='git diff'
 alias gdh='git diff HEAD'
 alias gaa='git add -A :/'
 alias gaac='git add -A :/ && git commit'
+alias gco='git checkout'
 
 # cd shortcuts
 alias up='cd ..'
