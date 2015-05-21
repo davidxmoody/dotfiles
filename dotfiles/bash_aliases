@@ -23,9 +23,6 @@ alias u='l'
 # Grep
 alias grep='grep --color=auto --exclude-dir=node_modules --exclude-dir=build --exclude-dir=dist --exclude-dir=.git -riI'
 
-greppy() { grep -n "$1" *.py; }
-grepc() { grep -n "$1" *.coffee; }
-
 # Functions
 cdl() { cd "$@" && l; }
 
@@ -117,7 +114,7 @@ alias nig='npm install -g'
 alias nug='npm uninstall -g'
 alias nr='npm run'
 alias nv='npm version'
-alias nodemon='nodemon -e md,sass,scss,css,html,hbs,js,coffee,jsx,cjsx,json,yaml --ignore build/ --ignore dist/'
+alias nodemon='nodemon -e md,sass,scss,css,html,hbs,js,coffee,jsx,cjsx,json,yaml,json --ignore build/ --ignore dist/'
 
 # Misc
 alias free='free -m'
