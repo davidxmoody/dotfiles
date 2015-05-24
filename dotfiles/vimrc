@@ -16,6 +16,19 @@ Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'mtscout6/vim-cjsx'
 Plugin 'scrooloose/syntastic'
 
+" Search highlighting
+Plugin 'haya14busa/incsearch.vim'
+set hlsearch
+let g:incsearch#auto_nohlsearch = 1
+map j  <Plug>(incsearch-nohl-n)
+map J  <Plug>(incsearch-nohl-N)
+map *  <Plug>(incsearch-nohl-*)
+map g* <Plug>(incsearch-nohl-g*)
+map #  <Nop>
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
+
 " Completion
 Plugin 'Valloric/YouCompleteMe'
 let g:ycm_filetype_blacklist = { 'md': 1, 'mkd': 1, 'markdown': 1, 'text': 1 , 'gitcommit': 1 }
@@ -118,11 +131,11 @@ noremap S L
 noremap gt gj
 noremap gn gk
 
-noremap j n
+"noremap j n
 noremap k J
 noremap l t
 
-noremap J N
+"noremap J N
 noremap K gJ
 noremap L T
 
