@@ -168,7 +168,6 @@ func! WordProcessorMode()
   " Load Markdown syntax highlighting but with custom hashtag support
   set filetype=mkd
   syn match htmlBoldItalic "#[-_a-zA-Z0-9]\+"
-  let b:delimitMate_quotes = "\" ' ` *"
 
   " Other options
   set nonumber
