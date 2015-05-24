@@ -1,5 +1,6 @@
 #!/bin/bash
 set -o errexit nounset
+[ -z "$DIARY_DIR" ] && echo '$DIARY_DIR does not exist' && exit 1
 
 # Import all text entries in android-entries/
 cd "$DIARY_DIR"
