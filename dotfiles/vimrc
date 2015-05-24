@@ -37,6 +37,7 @@ let g:ycm_filetype_blacklist = { 'md': 1, 'mkd': 1, 'markdown': 1, 'text': 1 , '
 Plugin 'Raimondi/delimitMate'
 set backspace=indent,eol,start
 let delimitMate_expand_cr = 1
+let delimitMate_nesting_quotes = ['"',"'",'`']
 
 " EasyMotion
 Plugin 'Lokaltog/vim-easymotion'
@@ -167,6 +168,7 @@ func! WordProcessorMode()
   " Load Markdown syntax highlighting but with custom hashtag support
   set filetype=mkd
   syn match htmlBoldItalic "#[-_a-zA-Z0-9]\+"
+  let b:delimitMate_quotes = "\" ' ` *"
 
   " Other options
   set nonumber
