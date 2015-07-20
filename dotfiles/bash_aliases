@@ -12,7 +12,8 @@ alias lar='ls -CHAR'
 alias u='l'
 
 # Grep
-alias grep='grep --color=auto --exclude-dir=node_modules --exclude-dir=build --exclude-dir=dist --exclude-dir=.git -riI'
+alias gr='grep --color=auto --exclude-dir=node_modules --exclude-dir=build --exclude-dir=dist --exclude-dir=.git --exclude-dir=mftembed -riI'
+alias gri='grep --color=auto --exclude-dir=node_modules --exclude-dir=build --exclude-dir=dist --exclude-dir=.git --exclude-dir=mftembed -rI'
 
 # Functions
 cdl() { cd "$@" && l; }
@@ -83,6 +84,7 @@ alias cdb='cd ~/sync/space/blog'
 alias cdd='cd $DIARY_DIR'
 alias cddb='cd $DBOX'
 alias cdrc='cd $RC_DIR'
+alias cdy='cd ~/yw2/'
 
 # Random functions
 alias coin='if ((RANDOM%2 == 0)); then echo yes; else echo no; fi'
