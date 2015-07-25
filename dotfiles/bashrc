@@ -145,12 +145,13 @@ esac
 export LC_COLLATE=C
 
 # Set some custom frequently used directories
-DBOX="$HOME/.dbox/Dropbox"
-[ -d "$DBOX" ] && export DBOX
-RC_DIR="$HOME/sync/space/dotfiles"
-[ -d "$RC_DIR" ] && export RC_DIR
-DIARY_DIR="$HOME/sync/diary-data"
-[ -d "$DIARY_DIR" ] && export DIARY_DIR
+export P_DIR="$HOME/p"
+export RC_DIR="$P_DIR/dotfiles"
+export BLOG_DIR="$P_DIR/davidxmoody.github.io"
+export TMP_DIR="$HOME/tmp"
+export SYNC_DIR="$HOME/sync"
+export DBOX="$HOME/.dbox/Dropbox"
+export DIARY_DIR="$HOME/sync/diary-data"
 
 # NPM
 NPM_PACKAGES="$HOME/.npm-packages"
