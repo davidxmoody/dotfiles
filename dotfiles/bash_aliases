@@ -1,22 +1,14 @@
 # List
-alias  ls='ls -F --group-directories-first --color=auto'
-alias   l='ls -CBH'
-alias  la='ls -CHA'
-
-alias  lg='ls -ohBH | grep'
-alias lag='ls -ohAH | grep'
-
-alias  lr='ls -CBHR'
-alias lar='ls -CHAR'
-
-alias u='l'
+alias u='ls -FCBH --group-directories-first --color=auto --hide node_modules --hide npm-debug.log'
+alias uu='u -A'
+alias ur='u -R'
 
 # Grep
 alias gr='grep --color=auto --exclude-dir=node_modules --exclude-dir=build --exclude-dir=dist --exclude-dir=.git --exclude-dir=mftembed -riI'
 alias gri='grep --color=auto --exclude-dir=node_modules --exclude-dir=build --exclude-dir=dist --exclude-dir=.git --exclude-dir=mftembed -rI'
 
 # Functions
-cdl() { cd "$@" && l; }
+cdl() { cd "$@" && u; }
 
 mkcd() { mkdir "$@" && cd "$@"; }
 
@@ -52,13 +44,6 @@ alias vv='vim +WP'
 alias vimrc='vim ~/.vimrc'
 alias vba='vim ~/.bash_aliases'
 alias vab='vim ~/.vim/abbreviations.vim'
-
-# Todo
-alias t='todo.sh'
-alias te='vv "+set number" $DIARY_DIR/todo/todo.txt'
-alias tes='vv "+set number" $DIARY_DIR/todo/someday.txt'
-alias ted='vv + "+set number" $DIARY_DIR/todo/done.txt'
-complete -F _todo t
 
 # Git
 alias g='git'
