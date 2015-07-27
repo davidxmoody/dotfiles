@@ -151,7 +151,6 @@ export BLOG_DIR="$P_DIR/davidxmoody.github.io"
 export TMP_DIR="$HOME/tmp"
 export SYNC_DIR="$HOME/sync"
 export DBOX="$HOME/.dbox/Dropbox"
-export DIARY_DIR="$HOME/sync/diary-data"
 
 # NPM
 NPM_PACKAGES="$HOME/.npm-packages"
@@ -177,20 +176,5 @@ for f in $RC_DIR/completion/*; do
   [ -f "$f" ] && source "$f"
 done
 
-# Amazon S3 completion
-complete -C aws_completer aws
-
 # Alias completion for all aliases defined in ~/.bash_aliases
 alias_completion
-
-# Diary aliases come here because alias_completion doesn't like them
-alias diary='~/sync/old-projects/diary/rundiary -b $DIARY_DIR'
-alias dl='diary list'
-alias ds='diary search'
-dn() { diary new "$@"; diary generate; }
-de() { diary edit "$@"; diary generate; }
-alias di='diary-import; diary generate'
-alias dr='xdg-open $(shuf -n1 -e $DIARY_DIR/html/*.html)'
-alias dw='diary wc -d --after $(date -d "6 days ago" +%F)'
-alias wsum='diary search \#wsum'
-alias dsp='diary search \#plan'

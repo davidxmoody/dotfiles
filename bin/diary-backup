@@ -1,8 +1,0 @@
-#!/bin/bash
-set -o errexit nounset
-
-[ -z "$DIARY_DIR" ] && echo '$DIARY_DIR does not exist' && exit 1
-
-cd "$DIARY_DIR"
-
-tar c ".git" | gpg -c --cipher-algo AES256 -o "$HOME/tmp/diary-backup-$(date +%F).tar.gpg" -

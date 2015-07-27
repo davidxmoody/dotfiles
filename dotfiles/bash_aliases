@@ -36,7 +36,7 @@ mkbash() {
 }
 
 # Vim
-alias vim='gvim -v'
+type gvim 2> /dev/null > /dev/null && alias vim='gvim -v'
 alias v='vim'
 alias vv='vim +WP'
 
@@ -67,7 +67,6 @@ alias cdp='cd $P_DIR'
 alias cds='cd $SYNC_DIR'
 alias cdt='cd $TMP_DIR'
 alias cdb='cd $BLOG_DIR'
-alias cdd='cd $DIARY_DIR'
 alias cddb='cd $DBOX'
 alias cdrc='cd $RC_DIR'
 alias cdy='cd $P_DIR/yw2'
