@@ -80,7 +80,7 @@
  */
     "consistent-return": 2,          // http://eslint.org/docs/rules/consistent-return
     "curly": [2, "multi-line"],      // http://eslint.org/docs/rules/curly
-    "default-case": 2,               // http://eslint.org/docs/rules/default-case
+    "default-case": 0,               // http://eslint.org/docs/rules/default-case
     "dot-notation": [2, {            // http://eslint.org/docs/rules/dot-notation
       "allowKeywords": true
     }],
@@ -144,12 +144,17 @@
         "afterColon": true
     }],
     "new-cap": [2, {                 // http://eslint.org/docs/rules/new-cap
-      "newIsCap": true
+      "newIsCap": true,
+      "capIsNew": true,
+      "capIsNewExceptions": [
+        "Metalsmith",
+        "T"
+      ]
     }],
     "no-multiple-empty-lines": [2, { // http://eslint.org/docs/rules/no-multiple-empty-lines
       "max": 2
     }],
-    "no-nested-ternary": 2,          // http://eslint.org/docs/rules/no-nested-ternary
+    "no-nested-ternary": 0,          // http://eslint.org/docs/rules/no-nested-ternary
     "no-new-object": 2,              // http://eslint.org/docs/rules/no-new-object
     "no-spaced-func": 2,             // http://eslint.org/docs/rules/no-spaced-func
     "no-trailing-spaces": 2,         // http://eslint.org/docs/rules/no-trailing-spaces
