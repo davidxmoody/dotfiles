@@ -1,0 +1,82 @@
+if !exists(":Abolish")
+  finish
+endif
+
+let g:abolish_save_file = expand('<sfile>:p')
+
+iab h the
+iab H The
+iab t to
+iab T To
+iab d and
+iab D And
+iab j just
+iab J Just
+iab q quick
+iab Q Quick
+iab w with
+iab W With
+iab v very
+iab V Very
+iab b be
+iab B Be
+iab f of
+iab F Of
+
+Abolish wh{,s} what{,'s}
+Abolish th{,s} that{,'s}
+ 
+iab i I
+iab (i (I
+Abolish im I'm
+Abolish iv I've
+Abolish il I'll
+Abolish id I'd
+
+Abolish ie i.e.
+Abolish eg e.g.
+
+Abolish {he,she,there,here,mum,dad,children}s {}'s
+Abolish {you,they}ve {}'ve
+Abolish {do,did,ca,is,wo,have,has,was,does,could,would,are,were,had,should}nt {}n't
+
+Abolish {al,}tho{,u} {}though
+Abolish thro{,u} through
+
+Abolish monday Monday
+Abolish tuesday Tuesday
+Abolish wednesday Wednesday
+Abolish thursday Thursday
+Abolish friday Friday
+Abolish saturday Saturday
+Abolish sunday Sunday
+
+Abolish january January
+Abolish february February
+Abolish april April
+Abolish june June
+Abolish july July
+Abolish august August
+Abolish september September
+Abolish october October
+Abolish november November
+Abolish december December
+
+Abolish jsc JavaScript
+Abolish cof CoffeeScript
+
+Abolish pmo{,s} Pomodoro{}
+Abolish def definitely
+Abolish prob probably
+Abolish bc because
+Abolish mins minutes
+Abolish hev however
+Abolish prog programming
+Abolish bf before
+Abolish prev previous
+Abolish dif different
+Abolish td today
+Abolish tm tomorrow
+Abolish yd yesterday
+
+" New abbreviations (added with `:Abolish!` will get added below this line

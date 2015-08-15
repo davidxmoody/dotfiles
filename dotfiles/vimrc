@@ -192,7 +192,7 @@ func! WordProcessorMode()
   set display=lastline
   set formatoptions=
   set spell spelllang=en_gb
-  source ~/sync/diary-data/vim/abbreviations.vim
+  source ~/.vim_abbreviations
 
   " Indenting
   setl tabstop=4
@@ -214,6 +214,4 @@ endfu
 
 com! WP call WordProcessorMode()
 au BufNewFile,BufRead *.md call WordProcessorMode()
-au BufNewFile,BufRead *.mkd call WordProcessorMode()
-au BufNewFile,BufRead *.markdown call WordProcessorMode()
 au BufNewFile,BufRead diary-*.txt call WordProcessorMode()
