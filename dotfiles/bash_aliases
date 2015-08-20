@@ -1,5 +1,5 @@
 # List
-alias u='ls -FCBH --group-directories-first --color=auto --hide node_modules --hide npm-debug.log'
+alias u='ls -FCBH --group-directories-first --color=auto --hide node_modules'
 alias uu='u -A'
 alias ur='u -R'
 
