@@ -15,10 +15,13 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'mtscout6/vim-cjsx'
 Plugin 'mxw/vim-jsx'
+Plugin 'elzr/vim-json'
 
 " Syntastic
 Plugin 'scrooloose/syntastic'
 let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_json_checkers = ['jsonlint']
+au! BufRead,BufNewFile *.json set filetype=json
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 "set statusline+=%*
@@ -27,6 +30,7 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
+
 
 " Search highlighting
 Plugin 'haya14busa/incsearch.vim'
