@@ -9,7 +9,13 @@ alias gri='grep --color=auto --exclude-dir=node_modules --exclude-dir=build --ex
 
 # Find
 f() {
-  find . -path "*/node_modules" -prune -or -iregex ".*$1.*" -print
+  regex=$(echo $* | sed -s "s/ /\\\|/g")
+  find . \
+    -path "*/.git" -prune -or \
+    -path "*/build" -prune -or \
+    -path "*/dist" -prune -or \
+    -path "*/node_modules" -prune -or \
+    -not -type d -iregex ".*\($regex\).*" -print
 }
 
 # Functions
