@@ -70,6 +70,9 @@ alias gpl='git pull'
 alias gps='git push'
 alias gpsa='git push --all'
 alias gpsat='git push --all --follow-tags'
+alias gsum='git summary'
+alias gef='git effort'
+alias gef10='git effort --above 10'
 
 # cd shortcuts
 alias up='cd ..'
