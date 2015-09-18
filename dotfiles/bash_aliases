@@ -40,12 +40,6 @@ mkalias() {
   alias "$alias_name" | tee -a "$HOME/.bash_aliases"
 }
 
-mkbash() {
-  echo -e "#!/bin/bash\n\n" > "$1" && \
-  chmod +x "$1" && \
-  v + +startinsert "$1"
-}
-
 # Vim
 type gvim 2> /dev/null > /dev/null && alias vim='gvim -v'
 alias v='vim'
@@ -55,6 +49,12 @@ alias vv='vim +WP'
 alias vimrc='vim ~/.vimrc'
 alias vba='vim ~/.bash_aliases'
 alias vab='vim ~/.vim/abbreviations.vim'
+
+mkbash() {
+  echo -e "#!/bin/bash\n\n" > "$1" && \
+  chmod +x "$1" && \
+  v + +startinsert "$1"
+}
 
 # Git
 alias g='git'

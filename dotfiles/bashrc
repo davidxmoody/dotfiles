@@ -194,3 +194,7 @@ alias de='diary edit'
 alias dt='diary generate && xdg-open $DIARY_DIR/html/today.html'
 alias dw='diary wc -d --after $(date -d "6 days ago" +%F)'
 alias wsum='diary search \#wsum'
+
+# Blog editing
+alias be='$BLOG_DIR/scripts/helpers/edit'
+alias bn='$BLOG_DIR/scripts/helpers/new'
