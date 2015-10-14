@@ -11,3 +11,5 @@ npm i -g jsonlint
 npm i -g nodemon
 
 sudo apt-get install git-extras
+
+sudo gem install fit-commit
