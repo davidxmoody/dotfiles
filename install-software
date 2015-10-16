@@ -14,3 +14,5 @@ npm i -g nodemon
 sudo apt-get install git
 sudo apt-get install git-extras
 sudo apt-get install gitk
+
+sudo gem install fit-commit

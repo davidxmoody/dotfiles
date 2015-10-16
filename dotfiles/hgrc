@@ -1,7 +1,3 @@
 [ui]
 username = David Moody <david@davidxmoody.com>
 editor = vim +startinsert
-
-[extensions]
-hgext.graphlog = 
-hgext.convert =
