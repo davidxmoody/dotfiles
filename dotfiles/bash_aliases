@@ -1,3 +1,6 @@
+# Tmux
+type tmux-next 2> /dev/null > /dev/null && alias tmux='tmux-next -f "$HOME/.tmux.conf"'
+
 # List
 alias u='ls -FCBH --group-directories-first --color=auto --hide node_modules'
 alias uu='u -A'
