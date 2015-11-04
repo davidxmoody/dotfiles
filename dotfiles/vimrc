@@ -159,10 +159,8 @@ noremap l t
 noremap K gJ
 noremap L T
 
-" todo.txt shortcuts
-noremap X <Nop>
-noremap XX A<Space>X<Esc>
-noremap Xx :.s/^\(([A-Z])<Space>\)\?/<CR>I<C-V>x78<Space><C-R>=strftime("%F")<CR><Space><Esc>$
+" gf filename options
+set suffixesadd=.js,.json,.coffee,.jsx,.cjsx,.yml,.yaml,.scss,.css
 
 " Function for editing Python code
 func! PythonMode()
