@@ -1,20 +1,20 @@
 #!/bin/bash
 
 # Remove unused empty directories commonly found on new installs
-for dir in Downloads Documents Music Pictures Video; do 
-    [ -d "$HOME/$dir" ] && rmdir -v "$HOME/$dir"
+for dir in Downloads Documents Music Pictures Video; do
+  [ -d "$HOME/$dir" ] && rmdir -v "$HOME/$dir"
 done
 
 # Create custom directories
 for dir in tmp p .npm-packages .vim-swap .desktop .templates .public; do
-    mkdir -pv "$HOME/$dir" 
+  mkdir -pv "$HOME/$dir"
 done
 
 # Create symlinks to all dotfiles (in home dir), also add dot to their names
 for file in dotfiles/*; do
-    target="$HOME/.${file#dotfiles/}"
-    target_canon=$(readlink -f "$target")
-    file_canon=$(readlink -f "$file")
-    [ "$target_canon" = "$file_canon" ] && continue
-    ln -sbv "$file_canon" "$target"
+  target="$HOME/.${file#dotfiles/}"
+  target_canon=$(readlink -f "$target")
+  file_canon=$(readlink -f "$file")
+  [ "$target_canon" = "$file_canon" ] && continue
+  ln -sbv "$file_canon" "$target"
 done
