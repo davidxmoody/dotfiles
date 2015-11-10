@@ -6,6 +6,8 @@ alias u='ls -FCBH --group-directories-first --color=auto --hide node_modules'
 alias uu='u -A'
 alias ur='u -R'
 
+#TODO replace these grep and find aliases with ag
+
 # Grep
 alias gr='grep --color=auto --exclude-dir=node_modules --exclude-dir=build --exclude-dir=dist --exclude-dir=.git --exclude-dir=mftembed --exclude-dir=mftembed-fast -riI'
 alias gri='grep --color=auto --exclude-dir=node_modules --exclude-dir=build --exclude-dir=dist --exclude-dir=.git --exclude-dir=mftembed --exclude-dir=mftembed-fast -rI'
@@ -89,6 +91,10 @@ alias cddb='cd $DBOX'
 alias cdrc='cd $RC_DIR'
 alias cdy='cd $P_DIR/yw2'
 alias cdl='cd $P_DIR/mftembed-life'
+
+p() {
+  cd $P_DIR/$(ls -1 $P_DIR | fzf --select-1 --query "$1")
+}
 
 # Random functions
 alias coin='if ((RANDOM%2 == 0)); then echo yes; else echo no; fi'
