@@ -93,7 +93,8 @@ alias cdy='cd $P_DIR/yw2'
 alias cdl='cd $P_DIR/mftembed-life'
 
 p() {
-  cd $P_DIR/$(ls -1 $P_DIR | fzf --select-1 --query "$1")
+  local dir=$(ls -1 $P_DIR | fzf --select-1 --query "$1")
+  [ ! -z "$dir" ] && cd "$P_DIR/$dir"
 }
 
 # Random functions
