@@ -6,12 +6,12 @@ for dir in Downloads Documents Music Pictures Video; do
 done
 
 # Create custom directories
-for dir in tmp p .npm-packages .vim-swap .desktop .templates .public; do
+for dir in tmp p .npm-packages .vim-swap .desktop .templates .public .config; do
   mkdir -pv "$HOME/$dir"
 done
 
 # Create symlinks to all dotfiles (in home dir), also add dot to their names
-for file in dotfiles/*; do
+for file in $(find dotfiles/ -type f); do
   target="$HOME/.${file#dotfiles/}"
   target_canon=$(readlink -f "$target")
   file_canon=$(readlink -f "$file")
