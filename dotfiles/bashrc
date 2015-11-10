@@ -206,3 +206,5 @@ alias wsum='diary search \#wsum'
 # Blog editing
 alias be='$BLOG_DIR/scripts/helpers/edit'
 alias bn='$BLOG_DIR/scripts/helpers/new'
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

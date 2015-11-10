@@ -14,5 +14,6 @@ npm i -g nodemon
 sudo apt-get install git
 sudo apt-get install git-extras
 sudo apt-get install gitk
+sudo apt-get install silversearcher-ag
 
 sudo gem install fit-commit
