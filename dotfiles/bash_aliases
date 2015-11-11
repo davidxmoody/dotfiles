@@ -47,8 +47,15 @@ mkalias() {
 
 # Vim
 type gvim 2> /dev/null > /dev/null && alias vim='gvim -v'
-alias v='vim'
-alias vv='vim +WP'
+
+v() {
+  if [ -f "$1" ]; then
+    vim "$1"
+  else
+    local file=$(ag -g "" | fzf --select-1 --query "$1")
+    [ ! -z "$file" ] && vim "$file"
+  fi
+}
 
 # Other quick vim editing
 alias vimrc='vim ~/.vimrc'
@@ -58,7 +65,7 @@ alias vab='vim ~/.vim/abbreviations.vim'
 mkbash() {
   echo -e "#!/bin/bash\n\n" > "$1" && \
   chmod +x "$1" && \
-  v + +startinsert "$1"
+  vim + +startinsert "$1"
 }
 
 # Git
@@ -75,22 +82,13 @@ alias gpl='git pull'
 alias gps='git push'
 alias gpsa='git push --all'
 alias gpsat='git push --all --follow-tags'
-alias gsum='git summary'
-alias gef='git effort'
-alias gef10='git effort --above 10'
 
 # cd shortcuts
 alias up='cd ..'
 alias back='cd -'
-alias cdp='cd $P_DIR'
-alias cds='cd $SYNC_DIR'
 alias cdt='cd $TMP_DIR'
-alias cdb='cd $BLOG_DIR'
 alias cdd='cd $DIARY_DIR'
 alias cddb='cd $DBOX'
-alias cdrc='cd $RC_DIR'
-alias cdy='cd $P_DIR/yw2'
-alias cdl='cd $P_DIR/mftembed-life'
 
 p() {
   local dir=$(ls -1 $P_DIR | fzf --select-1 --query "$1")
@@ -124,10 +122,7 @@ alias nverm='npm version minor'
 alias nodemon='nodemon -e md,sass,scss,css,html,hbs,js,coffee,jsx,cjsx,json,yaml,json --ignore build/ --ignore dist/ --ignore node_modules/'
 
 # Misc
-alias free='free -m'
 alias dus='du -Dhs'
-alias py='python3'
-alias pyi='python3 -i'
 alias df='df -hT'
 alias op='xdg-open'
 alias mkdir='mkdir -p'
