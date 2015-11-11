@@ -6,22 +6,22 @@ alias u='ls -FCBH --group-directories-first --color=auto --hide node_modules'
 alias uu='u -A'
 alias ur='u -R'
 
-#TODO replace these grep and find aliases with ag
-
-# Grep
-alias gr='grep --color=auto --exclude-dir=node_modules --exclude-dir=build --exclude-dir=dist --exclude-dir=.git --exclude-dir=mftembed --exclude-dir=mftembed-fast -riI'
-alias gri='grep --color=auto --exclude-dir=node_modules --exclude-dir=build --exclude-dir=dist --exclude-dir=.git --exclude-dir=mftembed --exclude-dir=mftembed-fast -rI'
-
-# Find
-f() {
-  regex=$(echo $* | sed -s "s/ /\\\|/g")
-  find . \
-    -path "*/.git" -prune -or \
-    -path "*/build" -prune -or \
-    -path "*/dist" -prune -or \
-    -path "*/node_modules" -prune -or \
-    -not -type d -iregex ".*\($regex\).*" -print
+# fzf and ag
+p() {
+  local dir=$(ls -1 $P_DIR | fzf --select-1 --query "$1")
+  [ ! -z "$dir" ] && cd "$P_DIR/$dir"
 }
+
+v() {
+  if [ -f "$1" ]; then
+    vim "$1"
+  else
+    local file=$(ag -g "" | fzf --select-1 --query "$1")
+    [ ! -z "$file" ] && vim "$file"
+  fi
+}
+
+alias ag='ag --smart-case'
 
 # Functions
 cdl() { cd "$@" && u; }
@@ -47,15 +47,6 @@ mkalias() {
 
 # Vim
 type gvim 2> /dev/null > /dev/null && alias vim='gvim -v'
-
-v() {
-  if [ -f "$1" ]; then
-    vim "$1"
-  else
-    local file=$(ag -g "" | fzf --select-1 --query "$1")
-    [ ! -z "$file" ] && vim "$file"
-  fi
-}
 
 # Other quick vim editing
 alias vimrc='vim ~/.vimrc'
@@ -89,11 +80,6 @@ alias back='cd -'
 alias cdt='cd $TMP_DIR'
 alias cdd='cd $DIARY_DIR'
 alias cddb='cd $DBOX'
-
-p() {
-  local dir=$(ls -1 $P_DIR | fzf --select-1 --query "$1")
-  [ ! -z "$dir" ] && cd "$P_DIR/$dir"
-}
 
 # Random functions
 alias coin='if ((RANDOM%2 == 0)); then echo yes; else echo no; fi'
