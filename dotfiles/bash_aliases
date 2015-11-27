@@ -17,8 +17,17 @@ v() {
     vim "$1"
   else
     local file=$(ag -g "" | fzf --select-1 --query "$1")
-    [ ! -z "$file" ] && vim "$file"
+    [ ! -z "$file" ] && echo "vim \"$file\"" && vim "$file"
   fi
+}
+
+e() {
+  while true; do
+    local dir=$(find -maxdepth 1 -type d | fzf)
+    [ -z "$dir" ] && return
+    [ "$dir" = "." ] && return
+    [ -d "$dir" ] && cd "$dir"
+  done
 }
 
 alias ag='ag --smart-case'
