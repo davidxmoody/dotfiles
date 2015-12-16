@@ -10,6 +10,7 @@ npm i -g gulp
 npm i -g http-server
 npm i -g jsonlint
 npm i -g nodemon
+npm i -g ramda-cli
 
 sudo apt-get install git
 sudo apt-get install git-extras

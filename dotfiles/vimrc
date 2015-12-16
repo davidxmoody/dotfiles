@@ -16,6 +16,7 @@ Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'mtscout6/vim-cjsx'
 Plugin 'mxw/vim-jsx'
 Plugin 'elzr/vim-json'
+Plugin 'raichoo/purescript-vim'
 
 " Syntastic
 Plugin 'scrooloose/syntastic'
