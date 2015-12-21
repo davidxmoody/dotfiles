@@ -17,6 +17,7 @@ Plugin 'mtscout6/vim-cjsx'
 Plugin 'mxw/vim-jsx'
 Plugin 'elzr/vim-json'
 Plugin 'raichoo/purescript-vim'
+Plugin 'leafgarland/typescript-vim'
 
 " Syntastic
 Plugin 'scrooloose/syntastic'
