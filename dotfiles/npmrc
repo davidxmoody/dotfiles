@@ -1,5 +1,4 @@
-prefix=/home/dmoody/.npm-packages
+prefix=~/.npm-packages
 init.author.name=David Moody
 init.author.email=david@davidxmoody.com
 init.author.url=https://davidxmoody.com/
-//registry.npmjs.org/:_authToken=347a2829-209f-44fd-8763-ab61c29f7948
