@@ -12,9 +12,16 @@ done
 
 # Create symlinks to all dotfiles (in home dir), also add dot to their names
 for file in $(find dotfiles/ -type f); do
-  target="$HOME/.${file#dotfiles/}"
-  target_canon=$(readlink -f "$target")
-  file_canon=$(readlink -f "$file")
-  [ "$target_canon" = "$file_canon" ] && continue
-  ln -sbv "$file_canon" "$target"
+  if [[ "$file" =~ \.copy$ ]]; then
+    filename=${file%\.copy}
+    target="$HOME/.${filename#dotfiles/}"
+    [ ! "$file" -nt "$target" ] && continue
+    cp -bv "$file" "$target"
+  else
+    target="$HOME/.${file#dotfiles/}"
+    target_canon=$(readlink -f "$target")
+    file_canon=$(readlink -f "$file")
+    [ "$target_canon" = "$file_canon" ] && continue
+    ln -sbv "$file_canon" "$target"
+  fi
 done
