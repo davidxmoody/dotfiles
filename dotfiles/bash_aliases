@@ -8,7 +8,7 @@ alias ur='u -R'
 
 # fzf, ag and fpp
 p() {
-  local dir=$(ls -1 $P_DIR | fzf --select-1 --query "$1")
+  local dir=$(ls -1 $P_DIR | fzf --select-1 --query "${1%/}")
   [ ! -z "$dir" ] && cd "$P_DIR/$dir"
 }
 
