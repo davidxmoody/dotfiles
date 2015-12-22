@@ -17,7 +17,11 @@ v() {
     vim "$1"
   else
     local file=$(ag -g "" | fzf --select-1 --query "$1")
-    [ ! -z "$file" ] && echo "vim \"$file\"" && vim "$file"
+    if [ -z "$file" ]; then
+      vim "$1"
+    else
+      echo "vim \"$file\"" && vim "$file"
+    fi
   fi
 }
 
