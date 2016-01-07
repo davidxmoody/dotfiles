@@ -11,6 +11,7 @@ npm i -g http-server
 npm i -g jsonlint
 npm i -g nodemon
 npm i -g ramda-cli
+npm i -g tldr
 
 sudo apt-get install git
 sudo apt-get install git-extras

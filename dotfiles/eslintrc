@@ -57,7 +57,7 @@
     "no-console": 0,                 // http://eslint.org/docs/rules/no-console
     "no-debugger": 1,                // http://eslint.org/docs/rules/no-debugger
     "no-alert": 1,                   // http://eslint.org/docs/rules/no-alert
-    "no-constant-condition": 1,      // http://eslint.org/docs/rules/no-constant-condition
+    "no-constant-condition": 0,      // http://eslint.org/docs/rules/no-constant-condition
     "no-dupe-keys": 2,               // http://eslint.org/docs/rules/no-dupe-keys
     "no-duplicate-case": 2,          // http://eslint.org/docs/rules/no-duplicate-case
     "no-empty": 2,                   // http://eslint.org/docs/rules/no-empty
