@@ -149,7 +149,8 @@
       "capIsNewExceptions": [
         "Metalsmith",
         "T",
-        "Api"
+        "Api",
+        "BezierEasing"
       ]
     }],
     "no-multiple-empty-lines": [2, { // http://eslint.org/docs/rules/no-multiple-empty-lines

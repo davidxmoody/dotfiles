@@ -5,6 +5,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'gmarik/vundle'
 
+Plugin 'tpope/vim-repeat'
 Plugin 'scrooloose/nerdtree'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'kchmck/vim-coffee-script'
@@ -18,6 +19,7 @@ Plugin 'mxw/vim-jsx'
 Plugin 'elzr/vim-json'
 Plugin 'raichoo/purescript-vim'
 Plugin 'leafgarland/typescript-vim'
+Plugin 'tpope/vim-surround'
 
 " Syntastic
 Plugin 'scrooloose/syntastic'
