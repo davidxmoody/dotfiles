@@ -20,6 +20,7 @@ Plugin 'elzr/vim-json'
 Plugin 'raichoo/purescript-vim'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-commentary'
 
 " Syntastic
 Plugin 'scrooloose/syntastic'
