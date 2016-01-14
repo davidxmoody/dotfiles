@@ -164,6 +164,23 @@ noremap l t
 noremap K gJ
 noremap L T
 
+" Custom indent select script
+function! SelectIndent ()
+  let temp_var=indent(line("."))
+  while indent(line(".")-1) >= temp_var
+    exe "normal! k"
+  endwhile
+  exe "normal! V"
+  while indent(line(".")+1) >= temp_var
+    exe "normal! j"
+  endwhile
+endfun
+nmap gv :call SelectIndent()<CR>
+
+" Paste stuff with correct indentation
+:nnoremap p p=`]
+:nnoremap P P=`]
+
 " gf filename options
 set suffixesadd=.js,.json,.coffee,.jsx,.cjsx,.yml,.yaml,.scss,.css
 
