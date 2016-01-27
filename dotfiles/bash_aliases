@@ -74,6 +74,20 @@ mkbash() {
   vim + +startinsert "$1"
 }
 
+mkp() {
+  [ -z "$1" ] && echo "Please enter a project name" && return
+  [ -e "$P_DIR/$1" ] && "Project already exists: \"$P_DIR/$1\"" && return
+  mkdir -p "$P_DIR/$1"
+  cd "$P_DIR/$1"
+  git init
+}
+
+mkpn() {
+  mkp "$@" && \
+  echo "node_modules/" > .gitignore && \
+  npm init --yes
+}
+
 # Git
 alias g='git'
 alias gs='git status'
