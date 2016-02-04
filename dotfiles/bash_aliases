@@ -42,6 +42,57 @@ vv() {
   fi
 }
 
+e() {
+  # Go directly to any existing directory
+  if [ -d "$1" ]; then
+    cd "$1"
+
+  # Otherwise use fzf to find the best matching directory
+  else
+    local dir=$(find . '(' \
+      -path '*/.git' -o \
+      -path '*/.hg' -o \
+      -path '*/node_modules' -o \
+      -path '*/build' -o \
+      -path '*/dist' \
+      ')' -prune -o \
+      -not -path '*/.git' \
+      -not -path '*/.hg' \
+      -not -path '*/node_modules' \
+      -not -path '*/build' \
+      -not -path '*/dist' \
+      -not -path '.' \
+      -type d -print \
+      | fzf --select-1 --query "$1")
+
+    if [ ! -z "$dir" ]; then
+      cd "$dir"
+    fi
+  fi
+}
+
+is_in_project_dir() {
+  [ -f ./package.json -o -d ./node_modules -o -d ./.git -o -d ./.hg ] || return 1
+}
+
+is_in_home_dir() {
+  [ "$PWD" = "$HOME" ] || return 1
+}
+
+is_in_root_dir() {
+  [ "$PWD" = "/" ] || return 1
+}
+
+r() {
+  local temp_OLDPWD=$PWD
+  until is_in_project_dir || is_in_home_dir || is_in_root_dir; do
+    cd ..
+  done
+  OLDPWD=$temp_OLDPWD
+}
+
+alias re='r && e'
+
 alias ag='ag --smart-case'
 
 s() {
