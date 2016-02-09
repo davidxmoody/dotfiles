@@ -6,21 +6,21 @@ call vundle#begin()
 Plugin 'gmarik/vundle'
 
 Plugin 'tpope/vim-repeat'
-Plugin 'scrooloose/nerdtree'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'AndrewRadev/vim-eco'
 Plugin 'tpope/vim-abolish'
 Plugin 'tpope/vim-speeddating'
-Plugin 'pangloss/vim-javascript'
-Plugin 'mustache/vim-mustache-handlebars'
-Plugin 'mtscout6/vim-cjsx'
-Plugin 'mxw/vim-jsx'
-Plugin 'elzr/vim-json'
-Plugin 'raichoo/purescript-vim'
-Plugin 'leafgarland/typescript-vim'
+Plugin 'tpope/vim-eunuch'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-commentary'
+
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
+let g:jsx_ext_required = 0
+
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'mtscout6/vim-cjsx'
+Plugin 'elzr/vim-json'
+Plugin 'mustache/vim-mustache-handlebars'
+Plugin 'Lokaltog/vim-easymotion'
 
 " Syntastic
 Plugin 'scrooloose/syntastic'
@@ -29,13 +29,11 @@ let g:syntastic_json_checkers = ['jsonlint']
 au! BufRead,BufNewFile *.json set filetype=json
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
-
 
 " Search highlighting
 Plugin 'haya14busa/incsearch.vim'
@@ -59,9 +57,6 @@ Plugin 'Raimondi/delimitMate'
 set backspace=indent,eol,start
 let delimitMate_expand_cr = 1
 let delimitMate_nesting_quotes = ['"',"'",'`']
-
-" EasyMotion
-Plugin 'Lokaltog/vim-easymotion'
 
 " Emmet for expanding html stuff
 Plugin 'mattn/emmet-vim'
