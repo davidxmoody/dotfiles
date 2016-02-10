@@ -12,6 +12,7 @@ npm i -g jsonlint
 npm i -g nodemon
 npm i -g ramda-cli
 npm i -g tldr
+npm i -g diff-so-fancy
 
 sudo apt-get install git
 sudo apt-get install git-extras

@@ -92,6 +92,7 @@ r() {
 }
 
 alias re='r && e'
+alias rv='r && vv'
 
 alias ag='ag --smart-case'
 
