@@ -21,7 +21,9 @@ Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 Plug 'mtscout6/vim-cjsx', { 'for': 'coffee' }
 Plug 'elzr/vim-json', { 'for': 'json' }
 Plug 'mustache/vim-mustache-handlebars', { 'for': 'html.handlebars'}
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+
+" FZF
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 
 " Syntastic
@@ -96,6 +98,14 @@ set nojoinspaces
 set number
 set showcmd
 
+" Leader key
+let mapleader=' '
+
+noremap <leader>e ZZ
+noremap <leader>o :update<CR>:Files!<CR>
+noremap <leader>u :Ag!<CR>
+noremap <leader>b <C-^>
+
 " '.' in visual mode repeats the last change on every line
 vnoremap . :norm.<CR>
 
@@ -121,7 +131,8 @@ noremap _ :lfirst<CR>
 noremap \| :lnext<CR>
 
 " Some custom navigation bindings
-noremap <Space> A
+"noremap <Space> A
+noremap , A
 noremap <CR> o
 noremap - o-<Space>
 
