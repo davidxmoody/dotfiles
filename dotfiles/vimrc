@@ -1,5 +1,4 @@
 " Setup plugin manager
-set nocompatible
 filetype off
 call plug#begin('~/.vim/plugged')
 
@@ -10,15 +9,16 @@ Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 
-Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
+Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+Plug 'mxw/vim-jsx', { 'for': 'javascript' }
 let g:jsx_ext_required = 0
 
-Plug 'kchmck/vim-coffee-script'
-Plug 'mtscout6/vim-cjsx'
-Plug 'elzr/vim-json'
-Plug 'mustache/vim-mustache-handlebars'
-Plug 'Lokaltog/vim-easymotion'
+Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
+Plug 'mtscout6/vim-cjsx', { 'for': 'coffee' }
+Plug 'elzr/vim-json', { 'for': 'json' }
+Plug 'mustache/vim-mustache-handlebars', { 'for': 'html.handlebars'}
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 
 " Syntastic
 Plug 'scrooloose/syntastic'
@@ -64,7 +64,7 @@ vnoremap <C-F> <Nop>
 let g:user_emmet_leader_key='<C-F>'
 
 " Markdown syntax highlighting
-Plug 'plasticboy/vim-markdown'
+Plug 'plasticboy/vim-markdown', { 'for': 'md' }
 let g:vim_markdown_folding_disabled=1
 let g:markdown_no_default_key_mappings=1
 let g:vim_markdown_frontmatter=1
@@ -198,7 +198,7 @@ set spellfile=~/sync/diary-data/vim/en.utf-8.add
 " Function for editing English text
 func! WordProcessorMode()
   " Load Markdown syntax highlighting but with custom hashtag support
-  set filetype=mkd
+  set filetype=md
   syn match htmlBoldItalic "#[-_a-zA-Z0-9]\+"
 
   " Other options
