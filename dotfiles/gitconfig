@@ -2,10 +2,10 @@
 	name = David Moody
 	email = david@davidxmoody.com
 [core]
-	editor = vim +startinsert
+	editor = nvim +startinsert
 	pager = diff-so-fancy | less --tabs=1,5 -R
 [merge]
-	tool = vimdiff
+	tool = nvim -d
 [push]
 	default = simple
 [credential]

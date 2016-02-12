@@ -1,10 +1,7 @@
 # Vim
-type gvim 2> /dev/null > /dev/null && alias vim='gvim -v'
+type nvim 2> /dev/null > /dev/null && alias vim='nvim'
 
-alias v='vim'
-alias vimrc='vim ~/.vimrc'
-alias vba='vim ~/.bash_aliases'
-alias vab='vim ~/.vim/abbreviations.vim'
+alias v='nvim'
 
 # Tmux
 type tmux-next 2> /dev/null > /dev/null && alias tmux='tmux-next -f "$HOME/.tmux.conf"'
@@ -23,21 +20,21 @@ p() {
 vv() {
   # Open a direct path to a file
   if [ -f "$1" ]; then
-    vim "$1"
+    nvim "$1"
 
   # If a directory then open an index.* file if one exists
   elif [ -d "$1" ]; then
     if [ -f "$1"/index.* ]; then
-      vim "$1"/index.*
+      nvim "$1"/index.*
     else
-      vim "$1"
+      nvim "$1"
     fi
 
   # Otherwise use fzf to find the best matching file
   else
     local file=$(ag -g "" | fzf --select-1 --query "$1")
     if [ ! -z "$file" ]; then
-      echo "vim \"$file\"" && vim "$file"
+      echo "nvim \"$file\"" && nvim "$file"
     fi
   fi
 }
@@ -123,7 +120,7 @@ mkalias() {
 mkbash() {
   echo -e "#!/bin/bash\n\n" > "$1" && \
   chmod +x "$1" && \
-  vim + +startinsert "$1"
+  nvim + +startinsert "$1"
 }
 
 mkp() {

@@ -1,29 +1,27 @@
-" Setup Vundle
+" Setup plugin manager
 set nocompatible
 filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'gmarik/vundle'
+call plug#begin('~/.vim/plugged')
 
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-abolish'
-Plugin 'tpope/vim-speeddating'
-Plugin 'tpope/vim-eunuch'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-commentary'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-speeddating'
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
 
-Plugin 'pangloss/vim-javascript'
-Plugin 'mxw/vim-jsx'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
 let g:jsx_ext_required = 0
 
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'mtscout6/vim-cjsx'
-Plugin 'elzr/vim-json'
-Plugin 'mustache/vim-mustache-handlebars'
-Plugin 'Lokaltog/vim-easymotion'
+Plug 'kchmck/vim-coffee-script'
+Plug 'mtscout6/vim-cjsx'
+Plug 'elzr/vim-json'
+Plug 'mustache/vim-mustache-handlebars'
+Plug 'Lokaltog/vim-easymotion'
 
 " Syntastic
-Plugin 'scrooloose/syntastic'
+Plug 'scrooloose/syntastic'
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_json_checkers = ['jsonlint']
 au! BufRead,BufNewFile *.json set filetype=json
@@ -36,7 +34,7 @@ let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 
 " Search highlighting
-Plugin 'haya14busa/incsearch.vim'
+Plug 'haya14busa/incsearch.vim'
 set hlsearch
 let g:incsearch#auto_nohlsearch = 1
 map j  <Plug>(incsearch-nohl-n)
@@ -49,30 +47,30 @@ map ?  <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
 
 " Completion
-Plugin 'Valloric/YouCompleteMe'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 let g:ycm_filetype_blacklist = { 'md': 1, 'mkd': 1, 'markdown': 1, 'text': 1 , 'gitcommit': 1 }
 
 " Bracket expansion
-Plugin 'Raimondi/delimitMate'
+Plug 'Raimondi/delimitMate'
 set backspace=indent,eol,start
 let delimitMate_expand_cr = 1
 let delimitMate_nesting_quotes = ['"',"'",'`']
 
 " Emmet for expanding html stuff
-Plugin 'mattn/emmet-vim'
+Plug 'mattn/emmet-vim'
 nnoremap <C-F> <Nop>
 inoremap <C-F> <Nop>
 vnoremap <C-F> <Nop>
 let g:user_emmet_leader_key='<C-F>'
 
 " Markdown syntax highlighting
-Plugin 'plasticboy/vim-markdown'
+Plug 'plasticboy/vim-markdown'
 let g:vim_markdown_folding_disabled=1
 let g:markdown_no_default_key_mappings=1
 let g:vim_markdown_frontmatter=1
 
-" End of Vundle setup
-call vundle#end()
+" End of plugin manager setup
+call plug#end()
 filetype plugin indent on
 syntax on
 
