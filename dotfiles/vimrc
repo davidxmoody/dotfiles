@@ -13,14 +13,14 @@ Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 
-Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
-Plug 'mxw/vim-jsx', { 'for': 'javascript' }
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
 let g:jsx_ext_required = 0
 
 Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 Plug 'mtscout6/vim-cjsx', { 'for': 'coffee' }
 Plug 'elzr/vim-json', { 'for': 'json' }
-Plug 'mustache/vim-mustache-handlebars', { 'for': 'html.handlebars'}
+let g:vim_json_syntax_conceal = 0
 
 " FZF
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
@@ -103,8 +103,10 @@ let mapleader=' '
 
 noremap <leader>e ZZ
 noremap <leader>o :update<CR>:Files!<CR>
-noremap <leader>u :Ag!<CR>
+noremap <leader>a :Ag!<CR>
 noremap <leader>b <C-^>
+noremap <leader>q :q<CR>
+noremap <leader>Q :q!<CR>
 
 " '.' in visual mode repeats the last change on every line
 vnoremap . :norm.<CR>
