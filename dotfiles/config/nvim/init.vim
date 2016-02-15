@@ -101,9 +101,9 @@ set showcmd
 " Leader key
 let mapleader=' '
 
-noremap <leader>e ZZ
-noremap <leader>o :update<CR>:Files!<CR>
-noremap <leader>a :Ag!<CR>
+noremap <leader>u ZZ
+noremap <leader>e :update<CR>:Files!<CR>
+noremap <leader>a :update<CR>:Ag!<space>
 noremap <leader>b <C-^>
 noremap <leader>q :q<CR>
 noremap <leader>Q :q!<CR>
@@ -124,7 +124,7 @@ imap  <Nop>
 nnoremap ; :
 
 noremap + :update<CR>
-noremap ## ZZ
+"noremap ## ZZ
 
 imap  <Nop>
 inoremap ! 
