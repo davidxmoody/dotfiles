@@ -17,6 +17,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 let g:jsx_ext_required = 0
 
+Plug 'mustache/vim-mustache-handlebars'
 Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 Plug 'mtscout6/vim-cjsx', { 'for': 'coffee' }
 Plug 'elzr/vim-json', { 'for': 'json' }
@@ -99,14 +100,21 @@ set number
 set showcmd
 
 " Leader key
+map <space> <Nop>
 let mapleader=' '
 
 noremap <leader>u ZZ
 noremap <leader>e :update<CR>:Files!<CR>
+noremap <leader>E :update<CR>:Files!<space><C-R>=expand("%:p:h")<CR>
 noremap <leader>a :update<CR>:Ag!<space>
 noremap <leader>b <C-^>
+noremap <leader>B :update<CR>:History!<CR>!term://<space>
 noremap <leader>q :q<CR>
 noremap <leader>Q :q!<CR>
+
+noremap <leader>s <C-W>s
+noremap <leader>v <C-W>v
+noremap <leader>w <C-W>w
 
 " '.' in visual mode repeats the last change on every line
 vnoremap . :norm.<CR>
@@ -124,7 +132,6 @@ imap  <Nop>
 nnoremap ; :
 
 noremap + :update<CR>
-"noremap ## ZZ
 
 imap  <Nop>
 inoremap ! 
@@ -133,7 +140,6 @@ noremap _ :lfirst<CR>
 noremap \| :lnext<CR>
 
 " Some custom navigation bindings
-"noremap <Space> A
 noremap , A
 noremap <CR> o
 noremap - o-<Space>
@@ -154,7 +160,7 @@ set autoindent
 set nowrap
 
 " Navigation with htns
-"TODO: remap these keys with the onoremap command too
+" TODO: remap these keys with the onoremap command too
 noremap t j
 noremap n k
 noremap s l
@@ -166,11 +172,9 @@ noremap S L
 noremap gt gj
 noremap gn gk
 
-"noremap j n
 noremap k J
 noremap l t
 
-"noremap J N
 noremap K gJ
 noremap L T
 
@@ -188,8 +192,8 @@ endfun
 nmap gv :call SelectIndent()<CR>
 
 " Paste stuff with correct indentation
-:nnoremap p p=`]
-:nnoremap P P=`]
+nnoremap p p=`]
+nnoremap P P=`]
 
 " gf filename options
 set suffixesadd=.js,.json,.coffee,.jsx,.cjsx,.yml,.yaml,.scss,.css
