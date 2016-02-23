@@ -195,6 +195,9 @@ nmap gv :call SelectIndent()<CR>
 nnoremap p p=`]
 nnoremap P P=`]
 
+" Quick editing of this file
+command Vimrc e ~/.config/nvim/init.vim
+
 " gf filename options
 set suffixesadd=.js,.json,.coffee,.jsx,.cjsx,.yml,.yaml,.scss,.css
 

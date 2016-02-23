@@ -129,14 +129,20 @@ git_status() {
   fi
 }
 
+nvim_in_bg() {
+  if [[ "nvim" = "$(jobs | tail -n1 | tr -s ' ' | cut -f3 -d' ')" ]]; then
+    echo "nvim "
+  fi
+}
+
 case $TERM in
   xterm*)
-    PS1='\[\033]0;\w\007\]\[\e[0;31m\]\w\[\e[0m\] \[\e[0;33m\]$(git_status)\[\e[0m\]'
+    PS1='\[\033]0;\w\007\]\[\e[0;31m\]\w\[\e[0m\] \[\e[0;92m\]$(nvim_in_bg)\[\e[0;33m\]$(git_status)\[\e[0m\]'
     PS2='\[\e[0;31m\]>\[\e[0m\] '
     ;;
   screen)
     # For tmux, use orange instead of red
-    PS1='\[\033]0;\w\007\]\[\e[0;91m\]\w\[\e[0m\] \[\e[0;33m\]$(git_status)\[\e[0m\]'
+    PS1='\[\033]0;\w\007\]\[\e[0;91m\]\w\[\e[0m\] \[\e[0;92m\]$(nvim_in_bg)\[\e[0;33m\]$(git_status)\[\e[0m\]'
     PS2='\[\e[0;91m\]>\[\e[0m\] '
     ;;
   *)
