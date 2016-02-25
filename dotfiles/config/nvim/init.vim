@@ -12,6 +12,7 @@ Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
 
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
@@ -53,9 +54,16 @@ map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
 
+" Snippets
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+
 " Completion
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 let g:ycm_filetype_blacklist = { 'md': 1, 'mkd': 1, 'markdown': 1, 'text': 1 , 'gitcommit': 1 }
+let g:UltiSnipsExpandTrigger = '<C-T>'
+let g:UltiSnipsJumpForwardTrigger = '<C-T>'
+let g:UltiSnipsJumpBackwardTrigger = '<C-N>'
 
 " Bracket expansion
 Plug 'Raimondi/delimitMate'
