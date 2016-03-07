@@ -1,2 +1,4 @@
 set mark-symlinked-directories on
 set completion-ignore-case on
+set completion-map-case on
+set show-all-if-ambiguous on
