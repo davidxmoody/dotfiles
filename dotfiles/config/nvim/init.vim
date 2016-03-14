@@ -18,11 +18,14 @@ Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 let g:jsx_ext_required = 0
 
+Plug 'mbbill/undotree'
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 Plug 'mtscout6/vim-cjsx', { 'for': 'coffee' }
 Plug 'elzr/vim-json', { 'for': 'json' }
 let g:vim_json_syntax_conceal = 0
+
+Plug 'terryma/vim-multiple-cursors'
 
 " FZF
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
@@ -83,6 +86,9 @@ Plug 'plasticboy/vim-markdown', { 'for': 'md' }
 let g:vim_markdown_folding_disabled=1
 let g:markdown_no_default_key_mappings=1
 let g:vim_markdown_frontmatter=1
+
+" Splitjoin
+Plug 'AndrewRadev/splitjoin.vim'
 
 " End of plugin manager setup
 call plug#end()
