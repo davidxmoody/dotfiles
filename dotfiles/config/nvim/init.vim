@@ -113,6 +113,10 @@ set nojoinspaces
 set number
 set showcmd
 
+" Status line
+set laststatus=2
+set statusline=%f
+
 " Leader key
 map <space> <Nop>
 let mapleader=' '
