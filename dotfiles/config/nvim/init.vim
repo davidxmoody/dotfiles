@@ -36,8 +36,6 @@ Plug 'scrooloose/syntastic'
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_json_checkers = ['jsonlint']
 au! BufRead,BufNewFile *.json set filetype=json
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 0
@@ -96,7 +94,7 @@ filetype plugin indent on
 syntax on
 
 " Open new files in insert mode
-au BufNewFile * startinsert
+"au BufNewFile * startinsert
 
 " Miscellaneous 
 set ruler
@@ -115,7 +113,9 @@ set showcmd
 
 " Status line
 set laststatus=2
-set statusline=%f
+set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
 
 " Leader key
 map <space> <Nop>

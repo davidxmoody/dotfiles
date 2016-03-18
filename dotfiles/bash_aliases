@@ -14,8 +14,13 @@ alias ur='u -R'
 
 # fzf, ag and fpp
 p() {
-  local dir=$(ls -1 $P_DIR | fzf --select-1 --query "${1%/}")
-  [ ! -z "$dir" ] && cd "$P_DIR/$dir"
+  local initial_dir=${1%/}
+  if [ ! -z "$initial_dir" -a -d "$P_DIR/$initial_dir" ]; then
+    cd "$P_DIR/$initial_dir"
+  else
+    local chosen_dir=$(ls -1 $P_DIR | fzf --select-1 --query "$initial_dir")
+    [ ! -z "$chosen_dir" ] && cd "$P_DIR/$chosen_dir"
+  fi
 }
 
 vv() {
