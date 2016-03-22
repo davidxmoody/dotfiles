@@ -31,6 +31,8 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 
+Plug 'scrooloose/nerdtree'
+
 " Syntastic
 Plug 'scrooloose/syntastic'
 let g:syntastic_javascript_checkers = ['eslint']
