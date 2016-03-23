@@ -33,6 +33,10 @@ Plug 'junegunn/fzf.vim'
 
 Plug 'scrooloose/nerdtree'
 
+Plug 'rbgrouleff/bclose.vim'
+Plug 'francoiscabrol/ranger.vim'
+map <leader>f :call OpenRanger()<CR>
+
 " Syntastic
 Plug 'scrooloose/syntastic'
 let g:syntastic_javascript_checkers = ['eslint']
