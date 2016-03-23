@@ -238,3 +238,6 @@ alias bn='$BLOG_DIR/scripts/helpers/new'
 
 [ -f $P_DIR/PathPicker/fpp ] && fpp() { $P_DIR/PathPicker/fpp; }
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+# Don't load ranger config twice
+export RANGER_LOAD_DEFAULT_RC=FALSE
