@@ -33,9 +33,8 @@ Plug 'junegunn/fzf.vim'
 
 Plug 'scrooloose/nerdtree'
 
+" Needed (I think) for ranger integration (see script below)
 Plug 'rbgrouleff/bclose.vim'
-Plug 'francoiscabrol/ranger.vim'
-map <leader>f :call OpenRanger()<CR>
 
 " Syntastic
 Plug 'scrooloose/syntastic'
@@ -224,6 +223,28 @@ command Vimrc e ~/.config/nvim/init.vim
 
 " gf filename options
 set suffixesadd=.js,.json,.coffee,.jsx,.cjsx,.yml,.yaml,.scss,.css
+
+" Ranger
+function! OpenRanger()
+  let currentPath = expand("%:p:h")
+  let rangerCallback = { 'name': 'ranger' }
+  function! rangerCallback.on_exit(id, code)
+    Bclose!
+    try
+      if filereadable('/tmp/chosenfile')
+        exec system('sed -ie "s/ /\\\ /g" /tmp/chosenfile')
+        exec 'argadd ' . system('cat /tmp/chosenfile | tr "\\n" " "')
+        exec 'edit ' . system('head -n1 /tmp/chosenfile')
+        call system('rm /tmp/chosenfile')
+      endif
+    endtry
+  endfunction
+  enew
+  call termopen('ranger --choosefiles=/tmp/chosenfile ' . currentPath, rangerCallback)
+  startinsert
+endfunction
+
+map <leader>r :call OpenRanger()<CR>
 
 " Function for editing Python code
 func! PythonMode()
