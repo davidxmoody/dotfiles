@@ -20,3 +20,5 @@ sudo apt-get install gitk
 sudo apt-get install silversearcher-ag
 
 sudo gem install fit-commit
+
+sudo pip install pygments # For ranger syntax highlighting

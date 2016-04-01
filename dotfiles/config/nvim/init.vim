@@ -262,8 +262,6 @@ func! DisableSyntastic()
 endfu
 au BufNewFile,BufRead *.cjsx call DisableSyntastic()
 
-set spellfile=~/sync/diary-data/vim/en.utf-8.add
-
 " Function for editing English text
 func! WordProcessorMode()
   " Load Markdown syntax highlighting but with custom hashtag support
@@ -298,6 +296,9 @@ func! WordProcessorMode()
   augroup END
 endfu
 
+set spellfile=~/sync/diary-data/vim/en.utf-8.add
+
 com! WP call WordProcessorMode()
-au BufNewFile,BufRead *.md call WordProcessorMode()
-au BufNewFile,BufRead diary-*.txt call WordProcessorMode()
+" TODO I disabled this because spellcheck is screwed up with nvim for me right now
+" au BufNewFile,BufRead *.md call WordProcessorMode()
+" au BufNewFile,BufRead diary-*.txt call WordProcessorMode()

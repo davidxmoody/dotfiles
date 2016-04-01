@@ -203,6 +203,7 @@ fi
 # NVM
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+export EDITOR=nvim
 
 # Add custom bin dir to PATH
 [ -d "$RC_DIR/bin" ] && export PATH="$RC_DIR/bin:$PATH"
