@@ -264,24 +264,23 @@ au BufNewFile,BufRead *.cjsx call DisableSyntastic()
 
 " Function for editing English text
 func! WordProcessorMode()
-  " Load Markdown syntax highlighting but with custom hashtag support
-  set filetype=md
-  syn match htmlBoldItalic "#[-_a-zA-Z0-9]\+"
+  setl filetype=markdown
+  "syn match htmlBoldItalic "#[-_a-zA-Z0-9]\+"
 
   " Other options
-  set nonumber
-  set wrap
-  set linebreak
-  set breakat=\ 
-  set display=lastline
-  set formatoptions=
-  set spell spelllang=en_gb
-  source ~/.vim_abbreviations
+  setl nonumber
+  setl wrap
+  setl linebreak
+  setl breakat=\ 
+  setl display=lastline
+  setl formatoptions=
+  setl spell spelllang=en_gb
+  "source ~/.vim_abbreviations
 
   " Indenting
-  setl tabstop=4
+  setl tabstop=2
   setl softtabstop=0
-  setl shiftwidth=4
+  setl shiftwidth=2
   setl expandtab
   setl nosmarttab
   setl noautoindent
@@ -292,13 +291,12 @@ func! WordProcessorMode()
   " Auto-capitalize script
   augroup SENTENCES
     au!
-    autocmd InsertCharPre * if search('\v(%^|%^[1-7]{2}\s|[.!?]\_s+|\_^\s*\-\s|\_^#+\s|\_^title\:\s|\n\n)%#', 'bcnw') != 0 | let v:char = toupper(v:char) | endif
+    autocmd InsertCharPre <buffer> if search('\v(%^|%^[1-7]{2}\s|[.!?]\_s+|\_^\s*\-\s|\_^#+\s|\_^title\:\s|\n\n)%#', 'bcnw') != 0 | let v:char = toupper(v:char) | endif
   augroup END
 endfu
 
 set spellfile=~/sync/diary-data/vim/en.utf-8.add
 
 com! WP call WordProcessorMode()
-" TODO I disabled this because spellcheck is screwed up with nvim for me right now
-" au BufNewFile,BufRead *.md call WordProcessorMode()
-" au BufNewFile,BufRead diary-*.txt call WordProcessorMode()
+au BufNewFile,BufRead *.md call WordProcessorMode()
+au BufNewFile,BufRead diary-*.txt call WordProcessorMode()
