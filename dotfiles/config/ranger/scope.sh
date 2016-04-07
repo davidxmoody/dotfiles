@@ -88,7 +88,7 @@ case "$extension" in
         ;; # fall back to highlight/cat if the text browsers fail
     # Markdown files
     md|mkd|markdown)
-        fmt -w $width "$path" | trim; exit 4;
+        fmt -s -w $width "$path" | trim; exit 4;
         ;;
 esac
 
