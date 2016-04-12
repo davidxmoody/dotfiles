@@ -224,7 +224,26 @@ command Vimrc e ~/.config/nvim/init.vim
 " gf filename options
 set suffixesadd=.js,.json,.coffee,.jsx,.cjsx,.yml,.yaml,.scss,.css
 
-" Ranger
+" Ranger (two approaches, neither is great)
+function! RangerChooser()
+  let dirname = expand("%:p:h")
+  let callback = {'tempname': tempname()}
+  function! callback.on_exit()
+    try
+      if filereadable(self.tempname)
+        let names = readfile(self.tempname)
+        exec 'edit ' . fnameescape(names[0])
+        for name in names[1:]
+          exec 'tabe ' . fnameescape(name)
+        endfor
+      endif
+    endtry
+  endfunction
+  let cmd = 'ranger --choosefiles='.callback.tempname.' '.shellescape(l:dirname)
+  call termopen(cmd, callback)
+  startinsert
+endfunction
+
 function! OpenRanger()
   let currentPath = expand("%:p:h")
   let rangerCallback = { 'name': 'ranger' }
@@ -244,6 +263,7 @@ function! OpenRanger()
   startinsert
 endfunction
 
+map <leader>R :call RangerChooser()<CR>
 map <leader>r :call OpenRanger()<CR>
 
 " Function for editing Python code
