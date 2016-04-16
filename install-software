@@ -13,6 +13,7 @@ npm i -g nodemon
 npm i -g ramda-cli
 npm i -g tldr
 npm i -g diff-so-fancy
+npm i -g npm-check
 
 sudo apt-get install git
 sudo apt-get install git-extras
