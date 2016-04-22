@@ -39,6 +39,7 @@ Plug 'rbgrouleff/bclose.vim'
 " Syntastic
 Plug 'scrooloose/syntastic'
 let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_eslint_exec = 'eslint_d'
 let g:syntastic_json_checkers = ['jsonlint']
 au! BufRead,BufNewFile *.json set filetype=json
 

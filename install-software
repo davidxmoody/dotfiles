@@ -3,6 +3,7 @@
 npm i -g npm
 npm i -g babel
 npm i -g eslint
+npm i -g eslint_d
 npm i -g babel-eslint
 npm i -g eslint-plugin-react
 npm i -g coffee-script
