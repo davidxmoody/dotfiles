@@ -17,6 +17,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 let g:jsx_ext_required = 0
+Plug 'moll/vim-node'
 
 Plug 'mbbill/undotree'
 Plug 'mustache/vim-mustache-handlebars'
@@ -286,7 +287,6 @@ au BufNewFile,BufRead *.cjsx call DisableSyntastic()
 " Function for editing English text
 func! WordProcessorMode()
   setl filetype=markdown
-  "syn match htmlBoldItalic "#[-_a-zA-Z0-9]\+"
 
   " Other options
   setl nonumber
