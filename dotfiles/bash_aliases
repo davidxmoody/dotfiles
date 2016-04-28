@@ -160,6 +160,11 @@ alias gpsa='git push --all'
 alias gpsat='git push --all --follow-tags'
 alias gr='git rebase'
 alias gri='git rebase --interactive'
+alias gst='git stash'
+alias gstu='git stash save -u'
+alias gstp='git stash pop'
+alias gsta='git stash apply'
+alias gplr='git pull --rebase'
 cpgithooks() {
   for gh_dir in resources/git*hooks; do
     [ -d "$gh_dir" ] && cp -v "$gh_dir"/* ".git/hooks"
