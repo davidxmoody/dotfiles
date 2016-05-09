@@ -103,6 +103,9 @@ syntax on
 " Open new files in insert mode
 "au BufNewFile * startinsert
 
+" Check for changes
+au CursorHold * checktime
+
 " Miscellaneous 
 set ruler
 set autoread
@@ -129,11 +132,11 @@ map <space> <Nop>
 let mapleader=' '
 
 noremap <leader>u ZZ
-noremap <leader>e :update<CR>:Files!<CR>
-noremap <leader>E :update<CR>:Files!<space><C-R>=expand("%:p:h")<CR>
-noremap <leader>a :update<CR>:Ag!<space>
+noremap <leader>e :update<CR>:Files<CR>
+noremap <leader>E :update<CR>:Files<space><C-R>=expand("%:p:h")<CR>
+noremap <leader>a :update<CR>:Ag<space>
 noremap <leader>b <C-^>
-noremap <leader>B :update<CR>:History!<CR>!term://<space>
+noremap <leader>B :update<CR>:History<CR>!term://<space>
 noremap <leader>q :q<CR>
 noremap <leader>Q :q!<CR>
 
