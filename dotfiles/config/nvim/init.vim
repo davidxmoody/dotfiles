@@ -229,6 +229,13 @@ command Vimrc e ~/.config/nvim/init.vim
 " gf filename options
 set suffixesadd=.js,.json,.coffee,.jsx,.cjsx,.yml,.yaml,.scss,.css
 
+" Terminal key bindings
+noremap <leader>t :terminal<CR>
+noremap <leader>T :vs +terminal<CR>
+tnoremap <Esc> <C-\><C-n>
+"tnoremap + <C-\><C-n>
+tnoremap <C-V>+ +
+
 " Ranger (two approaches, neither is great)
 function! RangerChooser()
   let dirname = expand("%:p:h")
