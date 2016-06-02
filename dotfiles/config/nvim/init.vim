@@ -167,6 +167,8 @@ inoremap ! 
 noremap _ :lfirst<CR>
 noremap \| :lnext<CR>
 
+noremap <C-K> cl<CR><Esc>lf<Space>
+
 " Some custom navigation bindings
 noremap , A
 noremap <CR> o
