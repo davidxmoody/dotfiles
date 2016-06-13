@@ -143,6 +143,7 @@ noremap <leader>Q :q!<CR>
 noremap <leader>s <C-W>s
 noremap <leader>v <C-W>v
 noremap <leader>w <C-W>w
+noremap <leader>W <C-W>W
 
 " '.' in visual mode repeats the last change on every line
 vnoremap . :norm.<CR>
