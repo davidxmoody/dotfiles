@@ -3,6 +3,7 @@ type nvim 2> /dev/null > /dev/null && alias vim='nvim'
 
 alias v='nvim'
 alias vimrc='nvim ~/.config/nvim/init.vim'
+alias vba='nvim ~/.bash_aliases'
 
 # Tmux
 type tmux-next 2> /dev/null > /dev/null && alias tmux='tmux-next -f "$HOME/.tmux.conf"'
@@ -12,7 +13,7 @@ alias u='ls -FCBH --group-directories-first --color=auto --hide node_modules'
 alias uu='u -A'
 alias ur='u -R'
 
-# fzf, ag and fpp
+# FZF
 p() {
   local initial_dir=${1%/}
   if [ ! -z "$initial_dir" -a -d "$P_DIR/$initial_dir" ]; then
@@ -97,12 +98,6 @@ r() {
 alias re='r && e'
 alias rv='r && vv'
 
-alias ag='ag --smart-case'
-
-s() {
-  ag --color "$@" | fpp
-}
-
 # Functions
 mkcd() { mkdir "$@" && cd "$@"; }
 
@@ -154,6 +149,7 @@ alias gap='git add -p'
 alias gaa='git add -A :/'
 alias gaac='git add -A :/ && git commit --verbose'
 alias gco='git checkout'
+alias gcm='git checkout master'
 alias gm='git merge'
 alias gf='git fetch origin --prune && git lg origin/master ^master'
 alias gpl='git pull'
@@ -161,14 +157,13 @@ alias gps='git push'
 alias gpsa='git push --all'
 alias gpsat='git push --all --follow-tags'
 alias gr='git rebase'
-alias gri='git rebase --interactive'
 alias gst='git stash'
 alias gstu='git stash save -u'
 alias gstp='git stash pop'
 alias gsta='git stash apply'
 alias gplr='git pull --rebase'
-alias gcm='git checkout master'
 alias glm='git lg --author="David Moody"'
+
 cpgithooks() {
   for gh_dir in resources/git*hooks; do
     [ -d "$gh_dir" ] && cp -v "$gh_dir"/* ".git/hooks"
@@ -178,6 +173,7 @@ cpgithooks() {
 # cd shortcuts
 alias up='cd ..'
 alias back='cd -'
+alias cdp='cd $P_DIR'
 alias cdt='cd $TMP_DIR'
 alias cdd='cd $DIARY_DIR'
 alias cddb='cd $DBOX'
@@ -218,7 +214,6 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 alias xclip='xclip -selection clipboard'
 alias wrstats="grep '^m' ~/.workrave/historystats | rev | cut -d' ' -f 2 | rev | tail -n20"
 alias gpgc='gpg -c --cipher-algo AES256'
-vd() { ls "$@" | nvim -; }
 whatuses() {
   cat ~/p/mft-repo-explorer/sample-output.json | \
     ramda -o table --compact "filter prop '$1'" "map prop '$1'" "map replace(/^.*#/, '')"
@@ -227,6 +222,7 @@ alias weather='curl http://wttr.in/Bristol'
 alias f='fg'
 alias stopmongoandredis='sudo service mongodb stop && sudo service redis-server stop'
 alias mhenvi='npm i -g @mft/mh-dev-environment'
+alias ag='ag --smart-case'
 
 # Bindings (TODO maybe bring the inputrc file into here too)
 bind '"\C-f":vi-fWord'
