@@ -165,6 +165,8 @@ alias gstu='git stash save -u'
 alias gstp='git stash pop'
 alias gsta='git stash apply'
 alias gplr='git pull --rebase'
+alias gcm='git checkout master'
+alias glm='git lg --author="David Moody"'
 cpgithooks() {
   for gh_dir in resources/git*hooks; do
     [ -d "$gh_dir" ] && cp -v "$gh_dir"/* ".git/hooks"
@@ -222,6 +224,7 @@ whatuses() {
 alias weather='curl http://wttr.in/Bristol'
 alias f='fg'
 alias stopmongoandredis='sudo service mongodb stop && sudo service redis-server stop'
+alias mhenvi='npm i -g @mft/mh-dev-environment'
 
 # Bindings (TODO maybe bring the inputrc file into here too)
 bind '"\C-f":vi-fWord'
