@@ -19,8 +19,8 @@ Plug 'mxw/vim-jsx'
 let g:jsx_ext_required = 0
 Plug 'moll/vim-node'
 
-Plug 'mbbill/undotree'
-Plug 'mustache/vim-mustache-handlebars'
+" Plug 'mbbill/undotree'
+" Plug 'mustache/vim-mustache-handlebars'
 Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 Plug 'mtscout6/vim-cjsx', { 'for': 'coffee' }
 Plug 'elzr/vim-json', { 'for': 'json' }
@@ -32,10 +32,10 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 
-Plug 'scrooloose/nerdtree'
+" Plug 'scrooloose/nerdtree'
 
 " Needed (I think) for ranger integration (see script below)
-Plug 'rbgrouleff/bclose.vim'
+" Plug 'rbgrouleff/bclose.vim'
 
 " Syntastic
 Plug 'scrooloose/syntastic'
@@ -93,17 +93,14 @@ let g:markdown_no_default_key_mappings=1
 let g:vim_markdown_frontmatter=1
 
 " Splitjoin
-Plug 'AndrewRadev/splitjoin.vim'
+" Plug 'AndrewRadev/splitjoin.vim'
 
 " End of plugin manager setup
 call plug#end()
 filetype plugin indent on
 syntax on
 
-" Open new files in insert mode
-"au BufNewFile * startinsert
-
-" Check for changes
+" Check for changes to file
 au CursorHold * checktime
 
 " Miscellaneous 
@@ -222,10 +219,6 @@ function! SelectIndent ()
 endfun
 nmap gv :call SelectIndent()<CR>
 
-" Paste stuff with correct indentation
-nnoremap p p=`]
-nnoremap P P=`]
-
 " Quick editing of this file
 command Vimrc e ~/.config/nvim/init.vim
 
@@ -236,50 +229,48 @@ set suffixesadd=.js,.json,.coffee,.jsx,.cjsx,.yml,.yaml,.scss,.css
 noremap <leader>t :terminal<CR>
 noremap <leader>T :vs +terminal<CR>
 tnoremap <Esc> <C-\><C-n>
-"tnoremap + <C-\><C-n>
-tnoremap <C-V>+ +
 
 " Ranger (two approaches, neither is great)
-function! RangerChooser()
-  let dirname = expand("%:p:h")
-  let callback = {'tempname': tempname()}
-  function! callback.on_exit()
-    try
-      if filereadable(self.tempname)
-        let names = readfile(self.tempname)
-        exec 'edit ' . fnameescape(names[0])
-        for name in names[1:]
-          exec 'tabe ' . fnameescape(name)
-        endfor
-      endif
-    endtry
-  endfunction
-  let cmd = 'ranger --choosefiles='.callback.tempname.' '.shellescape(l:dirname)
-  call termopen(cmd, callback)
-  startinsert
-endfunction
+" function! RangerChooser()
+"   let dirname = expand("%:p:h")
+"   let callback = {'tempname': tempname()}
+"   function! callback.on_exit()
+"     try
+"       if filereadable(self.tempname)
+"         let names = readfile(self.tempname)
+"         exec 'edit ' . fnameescape(names[0])
+"         for name in names[1:]
+"           exec 'tabe ' . fnameescape(name)
+"         endfor
+"       endif
+"     endtry
+"   endfunction
+"   let cmd = 'ranger --choosefiles='.callback.tempname.' '.shellescape(l:dirname)
+"   call termopen(cmd, callback)
+"   startinsert
+" endfunction
 
-function! OpenRanger()
-  let currentPath = expand("%:p:h")
-  let rangerCallback = { 'name': 'ranger' }
-  function! rangerCallback.on_exit(id, code)
-    Bclose!
-    try
-      if filereadable('/tmp/chosenfile')
-        exec system('sed -ie "s/ /\\\ /g" /tmp/chosenfile')
-        exec 'argadd ' . system('cat /tmp/chosenfile | tr "\\n" " "')
-        exec 'edit ' . system('head -n1 /tmp/chosenfile')
-        call system('rm /tmp/chosenfile')
-      endif
-    endtry
-  endfunction
-  enew
-  call termopen('ranger --choosefiles=/tmp/chosenfile ' . currentPath, rangerCallback)
-  startinsert
-endfunction
+" function! OpenRanger()
+"   let currentPath = expand("%:p:h")
+"   let rangerCallback = { 'name': 'ranger' }
+"   function! rangerCallback.on_exit(id, code)
+"     Bclose!
+"     try
+"       if filereadable('/tmp/chosenfile')
+"         exec system('sed -ie "s/ /\\\ /g" /tmp/chosenfile')
+"         exec 'argadd ' . system('cat /tmp/chosenfile | tr "\\n" " "')
+"         exec 'edit ' . system('head -n1 /tmp/chosenfile')
+"         call system('rm /tmp/chosenfile')
+"       endif
+"     endtry
+"   endfunction
+"   enew
+"   call termopen('ranger --choosefiles=/tmp/chosenfile ' . currentPath, rangerCallback)
+"   startinsert
+" endfunction
 
-map <leader>R :call RangerChooser()<CR>
-map <leader>r :call OpenRanger()<CR>
+" map <leader>R :call RangerChooser()<CR>
+" map <leader>r :call OpenRanger()<CR>
 
 " Function for editing Python code
 func! PythonMode()
