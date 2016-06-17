@@ -31,6 +31,7 @@ Plug 'terryma/vim-multiple-cursors'
 " FZF
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
+let g:fzf_commits_log_options = '--color --graph --pretty=format:"%Cred%h%Creset - %C(bold blue)%<(18)%an %C(yellow)%d%Creset %s %Cgreen(%ar)%Creset" --abbrev-commit'
 
 " Plug 'scrooloose/nerdtree'
 
@@ -92,9 +93,6 @@ let g:vim_markdown_folding_disabled=1
 let g:markdown_no_default_key_mappings=1
 let g:vim_markdown_frontmatter=1
 
-" Splitjoin
-" Plug 'AndrewRadev/splitjoin.vim'
-
 " End of plugin manager setup
 call plug#end()
 filetype plugin indent on
@@ -129,11 +127,16 @@ map <space> <Nop>
 let mapleader=' '
 
 noremap <leader>u ZZ
-noremap <leader>e :update<CR>:Files<CR>
-noremap <leader>E :update<CR>:Files<space><C-R>=expand("%:p:h")<CR>
-noremap <leader>a :update<CR>:Ag<space>
+noremap <leader>e :update<CR>:Files!<CR>
+noremap <leader>E :update<CR>:Files!<space><C-R>=expand("%:p:h")<CR>
+noremap <leader>o :update<CR>:GFiles!?<CR>
+noremap <leader>O :update<CR>:Buffers!<CR>
+noremap <leader>a :update<CR>:Ag!<space>
+noremap <leader>c :Commits!<CR>
+noremap <leader>C :BCommits!<CR>
+
 noremap <leader>b <C-^>
-noremap <leader>B :update<CR>:History<CR>!term://<space>
+noremap <leader>B :update<CR>:History!<CR>
 noremap <leader>q :q<CR>
 noremap <leader>Q :q!<CR>
 
@@ -146,8 +149,9 @@ noremap <leader>W <C-W>W
 vnoremap . :norm.<CR>
 
 " Auto wrap comments
-set textwidth=79
 set formatoptions=crqn1j
+set textwidth=79
+au FileType gitcommit set textwidth=72
 
 " New way to exit normal mode
 nmap + <Nop>
@@ -155,9 +159,9 @@ imap + <Esc>s
 vmap + <Esc><Esc>
 imap  <Nop>
 
-nnoremap ; :
-
 noremap + :update<CR>
+
+nnoremap ; :
 
 imap  <Nop>
 inoremap ! 
@@ -205,19 +209,6 @@ noremap l t
 
 noremap K gJ
 noremap L T
-
-" Custom indent select script
-function! SelectIndent ()
-  let temp_var=indent(line("."))
-  while indent(line(".")-1) >= temp_var
-    exe "normal! k"
-  endwhile
-  exe "normal! V"
-  while indent(line(".")+1) >= temp_var
-    exe "normal! j"
-  endwhile
-endfun
-nmap gv :call SelectIndent()<CR>
 
 " Quick editing of this file
 command Vimrc e ~/.config/nvim/init.vim
