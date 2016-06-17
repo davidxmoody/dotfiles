@@ -134,21 +134,21 @@ git_status() {
   local branch
   if branch=$(git rev-parse --abbrev-ref HEAD 2> /dev/null); then
     if [[ "$branch" == "HEAD" ]]; then
-      branch='detached*'
+      echo 'detached*'
+      return
     fi
 
     local status=$(git status --porcelain 2> /dev/null)
     local status_indicator=''
     [[ "$status" != "" ]] && status_indicator='*'
 
-    local commits_ahead=$(git rev-list --count @{u}..)
+    local commits_behind=$(git rev-list --count HEAD..@{upstream})
+    local commits_ahead=$(git rev-list --count @{upstream}..HEAD)
     local commits_indicator=''
-    [[ "$commits_ahead" != 0 ]] && commits_indicator="+${commits_ahead}"
+    [[ "$commits_ahead" != 0 ]] && commits_indicator="${commits_indicator}+${commits_ahead}"
+    [[ "$commits_behind" != 0 ]] && commits_indicator="${commits_indicator}-${commits_behind}"
 
     echo "(${branch}${commits_indicator}${status_indicator}) "
-
-  else
-    echo ""
   fi
 }
 

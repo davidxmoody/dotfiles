@@ -151,7 +151,7 @@ alias gaac='git add -A :/ && git commit --verbose'
 alias gco='git checkout'
 alias gcm='git checkout master'
 alias gm='git merge'
-alias gf='git fetch origin --prune && git lg origin/master ^master'
+alias gf='git fetch origin --prune && git --no-pager lg @{upstream} ^HEAD; echo'
 alias gpl='git pull'
 alias gps='git push'
 alias gpsa='git push --all'
@@ -172,6 +172,9 @@ cpgithooks() {
 
 # cd shortcuts
 alias up='cd ..'
+alias upp='cd ../..'
+alias uppp='cd ../../..'
+alias b='cd -'
 alias back='cd -'
 alias cdp='cd $P_DIR'
 alias cdt='cd $TMP_DIR'
