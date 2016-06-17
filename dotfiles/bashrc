@@ -138,11 +138,14 @@ git_status() {
     fi
 
     local status=$(git status --porcelain 2> /dev/null)
-    if [[ "$status" != "" ]]; then
-      echo "($branch*) "
-    else
-      echo "($branch) "
-    fi
+    local status_indicator=''
+    [[ "$status" != "" ]] && status_indicator='*'
+
+    local commits_ahead=$(git rev-list --count @{u}..)
+    local commits_indicator=''
+    [[ "$commits_ahead" != 0 ]] && commits_indicator="+${commits_ahead}"
+
+    echo "(${branch}${commits_indicator}${status_indicator}) "
 
   else
     echo ""
