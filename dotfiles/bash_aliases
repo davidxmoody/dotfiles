@@ -171,20 +171,6 @@ cpgithooks() {
   done
 }
 
-morning() {
-  for proj in ~/p/*; do
-    if [ -d "$proj/.git" ]; then
-      if cd "$proj" && git fetch --quiet; then
-        local commits_behind=$(git rev-list --count HEAD..@{upstream} 2>/dev/null)
-        local padded_commits_behind=$(printf '%3s' "$commits_behind")
-        [[ "$commits_behind" -gt 0 ]] && echo "${padded_commits_behind} ${proj#~/p/}"
-      else
-        echo -e "\e[0;31m  !\e[0m ${proj#~/p/}"
-      fi
-    fi
-  done
-}
-
 # cd shortcuts
 alias up='cd ..'
 alias upp='cd ../..'

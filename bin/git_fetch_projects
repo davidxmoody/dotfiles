@@ -1,0 +1,13 @@
+#!/bin/bash
+
+for proj in $P_DIR/*; do
+  if [ -d "$proj/.git" ]; then
+    if cd "$proj" && [[ "$1" == "-q" ]] && true || git fetch --quiet; then
+      commits_behind=$(git rev-list --count HEAD..@{upstream} 2>/dev/null)
+      padded_commits_behind=$(printf '%3s' "$commits_behind")
+      [[ "$commits_behind" -gt 0 ]] && echo "${padded_commits_behind} ${proj#~/p/}"
+    else
+      echo -e "\e[0;31m  !\e[0m ${proj#~/p/}"
+    fi
+  fi
+done
