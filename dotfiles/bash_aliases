@@ -46,6 +46,15 @@ vv() {
   fi
 }
 
+vd() {
+  # Spawn a subshell so that nvim starts in the right directory
+  (
+    cd $RC_DIR
+    local file=$(ag -g "" | fzf --select-1 --query "$1")
+    [ ! -z "$file" ] && nvim "$file"
+  )
+}
+
 e() {
   # Go directly to any existing directory
   if [ -d "$1" ]; then
