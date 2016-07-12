@@ -24,9 +24,6 @@ shopt -s dirspell 2> /dev/null
 # Correct spelling errors in arguments supplied to cd
 shopt -s cdspell 2> /dev/null
 
-# Use `>|` to force redirection to an existing file
-set -o noclobber
-
 # Automatically trim long paths in the prompt
 PROMPT_DIRTRIM=2
 
