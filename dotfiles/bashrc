@@ -225,12 +225,8 @@ alias_completion
 # Diary aliases come here because alias_completion doesn't like them
 alias diary='~/sync/old-projects/diary/rundiary -b $DIARY_DIR'
 alias dl='diary list'
-alias ds='diary search'
-alias dn='diary new'
-alias de='diary edit'
-alias dt='diary generate && xdg-open $DIARY_DIR/html/today.html'
-alias dw='diary wc -d --after $(date -d "6 days ago" +%F)'
-alias wsum='diary search \#wsum'
+alias dn='diary new -e nvim'
+alias de='diary edit -e nvim'
 
 # Blog editing
 alias be='$BLOG_DIR/scripts/helpers/edit'
