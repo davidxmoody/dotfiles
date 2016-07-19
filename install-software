@@ -15,6 +15,7 @@ npm i -g ramda-cli
 npm i -g tldr
 npm i -g diff-so-fancy
 npm i -g npm-check
+npm i -g flow-bin
 
 sudo apt-get install git
 sudo apt-get install git-extras

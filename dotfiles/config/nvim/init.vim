@@ -15,6 +15,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 
 Plug 'pangloss/vim-javascript'
+let g:javascript_plugin_flow = 1
 Plug 'mxw/vim-jsx'
 let g:jsx_ext_required = 0
 Plug 'moll/vim-node'
@@ -40,8 +41,13 @@ let g:fzf_commits_log_options = '--color --graph --pretty=format:"%Cred%h%Creset
 
 " Syntastic
 Plug 'scrooloose/syntastic'
-let g:syntastic_javascript_checkers = ['eslint']
+
+" Flow and eslint
+let g:syntastic_javascript_checkers = ['eslint', 'flow']
 let g:syntastic_javascript_eslint_exec = 'eslint_d'
+let g:syntastic_javascript_flow_exe = 'flow'
+let g:syntastic_aggregate_errors = 1
+
 let g:syntastic_json_checkers = ['jsonlint']
 au! BufRead,BufNewFile *.json set filetype=json
 

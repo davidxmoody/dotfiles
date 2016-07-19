@@ -232,7 +232,7 @@ whatuses() {
 }
 alias weather='curl http://wttr.in/Bristol'
 alias f='fg'
-alias stopmongoandredis='sudo service mongodb stop && sudo service redis-server stop'
+alias stopmongoredisandnginx='sudo service mongodb stop && sudo service redis-server stop && sudo service nginx stop'
 alias ag='ag --smart-case'
 alias ports='netstat -tulpn'
 
