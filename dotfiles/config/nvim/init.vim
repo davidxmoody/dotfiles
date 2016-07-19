@@ -34,6 +34,9 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 let g:fzf_commits_log_options = '--color --graph --pretty=format:"%Cred%h%Creset - %C(bold blue)%<(18)%an %C(yellow)%d%Creset %s %Cgreen(%ar)%Creset" --abbrev-commit'
 
+" Ranger (does not specifically need to be done with Plug)
+Plug 'ranger/ranger', { 'dir': '~/.ranger', 'do': 'sudo make install' }
+
 " Plug 'scrooloose/nerdtree'
 
 " Needed (I think) for ranger integration (see script below)
