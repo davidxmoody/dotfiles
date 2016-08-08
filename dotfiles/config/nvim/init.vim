@@ -15,10 +15,11 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 
 Plug 'pangloss/vim-javascript'
-let g:javascript_plugin_flow = 1
 Plug 'mxw/vim-jsx'
 let g:jsx_ext_required = 0
 Plug 'moll/vim-node'
+
+Plug 'leafgarland/typescript-vim'
 
 " Plug 'mbbill/undotree'
 " Plug 'mustache/vim-mustache-handlebars'
@@ -27,7 +28,9 @@ Plug 'mtscout6/vim-cjsx', { 'for': 'coffee' }
 Plug 'elzr/vim-json', { 'for': 'json' }
 let g:vim_json_syntax_conceal = 0
 
-Plug 'terryma/vim-multiple-cursors'
+Plug 'lambdatoast/elm.vim'
+
+" Plug 'terryma/vim-multiple-cursors'
 
 " FZF
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
@@ -44,12 +47,20 @@ Plug 'ranger/ranger', { 'dir': '~/.ranger', 'do': 'sudo make install' }
 
 " Syntastic
 Plug 'scrooloose/syntastic'
+let g:syntastic_aggregate_errors = 1
+
+" Default JavaScript
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_eslint_exec = 'eslint_d'
+
+" TypeScript
+let g:syntastic_typescript_checkers = ['tslint', 'tsc']
 
 " Flow and eslint
-let g:syntastic_javascript_checkers = ['eslint', 'flow']
-let g:syntastic_javascript_eslint_exec = 'eslint_d'
-let g:syntastic_javascript_flow_exe = 'flow'
-let g:syntastic_aggregate_errors = 1
+" let g:syntastic_javascript_checkers = ['eslint', 'flow']
+" let g:syntastic_javascript_eslint_exec = 'eslint_d'
+" let g:syntastic_javascript_flow_exe = 'flow'
+" let g:javascript_plugin_flow = 1
 
 let g:syntastic_json_checkers = ['jsonlint']
 au! BufRead,BufNewFile *.json set filetype=json
