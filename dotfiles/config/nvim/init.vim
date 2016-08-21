@@ -311,7 +311,7 @@ func! WordProcessorMode()
   setl display=lastline
   setl formatoptions=
   setl spell spelllang=en_gb
-  "source ~/.vim_abbreviations
+  source ~/.vim_abbreviations
 
   " Indenting
   setl tabstop=2

@@ -189,20 +189,12 @@ export SYNC_DIR="$HOME/sync"
 export DBOX="$HOME/.dbox/Dropbox"
 export DIARY_DIR="$HOME/sync/diary-data"
 
+# EDITOR
+export EDITOR=nvim
+
 # NVM
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-export EDITOR=nvim
-
-# NPM
-NPM_PACKAGES="$HOME/.npm-packages"
-if [ -d "$NPM_PACKAGES" ]; then
-  export NPM_PACKAGES
-  export NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
-  export PATH="$NPM_PACKAGES/bin:$PATH"
-  unset MANPATH
-  export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
-fi
 
 # Add custom bin dir to PATH
 [ -d "$RC_DIR/bin" ] && export PATH="$RC_DIR/bin:$PATH"
@@ -213,11 +205,6 @@ export ANDROID_HOME=$P_DIR/android-sdk-linux
 
 # Alias definitions
 [ -f ~/.bash_aliases ] && source ~/.bash_aliases
-
-# Source all custom bash completion files (for todo.txt mostly)
-for f in $RC_DIR/completion/*; do
-  [ -f "$f" ] && source "$f"
-done
 
 # Alias completion for all aliases defined in ~/.bash_aliases
 alias_completion

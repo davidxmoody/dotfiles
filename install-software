@@ -21,6 +21,7 @@ sudo apt-get install git
 sudo apt-get install git-extras
 sudo apt-get install gitk
 sudo apt-get install silversearcher-ag
+sudo apt-get install meld
 
 sudo gem install fit-commit
 
