@@ -131,7 +131,7 @@ git_status() {
   local branch
   if branch=$(git rev-parse --abbrev-ref HEAD 2> /dev/null); then
     if [[ "$branch" == "HEAD" ]]; then
-      echo 'detached*'
+      echo '(DETACHED*) '
       return
     fi
 
@@ -141,9 +141,11 @@ git_status() {
 
     local commits_behind=$(git rev-list --count HEAD..@{upstream} 2>/dev/null)
     local commits_ahead=$(git rev-list --count @{upstream}..HEAD 2>/dev/null)
+    local stashes_count=$(git stash list 2>/dev/null | wc -l)
     local commits_indicator=''
     [[ "$commits_ahead" -gt 0 ]] && commits_indicator="${commits_indicator}+${commits_ahead}"
     [[ "$commits_behind" -gt 0 ]] && commits_indicator="${commits_indicator}-${commits_behind}"
+    [[ "$stashes_count" -gt 0 ]] && commits_indicator="${commits_indicator}#${stashes_count}"
 
     echo "(${branch}${commits_indicator}${status_indicator}) "
   fi
