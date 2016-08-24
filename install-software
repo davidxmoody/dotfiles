@@ -18,6 +18,7 @@ npm i -g diff-so-fancy
 npm i -g npm-check
 
 sudo apt-get install git
+sudo apt-get install gitk
 sudo apt-get install git-extras
 sudo apt-get install silversearcher-ag
 sudo apt-get install meld
