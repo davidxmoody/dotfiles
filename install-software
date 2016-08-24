@@ -1,25 +1,24 @@
 #!/bin/bash
 
-npm i -g npm
-npm i -g babel
 npm i -g eslint
 npm i -g eslint_d
-npm i -g babel-eslint
 npm i -g eslint-plugin-react
+npm i -g eslint-config-airbnb
+npm i -g eslint-plugin-import
+npm i -g babel-eslint
+npm i -g babel-preset-es2015
+npm i -g babel-preset-react
 npm i -g coffee-script
 npm i -g gulp
 npm i -g http-server
 npm i -g jsonlint
 npm i -g nodemon
 npm i -g ramda-cli
-npm i -g tldr
 npm i -g diff-so-fancy
 npm i -g npm-check
-npm i -g flow-bin
 
 sudo apt-get install git
 sudo apt-get install git-extras
-sudo apt-get install gitk
 sudo apt-get install silversearcher-ag
 sudo apt-get install meld
 
