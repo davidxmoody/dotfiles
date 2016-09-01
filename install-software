@@ -4,6 +4,7 @@ npm i -g eslint
 npm i -g eslint_d
 npm i -g eslint-plugin-react
 npm i -g eslint-config-airbnb
+npm i -g eslint-plugin-jsx-a11y
 npm i -g eslint-plugin-import
 npm i -g babel-eslint
 npm i -g babel-preset-es2015
