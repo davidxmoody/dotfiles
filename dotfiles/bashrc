@@ -166,9 +166,14 @@ jobs_status() {
   fi
 }
 
+node_version() {
+  local ver=$(node --version | sed 's/^[^1-9]*\([1-9][0-9]*\).*$/\1/')
+  [[ "$ver" -ne "6" ]] && echo "$ver "
+}
+
 case $TERM in
   xterm*)
-    PS1='\[\033]0;\w\007\]\[\e[0;31m\]\w\[\e[0m\] \[\e[0;33m\]$(git_status)\[\e[0;92m\]$(jobs_status)\[\e[0m\]'
+    PS1='\[\033]0;\w\007\]\[\e[0;31m\]\w \[\e[0;32m\]$(node_version)\[\e[0;33m\]$(git_status)\[\e[0;92m\]$(jobs_status)\[\e[0m\]'
     PS2='\[\e[0;31m\]>\[\e[0m\] '
     ;;
   *)
