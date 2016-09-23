@@ -14,6 +14,10 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 
+Plug 'airblade/vim-gitgutter'
+let g:gitgutter_sign_column_always = 1
+set updatetime=250
+
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 let g:jsx_ext_required = 0
@@ -22,7 +26,6 @@ Plug 'moll/vim-node'
 Plug 'leafgarland/typescript-vim'
 
 " Plug 'mbbill/undotree'
-" Plug 'mustache/vim-mustache-handlebars'
 Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 Plug 'mtscout6/vim-cjsx', { 'for': 'coffee' }
 Plug 'elzr/vim-json', { 'for': 'json' }
