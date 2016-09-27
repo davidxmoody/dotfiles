@@ -15,8 +15,19 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 
 Plug 'airblade/vim-gitgutter'
-let g:gitgutter_sign_column_always = 1
 set updatetime=250
+let g:gitgutter_diff_args = '-w'
+let g:gitgutter_sign_column_always = 1
+noremap <leader>ha <Plug>GitGutterStageHunk
+noremap <leader>hr <Plug>GitGutterUndoHunk
+noremap <leader>hv <Plug>GitGutterPreviewHunk
+noremap <leader>ht :GitGutterToggle<CR>
+nmap ]h <Plug>GitGutterNextHunk
+nmap [h <Plug>GitGutterPrevHunk
+omap ih <Plug>GitGutterTextObjectInnerPending
+omap ah <Plug>GitGutterTextObjectOuterPending
+xmap ih <Plug>GitGutterTextObjectInnerVisual
+xmap ah <Plug>GitGutterTextObjectOuterVisual
 
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
