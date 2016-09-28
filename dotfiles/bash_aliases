@@ -150,7 +150,7 @@ alias gd='git diff'
 alias ga='git add'
 alias gaa='git add -A :/'
 alias gaac='git add -A :/ && git commit'
-gaacm() { git add -A :/ && git commit -m "$@"; }
+gaacm() { git add -A :/ && git commit -m "$*"; }
 alias gaaca='git add -A :/ && git commit --amend'
 alias gaacane='git add -A :/ && git commit --amend --no-edit'
 alias gco='git checkout'

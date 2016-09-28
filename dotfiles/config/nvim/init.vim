@@ -14,20 +14,26 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 
-Plug 'airblade/vim-gitgutter'
-set updatetime=250
-let g:gitgutter_diff_args = '-w'
-let g:gitgutter_sign_column_always = 1
-noremap <leader>ha <Plug>GitGutterStageHunk
-noremap <leader>hr <Plug>GitGutterUndoHunk
-noremap <leader>hv <Plug>GitGutterPreviewHunk
-noremap <leader>ht :GitGutterToggle<CR>
-nmap ]h <Plug>GitGutterNextHunk
-nmap [h <Plug>GitGutterPrevHunk
-omap ih <Plug>GitGutterTextObjectInnerPending
-omap ah <Plug>GitGutterTextObjectOuterPending
-xmap ih <Plug>GitGutterTextObjectInnerVisual
-xmap ah <Plug>GitGutterTextObjectOuterVisual
+Plug 'easymotion/vim-easymotion'
+let g:EasyMotion_smartcase = 1
+nmap m <Plug>(easymotion-overwin-f)
+nmap M <Plug>(easymotion-overwin-f2)
+
+" Unfortunately this plugin makes fzf glitchy and I value fzf more...
+" Plug 'airblade/vim-gitgutter'
+" set updatetime=250
+" let g:gitgutter_diff_args = '-w'
+" let g:gitgutter_sign_column_always = 1
+" noremap <leader>ha <Plug>GitGutterStageHunk
+" noremap <leader>hr <Plug>GitGutterUndoHunk
+" noremap <leader>hv <Plug>GitGutterPreviewHunk
+" noremap <leader>ht :GitGutterToggle<CR>
+" nmap ]h <Plug>GitGutterNextHunk
+" nmap [h <Plug>GitGutterPrevHunk
+" omap ih <Plug>GitGutterTextObjectInnerPending
+" omap ah <Plug>GitGutterTextObjectOuterPending
+" xmap ih <Plug>GitGutterTextObjectInnerVisual
+" xmap ah <Plug>GitGutterTextObjectOuterVisual
 
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
@@ -210,7 +216,6 @@ noremap , A
 noremap <CR> o
 noremap - o-<Space>
 
-noremap M <Nop>
 noremap S <Nop>
 noremap H <Nop>
 
