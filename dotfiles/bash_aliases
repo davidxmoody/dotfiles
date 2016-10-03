@@ -172,6 +172,16 @@ alias glm='git lg --author="David Moody"'
 alias gdp='git diff ORIG_HEAD -- package.json'
 alias gg='git_fetch_projects'
 
+gclone() {
+  local git_repo=$1
+  [ -z "$git_repo" ] && echo "Please enter the name of a git repository" && return 1
+
+  (
+    cd ~/p && \
+      git clone git@bitbucket.org:yourwealth/${git_repo}.git
+  ) && cd ~/p/${git_repo}
+}
+
 cpgithooks() {
   for gh_dir in resources/git*hooks; do
     [ -d "$gh_dir" ] && cp -v "$gh_dir"/* ".git/hooks"
