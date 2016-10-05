@@ -189,6 +189,13 @@ nnoremap <leader>* :Ag! <C-R><C-W><CR>
 vnoremap <leader>* "zy:Ag! <C-R><C-R>z<CR>
 vnoremap * "zy:Ag! <C-R><C-R>z<CR>
 
+nnoremap <leader>g <Nop>
+vnoremap <leader>g <Nop>
+nnoremap <leader>g* :tabe<CR>:terminal googler <C-R><C-W><CR>
+vnoremap <leader>gg* "zy:tabe<CR>:terminal googler <C-R><C-R>z<CR>
+nnoremap <leader>g* :terminal googler --first <C-R><C-W><CR>
+vnoremap <leader>gg* "zy:terminal googler --first <C-R><C-R>z<CR>
+
 " '.' in visual mode repeats the last change on every line
 vnoremap . :norm.<CR>
 
