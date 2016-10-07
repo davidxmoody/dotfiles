@@ -231,6 +231,7 @@ removekernels() { sudo apt-get remove --purge $(dpkg -l 'linux-*' | sed '/^ii/!d
 alias ins='sudo apt-get install'
 alias uns='sudo apt-get remove'
 alias xclip='xclip -selection clipboard'
+alias getclip='xclip -selection clipboard -o'
 alias wrstats="grep '^m' ~/.workrave/historystats | rev | cut -d' ' -f 2 | rev | tail -n20"
 alias gpgc='gpg -c --cipher-algo AES256'
 alias f='fg'

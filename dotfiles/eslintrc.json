@@ -4,7 +4,7 @@
     "mocha": true,
     "node": true
   },
-  "plugins": ["react", "import"],
+  "plugins": ["react"],
   "extends": "eslint-config-airbnb",
   "parserOptions": {
     "ecmaVersion": 7
@@ -78,6 +78,7 @@
     "guard-for-in": "off",
     "curly": "off",
     "arrow-parens": "off",
+    "no-confusing-arrow": "off",
     "react/sort-comp": "off",
     "react/jsx-boolean-value": "off",
     "react/prefer-stateless-function": "error",
