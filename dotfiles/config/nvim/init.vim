@@ -166,6 +166,7 @@ set statusline+=%{SyntasticStatuslineFlag()}
 map <space> <Nop>
 let mapleader=' '
 
+" File movement
 noremap <leader>u ZZ
 noremap <leader>e :update<CR>:Files!<CR>
 noremap <leader>E :update<CR>:Files!<space><C-R>=expand("%:p:h")<CR>
@@ -180,21 +181,22 @@ noremap <leader>B :update<CR>:History!<CR>
 noremap <leader>q :q<CR>
 noremap <leader>Q :q!<CR>
 
+" Window movement
 noremap <leader>s <C-W>s
 noremap <leader>v <C-W>v
 noremap <leader>w <C-W>w
 noremap <leader>W <C-W>W
 
+" Search
 nnoremap <leader>* :Ag! <C-R><C-W><CR>
 vnoremap <leader>* "zy:Ag! <C-R><C-R>z<CR>
 vnoremap * "zy:Ag! <C-R><C-R>z<CR>
 
-nnoremap <leader>g <Nop>
-vnoremap <leader>g <Nop>
-nnoremap <leader>g* :tabe<CR>:terminal googler <C-R><C-W><CR>
-vnoremap <leader>gg* "zy:tabe<CR>:terminal googler <C-R><C-R>z<CR>
-nnoremap <leader>g* :terminal googler --first <C-R><C-W><CR>
-vnoremap <leader>gg* "zy:terminal googler --first <C-R><C-R>z<CR>
+" Replace
+nnoremap <leader>r :.s/<C-R><C-W>//g<Left><Left>
+vnoremap <leader>r "zy:.s/<C-R><C-R>z//g<Left><Left>
+nnoremap <leader>R :%s/<C-R><C-W>//g<Left><Left>
+vnoremap <leader>R "zy:%s/<C-R><C-R>z//g<Left><Left>
 
 " '.' in visual mode repeats the last change on every line
 vnoremap . :norm.<CR>
