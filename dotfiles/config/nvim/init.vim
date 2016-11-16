@@ -60,10 +60,11 @@ let g:fzf_commits_log_options = '--color --graph --pretty=tformat:"%Cred%h%Crese
 " Ranger (does not specifically need to be done with Plug)
 Plug 'ranger/ranger', { 'dir': '~/.ranger', 'do': 'sudo make install' }
 
-" Plug 'scrooloose/nerdtree'
-
-" Needed (I think) for ranger integration (see script below)
-" Plug 'rbgrouleff/bclose.vim'
+" NERDTree
+Plug 'scrooloose/nerdtree'
+let NERDTreeIgnore=['^node_modules$', '^npm-debug.log$', '^.git$']
+let NERDTreeCaseSensitiveSort=1
+let NERDTreeMapOpenInTab='X'
 
 " Syntastic
 Plug 'scrooloose/syntastic'
@@ -155,6 +156,7 @@ set clipboard=unnamedplus
 set nojoinspaces
 set number
 set showcmd
+set backupcopy=yes
 
 " Status line
 set laststatus=2
@@ -269,51 +271,10 @@ command Vimrc e ~/.config/nvim/init.vim
 set suffixesadd=.js,.json,.coffee,.jsx,.cjsx,.yml,.yaml,.scss,.css
 
 " Terminal key bindings
-noremap <leader>t :terminal<CR>
-noremap <leader>T :vs +terminal<CR>
+noremap <silent> <leader>t :NERDTreeToggle<CR>
+noremap <leader>T :terminal<CR>
+" noremap <leader>T :vs +terminal<CR>
 tnoremap <Esc> <C-\><C-n>
-
-" Ranger (two approaches, neither is great)
-" function! RangerChooser()
-"   let dirname = expand("%:p:h")
-"   let callback = {'tempname': tempname()}
-"   function! callback.on_exit()
-"     try
-"       if filereadable(self.tempname)
-"         let names = readfile(self.tempname)
-"         exec 'edit ' . fnameescape(names[0])
-"         for name in names[1:]
-"           exec 'tabe ' . fnameescape(name)
-"         endfor
-"       endif
-"     endtry
-"   endfunction
-"   let cmd = 'ranger --choosefiles='.callback.tempname.' '.shellescape(l:dirname)
-"   call termopen(cmd, callback)
-"   startinsert
-" endfunction
-
-" function! OpenRanger()
-"   let currentPath = expand("%:p:h")
-"   let rangerCallback = { 'name': 'ranger' }
-"   function! rangerCallback.on_exit(id, code)
-"     Bclose!
-"     try
-"       if filereadable('/tmp/chosenfile')
-"         exec system('sed -ie "s/ /\\\ /g" /tmp/chosenfile')
-"         exec 'argadd ' . system('cat /tmp/chosenfile | tr "\\n" " "')
-"         exec 'edit ' . system('head -n1 /tmp/chosenfile')
-"         call system('rm /tmp/chosenfile')
-"       endif
-"     endtry
-"   endfunction
-"   enew
-"   call termopen('ranger --choosefiles=/tmp/chosenfile ' . currentPath, rangerCallback)
-"   startinsert
-" endfunction
-
-" map <leader>R :call RangerChooser()<CR>
-" map <leader>r :call OpenRanger()<CR>
 
 " Function for editing Python code
 func! PythonMode()

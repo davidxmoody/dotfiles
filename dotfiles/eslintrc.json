@@ -79,6 +79,7 @@
     "curly": "off",
     "arrow-parens": "off",
     "no-confusing-arrow": "off",
+    "no-plusplus": "off",
     "react/sort-comp": "off",
     "react/jsx-boolean-value": "off",
     "react/prefer-stateless-function": "error",
