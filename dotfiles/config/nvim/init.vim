@@ -62,6 +62,7 @@ Plug 'ranger/ranger', { 'dir': '~/.ranger', 'do': 'sudo make install' }
 
 " NERDTree
 Plug 'scrooloose/nerdtree'
+let NERDTreeMapActivateNode='h'
 let NERDTreeIgnore=['^node_modules$', '^npm-debug.log$', '^.git$']
 let NERDTreeCaseSensitiveSort=1
 let NERDTreeMapOpenInTab='X'
@@ -148,15 +149,23 @@ set autoread
 set ignorecase
 set smartcase
 set report=0
-set scrolloff=4
+set scrolloff=3
 set sidescrolloff=1
-set listchars=extends:>,precedes:<
+set list
+set listchars=tab:›\ ,trail:•,extends:>,precedes:<,nbsp:.
 set directory=~/.vim-swap,~/tmp,/var/tmp,/tmp,.
 set clipboard=unnamedplus
 set nojoinspaces
 set number
 set showcmd
 set backupcopy=yes
+
+" Persistent undo
+if has('persistent_undo')
+  set undofile
+  set undolevels=1000
+  set undoreload=10000
+endif
 
 " Status line
 set laststatus=2
@@ -272,7 +281,8 @@ set suffixesadd=.js,.json,.coffee,.jsx,.cjsx,.yml,.yaml,.scss,.css
 
 " Terminal key bindings
 noremap <silent> <leader>t :NERDTreeToggle<CR>
-noremap <leader>T :terminal<CR>
+noremap <silent> <leader>T :NERDTreeFind<CR>
+" noremap <leader>t :terminal<CR>
 " noremap <leader>T :vs +terminal<CR>
 tnoremap <Esc> <C-\><C-n>
 
