@@ -66,6 +66,8 @@ let NERDTreeMapActivateNode='h'
 let NERDTreeIgnore=['^node_modules$', '^npm-debug.log$', '^.git$']
 let NERDTreeCaseSensitiveSort=1
 let NERDTreeMapOpenInTab='X'
+let NERDTreeShowBookmarks=1
+let NERDTreeMouseMode=2
 
 " Syntastic
 Plug 'scrooloose/syntastic'
@@ -112,6 +114,9 @@ Plug 'honza/vim-snippets'
 " Completion
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 let g:ycm_filetype_blacklist = { 'md': 1, 'mkd': 1, 'markdown': 1, 'text': 1 , 'gitcommit': 1 }
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+
 let g:UltiSnipsExpandTrigger = '<C-T>'
 let g:UltiSnipsJumpForwardTrigger = '<C-T>'
 let g:UltiSnipsJumpBackwardTrigger = '<C-N>'
@@ -212,6 +217,9 @@ vnoremap <leader>R "zy:%s/<C-R><C-R>z//g<Left><Left>
 " '.' in visual mode repeats the last change on every line
 vnoremap . :norm.<CR>
 
+vnoremap < <gv
+vnoremap > >gv
+
 " Auto wrap comments
 set formatoptions=crqn1j
 set textwidth=79
@@ -235,6 +243,10 @@ noremap \| :lnext<CR>
 
 noremap <C-K> cl<CR><Esc>lf<Space>
 
+" Command line helpers
+cnoremap cd. lcd %:p:h
+cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<cr>
+
 " Some custom navigation bindings
 noremap , A
 noremap <CR> o
@@ -242,6 +254,8 @@ noremap - o-<Space>
 
 noremap S <Nop>
 noremap H <Nop>
+
+nnoremap Y y$
 
 " Indenting
 set tabstop=2

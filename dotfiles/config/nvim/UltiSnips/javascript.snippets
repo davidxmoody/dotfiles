@@ -1,0 +1,23 @@
+snippet fun "Function"
+function ${1:function_name}(${2:argument}) {
+	${VISUAL}$0
+}
+endsnippet
+
+snippet fn "Arrow function"
+($1) => {
+	$2
+}
+endsnippet
+
+snippet im "Require"
+const ${1:module_name} = require("${2:module_path}")
+endsnippet
+
+snippet ex "module.exports"
+module.exports = $1
+endsnippet
+
+snippet cl "console.log()"
+console.log(${1:"${2:string}"})
+endsnippet
