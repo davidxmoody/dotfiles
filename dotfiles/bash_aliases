@@ -3,7 +3,11 @@ type nvim 2> /dev/null > /dev/null && alias vim='nvim'
 alias v='nvim'
 
 # Tmux
-type tmux-next 2> /dev/null > /dev/null && alias tmux='tmux-next -f "$HOME/.tmux.conf"'
+if type tmux-next 2> /dev/null > /dev/null; then
+  alias tmux='tmux-next -f "$HOME/.tmux.conf"'
+else
+  alias tmux='tmux -f "$HOME/.tmux.conf"'
+fi
 
 # List
 alias u='ls -FCBH --group-directories-first --color=auto --hide node_modules'
