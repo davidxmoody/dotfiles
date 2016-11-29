@@ -21,3 +21,10 @@ endsnippet
 snippet cl "console.log()"
 console.log(${1:"${2:string}"})
 endsnippet
+
+# Consider adapting this
+# TODO this is far too complex to do with regular expressions, use python
+# instead (with `!p`
+# snippet vreq "assign a CommonJS-style module to a var"
+# var ${0:${1/(.+\/)*(\w+)(-|\b|$)(\..+$)?/\u$2/g}} = require('${1}');
+# endsnippet

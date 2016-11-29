@@ -69,6 +69,19 @@ let NERDTreeMapOpenInTab='X'
 let NERDTreeShowBookmarks=1
 let NERDTreeMouseMode=2
 
+Plug 'Xuyuanp/nerdtree-git-plugin'
+let g:NERDTreeIndicatorMapCustom = {
+  \ "Modified"  : "✹",
+  \ "Staged"    : "✚",
+  \ "Untracked" : "✭",
+  \ "Renamed"   : "➜",
+  \ "Unmerged"  : "═",
+  \ "Deleted"   : "✖",
+  \ "Dirty"     : "✗",
+  \ "Clean"     : "✔︎",
+  \ "Unknown"   : "?"
+  \ }
+
 " Syntastic
 Plug 'scrooloose/syntastic'
 let g:syntastic_aggregate_errors = 1

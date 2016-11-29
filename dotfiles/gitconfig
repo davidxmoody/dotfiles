@@ -12,7 +12,5 @@
 	helper = cache --timeout=3600
 [alias]
   lg = log --color --graph --pretty=tformat:'%Cred%h%Creset - %C(bold blue)%<(18)%aN %C(yellow)%d%Creset %s %Cgreen(%ar)%Creset' --abbrev-commit
-[init]
-	templatedir = ~/.git_templates
 [include]
   path = ~/.git_include
