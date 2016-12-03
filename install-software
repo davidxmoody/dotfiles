@@ -17,6 +17,7 @@ npm i -g \
   nodemon \
   ramda-cli \
   diff-so-fancy \
+  cloc \
   npm-check
 
 sudo apt-get install git
@@ -24,8 +25,7 @@ sudo apt-get install gitk
 sudo apt-get install git-extras
 sudo apt-get install silversearcher-ag
 sudo apt-get install meld
-
-sudo gem install fit-commit
+sudo apt-get install baobab
 
 sudo pip install pygments # For ranger syntax highlighting
 sudo pip3 install neovim-remote
