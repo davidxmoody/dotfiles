@@ -230,9 +230,6 @@ vnoremap <leader>R "zy:%s/<C-R><C-R>z//g<Left><Left>
 " '.' in visual mode repeats the last change on every line
 vnoremap . :norm.<CR>
 
-vnoremap < <gv
-vnoremap > >gv
-
 " Auto wrap comments
 set formatoptions=crqn1j
 set textwidth=79

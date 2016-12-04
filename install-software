@@ -27,5 +27,8 @@ sudo apt-get install silversearcher-ag
 sudo apt-get install meld
 sudo apt-get install baobab
 
+# For compiling YouCompleteMe
+sudo apt-get install build-essential cmake python-dev python3-dev
+
 sudo pip install pygments # For ranger syntax highlighting
 sudo pip3 install neovim-remote
