@@ -4,81 +4,81 @@ endif
 
 let g:abolish_save_file = expand('<sfile>:p')
 
-iab h the
-iab H The
-iab t to
-iab T To
-iab d and
-iab D And
-iab j just
-iab J Just
-iab q quick
-iab Q Quick
-iab w with
-iab W With
-iab v very
-iab V Very
-iab b be
-iab B Be
-iab f of
-iab F Of
+iab <buffer> h the
+iab <buffer> H The
+iab <buffer> t to
+iab <buffer> T To
+iab <buffer> d and
+iab <buffer> D And
+iab <buffer> j just
+iab <buffer> J Just
+iab <buffer> q quick
+iab <buffer> Q Quick
+iab <buffer> w with
+iab <buffer> W With
+iab <buffer> v very
+iab <buffer> V Very
+iab <buffer> b be
+iab <buffer> B Be
+iab <buffer> f of
+iab <buffer> F Of
 
-Abolish wh{,s} what{,'s}
-Abolish th{,s} that{,'s}
- 
-iab i I
-iab (i (I
-Abolish im I'm
-Abolish iv I've
-Abolish il I'll
-Abolish id I'd
+Abolish -buffer wh{,s} what{,'s}
+Abolish -buffer th{,s} that{,'s}
 
-Abolish ie i.e.
-Abolish eg e.g.
+iab <buffer> i I
+iab <buffer> (i (I
+Abolish -buffer im I'm
+Abolish -buffer iv I've
+Abolish -buffer il I'll
+Abolish -buffer id I'd
 
-Abolish {he,she,there,here,mum,dad,children}s {}'s
-Abolish {you,they}ve {}'ve
-Abolish {do,did,ca,is,wo,have,has,was,does,could,would,are,were,had,should}nt {}n't
+Abolish -buffer ie i.e.
+Abolish -buffer eg e.g.
 
-Abolish {al,}tho{,u} {}though
-Abolish thro{,u} through
+Abolish -buffer {he,she,there,here,mum,dad,children}s {}'s
+Abolish -buffer {you,they}ve {}'ve
+Abolish -buffer {do,did,ca,is,wo,have,has,was,does,could,would,are,were,had,should}nt {}n't
 
-Abolish monday Monday
-Abolish tuesday Tuesday
-Abolish wednesday Wednesday
-Abolish thursday Thursday
-Abolish friday Friday
-Abolish saturday Saturday
-Abolish sunday Sunday
+Abolish -buffer {al,}tho{,u} {}though
+Abolish -buffer thro{,u} through
 
-Abolish january January
-Abolish february February
-Abolish april April
-Abolish june June
-Abolish july July
-Abolish august August
-Abolish september September
-Abolish october October
-Abolish november November
-Abolish december December
+Abolish -buffer monday Monday
+Abolish -buffer tuesday Tuesday
+Abolish -buffer wednesday Wednesday
+Abolish -buffer thursday Thursday
+Abolish -buffer friday Friday
+Abolish -buffer saturday Saturday
+Abolish -buffer sunday Sunday
 
-Abolish jsc JavaScript
-Abolish cof CoffeeScript
+Abolish -buffer january January
+Abolish -buffer february February
+Abolish -buffer april April
+Abolish -buffer june June
+Abolish -buffer july July
+Abolish -buffer august August
+Abolish -buffer september September
+Abolish -buffer october October
+Abolish -buffer november November
+Abolish -buffer december December
 
-Abolish pmo{,s} Pomodoro{}
-Abolish def definitely
-Abolish prob probably
-Abolish bc because
-Abolish mins minutes
-Abolish hev however
-Abolish prog programming
-Abolish bf before
-Abolish prev previous
-Abolish dif different
-Abolish td today
-Abolish tm tomorrow
-Abolish yd yesterday
+Abolish -buffer jsc JavaScript
+Abolish -buffer cof CoffeeScript
 
-" New abbreviations (added with `:Abolish!` will get added below this line
-Abolish obv obviously
-Abolish speach speech
+Abolish -buffer pmo{,s} Pomodoro{}
+Abolish -buffer def definitely
+Abolish -buffer prob probably
+Abolish -buffer bc because
+Abolish -buffer mins minutes
+Abolish -buffer hev however
+Abolish -buffer prog programming
+Abolish -buffer bf before
+Abolish -buffer prev previous
+Abolish -buffer dif different
+Abolish -buffer td today
+Abolish -buffer tm tomorrow
+Abolish -buffer yd yesterday
+Abolish -buffer obv obviously
+Abolish -buffer speach speech
+
+" New abbreviations (added with `:Abolish!` will get added below this line)

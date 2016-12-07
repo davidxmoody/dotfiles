@@ -127,8 +127,8 @@ Plug 'honza/vim-snippets'
 " Completion
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 let g:ycm_filetype_blacklist = { 'md': 1, 'mkd': 1, 'markdown': 1, 'text': 1 , 'gitcommit': 1 }
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+au FileType css setlocal omnifunc=csscomplete#CompleteCSS
+au FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 
 let g:UltiSnipsExpandTrigger = '<C-T>'
 let g:UltiSnipsJumpForwardTrigger = '<C-T>'
@@ -326,7 +326,7 @@ func! DisableSyntastic()
 endfu
 au BufNewFile,BufRead *.cjsx call DisableSyntastic()
 
-" Function for editing English text
+" Function for editing English text (everything should be local to buffer)
 func! WordProcessorMode()
   setl filetype=markdown
 
@@ -351,10 +351,9 @@ func! WordProcessorMode()
   setl nosmartindent
   setl indentexpr=
 
-  " Auto-capitalize script
-  augroup SENTENCES
+  augroup auto_capitalize_sentences
     au!
-    autocmd InsertCharPre <buffer> if search('\v(%^|%^[1-7]{2}\s|[.!?]\_s+|\_^\s*\-\s|\_^#+\s|\_^title\:\s|\n\n)%#', 'bcnw') != 0 | let v:char = toupper(v:char) | endif
+    au InsertCharPre <buffer> if search('\v(%^|%^[1-7]{2}\s|[.!?]\_s+|\_^\s*\-\s|\_^#+\s|\_^title\:\s|\n\n)%#', 'bcnw') != 0 | let v:char = toupper(v:char) | endif
   augroup END
 endfu
 
