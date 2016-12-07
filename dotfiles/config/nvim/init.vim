@@ -44,7 +44,6 @@ Plug 'leafgarland/typescript-vim'
 
 " Plug 'mbbill/undotree'
 Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
-Plug 'mtscout6/vim-cjsx', { 'for': 'coffee' }
 Plug 'elzr/vim-json', { 'for': 'json' }
 let g:vim_json_syntax_conceal = 0
 
@@ -301,7 +300,7 @@ noremap L T
 command Vimrc e ~/.config/nvim/init.vim
 
 " gf filename options
-set suffixesadd=.js,.json,.coffee,.jsx,.cjsx,.yml,.yaml,.scss,.css
+set suffixesadd=.js,.json,.jsx,.coffee,.css,.scss
 
 " Terminal key bindings
 noremap <silent> <leader>t :NERDTreeToggle<CR>
@@ -317,14 +316,6 @@ func! PythonMode()
   set shiftwidth=4
 endfu
 au BufNewFile,BufRead *.py call PythonMode()
-
-" Disable syntastic for cjsx (but not regular coffee files)
-func! DisableSyntastic()
-  set cmdheight=2
-  SyntasticToggleMode
-  set cmdheight=1
-endfu
-au BufNewFile,BufRead *.cjsx call DisableSyntastic()
 
 " Function for editing English text (everything should be local to buffer)
 func! WordProcessorMode()
