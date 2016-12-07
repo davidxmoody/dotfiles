@@ -252,6 +252,12 @@ noremap \| :lnext<CR>
 
 noremap <C-K> cl<CR><Esc>lf<Space>
 
+" Autoindent on paste
+noremap gp p`[V`]=
+noremap gP P`[V`]=
+vnoremap gp p`[V`]=
+vnoremap gP P`[V`]=
+
 " Command line helpers
 cnoremap cd. lcd %:p:h
 cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<cr>
