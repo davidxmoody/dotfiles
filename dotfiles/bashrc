@@ -15,14 +15,8 @@ shopt -s histappend
 # Save multi-line commands as one command
 shopt -s cmdhist
 
-# Prepend cd to directory names automatically
-shopt -s autocd 2> /dev/null
-
 # Correct spelling errors during tab-completion
 shopt -s dirspell 2> /dev/null
-
-# Correct spelling errors in arguments supplied to cd
-shopt -s cdspell 2> /dev/null
 
 # Automatically trim long paths in the prompt
 PROMPT_DIRTRIM=2
@@ -48,7 +42,6 @@ export LESS=RSci
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
-#. ~/.bash_completion
 if ! shopt -oq posix; then
   if [ -f /usr/share/bash-completion/bash_completion ]; then
     . /usr/share/bash-completion/bash_completion
