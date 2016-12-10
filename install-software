@@ -1,15 +1,6 @@
 #!/bin/bash
 
 npm i -g \
-  eslint \
-  eslint_d \
-  eslint-plugin-react \
-  eslint-config-airbnb \
-  eslint-plugin-jsx-a11y \
-  eslint-plugin-import \
-  babel-eslint \
-  babel-preset-es2015 \
-  babel-preset-react \
   coffee-script \
   gulp \
   http-server \
@@ -19,6 +10,8 @@ npm i -g \
   diff-so-fancy \
   cloc \
   npm-check
+
+npm info "eslint-config-airbnb@latest" peerDependencies --json | command sed 's/[\{\},]//g ; s/: /@/g' | xargs npm install -g "eslint_d" "eslint-config-airbnb@latest"
 
 sudo apt-get install git
 sudo apt-get install gitk
