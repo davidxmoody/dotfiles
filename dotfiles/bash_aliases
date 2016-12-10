@@ -18,10 +18,10 @@ alias ur='u -R'
 p() {
   local initial_dir=${1%/}
   if [ ! -z "$initial_dir" -a -d "$P_DIR/$initial_dir" ]; then
-    cd "$P_DIR/$initial_dir"
+    cd "$P_DIR/$initial_dir" && tmux rename-window "$initial_dir"
   else
     local chosen_dir=$(ls -1 $P_DIR | fzf --select-1 --query "$initial_dir")
-    [ ! -z "$chosen_dir" ] && cd "$P_DIR/$chosen_dir"
+    [ ! -z "$chosen_dir" ] && cd "$P_DIR/$chosen_dir" && tmux rename-window "$chosen_dir"
   fi
 }
 
