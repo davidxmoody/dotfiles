@@ -1,15 +1,13 @@
 [user]
-	name = David Moody
-	email = david@davidxmoody.com
+  name = David Moody
+  email = david@davidxmoody.com
 [core]
-	editor = nvim
-	pager = diff-so-fancy | less --tabs=1,5
-[merge]
-	tool = nvim -d
+  editor = nvim
+  pager = diff-so-fancy | less --tabs=1,5
 [push]
-	default = simple
-[credential]
-	helper = cache --timeout=3600
+  default = simple
+[blame]
+  date = short
 [alias]
   lg = log --color --graph --pretty=tformat:'%Cred%h%Creset - %C(bold blue)%<(18)%aN %C(yellow)%d%Creset %s %Cgreen(%ar)%Creset' --abbrev-commit
 [include]
