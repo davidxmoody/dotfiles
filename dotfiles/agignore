@@ -2,3 +2,11 @@ node_modules/
 build/
 dist/
 android-sdk-linux/
+*.png
+*.jpg
+*.svg
+*.icon.svg
+*.woff
+*.woff2
+*.ttf
+*.eot
