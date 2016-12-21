@@ -181,11 +181,6 @@ export LC_COLLATE=C
 # Set some custom frequently used directories
 export P_DIR="$HOME/p"
 export RC_DIR="$P_DIR/dotfiles"
-if [[ -d "$P_DIR/blog" ]]; then
-  export BLOG_DIR="$P_DIR/blog"
-else
-  export BLOG_DIR="$P_DIR/davidxmoody.github.io"
-fi
 export TMP_DIR="$HOME/tmp"
 export SYNC_DIR="$HOME/sync"
 export DBOX="$HOME/.dbox/Dropbox"
@@ -223,15 +218,11 @@ alias_completion
 
 # Diary aliases come here because alias_completion doesn't like them
 alias diary='~/sync/old-projects/diary/rundiary -b $DIARY_DIR'
-alias dl='diary list'
-alias dn='diary new -e nvim'
-alias de='diary edit -e nvim'
-
-# Blog editing
-alias be='$BLOG_DIR/scripts/helpers/edit'
-alias bn='$BLOG_DIR/scripts/helpers/new'
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 # Don't load ranger config twice
 export RANGER_LOAD_DEFAULT_RC=FALSE
+
+# Launch tmux if not already in tmux
+[ -z "$TMUX" ] && echo "Launching tmux..." && tmux

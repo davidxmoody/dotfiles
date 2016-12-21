@@ -226,6 +226,9 @@ vnoremap <leader>r "zy:.s/<C-R><C-R>z//g<Left><Left>
 nnoremap <leader>R :%s/<C-R><C-W>//g<Left><Left>
 vnoremap <leader>R "zy:%s/<C-R><C-R>z//g<Left><Left>
 
+" Git
+noremap <leader>gb :Gblame<CR>
+
 " '.' in visual mode repeats the last change on every line
 vnoremap . :norm.<CR>
 
