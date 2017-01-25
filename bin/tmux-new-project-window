@@ -1,0 +1,13 @@
+#!/bin/bash
+
+p_dir=${P_DIR-$HOME/p}
+
+tmux rename-window "NEW"
+
+proj=$(ls -1 "$p_dir" | fzf)
+
+if [ -z "$proj" ]; then
+  tmux new-window -c "$HOME" -n "HOME"
+else
+  tmux new-window -c "$p_dir/$proj" -n "$proj"
+fi
