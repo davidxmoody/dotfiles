@@ -4,7 +4,13 @@ p_dir=${P_DIR-$HOME/p}
 
 tmux rename-window "NEW"
 
-proj=$(ls -1 "$p_dir" | fzf)
+proj=$(for project in $(ls -1 "$p_dir"); do
+  status=$(cd "$p_dir/$project" && git status --porcelain 2> /dev/null)
+  [[ "$status" != "" ]] && echo -n '* ' || echo -n '  '
+  echo "$project"
+done | fzf)
+
+proj=${proj#??}
 
 if [ -z "$proj" ]; then
   tmux new-window -c "$HOME" -n "HOME"
