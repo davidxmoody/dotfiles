@@ -14,10 +14,10 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 
-Plug 'easymotion/vim-easymotion'
-let g:EasyMotion_smartcase = 1
-nmap m <Plug>(easymotion-overwin-f)
-nmap M <Plug>(easymotion-overwin-f2)
+" Plug 'easymotion/vim-easymotion'
+" let g:EasyMotion_smartcase = 1
+" nmap m <Plug>(easymotion-overwin-f)
+" nmap M <Plug>(easymotion-overwin-f2)
 
 " Unfortunately this plugin makes fzf glitchy and I value fzf more...
 " Plug 'airblade/vim-gitgutter'
@@ -40,14 +40,14 @@ Plug 'mxw/vim-jsx'
 let g:jsx_ext_required = 0
 Plug 'moll/vim-node'
 
-Plug 'leafgarland/typescript-vim'
+" Plug 'leafgarland/typescript-vim'
 
 " Plug 'mbbill/undotree'
 Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 Plug 'elzr/vim-json', { 'for': 'json' }
 let g:vim_json_syntax_conceal = 0
 
-Plug 'lambdatoast/elm.vim', { 'for': 'elm' }
+" Plug 'lambdatoast/elm.vim', { 'for': 'elm' }
 
 " Plug 'terryma/vim-multiple-cursors'
 
@@ -57,7 +57,7 @@ Plug 'junegunn/fzf.vim'
 let g:fzf_commits_log_options = '--color --graph --pretty=tformat:"%Cred%h%Creset - %C(bold blue)%<(18)%an %C(yellow)%d%Creset %s %Cgreen(%ar)%Creset" --abbrev-commit'
 
 " Ranger (does not specifically need to be done with Plug)
-Plug 'ranger/ranger', { 'dir': '~/.ranger', 'do': 'sudo make install' }
+" Plug 'ranger/ranger', { 'dir': '~/.ranger', 'do': 'sudo make install' }
 
 " NERDTree
 Plug 'scrooloose/nerdtree'
@@ -120,8 +120,8 @@ map ?  <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
 
 " Snippets
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
+" Plug 'SirVer/ultisnips'
+" Plug 'honza/vim-snippets'
 
 " Completion
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
@@ -231,7 +231,7 @@ noremap <leader>gb :Gblame<CR>
 noremap <leader>gr :Gread<CR>
 
 " '.' in visual mode repeats the last change on every line
-vnoremap . :norm.<CR>
+" vnoremap . :norm.<CR>
 
 " Auto wrap comments
 set formatoptions=crqn1j
@@ -263,7 +263,7 @@ vnoremap gp p`[V`]=
 vnoremap gP P`[V`]=
 
 " Command line helpers
-cnoremap cd. lcd %:p:h
+" cnoremap cd. lcd %:p:h
 cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<cr>
 
 " Some custom navigation bindings
@@ -307,59 +307,55 @@ noremap K gJ
 noremap L T
 
 " Quick editing of this file
-command Vimrc e ~/.config/nvim/init.vim
+" command Vimrc e ~/.config/nvim/init.vim
 
 " gf filename options
 set suffixesadd=.js,.json,.jsx,.coffee,.css,.scss
 
-" Terminal key bindings
 noremap <silent> <leader>t :NERDTreeToggle<CR>
 noremap <silent> <leader>T :NERDTreeFind<CR>
-" noremap <leader>t :terminal<CR>
-" noremap <leader>T :vs +terminal<CR>
 tnoremap <Esc> <C-\><C-n>
 
 " Function for editing Python code
-func! PythonMode()
-  set tabstop=4
-  set softtabstop=4
-  set shiftwidth=4
-endfu
-au BufNewFile,BufRead *.py call PythonMode()
+" func! PythonMode()
+"   set tabstop=4
+"   set softtabstop=4
+"   set shiftwidth=4
+" endfu
+" au BufNewFile,BufRead *.py call PythonMode()
 
 " Function for editing English text (everything should be local to buffer)
-func! WordProcessorMode()
-  setl filetype=markdown
+" func! WordProcessorMode()
+"   setl filetype=markdown
 
-  " Other options
-  setl nonumber
-  setl wrap
-  setl linebreak
-  setl breakat=\ 
-  setl display=lastline
-  setl formatoptions=
-  setl spell spelllang=en_gb
-  source ~/.vim_abbreviations
+"   " Other options
+"   setl nonumber
+"   setl wrap
+"   setl linebreak
+"   setl breakat=\ 
+"   setl display=lastline
+"   setl formatoptions=
+"   setl spell spelllang=en_gb
+"   source ~/.vim_abbreviations
 
-  " Indenting
-  setl tabstop=2
-  setl softtabstop=0
-  setl shiftwidth=2
-  setl expandtab
-  setl nosmarttab
-  setl noautoindent
-  setl nocindent
-  setl nosmartindent
-  setl indentexpr=
+"   " Indenting
+"   setl tabstop=2
+"   setl softtabstop=0
+"   setl shiftwidth=2
+"   setl expandtab
+"   setl nosmarttab
+"   setl noautoindent
+"   setl nocindent
+"   setl nosmartindent
+"   setl indentexpr=
 
-  augroup auto_capitalize_sentences
-    au!
-    au InsertCharPre <buffer> if search('\v(%^|%^[1-7]{2}\s|[.!?]\_s+|\_^\s*\-\s|\_^#+\s|\_^title\:\s|\n\n)%#', 'bcnw') != 0 | let v:char = toupper(v:char) | endif
-  augroup END
-endfu
+"   augroup auto_capitalize_sentences
+"     au!
+"     au InsertCharPre <buffer> if search('\v(%^|%^[1-7]{2}\s|[.!?]\_s+|\_^\s*\-\s|\_^#+\s|\_^title\:\s|\n\n)%#', 'bcnw') != 0 | let v:char = toupper(v:char) | endif
+"   augroup END
+" endfu
 
-set spellfile=~/sync/diary-data/vim/en.utf-8.add
+" set spellfile=~/sync/diary-data/vim/en.utf-8.add
 
-com! WP call WordProcessorMode()
-au BufNewFile,BufRead *.md call WordProcessorMode()
-au BufNewFile,BufRead diary-*.txt call WordProcessorMode()
+" com! WP call WordProcessorMode()
+" au BufNewFile,BufRead *.md call WordProcessorMode()
