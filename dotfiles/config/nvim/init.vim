@@ -120,7 +120,7 @@ map ?  <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
 
 " Snippets
-" Plug 'SirVer/ultisnips'
+Plug 'SirVer/ultisnips'
 " Plug 'honza/vim-snippets'
 
 " Completion
@@ -176,6 +176,7 @@ set nojoinspaces
 set number
 set showcmd
 set backupcopy=yes
+set mouse=nv
 
 " Persistent undo
 if has('persistent_undo')
@@ -231,7 +232,7 @@ noremap <leader>gb :Gblame<CR>
 noremap <leader>gr :Gread<CR>
 
 " '.' in visual mode repeats the last change on every line
-" vnoremap . :norm.<CR>
+vnoremap . :norm.<CR>
 
 " Auto wrap comments
 set formatoptions=crqn1j
@@ -263,7 +264,7 @@ vnoremap gp p`[V`]=
 vnoremap gP P`[V`]=
 
 " Command line helpers
-" cnoremap cd. lcd %:p:h
+cnoremap cd. lcd %:p:h
 cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<cr>
 
 " Some custom navigation bindings
@@ -307,7 +308,7 @@ noremap K gJ
 noremap L T
 
 " Quick editing of this file
-" command Vimrc e ~/.config/nvim/init.vim
+command Vimrc e ~/.config/nvim/init.vim
 
 " gf filename options
 set suffixesadd=.js,.json,.jsx,.coffee,.css,.scss
