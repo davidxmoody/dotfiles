@@ -222,10 +222,10 @@ vnoremap <leader>* "zy:Ag! <C-R><C-R>z<CR>
 vnoremap * "zy:Ag! <C-R><C-R>z<CR>
 
 " Replace
-nnoremap <leader>r :.s/<C-R><C-W>//g<Left><Left>
-vnoremap <leader>r "zy:.s/<C-R><C-R>z//g<Left><Left>
-nnoremap <leader>R :%s/<C-R><C-W>//g<Left><Left>
-vnoremap <leader>R "zy:%s/<C-R><C-R>z//g<Left><Left>
+nnoremap <leader>r :%s/<C-R><C-W>//g<Left><Left>
+vnoremap <leader>r "zy:%s/<C-R><C-R>z//g<Left><Left>
+nnoremap <leader>R :!ag -l '<C-R><C-W>' \| xargs -I@ sed -i 's/<C-R><C-W>//g; T; w /dev/stdout' @ \| wc -l \| sed 's/$/ lines changed\n\n/'<C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><Left><Left><Left><Left>
+vnoremap <leader>R "zy:!ag -l '<C-R><C-W>' \| xargs -I@ sed -i 's/<C-R><C-W>//g; T; w /dev/stdout' @ \| wc -l \| sed 's/$/ lines changed\n\n/'<C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><Left><Left><Left><Left>
 
 " Git
 noremap <leader>gb :Gblame<CR>
