@@ -14,11 +14,6 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 
-" Plug 'easymotion/vim-easymotion'
-" let g:EasyMotion_smartcase = 1
-" nmap m <Plug>(easymotion-overwin-f)
-" nmap M <Plug>(easymotion-overwin-f2)
-
 " Unfortunately this plugin makes fzf glitchy and I value fzf more...
 " Plug 'airblade/vim-gitgutter'
 " set updatetime=250
@@ -39,17 +34,9 @@ Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 let g:jsx_ext_required = 0
 Plug 'moll/vim-node'
-
-" Plug 'leafgarland/typescript-vim'
-
-" Plug 'mbbill/undotree'
 Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 Plug 'elzr/vim-json', { 'for': 'json' }
 let g:vim_json_syntax_conceal = 0
-
-" Plug 'lambdatoast/elm.vim', { 'for': 'elm' }
-
-" Plug 'terryma/vim-multiple-cursors'
 
 " FZF
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
@@ -57,7 +44,7 @@ Plug 'junegunn/fzf.vim'
 let g:fzf_commits_log_options = '--color --graph --pretty=tformat:"%Cred%h%Creset - %C(bold blue)%<(18)%an %C(yellow)%d%Creset %s %Cgreen(%ar)%Creset" --abbrev-commit'
 
 " Ranger (does not specifically need to be done with Plug)
-" Plug 'ranger/ranger', { 'dir': '~/.ranger', 'do': 'sudo make install' }
+Plug 'ranger/ranger', { 'dir': '~/.ranger', 'do': 'sudo make install' }
 
 " NERDTree
 Plug 'scrooloose/nerdtree'
@@ -289,7 +276,6 @@ set autoindent
 set nowrap
 
 " Navigation with htns
-" TODO: remap these keys with the onoremap command too
 noremap t j
 noremap n k
 noremap s l
