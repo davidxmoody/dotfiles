@@ -14,6 +14,8 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 
+Plug 'tommcdo/vim-fubitive'
+
 " Unfortunately this plugin makes fzf glitchy and I value fzf more...
 " Plug 'airblade/vim-gitgutter'
 " set updatetime=250
@@ -304,45 +306,45 @@ noremap <silent> <leader>T :NERDTreeFind<CR>
 tnoremap <Esc> <C-\><C-n>
 
 " Function for editing Python code
-" func! PythonMode()
-"   set tabstop=4
-"   set softtabstop=4
-"   set shiftwidth=4
-" endfu
-" au BufNewFile,BufRead *.py call PythonMode()
+func! PythonMode()
+  set tabstop=4
+  set softtabstop=4
+  set shiftwidth=4
+endfu
+au BufNewFile,BufRead *.py call PythonMode()
 
 " Function for editing English text (everything should be local to buffer)
-" func! WordProcessorMode()
-"   setl filetype=markdown
+func! WordProcessorMode()
+  setl filetype=markdown
 
-"   " Other options
-"   setl nonumber
-"   setl wrap
-"   setl linebreak
-"   setl breakat=\ 
-"   setl display=lastline
-"   setl formatoptions=
-"   setl spell spelllang=en_gb
-"   source ~/.vim_abbreviations
+  " Other options
+  setl nonumber
+  setl wrap
+  setl linebreak
+  setl breakat=\ 
+  setl display=lastline
+  setl formatoptions=
+  setl spell spelllang=en_gb
+  source ~/.vim_abbreviations
 
-"   " Indenting
-"   setl tabstop=2
-"   setl softtabstop=0
-"   setl shiftwidth=2
-"   setl expandtab
-"   setl nosmarttab
-"   setl noautoindent
-"   setl nocindent
-"   setl nosmartindent
-"   setl indentexpr=
+  " Indenting
+  setl tabstop=2
+  setl softtabstop=0
+  setl shiftwidth=2
+  setl expandtab
+  setl nosmarttab
+  setl noautoindent
+  setl nocindent
+  setl nosmartindent
+  setl indentexpr=
 
-"   augroup auto_capitalize_sentences
-"     au!
-"     au InsertCharPre <buffer> if search('\v(%^|%^[1-7]{2}\s|[.!?]\_s+|\_^\s*\-\s|\_^#+\s|\_^title\:\s|\n\n)%#', 'bcnw') != 0 | let v:char = toupper(v:char) | endif
-"   augroup END
-" endfu
+  augroup auto_capitalize_sentences
+    au!
+    au InsertCharPre <buffer> if search('\v(%^|%^[1-7]{2}\s|[.!?]\_s+|\_^\s*\-\s|\_^#+\s|\_^title\:\s|\n\n)%#', 'bcnw') != 0 | let v:char = toupper(v:char) | endif
+  augroup END
+endfu
 
-" set spellfile=~/sync/diary-data/vim/en.utf-8.add
+set spellfile=~/sync/diary-data/vim/en.utf-8.add
 
-" com! WP call WordProcessorMode()
-" au BufNewFile,BufRead *.md call WordProcessorMode()
+com! WP call WordProcessorMode()
+au BufNewFile,BufRead *.md call WordProcessorMode()
