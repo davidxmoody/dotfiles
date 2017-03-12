@@ -22,6 +22,18 @@ snippet cl "console.log()"
 console.log(${1:"${2:string}"})
 endsnippet
 
+snippet describe "mocha describe"
+describe("${1:thing}", () => {
+	${2}
+})
+endsnippet
+
+snippet it "mocha it"
+it("${1:should ${2:...}}", () => {
+	${3}
+})
+endsnippet
+
 # Consider adapting this
 # TODO this is far too complex to do with regular expressions, use python
 # instead (with `!p`
