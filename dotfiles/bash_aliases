@@ -137,7 +137,13 @@ mkpn() {
 alias g='git'
 alias gs='git status'
 alias gc='git commit'
-alias gl='git lg'
+gl() {
+  if git rev-parse @{u} 2>/dev/null 1>/dev/null; then
+    git lg @ @{u}
+  else
+    git lg
+  fi
+}
 alias gd='git diff'
 alias gdc='git diff --cached'
 alias ga='git add'
@@ -155,12 +161,13 @@ alias gps='git push'
 alias gpsa='git push --all'
 alias gpsat='git push --all --follow-tags'
 alias gr='git rebase'
+alias gri='git rebase -i @{u}'
 alias gst='git stash'
 alias gstu='git stash save -u'
 alias gstp='git stash pop'
 alias gsta='git stash apply'
-alias gstl='git stash list'
-alias gplr='git pull --rebase'
+alias gsts='git stash show -p'
+alias gstd='git stash drop'
 alias glm='git lg --author="David Moody"'
 alias gdp='git diff ORIG_HEAD -- package.json'
 alias gg='git_fetch_projects'
@@ -218,6 +225,9 @@ alias nverm='npm version minor'
 alias nc='npm-check -u'
 
 # Misc
+alias x='exit'
+alias f='fg'
+alias ag='ag --smart-case'
 alias dus='du -Dhs'
 alias dun='du -Ds node_modules/{@*/*,*} | sort -nr'
 alias df='df -hT'
@@ -230,10 +240,7 @@ alias xclip='xclip -selection clipboard'
 alias getclip='xclip -selection clipboard -o'
 alias wrstats="grep '^m' ~/.workrave/historystats | rev | cut -d' ' -f 2 | rev | tail -n20"
 alias gpgc='gpg -c --cipher-algo AES256'
-alias f='fg'
 alias stopmongoredisandnginx='sudo service mongodb stop && sudo service redis-server stop && sudo service nginx stop'
-alias ag='ag --smart-case'
-alias rg='rg --smart-case'
 alias ports='netstat -tulpn'
 alias count='sort | uniq -c | sort -nr'
 alias get_github_repos='curl https://api.github.com/users/davidxmoody/repos | ramda "map pick([\name, \description, \ssh_url])" > ~/.github-repos.json'
@@ -241,7 +248,7 @@ alias cleanupdocker='docker rmi $(docker images -qf dangling=true)'
 alias ubuntuversion='lsb_release -a'
 alias restartwifi='sudo service network-manager restart'
 alias echopath='echo $PATH | sed "s/:/\n/g"'
-alias x='exit'
+alias countcoffee='ag -g \.coffee | xargs -n1 wc -l | sort -n | less'
 
 dep() {
   [ ! -d node_modules ] && echo "node_modules directory not found" && return 1
