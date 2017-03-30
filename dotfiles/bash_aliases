@@ -139,9 +139,9 @@ alias gs='git status'
 alias gc='git commit'
 gl() {
   if git rev-parse @{u} 2>/dev/null 1>/dev/null; then
-    git lg @ @{u}
+    git lg @ @{u} "$@"
   else
-    git lg
+    git lg "$@"
   fi
 }
 alias gd='git diff'
