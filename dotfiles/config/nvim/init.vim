@@ -55,7 +55,6 @@ let NERDTreeIgnore=['^node_modules$', '^npm-debug.log$', '^.git$']
 let NERDTreeCaseSensitiveSort=1
 let NERDTreeMapOpenInTab='X'
 let NERDTreeShowBookmarks=1
-let NERDTreeMouseMode=2
 
 Plug 'Xuyuanp/nerdtree-git-plugin'
 let g:NERDTreeIndicatorMapCustom = {
@@ -234,6 +233,8 @@ vnoremap <leader>R "zy:!ag -l '<C-R><C-W>' \| xargs -I@ sed -i 's/<C-R><C-W>//g;
 " Git
 noremap <leader>gb :Gblame<CR>
 noremap <leader>gr :Gread<CR>
+noremap <leader>gw :Gwrite<CR>
+noremap <leader>gs :Gbrowse<CR>
 
 " '.' in visual mode repeats the last change on every line
 vnoremap . :norm.<CR>
