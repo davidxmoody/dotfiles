@@ -2,5 +2,5 @@
 
 tmux rename-window "STATUS"
 
-tmux split-window -h -c '#{pane_current_path}' 'git lg | less -R'
+# tmux split-window -h -c '#{pane_current_path}' 'git lg | less -R'
 git -c color.status=always status | less -R

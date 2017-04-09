@@ -1,16 +1,20 @@
 #!/bin/bash
 
-# Remove unused empty directories commonly found on new installs
+echo "About to remove unused empty directories"
 for dir in Downloads Documents Music Pictures Video; do
   [ -d "$HOME/$dir" ] && rmdir -v "$HOME/$dir"
 done
+echo
+echo
 
-# Create custom directories
+echo "About to create custom directories"
 for dir in tmp p .npm-packages .vim-swap .desktop .templates .public .config; do
   mkdir -pv "$HOME/$dir"
 done
+echo
+echo
 
-# Create symlinks to all dotfiles (in home dir), also add dot to their names
+echo "About to symlink dotfiles"
 for file in $(find dotfiles/ -type f); do
   if [[ "$file" =~ \.copy$ ]]; then
     filename=${file%\.copy}
@@ -29,3 +33,5 @@ for file in $(find dotfiles/ -type f); do
     ln -sbv "$file_canon" "$target"
   fi
 done
+echo
+echo
