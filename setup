@@ -3,11 +3,13 @@
 # INSTALL HELPERS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 install_fedora() {
-  sudo dnf -yq install "$@"
+  hash dnf 2>/dev/null && \
+    sudo dnf -yq install "$@"
 }
 
 install_ubuntu() {
-  sudo apt-get -yq install "$@"
+  hash apt-get 2>/dev/null && \
+    sudo apt-get -yq install "$@"
 }
 
 install() {
@@ -56,9 +58,6 @@ done
 [ -d ~/.nvm ] || \
   curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.1/install.sh | PROFILE=/dev/null bash
 
-hash node 2>/dev/null || \
-  nvm install 6
-
 hash eslint_d 2>/dev/null || \
   npm info "eslint-config-airbnb@latest" peerDependencies --json | command sed 's/[\{\},]//g ; s/: /@/g' | xargs npm install -g "eslint_d" "eslint-config-airbnb@latest"
 
@@ -75,6 +74,10 @@ install chromium
 install git
 install git-extras
 install meld
+install tmux
+install xclip
+install gnome-tweak-tool
+install_fedora perl-core
 
 install_ubuntu silversearcher-ag
 install_fedora the_silver_searcher
@@ -83,3 +86,4 @@ install_fedora neovim python3-neovim python2-neovim
 
 # For compiling YouCompleteMe
 install_ubuntu build-essential cmake python-dev python3-dev
+install_fedora automake gcc gcc-c++ kernel-devel cmake python-devel python3-devel
