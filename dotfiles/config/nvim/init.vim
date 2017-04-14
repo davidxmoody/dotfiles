@@ -109,7 +109,6 @@ map g/ <Plug>(incsearch-stay)
 
 " Snippets
 Plug 'SirVer/ultisnips'
-" Plug 'honza/vim-snippets'
 
 " Completion
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
