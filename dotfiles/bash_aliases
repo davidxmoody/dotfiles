@@ -198,6 +198,29 @@ cpgithooks() {
   done
 }
 
+fetch_repo_list() {
+  curl https://api.github.com/users/davidxmoody/repos 2>/dev/null | \
+    ramda --unslurp "pluck('name')" | \
+    sed 's/"//g' > ~/.github-repos
+}
+
+clone() {
+  if [ -z "$(find ~/.github-repos -mtime -3 2>/dev/null)" ]; then
+    echo "Re-fetching repo list from GitHub..."
+    fetch_repo_list
+  fi
+
+  local repo=$(cat ~/.github-repos | fzf --select-1 --query "$*")
+
+  if [ -n "$repo" ]; then
+    if [ ! -d "$P_DIR/$repo" ]; then
+      git clone --config "user.email=david@davidxmoody.com" "git@github.com:davidxmoody/${repo}.git" "$P_DIR/$repo"
+    fi
+
+    cd "$P_DIR/$repo"
+  fi
+}
+
 # cd shortcuts
 alias up='cd ..'
 alias upp='cd ../..'
@@ -251,7 +274,6 @@ alias gpgc='gpg -c --cipher-algo AES256'
 alias stopmongoredisandnginx='sudo service mongodb stop && sudo service redis-server stop && sudo service nginx stop'
 alias ports='netstat -tulpn'
 alias count='sort | uniq -c | sort -nr'
-alias get_github_repos='curl https://api.github.com/users/davidxmoody/repos | ramda "map pick([\name, \description, \ssh_url])" > ~/.github-repos.json'
 alias cleanupdocker='docker rmi $(docker images -qf dangling=true)'
 alias ubuntuversion='lsb_release -a'
 alias restartwifi='sudo service network-manager restart'
