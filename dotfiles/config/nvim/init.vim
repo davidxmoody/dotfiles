@@ -45,9 +45,6 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 let g:fzf_commits_log_options = '--color --graph --pretty=tformat:"%Cred%h%Creset - %C(bold blue)%<(18)%an %C(yellow)%d%Creset %s %Cgreen(%ar)%Creset" --abbrev-commit'
 
-" Ranger (does not specifically need to be done with Plug)
-Plug 'ranger/ranger', { 'dir': '~/.ranger', 'do': 'sudo make install' }
-
 " NERDTree
 Plug 'scrooloose/nerdtree'
 let NERDTreeMapActivateNode='h'
@@ -148,12 +145,10 @@ syntax on
 au CursorHold * checktime
 
 " Miscellaneous 
-set ruler
-set autoread
 set ignorecase
 set smartcase
 set report=0
-set scrolloff=3
+set scrolloff=2
 set sidescrolloff=1
 set list
 set listchars=tab:›\ ,trail:•,extends:>,precedes:<,nbsp:.
@@ -166,17 +161,13 @@ set backupcopy=yes
 set mouse=nv
 
 " Persistent undo
-if has('persistent_undo')
-  set undofile
-  set undolevels=1000
-  set undoreload=10000
-endif
+set undofile
+set undolevels=1000
+set undoreload=10000
 
 " Status line
 set laststatus=2
 set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
 
 " Leader key
 map <space> <Nop>
@@ -270,14 +261,12 @@ vnoremap gP P`[V`]=
 " Command line helpers
 cnoremap cd. lcd %:p:h
 cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<cr>
+command Cppath let @+ = expand("%:p")
 
 " Some custom navigation bindings
 noremap , A
 noremap <CR> o
 noremap - o-<Space>
-
-noremap S <Nop>
-noremap H <Nop>
 
 nnoremap Y y$
 

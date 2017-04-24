@@ -13,4 +13,4 @@
 [include]
   path = ~/.git_include
 [pull]
-	rebase = true
+  rebase = true
