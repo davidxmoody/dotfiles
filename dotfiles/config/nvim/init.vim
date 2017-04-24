@@ -93,6 +93,7 @@ let g:syntastic_check_on_wq = 0
 
 " Search highlighting
 Plug 'haya14busa/incsearch.vim'
+Plug 'haya14busa/incsearch-fuzzy.vim'
 set hlsearch
 let g:incsearch#auto_nohlsearch = 1
 map j  <Plug>(incsearch-nohl-n)
@@ -100,9 +101,13 @@ map J  <Plug>(incsearch-nohl-N)
 map *  <Plug>(incsearch-nohl-*)
 map g* <Plug>(incsearch-nohl-g*)
 map #  <Nop>
-map /  <Plug>(incsearch-forward)
-map ?  <Plug>(incsearch-backward)
-map g/ <Plug>(incsearch-stay)
+" map /  <Plug>(incsearch-forward)
+" map ?  <Plug>(incsearch-backward)
+" map g/ <Plug>(incsearch-stay)
+map / <Plug>(incsearch-fuzzy-/)
+map ? <Plug>(incsearch-fuzzy-?)
+map g/ <Plug>(incsearch-fuzzy-stay)
+" TODO use <CTRL-R>/ to get access to the last search term to replace it
 
 " Snippets
 Plug 'SirVer/ultisnips'
