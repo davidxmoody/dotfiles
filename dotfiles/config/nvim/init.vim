@@ -16,21 +16,10 @@ Plug 'tpope/vim-fugitive'
 
 Plug 'tommcdo/vim-fubitive'
 
-" Unfortunately this plugin makes fzf glitchy and I value fzf more...
-" Plug 'airblade/vim-gitgutter'
-" set updatetime=250
-" let g:gitgutter_diff_args = '-w'
-" let g:gitgutter_sign_column_always = 1
-" noremap <leader>ha <Plug>GitGutterStageHunk
-" noremap <leader>hr <Plug>GitGutterUndoHunk
-" noremap <leader>hv <Plug>GitGutterPreviewHunk
-" noremap <leader>ht :GitGutterToggle<CR>
-" nmap ]h <Plug>GitGutterNextHunk
-" nmap [h <Plug>GitGutterPrevHunk
-" omap ih <Plug>GitGutterTextObjectInnerPending
-" omap ah <Plug>GitGutterTextObjectOuterPending
-" xmap ih <Plug>GitGutterTextObjectInnerVisual
-" xmap ah <Plug>GitGutterTextObjectOuterVisual
+Plug 'airblade/vim-gitgutter'
+set updatetime=250
+let g:gitgutter_diff_args = '-w'
+let g:gitgutter_sign_column_always = 1
 
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
@@ -101,9 +90,9 @@ map J  <Plug>(incsearch-nohl-N)
 map *  <Plug>(incsearch-nohl-*)
 map g* <Plug>(incsearch-nohl-g*)
 map #  <Nop>
-" map /  <Plug>(incsearch-forward)
-" map ?  <Plug>(incsearch-backward)
-" map g/ <Plug>(incsearch-stay)
+map z/  <Plug>(incsearch-forward)
+map z?  <Plug>(incsearch-backward)
+map zg/ <Plug>(incsearch-stay)
 map / <Plug>(incsearch-fuzzy-/)
 map ? <Plug>(incsearch-fuzzy-?)
 map g/ <Plug>(incsearch-fuzzy-stay)
@@ -230,6 +219,18 @@ noremap <leader>gb :Gblame<CR>
 noremap <leader>gr :Gread<CR>
 noremap <leader>gw :Gwrite<CR>
 noremap <leader>gs :Gbrowse<CR>
+
+noremap <leader>ha :GitGutterStageHunk<CR>
+noremap <leader>hu :GitGutterUndoHunk<CR>
+noremap <leader>hr <Nop>
+noremap <leader>hv :GitGutterPreviewHunk<CR>
+noremap <leader>ht :GitGutterToggle<CR>
+nmap ]h <Plug>GitGutterNextHunk
+nmap [h <Plug>GitGutterPrevHunk
+omap ih <Plug>GitGutterTextObjectInnerPending
+omap ah <Plug>GitGutterTextObjectOuterPending
+xmap ih <Plug>GitGutterTextObjectInnerVisual
+xmap ah <Plug>GitGutterTextObjectOuterVisual
 
 " '.' in visual mode repeats the last change on every line
 vnoremap . :norm.<CR>

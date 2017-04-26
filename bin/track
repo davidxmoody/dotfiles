@@ -37,6 +37,9 @@ else
     log|lg)
       git_track lg
       ;;
+    show)
+      git_track show
+      ;;
     *)
       echo "Command not recognised"
       exit 1
