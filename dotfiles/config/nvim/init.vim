@@ -90,13 +90,12 @@ map J  <Plug>(incsearch-nohl-N)
 map *  <Plug>(incsearch-nohl-*)
 map g* <Plug>(incsearch-nohl-g*)
 map #  <Nop>
-map z/  <Plug>(incsearch-forward)
-map z?  <Plug>(incsearch-backward)
-map zg/ <Plug>(incsearch-stay)
-map / <Plug>(incsearch-fuzzy-/)
-map ? <Plug>(incsearch-fuzzy-?)
-map g/ <Plug>(incsearch-fuzzy-stay)
-" TODO use <CTRL-R>/ to get access to the last search term to replace it
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
+map z/ <Plug>(incsearch-fuzzy-/)
+map z? <Plug>(incsearch-fuzzy-?)
+map zg/ <Plug>(incsearch-fuzzy-stay)
 
 " Snippets
 Plug 'SirVer/ultisnips'
