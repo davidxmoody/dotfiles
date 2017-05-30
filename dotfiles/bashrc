@@ -228,8 +228,5 @@ alias diary='~/sync/old-projects/diary/rundiary -b $DIARY_DIR'
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-# Don't load ranger config twice
-export RANGER_LOAD_DEFAULT_RC=FALSE
-
 # Launch tmux if not already in tmux
 [ -z "$TMUX" ] && echo "Launching tmux..." && tmux
