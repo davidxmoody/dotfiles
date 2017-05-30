@@ -176,21 +176,15 @@ noremap <leader>E :update<CR>:Files!<space><C-R>=expand("%:p:h")<CR>
 noremap <leader>o :update<CR>:GFiles!?<CR>
 noremap <leader>O :update<CR>:Buffers!<CR>
 
-function Agdir(dir, ...)
-  execute 'cd ' . a:dir
-  execute 'Ag! ' . join(a:000, ' ')
-  cd -
-endfunction
-
-command -nargs=+ Agdir call Agdir(<f-args>)
-
-noremap <leader>a :update<CR>:Agdir<space>.<space>
-noremap <leader>A :update<CR>:Agdir<space><C-R>=fnameescape(expand('%:h'))<CR><space>
+noremap <leader>a :update<CR>:Ag!<space>
 
 noremap <leader>i :update<CR>:Ag!<space>/<C-R>=fnameescape(expand('%:t:r'))<CR><CR>
 
-noremap <leader>c :Commits!<CR>
-noremap <leader>C :BCommits!<CR>
+" noremap <leader>c :Commits!<CR>
+" noremap <leader>C :BCommits!<CR>
+
+noremap <leader>c :cd<space><C-R>=fnameescape(expand("%:p:h"))<CR>
+noremap <leader>C :cd <C-R>=fnameescape(systemlist('git rev-parse --show-toplevel')[0])<CR><CR>
 
 noremap <leader>b <C-^>
 noremap <leader>B :update<CR>:History!<CR>
