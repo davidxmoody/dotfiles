@@ -164,16 +164,23 @@ node_version() {
   [[ "$ver" -ne "6" ]] && echo "$ver "
 }
 
-case $TERM in
-  screen*|xterm*)
-    PS1='\[\033]0;\w\007\]\[\e[0;31m\]\w \[\e[0;32m\]$(node_version)\[\e[0;33m\]$(git_status)\[\e[0;92m\]$(jobs_status)\[\e[0m\]'
-    PS2='\[\e[0;31m\]>\[\e[0m\] '
-    ;;
-  *)
-    PS1='\w '
-    PS2='> '
-    ;;
-esac
+get_friendly_name() {
+  sed "
+    s%^/$%ROOT%;
+    s%^$HOME$%HOME%;
+    s%^$TMP_DIR\\(/\\)\\?.*$%TMP\1%;
+    s%^$P_DIR$%P_DIR%;
+    s%^$P_DIR/\\([^/]\\+\\)\\(/\\)\\?.*$%\\U\\1\\2%;
+    s%^/\\([^/]\\+\\)\\(/[^/]\\+\\)\\(/\\)\\?.*$%/\\1\\2\\3%;
+  " <<< "${1:-$PWD}"
+}
+
+update_tmux_window() {
+  tmux rename-window "$(get_friendly_name)" >/dev/null 2>/dev/null
+}
+
+PS1='$(update_tmux_window)\[\033]0;\w\007\]\[\e[0;31m\]\w \[\e[0;32m\]$(node_version)\[\e[0;33m\]$(git_status)\[\e[0;92m\]$(jobs_status)\[\e[0m\]'
+PS2='\[\e[0;31m\]>\[\e[0m\] '
 
 # Sorting order
 export LC_COLLATE=C

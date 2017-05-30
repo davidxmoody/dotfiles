@@ -7,7 +7,7 @@ tmux rename-window "NEW"
 proj=$(ls -1 "$p_dir" | fzf)
 
 if [ -z "$proj" ]; then
-  tmux new-window -c "$HOME" -n "HOME"
+  tmux new-window -c "$HOME"
 else
-  tmux new-window -c "$p_dir/$proj" -n "$proj"
+  tmux new-window -c "$p_dir/$proj"
 fi
