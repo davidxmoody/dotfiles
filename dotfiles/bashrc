@@ -6,7 +6,7 @@ esac
 
 # don't put duplicate lines or lines starting with space in the history.
 HISTCONTROL="erasedups:ignoreboth"
-export HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history:clear"
+export HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history:clear:u:x:f:b"
 HISTTIMEFORMAT='%F %T '
 
 # append to the history file, don't overwrite it
@@ -200,22 +200,19 @@ export EDITOR=nvim
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 
-# NPM
-NPM_PACKAGES="$HOME/.npm-packages"
-if [ -d "$NPM_PACKAGES" ]; then
-  # export NPM_PACKAGES
-  export NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
-  export PATH="$NPM_PACKAGES/bin:$PATH"
-  # unset MANPATH
-  # export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
-fi
+add_to_path() {
+  if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
+    PATH="$1${PATH:+":$PATH"}"
+  fi
+}
 
-# Add custom bin dir to PATH
-[ -d "$RC_DIR/bin" ] && export PATH="$RC_DIR/bin:$PATH"
+# Custom bin dir
+add_to_path "$RC_DIR/bin"
 
 # Android SDK
 export ANDROID_HOME=$P_DIR/android-sdk-linux
-[ -d "$ANDROID_HOME" ] && export PATH="$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools:$PATH"
+add_to_path "$ANDROID_HOME/platform-tools"
+add_to_path "$ANDROID_HOME/tools"
 
 # Alias definitions
 [ -f ~/.bash_aliases ] && source ~/.bash_aliases

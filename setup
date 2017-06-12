@@ -30,7 +30,7 @@ for dir in Downloads Documents Music Pictures Video; do
   [ -d "$HOME/$dir" ] && rmdir -v "$HOME/$dir"
 done
 
-for dir in tmp p .npm-packages .vim-swap .desktop .templates .public .config; do
+for dir in tmp p .vim-swap .desktop .templates .public .config; do
   mkdir -pv "$HOME/$dir"
 done
 
