@@ -87,5 +87,3 @@ install_fedora neovim python3-neovim python2-neovim
 # For compiling YouCompleteMe
 install_ubuntu build-essential cmake python-dev python3-dev
 install_fedora automake gcc gcc-c++ kernel-devel cmake python-devel python3-devel
-
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
