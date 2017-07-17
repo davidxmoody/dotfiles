@@ -15,4 +15,7 @@
 [pull]
   rebase = true
 [color]
-	ui = always
+  ui = always
+[color "diff"]
+  meta = yellow bold
+  frag = magenta bold
