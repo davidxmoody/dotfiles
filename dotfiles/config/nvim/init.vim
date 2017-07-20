@@ -153,6 +153,12 @@ set showcmd
 set backupcopy=yes
 set mouse=nv
 
+" Temp fix for printing '[2 q' spam to the console, see here for more details:
+" https://github.com/neovim/neovim/issues/7049
+" https://github.com/neovim/neovim/pull/6997
+" Note than once this is fixed, I can have some nicer cursor shapes :)
+set guicursor=
+
 " Persistent undo
 set undofile
 set undolevels=1000
