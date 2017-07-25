@@ -1,9 +1,6 @@
 #!/bin/bash
 
 p_dir=${P_DIR-$HOME/p}
-
-tmux rename-window "NEW"
-
 proj=$(ls -1 "$p_dir" | fzf)
 
 if [ -z "$proj" ]; then
