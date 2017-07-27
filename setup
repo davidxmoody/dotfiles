@@ -55,9 +55,6 @@ done
 
 # NPM ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-[ -d ~/.nvm ] || \
-  curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.1/install.sh | PROFILE=/dev/null bash
-
 hash eslint_d 2>/dev/null || \
   npm info "eslint-config-airbnb@latest" peerDependencies --json | command sed 's/[\{\},]//g ; s/: /@/g' | xargs npm install -g "eslint_d" "eslint-config-airbnb@latest"
 

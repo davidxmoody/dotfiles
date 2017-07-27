@@ -74,11 +74,6 @@ jobs_status() {
   fi
 }
 
-node_version() {
-  local ver=$(node --version | sed 's/^[^1-9]*\([1-9][0-9]*\).*$/\1/')
-  [[ "$ver" -ne "6" ]] && echo "$ver "
-}
-
 get_friendly_name() {
   sed "
     s%^/$%ROOT%;
@@ -94,7 +89,7 @@ update_tmux_window() {
   tmux rename-window "$(get_friendly_name)" >/dev/null 2>/dev/null
 }
 
-PS1='$(update_tmux_window)\[\033]0;\w\007\]\[\e[0;31m\]\w \[\e[0;32m\]$(node_version)\[\e[0;33m\]$(git_status)\[\e[0;92m\]$(jobs_status)\[\e[0m\]'
+PS1='$(update_tmux_window)\[\033]0;\w\007\]\[\e[0;31m\]\w \[\e[0;33m\]$(git_status)\[\e[0;92m\]$(jobs_status)\[\e[0m\]'
 PS2='\[\e[0;31m\]>\[\e[0m\] '
 
 # Set some custom frequently used directories
@@ -105,29 +100,24 @@ export SYNC_DIR="$HOME/sync"
 export DBOX="$HOME/.dbox/Dropbox"
 export DIARY_DIR="$HOME/sync/diary-data"
 
-# NVM
-# TODO I just found out that nvm takes about 0.15 seconds to load, consider
-# switching to a different node version manager
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-
+# Path stuff
 add_to_path() {
   if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
     PATH="$1${PATH:+":$PATH"}"
   fi
 }
 
-# Custom bin dir
+export N_PREFIX="$HOME/.n"
+add_to_path "$N_PREFIX/bin"
+
 add_to_path "$RC_DIR/bin"
 
-# Android SDK
 export ANDROID_HOME=$P_DIR/android-sdk-linux
 add_to_path "$ANDROID_HOME/platform-tools"
 add_to_path "$ANDROID_HOME/tools"
 
 # Alias definitions
 [ -f ~/.bash_aliases ] && source ~/.bash_aliases
-
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 # TODO this is temporary code for optimising my bash shell launch time, delete
