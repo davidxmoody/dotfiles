@@ -55,7 +55,7 @@ git_status() {
 
     local commits_behind=$(git rev-list --count HEAD..@{upstream} 2>/dev/null)
     local commits_ahead=$(git rev-list --count @{upstream}..HEAD 2>/dev/null)
-    local stashes_count=$(git stash list 2>/dev/null | wc -l)
+    local stashes_count=$(git rev-list --count --walk-reflogs stash 2>/dev/null)
     local commits_indicator=''
     [[ "$commits_ahead" -gt 0 ]] && commits_indicator="${commits_indicator}+${commits_ahead}"
     [[ "$commits_behind" -gt 0 ]] && commits_indicator="${commits_indicator}-${commits_behind}"

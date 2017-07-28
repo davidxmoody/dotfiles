@@ -2,6 +2,7 @@
 type nvim 2> /dev/null > /dev/null && alias vim='nvim'
 alias v='nvim'
 alias vv='nvim -c "Files!"'
+alias vo='nvim -c "GFiles!?"'
 alias vd='nvim -c "cd $RC_DIR" -c "Files!"'
 
 # Tmux
