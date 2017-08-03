@@ -1,5 +1,3 @@
-bash_load_start=$(date "+%s%N")
-
 # If not running interactively, don't do anything
 case $- in
   *i*) ;;
@@ -104,11 +102,6 @@ add_to_path "$ANDROID_HOME/tools"
 # Alias definitions
 [ -f ~/.bash_aliases ] && source ~/.bash_aliases
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
-# TODO this is temporary code for optimising my bash shell launch time, delete
-# this and also the line at the top of the file
-bash_load_end=$(date "+%s%N")
-expr $bash_load_end - $bash_load_start >> ~/.bash-timing-logs
 
 # Launch tmux if not already in tmux
 [ -z "$TMUX" ] && echo "Launching tmux..." && tmux
