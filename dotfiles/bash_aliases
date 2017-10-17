@@ -1,3 +1,8 @@
+# Mac coreutils linking
+gnu_alias() { type "g$1" 2> /dev/null > /dev/null && alias "$1"="g$1"; }
+gnu_alias sed
+gnu_alias ls
+
 # Vim
 type nvim 2> /dev/null > /dev/null && alias vim='nvim'
 alias v='nvim'
