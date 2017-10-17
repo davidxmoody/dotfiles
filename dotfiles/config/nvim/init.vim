@@ -28,6 +28,7 @@ Plug 'elzr/vim-json', { 'for': 'json' }
 let g:vim_json_syntax_conceal = 0
 
 Plug 'leafgarland/typescript-vim'
+Plug 'ElmCast/elm-vim'
 
 " FZF
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }

@@ -64,6 +64,7 @@ install_npm nodemon
 install_npm ramda-cli
 install_npm diff-so-fancy
 install_npm npm-check
+install_npm gtop
 
 # OTHER SOFTWARE ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
