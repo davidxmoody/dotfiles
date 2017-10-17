@@ -14,12 +14,10 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 
-Plug 'tommcdo/vim-fubitive'
-
 Plug 'airblade/vim-gitgutter'
 set updatetime=250
+set signcolumn=yes
 let g:gitgutter_diff_args = '-w'
-let g:gitgutter_sign_column_always = 1
 
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
@@ -28,6 +26,8 @@ Plug 'moll/vim-node'
 Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 Plug 'elzr/vim-json', { 'for': 'json' }
 let g:vim_json_syntax_conceal = 0
+
+Plug 'leafgarland/typescript-vim'
 
 " FZF
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
@@ -64,7 +64,7 @@ let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_javascript_eslint_exec = 'eslint_d'
 
 " TypeScript
-let g:syntastic_typescript_checkers = ['tslint', 'tsc']
+let g:syntastic_typescript_checkers = ['tslint']
 
 " Flow and eslint
 " let g:syntastic_javascript_checkers = ['eslint', 'flow']
@@ -82,7 +82,7 @@ let g:syntastic_check_on_wq = 0
 
 " Search highlighting
 Plug 'haya14busa/incsearch.vim'
-Plug 'haya14busa/incsearch-fuzzy.vim'
+" Plug 'haya14busa/incsearch-fuzzy.vim'
 set hlsearch
 let g:incsearch#auto_nohlsearch = 1
 map j  <Plug>(incsearch-nohl-n)
@@ -93,9 +93,9 @@ map #  <Nop>
 map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
-map z/ <Plug>(incsearch-fuzzy-/)
-map z? <Plug>(incsearch-fuzzy-?)
-map zg/ <Plug>(incsearch-fuzzy-stay)
+" map z/ <Plug>(incsearch-fuzzy-/)
+" map z? <Plug>(incsearch-fuzzy-?)
+" map zg/ <Plug>(incsearch-fuzzy-stay)
 
 " Snippets
 Plug 'SirVer/ultisnips'
