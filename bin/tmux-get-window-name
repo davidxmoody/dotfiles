@@ -1,6 +1,9 @@
 #!/bin/bash
 
-sed "
+sed_cmd=sed
+type gsed 2>/dev/null >/dev/null && sed_cmd=gsed
+
+$sed_cmd "
   s%^/$%ROOT%;
   s%^$HOME$%HOME%;
   s%^$TMP_DIR\\(/\\)\\?.*$%TMP\1%;
