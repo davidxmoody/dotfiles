@@ -5,3 +5,6 @@ set show-all-if-ambiguous on
 
 "\C-f": vi-fWord
 "\C-b": vi-bWord
+
+"\e[A": history-search-backward
+"\e[B": history-search-forward
