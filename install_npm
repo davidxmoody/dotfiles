@@ -1,0 +1,12 @@
+#!/bin/bash
+
+npm info "eslint-config-airbnb@latest" peerDependencies --json | \
+  command sed 's/[\{\},]//g ; s/: /@/g' | \
+  xargs npm i -g "eslint_d" "eslint-config-airbnb@latest"
+
+npm i -g \
+  jsonlint \
+  diff-so-fancy \
+  npx \
+  tslint \
+  typescript

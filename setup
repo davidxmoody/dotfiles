@@ -20,10 +20,6 @@ install() {
   fi
 }
 
-install_npm() {
-  hash "$1" 2>/dev/null || npm i -g "$@"
-}
-
 # SETUP DIRS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 for dir in Downloads Documents Music Pictures Video; do
@@ -52,19 +48,6 @@ for file in $(find dotfiles/ -type f); do
     ln -sbv "$file_canon" "$target"
   fi
 done
-
-# NPM ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-hash eslint_d 2>/dev/null || \
-  npm info "eslint-config-airbnb@latest" peerDependencies --json | command sed 's/[\{\},]//g ; s/: /@/g' | xargs npm install -g "eslint_d" "eslint-config-airbnb@latest"
-
-install_npm http-server
-install_npm jsonlint
-install_npm nodemon
-install_npm ramda-cli
-install_npm diff-so-fancy
-install_npm npm-check
-install_npm gtop
 
 # OTHER SOFTWARE ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

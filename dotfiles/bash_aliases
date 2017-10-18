@@ -185,7 +185,12 @@ alias ns='npm start'
 alias nb='npm run build'
 alias nverp='npm version patch'
 alias nverm='npm version minor'
-alias nc='npm-check -u'
+
+alias nc='npx npm-check -u'
+alias gtop='npx gtop'
+alias ramda='npx ramda'
+alias nodemon='npx nodemon'
+alias http-server='npx http-server'
 
 # Misc
 alias x='exit'
