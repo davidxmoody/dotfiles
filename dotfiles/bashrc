@@ -95,9 +95,11 @@ add_to_path "$N_PREFIX/bin"
 
 add_to_path "$RC_DIR/bin"
 
-export ANDROID_HOME=$P_DIR/android-sdk-linux
+export ANDROID_HOME=$HOME/Library/Android/sdk
 add_to_path "$ANDROID_HOME/platform-tools"
 add_to_path "$ANDROID_HOME/tools"
+export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
+export GRADLE_OPTS="-Dorg.gradle.daemon=true"
 
 # Alias definitions
 [ -f ~/.bash_aliases ] && source ~/.bash_aliases
