@@ -1,0 +1,15 @@
+#!/bin/bash
+
+color_reset="\e[0m"
+color_bad="\e[31m"
+color_good="\e[32m"
+
+is_installed() {
+  if type "$1" >/dev/null 2>/dev/null; then
+    echo -e "${color_good}yes ${1}${color_reset}"
+  else
+    echo -e "${color_bad}no  ${1}${color_reset}"
+  fi
+}
+
+is_installed diff-so-fancy
