@@ -4,11 +4,14 @@ color_reset="\e[0m"
 color_bad="\e[31m"
 color_good="\e[32m"
 
+echo_cmd=echo
+type gecho >/dev/null 2>/dev/null && echo_cmd=gecho
+
 is_installed() {
   if type "$1" >/dev/null 2>/dev/null; then
-    echo -e "${color_good}yes ${1}${color_reset}"
+    $echo_cmd -e "${color_good}☑ ${1}${color_reset}"
   else
-    echo -e "${color_bad}no  ${1}${color_reset}"
+    $echo_cmd -e "${color_bad}☐  ${1}${color_reset}"
   fi
 }
 
