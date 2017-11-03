@@ -11,8 +11,14 @@ is_installed() {
   if type "$1" >/dev/null 2>/dev/null; then
     $echo_cmd -e "${color_good}☑ ${1}${color_reset}"
   else
-    $echo_cmd -e "${color_bad}☐  ${1}${color_reset}"
+    $echo_cmd -e "${color_bad}☐ ${1}${color_reset}"
   fi
 }
 
+$echo_cmd "npm deps ~~~~~~~~~~~~~~~~~~~~~~"
 is_installed diff-so-fancy
+is_installed jsonlint
+is_installed ramda
+is_installed eslint_d
+is_installed tslint
+is_installed tsc

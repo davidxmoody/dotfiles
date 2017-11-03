@@ -29,6 +29,9 @@ let g:vim_json_syntax_conceal = 0
 
 Plug 'leafgarland/typescript-vim'
 Plug 'ElmCast/elm-vim'
+Plug 'jparise/vim-graphql'
+
+Plug 'neovimhaskell/haskell-vim'
 
 " FZF
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
@@ -153,6 +156,7 @@ set number
 set showcmd
 set backupcopy=yes
 set mouse=nv
+set cursorline
 
 " Temp fix for printing '[2 q' spam to the console, see here for more details:
 " https://github.com/neovim/neovim/issues/7049

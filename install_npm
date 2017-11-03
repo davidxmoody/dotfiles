@@ -8,5 +8,6 @@ npm i -g \
   jsonlint \
   diff-so-fancy \
   npx \
+  ramda-cli \
   tslint \
   typescript

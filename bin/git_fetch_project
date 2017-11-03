@@ -2,6 +2,9 @@
 
 [ $# = 0 ] && echo "Please specify a project dir" >&2 && exit 1
 
+echo_cmd=echo
+type gecho >/dev/null 2>/dev/null && echo_cmd=gecho
+
 color_reset="\e[0m"
 color_bad="\e[31m"
 color_good="\e[32m"
@@ -14,8 +17,8 @@ if [ -d "$proj/.git" ] && cd "$proj" && git fetch --quiet; then
   color=$color_bad
   if [[ "$commits_behind" -gt 0 ]]; then
     git merge --ff-only --quiet @{upstream} && color=$color_good
-    echo -e "${color}${padded_commits_behind}${color_reset} $(basename "$proj")"
+    $echo_cmd -e "${color}${padded_commits_behind}${color_reset} $(basename "$proj")"
   fi
 else
-  echo -e "${color_bad}  !${color_reset} $(basename "$proj")"
+  $echo_cmd -e "${color_bad}  !${color_reset} $(basename "$proj")"
 fi
