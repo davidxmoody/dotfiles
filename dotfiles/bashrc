@@ -98,7 +98,7 @@ add_to_path "$RC_DIR/bin"
 export ANDROID_HOME=$HOME/Library/Android/sdk
 add_to_path "$ANDROID_HOME/platform-tools"
 add_to_path "$ANDROID_HOME/tools"
-export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
+export JAVA_HOME=$([ -x /usr/libexec/java_home ] && /usr/libexec/java_home -v 1.8)
 export GRADLE_OPTS="-Dorg.gradle.daemon=true"
 
 # Alias definitions
