@@ -313,7 +313,7 @@ noremap L T
 command Vimrc e ~/.config/nvim/init.vim
 
 " gf filename options
-set suffixesadd=.js,.json,.jsx,.coffee,.css,.scss
+set suffixesadd=.js,.json,.jsx,.coffee,.css,.scss,.ts,.tsx
 
 noremap <silent> <leader>t :NERDTreeToggle<CR>
 noremap <silent> <leader>T :NERDTreeFind<CR>
