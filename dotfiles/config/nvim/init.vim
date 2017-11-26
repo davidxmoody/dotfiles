@@ -6,6 +6,7 @@ endif
 filetype off
 call plug#begin('~/.vim/plugged')
 
+Plug 'junegunn/goyo.vim'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-speeddating'
@@ -128,7 +129,7 @@ vnoremap <C-F> <Nop>
 let g:user_emmet_leader_key='<C-F>'
 
 " Markdown syntax highlighting
-Plug 'plasticboy/vim-markdown', { 'for': 'md' }
+Plug 'plasticboy/vim-markdown'
 let g:vim_markdown_folding_disabled=1
 let g:markdown_no_default_key_mappings=1
 let g:vim_markdown_frontmatter=1
@@ -332,6 +333,7 @@ func! WordProcessorMode()
   setl filetype=markdown
 
   " Other options
+  setl nocursorline
   setl nonumber
   setl wrap
   setl linebreak
@@ -356,9 +358,12 @@ func! WordProcessorMode()
     au!
     au InsertCharPre <buffer> if search('\v(%^|%^[1-7]{2}\s|[.!?]\_s+|\_^\s*\-\s|\_^#+\s|\_^title\:\s|\n\n)%#', 'bcnw') != 0 | let v:char = toupper(v:char) | endif
   augroup END
+
+  Goyo
 endfu
 
 set spellfile=~/sync/diary-data/vim/en.utf-8.add
 
 com! WP call WordProcessorMode()
 au BufNewFile,BufRead *.md call WordProcessorMode()
+au BufNewFile,BufRead diary-*.txt call WordProcessorMode()
