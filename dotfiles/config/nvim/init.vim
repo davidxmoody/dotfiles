@@ -358,8 +358,6 @@ func! WordProcessorMode()
     au!
     au InsertCharPre <buffer> if search('\v(%^|%^[1-7]{2}\s|[.!?]\_s+|\_^\s*\-\s|\_^#+\s|\_^title\:\s|\n\n)%#', 'bcnw') != 0 | let v:char = toupper(v:char) | endif
   augroup END
-
-  Goyo
 endfu
 
 set spellfile=~/sync/diary-data/vim/en.utf-8.add

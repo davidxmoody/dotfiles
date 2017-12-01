@@ -2,6 +2,7 @@ node_modules/
 build/
 dist/
 android-sdk-linux/
+package-lock.json
 *.png
 *.jpg
 *.svg
