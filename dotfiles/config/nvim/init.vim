@@ -14,6 +14,7 @@ Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
+Plug 'SirVer/ultisnips'
 
 Plug 'airblade/vim-gitgutter'
 set updatetime=250
@@ -21,6 +22,7 @@ set signcolumn=yes
 let g:gitgutter_diff_args = '-w'
 
 Plug 'pangloss/vim-javascript'
+let g:javascript_plugin_flow = 1
 Plug 'mxw/vim-jsx'
 let g:jsx_ext_required = 0
 Plug 'moll/vim-node'
@@ -64,18 +66,9 @@ let g:NERDTreeIndicatorMapCustom = {
 Plug 'scrooloose/syntastic'
 let g:syntastic_aggregate_errors = 1
 
-" Default JavaScript
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_javascript_eslint_exec = 'eslint_d'
-
-" TypeScript
 let g:syntastic_typescript_checkers = ['tslint']
-
-" Flow and eslint
-" let g:syntastic_javascript_checkers = ['eslint', 'flow']
-" let g:syntastic_javascript_eslint_exec = 'eslint_d'
-" let g:syntastic_javascript_flow_exe = 'flow'
-let g:javascript_plugin_flow = 1
 
 let g:syntastic_json_checkers = ['jsonlint']
 au! BufRead,BufNewFile *.json set filetype=json
@@ -87,7 +80,6 @@ let g:syntastic_check_on_wq = 0
 
 " Search highlighting
 Plug 'haya14busa/incsearch.vim'
-" Plug 'haya14busa/incsearch-fuzzy.vim'
 set hlsearch
 let g:incsearch#auto_nohlsearch = 1
 map j  <Plug>(incsearch-nohl-n)
@@ -98,12 +90,6 @@ map #  <Nop>
 map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
-" map z/ <Plug>(incsearch-fuzzy-/)
-" map z? <Plug>(incsearch-fuzzy-?)
-" map zg/ <Plug>(incsearch-fuzzy-stay)
-
-" Snippets
-Plug 'SirVer/ultisnips'
 
 " Completion
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
@@ -162,7 +148,6 @@ set cursorline
 " Temp fix for printing '[2 q' spam to the console, see here for more details:
 " https://github.com/neovim/neovim/issues/7049
 " https://github.com/neovim/neovim/pull/6997
-" Note than once this is fixed, I can have some nicer cursor shapes :)
 set guicursor=
 
 " Persistent undo
@@ -190,9 +175,6 @@ noremap <leader>O :update<CR>:Buffers!<CR>
 noremap <leader>a :update<CR>:Ag!<space>
 
 noremap <leader>i :update<CR>:Ag!<space>/<C-R>=fnameescape(expand('%:t:r'))<CR><CR>
-
-" noremap <leader>c :Commits!<CR>
-" noremap <leader>C :BCommits!<CR>
 
 noremap <leader>c :cd<space><C-R>=fnameescape(expand("%:p:h"))<CR>
 noremap <leader>C :cd <C-R>=fnameescape(systemlist('git rev-parse --show-toplevel')[0])<CR><CR>

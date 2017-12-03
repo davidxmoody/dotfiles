@@ -1,0 +1,25 @@
+#!/bin/bash
+
+expect() {
+  local input=$1
+  local expected_output=$2
+  local actual_output=$(tmux-get-window-name "$1")
+  if [[ "$expected_output" != "$actual_output" ]]; then
+    echo "Failed: '$input', '$expected_output', '$actual_output'"
+  fi
+}
+
+expect "/" "ROOT"
+expect "$HOME" "HOME"
+
+expect "$P_DIR/project-name" "PROJECT-NAME"
+expect "$P_DIR/project-name/subdir" "PROJECT-NAME/"
+expect "$P_DIR/project-name/subdir/subsubdir" "PROJECT-NAME/"
+
+expect "$HOME/homesubdir" "~/homesubdir"
+expect "$HOME/homesubdir/subsubdir" "~/homesubdir/subsubdir"
+expect "$HOME/homesubdir/subsubdir/foo" "~/homesubdir/subsubdir/"
+
+expect "/tmp" "/tmp"
+expect "/tmp/foo" "/tmp/foo"
+expect "/tmp/foo/bar" "/tmp/foo/"
