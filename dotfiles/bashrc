@@ -106,4 +106,4 @@ export GRADLE_OPTS="-Dorg.gradle.daemon=true"
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 # Launch tmux if not already in tmux
-[ -z "$TMUX" ] && echo "Launching tmux..." && tmux
+# [ -z "$TMUX" ] && echo "Launching tmux..." && tmux
