@@ -1,0 +1,43 @@
+{
+    "workbench.statusBar.feedback.visible": false,
+    "workbench.iconTheme": "vscode-icons",
+    "cSpell.language": "en-GB",
+    "files.associations": {
+        "bashrc": "shellscript",
+        "bash_aliases": "shellscript",
+        "bash_profile": "shellscript"
+    },
+    "diffEditor.ignoreTrimWhitespace": true,
+    "scm.alwaysShowProviders": true,
+    "workbench.editor.swipeToNavigate": true,
+    "files.insertFinalNewline": true,
+    "search.smartCase": true,
+    "prettier.requireConfig": true,
+    "prettier.arrowParens": "always",
+    "prettier.bracketSpacing": false,
+    "prettier.semi": false,
+    "prettier.trailingComma": "all",
+    "vim.cmdLineInitialColon": true,
+    "vim.history": 1000,
+    "vim.leader": " ",
+    "vim.visualstar": true,
+    "git.defaultCloneDirectory": "~/p",
+    "vim.insertModeKeyBindingsNonRecursive": [
+        {"before": ["+"], "after": ["<Esc>", "l"]},
+    ],
+    "vim.otherModesKeyBindingsNonRecursive": [
+        {"before": ["t"], "after": ["j"]},
+        {"before": ["n"], "after": ["k"]},
+        {"before": ["s"], "after": ["l"]},
+        {"before": ["l"], "after": ["t"]},
+        {"before": ["L"], "after": ["T"]},
+        {"before": ["k"], "after": ["J"]},
+        {"before": ["K"], "after": ["g", "J"]},
+        {"before": ["j"], "after": ["n"]},
+        {"before": ["J"], "after": ["N"]},
+        {"before": ["<CR>"], "after": ["o"]},
+        {"before": ["+"], "after": [], "commands": [{
+            "command": "workbench.action.files.save", 
+        }]},
+    ],
+}
