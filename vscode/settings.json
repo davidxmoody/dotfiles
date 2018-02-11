@@ -28,6 +28,8 @@
     "vim.otherModesKeyBindingsNonRecursive": [
         {"before": ["t"], "after": ["j"]},
         {"before": ["n"], "after": ["k"]},
+        {"before": ["T"], "after": ["1", "0", "j"]},
+        {"before": ["N"], "after": ["1", "0", "k"]},
         {"before": ["s"], "after": ["l"]},
         {"before": ["l"], "after": ["t"]},
         {"before": ["L"], "after": ["T"]},
@@ -35,9 +37,18 @@
         {"before": ["K"], "after": ["g", "J"]},
         {"before": ["j"], "after": ["n"]},
         {"before": ["J"], "after": ["N"]},
+        {"before": [";"], "after": [":"]},
         {"before": ["<CR>"], "after": ["o"]},
-        {"before": ["+"], "after": [], "commands": [{
+        {"before": [","], "after": ["A"]},
+        {"before": ["-"], "after": ["o", "-", "<Space>"]},
+        {"before": ["+"], "commands": [{
             "command": "workbench.action.files.save", 
+        }]},
+        {"before": ["leader", "e"], "commands": [{
+            "command": "workbench.action.quickOpen",
+        }]},
+        {"before": ["leader", "T"], "commands": [{
+            "command": "workbench.action.focusSideBar",
         }]},
     ],
 }
