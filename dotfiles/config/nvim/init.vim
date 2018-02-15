@@ -31,6 +31,12 @@ Plug 'elzr/vim-json', { 'for': 'json' }
 let g:vim_json_syntax_conceal = 0
 
 Plug 'leafgarland/typescript-vim'
+Plug 'Shougo/vimproc.vim', {'do': 'make'} " Required for tsuquyomi
+Plug 'Quramy/tsuquyomi', {'do': 'make -f make_mac.mak'}
+
+Plug 'justinmk/vim-sneak'
+let g:sneak#s_next = 1
+
 Plug 'ElmCast/elm-vim'
 Plug 'jparise/vim-graphql'
 
@@ -281,7 +287,7 @@ noremap s l
 
 noremap T 
 noremap N 
-noremap S L
+map S <Plug>Sneak_s
 
 noremap gt gj
 noremap gn gk
