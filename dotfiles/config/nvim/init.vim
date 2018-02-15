@@ -31,8 +31,8 @@ Plug 'elzr/vim-json', { 'for': 'json' }
 let g:vim_json_syntax_conceal = 0
 
 Plug 'leafgarland/typescript-vim'
-Plug 'Shougo/vimproc.vim', {'do': 'make'} " Required for tsuquyomi
-Plug 'Quramy/tsuquyomi', {'do': 'make -f make_mac.mak'}
+Plug 'Shougo/vimproc.vim', { 'do': 'make' } " Required for tsuquyomi
+Plug 'Quramy/tsuquyomi'
 
 Plug 'justinmk/vim-sneak'
 let g:sneak#s_next = 1
