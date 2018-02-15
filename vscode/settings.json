@@ -51,4 +51,11 @@
             "command": "workbench.action.focusSideBar",
         }]},
     ],
+    "git.autofetch": true,
+    "git.confirmSync": false,
+    "gitlens.gitExplorer.files.layout": "auto",
+    "explorer.confirmDelete": false,
+    "vim.useSystemClipboard": true,
+    "gitlens.codeLens.enabled": false,
+    "editor.fontSize": 11,
 }
