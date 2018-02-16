@@ -35,7 +35,6 @@ Plug 'Shougo/vimproc.vim', { 'do': 'make' } " Required for tsuquyomi
 Plug 'Quramy/tsuquyomi'
 
 Plug 'justinmk/vim-sneak'
-let g:sneak#s_next = 1
 
 Plug 'ElmCast/elm-vim'
 Plug 'jparise/vim-graphql'
@@ -287,7 +286,8 @@ noremap s l
 
 noremap T 
 noremap N 
-map S <Plug>Sneak_s
+noremap H <Nop>
+noremap S <Nop>
 
 noremap gt gj
 noremap gn gk
@@ -353,3 +353,9 @@ set spellfile=~/sync/diary-data/vim/en.utf-8.add
 com! WP call WordProcessorMode()
 au BufNewFile,BufRead *.md call WordProcessorMode()
 au BufNewFile,BufRead diary-*.txt call WordProcessorMode()
+
+" These seem to be valid but mapping the '(' char breaks syntax highlighting
+map m <Plug>Sneak_s
+map M <Plug>Sneak_S
+map ) <Plug>Sneak_;
+map ( <Plug>Sneak_,
