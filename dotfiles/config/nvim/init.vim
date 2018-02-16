@@ -35,6 +35,8 @@ Plug 'Shougo/vimproc.vim', { 'do': 'make' } " Required for tsuquyomi
 Plug 'Quramy/tsuquyomi'
 
 Plug 'justinmk/vim-sneak'
+let g:sneak#absolute_dir = 1
+let g:sneak#use_ic_scs = 1
 
 Plug 'ElmCast/elm-vim'
 Plug 'jparise/vim-graphql'
@@ -357,5 +359,9 @@ au BufNewFile,BufRead diary-*.txt call WordProcessorMode()
 " These seem to be valid but mapping the '(' char breaks syntax highlighting
 map m <Plug>Sneak_s
 map M <Plug>Sneak_S
+map f <Plug>Sneak_f
+map F <Plug>Sneak_F
+map l <Plug>Sneak_t
+map L <Plug>Sneak_T
 map ) <Plug>Sneak_;
 map ( <Plug>Sneak_,
