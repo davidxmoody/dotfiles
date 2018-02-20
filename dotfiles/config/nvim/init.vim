@@ -31,8 +31,8 @@ Plug 'elzr/vim-json', { 'for': 'json' }
 let g:vim_json_syntax_conceal = 0
 
 Plug 'leafgarland/typescript-vim'
-Plug 'Shougo/vimproc.vim', { 'do': 'make' } " Required for tsuquyomi
-Plug 'Quramy/tsuquyomi'
+Plug 'mhartington/nvim-typescript'
+let g:nvim_typescript#type_info_on_hold = 1
 
 Plug 'justinmk/vim-sneak'
 let g:sneak#absolute_dir = 1
@@ -135,7 +135,7 @@ syntax on
 " Check for changes to file
 au CursorHold * checktime
 
-" Miscellaneous 
+" Miscellaneous
 set ignorecase
 set smartcase
 set report=0
@@ -151,6 +151,7 @@ set showcmd
 set backupcopy=yes
 set mouse=nv
 set cursorline
+highlight! link QuickFixLine Normal
 
 " Temp fix for printing '[2 q' spam to the console, see here for more details:
 " https://github.com/neovim/neovim/issues/7049
@@ -207,6 +208,24 @@ nnoremap <leader>r :%s/\<<C-R><C-W>\>//g<Left><Left>
 vnoremap <leader>r "zy:%s/\<<C-R><C-R>z\>//g<Left><Left>
 nnoremap <leader>R :!ag -l '\b<C-R><C-W>\b' \| xargs -I@ sed -i 's/\b<C-R><C-W>\b//g; T; w /dev/stdout' @ \| wc -l \| sed 's/$/ lines changed\n\n/'<C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><Left><Left><Left><Left>
 vnoremap <leader>R "zy:!ag -l '\b<C-R><C-W>\b' \| xargs -I@ sed -i 's/\b<C-R><C-W>\b//g; T; w /dev/stdout' @ \| wc -l \| sed 's/$/ lines changed\n\n/'<C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><Left><Left><Left><Left>
+
+" TypeScript
+nnoremap gd :TSDef<CR>
+nnoremap gD :TSTypeDef<CR>
+nnoremap gr :TSRefs<CR>
+nnoremap gR :TSRename<CR>
+nnoremap gs :TSImport<CR>
+nnoremap gS :TSType<CR>
+
+" Unused potentially useful commands ('gm' and 'gl' are still available):
+" - TSDoc
+" - TSDefPreview
+
+" Quickfix/Location List window mappings
+autocmd FileType qf set wrap
+autocmd FileType qf set nonumber
+autocmd FileType qf nnoremap <buffer> <Enter> <Enter>
+autocmd FileType qf nnoremap <buffer> h <Enter>
 
 " Git
 noremap <leader>gb :Gblame<CR>
@@ -293,6 +312,7 @@ noremap S <Nop>
 
 noremap gt gj
 noremap gn gk
+noremap gj gn
 
 noremap k J
 noremap l t
