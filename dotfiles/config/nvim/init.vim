@@ -30,7 +30,8 @@ Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 Plug 'elzr/vim-json', { 'for': 'json' }
 let g:vim_json_syntax_conceal = 0
 
-Plug 'leafgarland/typescript-vim'
+Plug 'HerringtonDarkholme/yats.vim'
+Plug 'ianks/vim-tsx'
 Plug 'mhartington/nvim-typescript'
 let g:nvim_typescript#type_info_on_hold = 1
 
@@ -201,6 +202,8 @@ noremap <leader>W <C-W>W
 " Search
 nnoremap <leader>* :Ag! <C-R><C-W><CR>
 vnoremap <leader>* "zy:Ag! <C-R><C-R>z<CR>
+nnoremap * /\C\<<C-R><C-W>\><CR>
+nnoremap g* /\C<C-R><C-W><CR>
 vnoremap * "zy:Ag! <C-R><C-R>z<CR>
 
 " Replace
@@ -225,7 +228,7 @@ nnoremap gS :TSType<CR>
 autocmd FileType qf set wrap
 autocmd FileType qf set nonumber
 autocmd FileType qf nnoremap <buffer> <Enter> <Enter>
-autocmd FileType qf nnoremap <buffer> h <Enter>
+autocmd FileType qf nnoremap <buffer> h <Enter><C-W><C-W>
 
 " Git
 noremap <leader>gb :Gblame<CR>
