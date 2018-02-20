@@ -30,8 +30,7 @@ Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 Plug 'elzr/vim-json', { 'for': 'json' }
 let g:vim_json_syntax_conceal = 0
 
-Plug 'HerringtonDarkholme/yats.vim'
-Plug 'ianks/vim-tsx'
+Plug 'leafgarland/typescript-vim'
 Plug 'mhartington/nvim-typescript'
 let g:nvim_typescript#type_info_on_hold = 1
 
