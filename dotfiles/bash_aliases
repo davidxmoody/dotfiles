@@ -65,6 +65,28 @@ mkbash() {
   nvim + +startinsert "$1"
 }
 
+export SCRIPTS_DIR=$HOME/tmp/scripts
+
+mkscript() {
+  mkdir -p "$SCRIPTS_DIR"
+  mkbash "$SCRIPTS_DIR/$(date +%F-%H-%M-%S)-${1-unnamed}"
+}
+
+editscript() {
+  local script_file=$(ls -r1 "$SCRIPTS_DIR" | fzf --select-1 --query "$1")
+  [ -n "$script_file" ] && v "$SCRIPTS_DIR/$script_file"
+}
+
+runscript() {
+  local script_file=$(ls -r1 "$SCRIPTS_DIR" | fzf --select-1 --query "$1")
+  [ -n "$script_file" ] && "$SCRIPTS_DIR/$script_file"
+}
+
+watchscript() {
+  local script_file=$(ls -r1 "$SCRIPTS_DIR" | fzf --select-1 --query "$1")
+  [ -n "$script_file" ] && entr -c "$SCRIPTS_DIR/$script_file" <<< "$SCRIPTS_DIR/$script_file"
+}
+
 mkp() {
   if [ -z "$1" ]; then
     echo "Error: Please enter a project name"
