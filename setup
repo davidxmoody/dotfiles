@@ -22,14 +22,6 @@ install() {
 
 # SETUP DIRS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-for dir in Downloads Documents Music Pictures Video; do
-  [ -d "$HOME/$dir" ] && rmdir -v "$HOME/$dir"
-done
-
-for dir in tmp p .vim-swap .desktop .templates .public .config; do
-  mkdir -pv "$HOME/$dir"
-done
-
 for file in $(find dotfiles/ -type f); do
   if [[ "$file" =~ \.copy$ ]]; then
     filename=${file%\.copy}
