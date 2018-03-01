@@ -95,6 +95,7 @@ add_to_path "$N_PREFIX/bin"
 
 add_to_path "$RC_DIR/bin"
 add_to_path "$HOME/.bin"
+add_to_path "$HOME/.local/bin"
 
 export ANDROID_HOME=$HOME/Library/Android/sdk
 add_to_path "$ANDROID_HOME/platform-tools"
