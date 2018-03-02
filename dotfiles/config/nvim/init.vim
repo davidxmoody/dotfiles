@@ -32,7 +32,6 @@ let g:vim_json_syntax_conceal = 0
 
 Plug 'leafgarland/typescript-vim'
 Plug 'mhartington/nvim-typescript'
-let g:nvim_typescript#type_info_on_hold = 1
 
 Plug 'justinmk/vim-sneak'
 let g:sneak#absolute_dir = 1
@@ -181,6 +180,7 @@ noremap <leader>o :update<CR>:GFiles!?<CR>
 noremap <leader>O :update<CR>:Buffers!<CR>
 
 noremap <leader>a :update<CR>:Ag!<space>
+noremap <leader>A :update<CR>:Ag!<space><Up><CR>
 
 noremap <leader>i :update<CR>:Ag!<space>/<C-R>=fnameescape(expand('%:t:r'))<CR><CR>
 
@@ -309,8 +309,7 @@ noremap s l
 
 noremap T 
 noremap N 
-noremap H <Nop>
-noremap S <Nop>
+noremap S L
 
 noremap gt gj
 noremap gn gk
@@ -372,7 +371,7 @@ func! WordProcessorMode()
   augroup END
 endfu
 
-set spellfile=~/sync/diary-data/vim/en.utf-8.add
+" set spellfile=~/sync/diary-data/vim/en.utf-8.add
 
 com! WP call WordProcessorMode()
 au BufNewFile,BufRead *.md call WordProcessorMode()

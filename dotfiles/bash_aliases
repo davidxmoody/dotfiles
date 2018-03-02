@@ -111,7 +111,7 @@ mkpn() {
 
 # Git
 alias g='git'
-alias gs='git status'
+alias gs='git status -sb -uall'
 alias gc='git commit'
 gl() {
   if git rev-parse @{u} 2>/dev/null 1>/dev/null; then
