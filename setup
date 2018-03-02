@@ -20,27 +20,6 @@ install() {
   fi
 }
 
-# SETUP DIRS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-for file in $(find dotfiles/ -type f); do
-  if [[ "$file" =~ \.copy$ ]]; then
-    filename=${file%\.copy}
-    target="$HOME/.${filename#dotfiles/}"
-    target_dir=$(dirname "$target")
-    [ ! "$file" -nt "$target" ] && continue
-    mkdir -pv "$target_dir"
-    cp -bv "$file" "$target"
-  else
-    target="$HOME/.${file#dotfiles/}"
-    target_dir=$(dirname "$target")
-    target_canon=$(readlink -f "$target")
-    file_canon=$(readlink -f "$file")
-    [ "$target_canon" = "$file_canon" ] && continue
-    mkdir -pv "$target_dir"
-    ln -sbv "$file_canon" "$target"
-  fi
-done
-
 # OTHER SOFTWARE ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 install chromium

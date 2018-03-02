@@ -22,3 +22,10 @@ is_installed ramda
 is_installed eslint_d
 is_installed tslint
 is_installed tsc
+
+# TODO check bash version (for mac)
+# TODO check node
+# TODO check sed has gsed capabilities
+# TODO maybe link my coreutils more effectively
+# TODO check watch is installed
+# TODO check ag
