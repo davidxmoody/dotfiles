@@ -1,0 +1,23 @@
+#!/bin/bash
+
+day_of_week=$(date +%w)
+if [ "$day_of_week" = 0 ]; then
+  look_back=2
+elif [ "$day_of_week" = 1 ]; then
+  look_back=3
+else
+  look_back=1
+fi
+
+last_working_day=$(gdate -d "${look_back} day ago" +%Y-%m-%d)
+
+for dir in $(ls -1 $P_DIR); do
+  git_dir=$P_DIR/$dir/.git
+  [ ! -d "$git_dir" ] && continue
+  commits=$(git --no-pager --git-dir="$git_dir" lg --since="$last_working_day" --author="$(git config user.name)")
+  if [ -n "$commits" ]; then
+    echo "$dir"
+    echo "$commits"
+    echo
+  fi
+done
