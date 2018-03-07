@@ -151,6 +151,7 @@ alias gstd='git stash drop'
 alias glm='git lg --author="David Moody"'
 alias gdp='git diff ORIG_HEAD -- package.json'
 alias groot='cd "$(git rev-parse --show-toplevel)"'
+alias gy='git_show_yesterday'
 
 gg() {
   local dir=${1-$P_DIR}
