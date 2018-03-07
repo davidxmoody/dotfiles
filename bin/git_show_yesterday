@@ -16,10 +16,10 @@ last_working_day=$($date_cmd -d "${look_back} day ago" +%Y-%m-%d)
 
 for dir in $(ls -1 $P_DIR); do
   git_dir=$P_DIR/$dir/.git
-  [ ! -d "$git_dir" ] && continue
-  commits=$(git --no-pager --git-dir="$git_dir" lg --since="$last_working_day" --author="$(git config user.name)")
+  [[ ! -d "$git_dir" ]] && continue
+  commits=$(git --no-pager --git-dir="$git_dir" log --since="$last_working_day" --author="$(git config user.name)" --oneline)
   if [ -n "$commits" ]; then
-    echo "$dir"
+    echo "# $dir"
     echo "$commits"
     echo
   fi
