@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# INSTALL HELPERS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 install_fedora() {
   hash dnf 2>/dev/null && \
     sudo dnf -yq install "$@"
@@ -19,8 +17,6 @@ install() {
     install_ubuntu "$@"
   fi
 }
-
-# OTHER SOFTWARE ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 install chromium
 install git

@@ -43,6 +43,7 @@ $echo_cmd "# tools"
 check_installed xargs
 check_installed watch
 check_installed jq
+check_installed meld
 $echo_cmd
 
 $echo_cmd "# npm"

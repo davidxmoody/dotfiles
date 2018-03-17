@@ -1,7 +1,0 @@
-#!/bin/bash
-
-command=$1
-message=${2-Your command returned successfully}
-timeout=${3-60}
-
-watch -n "$timeout" "$command && echo \"\n$message\" && notify-send \"$message\" \"$command\""
