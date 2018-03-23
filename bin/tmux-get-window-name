@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 sed_cmd=sed
 type gsed 2>/dev/null >/dev/null && sed_cmd=gsed

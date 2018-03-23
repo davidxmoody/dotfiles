@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 useage() {
   printf "\n\e[1;4mAscii Escape Code Helper Utility\e[m\n\n"

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 SOURCE_DIR=$HOME/p/dotfiles/dotfiles
 TARGET_DIR=$HOME

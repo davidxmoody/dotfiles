@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 [ $# = 0 ] && echo "Please specify a project dir" >&2 && exit 1
 

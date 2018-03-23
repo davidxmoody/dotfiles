@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 p_dir=${P_DIR-$HOME/p}
 proj=$(ls -1t "$p_dir" | fzf --preview 'git --git-dir="$P_DIR"/{}/.git log --stat -n5')
