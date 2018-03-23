@@ -11,7 +11,7 @@ color_good="\e[32m"
 
 proj=${1%/}
 
-if [ -d "$proj/.git" ] && cd "$proj" && git fetch --quiet; then
+if [ -d "$proj/.git" ] && cd "$proj" && [[ ! -z "$(git remote -v)" ]] && git fetch --quiet; then
   commits_behind=$(git rev-list --count HEAD..@{upstream} 2>/dev/null)
   padded_commits_behind=$(printf '%3s' "$commits_behind")
   color=$color_bad

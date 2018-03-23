@@ -32,6 +32,7 @@ let g:vim_json_syntax_conceal = 0
 
 Plug 'leafgarland/typescript-vim'
 Plug 'mhartington/nvim-typescript'
+let g:nvim_typescript#type_info_on_hold = 1
 
 Plug 'justinmk/vim-sneak'
 let g:sneak#absolute_dir = 1

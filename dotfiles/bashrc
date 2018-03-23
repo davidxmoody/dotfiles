@@ -10,8 +10,8 @@ export HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history:clear:u:x:f:b"
 HISTTIMEFORMAT='%F %T '
 shopt -s histappend
 shopt -s cmdhist
-HISTSIZE=5000
-HISTFILESIZE=10000
+HISTSIZE=50000
+HISTFILESIZE=100000
 
 # Misc options
 shopt -s checkwinsize
