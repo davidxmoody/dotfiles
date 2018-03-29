@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+tee >(grep -o -E "$1" | sort | uniq -c | sort -nr | sed '1s/^/\n/' >&2) | grep --color=auto -E "$1|$"

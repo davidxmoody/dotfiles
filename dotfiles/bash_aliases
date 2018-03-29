@@ -253,6 +253,7 @@ alias diary='~/sync/old-projects/diary/rundiary -b $DIARY_DIR'
 alias stripjpg='exiftool -all= '
 alias android-proxy='adb reverse tcp:8097 tcp:8097; adb reverse tcp:8081 tcp:8081'
 alias rndebug='open "rndebugger://set-debugger-loc?host=localhost&port=8081"'
+alias wcl='wc -l'
 
 alias bashal='source ~/.bash_aliases'
 
