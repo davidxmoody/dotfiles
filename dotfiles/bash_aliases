@@ -263,10 +263,6 @@ dotpreview() {
   dot -Tpng "$1" -o "$outfile" && op "$outfile"
 }
 
-pramda () {
-  cat ~/p/knowledge-base-schema/dump.json | ramda 'prop \docs' "$@"
-}
-
 r() {
   if (( $# == 0)); then
     echo "Please provide at least one argument"

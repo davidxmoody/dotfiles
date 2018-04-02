@@ -15,6 +15,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'SirVer/ultisnips'
+Plug 'michaeljsmith/vim-indent-object'
 
 Plug 'airblade/vim-gitgutter'
 set updatetime=250
