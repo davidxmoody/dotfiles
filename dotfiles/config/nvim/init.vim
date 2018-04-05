@@ -373,7 +373,9 @@ func! WordProcessorMode()
   augroup END
 endfu
 
-" set spellfile=~/sync/diary-data/vim/en.utf-8.add
+if filereadable(glob("~/sync/diary-data/vim/en.utf-8.add"))
+  set spellfile=~/sync/diary-data/vim/en.utf-8.add
+endif
 
 com! WP call WordProcessorMode()
 au BufNewFile,BufRead *.md call WordProcessorMode()
