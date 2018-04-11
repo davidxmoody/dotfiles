@@ -62,7 +62,7 @@ mkalias() {
 }
 
 mkbash() {
-  echo -e "#!/usr/bin/env bash\n\n" > "$1" && \
+  echo -e "#!/usr/bin/env bash\n\nset -e\n\n" > "$1" && \
   chmod +x "$1" && \
   nvim + +startinsert "$1"
 }
@@ -81,7 +81,8 @@ editscript() {
 
 runscript() {
   local script_file=$(ls -r1 "$SCRIPTS_DIR" | fzf --select-1 --query "$1")
-  [ -n "$script_file" ] && "$SCRIPTS_DIR/$script_file"
+  shift
+  [ -n "$script_file" ] && "$SCRIPTS_DIR/$script_file" "$@"
 }
 
 watchscript() {
@@ -274,6 +275,7 @@ r() {
 }
 
 alias alsowc='tee >(wc -l)'
+alias alsocount='tee >(sort | uniq -c | sort -nr)'
 for i in {1..9}; do
   alias col$i="awk '{print \$$i}'"
 done
