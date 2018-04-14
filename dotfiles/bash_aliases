@@ -32,7 +32,7 @@ search_project_dir() {
   if [ ! -z "$initial_dir" -a -d "$P_DIR/$initial_dir" ]; then
     echo "$P_DIR/$initial_dir"
   else
-    local chosen_dir=$(ls -1 $P_DIR | fzf --select-1 --query "$initial_dir")
+    local chosen_dir=$(ls -1 $P_DIR | fzf --select-1 --query "$initial_dir" --preview "git --git-dir='$P_DIR/{}/.git' --work-tree='$P_DIR/{}' status -sb -uall")
     [ ! -z "$chosen_dir" ] && echo "$P_DIR/$chosen_dir"
   fi
 }
