@@ -257,6 +257,7 @@ alias rndebug='open "rndebugger://set-debugger-loc?host=localhost&port=8081"'
 alias wcl='wc -l'
 
 alias bashal='source ~/.bash_aliases'
+alias bashtimestamps='grep "^#" ~/.bash_history | sed "s/#//" | sort -n'
 
 dotpreview() {
   mkdir -p /tmp/dotpreview

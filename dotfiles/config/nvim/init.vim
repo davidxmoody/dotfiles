@@ -151,13 +151,21 @@ set number
 set showcmd
 set backupcopy=yes
 set mouse=nv
-set cursorline
 highlight! link QuickFixLine Normal
+
+set colorcolumn=80
+highlight ColorColumn ctermbg=Black
+
+" Coloured cursorline (:help cterm-colors)
+set cursorline
+highlight CursorLine ctermbg=Black cterm=NONE
+" autocmd InsertEnter * highlight CursorLine ctermbg=Red guifg=fg
+" autocmd InsertLeave * highlight CursorLine ctermbg=Blue guifg=fg
 
 " Temp fix for printing '[2 q' spam to the console, see here for more details:
 " https://github.com/neovim/neovim/issues/7049
 " https://github.com/neovim/neovim/pull/6997
-set guicursor=
+" set guicursor=
 
 " Persistent undo
 set undofile
@@ -226,8 +234,8 @@ nnoremap gS :TSType<CR>
 " - TSDefPreview
 
 " Quickfix/Location List window mappings
-autocmd FileType qf set wrap
-autocmd FileType qf set nonumber
+autocmd FileType qf setl wrap
+autocmd FileType qf setl nonumber
 autocmd FileType qf nnoremap <buffer> <Enter> <Enter>
 autocmd FileType qf nnoremap <buffer> h <Enter><C-W><C-W>
 
