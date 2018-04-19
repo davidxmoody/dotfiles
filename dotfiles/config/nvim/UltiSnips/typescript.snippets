@@ -1,0 +1,89 @@
+snippet fun "Function"
+function ${1:function_name}(${2:argument}) {
+	${VISUAL}$0
+}
+endsnippet
+
+snippet fn "Arrow function"
+($1) => {
+	$2
+}
+endsnippet
+
+snippet im "Require"
+import ${1:module_name} from "${2:module_path}"
+endsnippet
+
+snippet ex "Export default"
+export default $1
+endsnippet
+
+snippet cl "console.log()"
+;(console).log(${1:"${2:string}"})
+endsnippet
+
+snippet cw "console.warn()"
+;(console).warn(${1:"${2:string}"})
+endsnippet
+
+snippet ce "console.error()"
+;(console).error(${1:"${2:string}"})
+endsnippet
+
+snippet describe "mocha describe"
+describe("${1:thing}", () => {
+	${2}
+})
+endsnippet
+
+snippet it "mocha it"
+it("${1:should ${2:...}}", () => {
+	${3}
+})
+endsnippet
+
+snippet react "React functional component"
+import * as React from "react"
+
+interface Props {
+	${2:children: any}
+}
+
+export default function ${1:ComponentName}(props: Props) {
+	return (
+		<div>TODO</div>
+	)
+}
+endsnippet
+
+snippet reactc "React class component"
+import * as React from "react"
+
+interface Props {
+	${2:children: any}
+}
+
+export default class ${1:ComponentName} extends React.Component<Props> {
+	public render() {
+		return (
+			<div>TODO</div>
+		)
+	}
+}
+endsnippet
+
+snippet reactpc "React pure class component"
+import * as React from "react"
+
+interface Props {
+	${2:children: any}
+}
+
+export default class ${1:ComponentName} extends React.PureComponent<Props> {
+	public render() {
+		return (
+				<div>TODO</div>
+				)
+	}
+}
+endsnippet
