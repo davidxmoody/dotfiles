@@ -44,6 +44,8 @@ check_installed xargs
 check_installed watch
 check_installed jq
 check_installed meld
+check_installed csvtojson
+check_installed sqlite3
 $echo_cmd
 
 $echo_cmd "# npm"
