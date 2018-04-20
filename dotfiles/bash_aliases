@@ -1,10 +1,3 @@
-# Mac coreutils linking
-gnu_alias() { type "g$1" 2> /dev/null > /dev/null && alias "$1"="g$1"; }
-gnu_alias sed
-gnu_alias ls
-gnu_alias xargs
-gnu_alias echo
-
 # Vim
 type nvim 2> /dev/null > /dev/null && alias vim='nvim'
 alias v='nvim'
@@ -235,7 +228,7 @@ alias dus='du -Dhs'
 alias dun='du -Ds node_modules/{@*/*,*} | sort -nr'
 alias df='df -hT'
 alias op='xdg-open'
-type 'open' 2>/dev/null >/dev/null && alias op='open'
+type open 2>/dev/null >/dev/null && alias op='open'
 alias mkdir='mkdir -p'
 removekernels() { sudo apt-get remove --purge $(dpkg -l 'linux-*' | sed '/^ii/!d;/'"$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]* [^ ]* \([^ ]*\).*/\1/;/[0-9]/!d'); }
 alias ins='sudo apt-get install'
@@ -271,7 +264,7 @@ r() {
   elif (( $# == 1)); then
     ag "$1"
   else
-    ag -l "$1" | xargs -I@ gsed -i "s^${1}^${2}^g; T; w /dev/stdout" @
+    ag -l "$1" | xargs -I@ sed -i "s^${1}^${2}^g; T; w /dev/stdout" @
   fi
 }
 

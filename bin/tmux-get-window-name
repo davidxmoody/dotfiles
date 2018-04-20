@@ -1,9 +1,6 @@
 #!/usr/bin/env bash
 
-sed_cmd=sed
-type gsed 2>/dev/null >/dev/null && sed_cmd=gsed
-
-$sed_cmd "
+sed "
   s%^/$%ROOT%;
   s%^$HOME$%HOME%;
   s%^$P_DIR/\\([^/]\\+\\)\\(/\\)\\?.*$%\\U\\1\\2%;

@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-date_cmd=date
-type gdate >/dev/null 2>/dev/null && date_cmd=gdate
-
 day_of_week=$(date +%w)
 if [ "$day_of_week" = 0 ]; then
   look_back=2
@@ -12,7 +9,7 @@ else
   look_back=1
 fi
 
-last_working_day=$($date_cmd -d "${look_back} day ago" +%Y-%m-%d)
+last_working_day=$(date -d "${look_back} day ago" +%Y-%m-%d)
 
 for dir in $(ls -1 $P_DIR); do
   git_dir=$P_DIR/$dir/.git

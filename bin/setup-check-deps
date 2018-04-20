@@ -4,15 +4,12 @@ color_reset="\e[0m"
 color_bad="\e[31m"
 color_good="\e[32m"
 
-echo_cmd=echo
-type gecho >/dev/null 2>/dev/null && echo_cmd=gecho
-
 echo_good() {
-  $echo_cmd -e "${color_good}☑ ${@}${color_reset}"
+  echo -e "${color_good}☑ ${@}${color_reset}"
 }
 
 echo_bad() {
-  $echo_cmd -e "${color_bad}☐ ${@}${color_reset}"
+  echo -e "${color_bad}☐ ${@}${color_reset}"
 }
 
 check_installed() {
@@ -23,32 +20,33 @@ check_installed() {
   fi
 }
 
-$echo_cmd "# core"
+echo "# core"
 check_installed bash "${BASH_VERSION%%\(*}"
 check_installed git "$(git --version 2>/dev/null | sed 's/git version //')"
 check_installed node "$(node --version 2>/dev/null)"
 check_installed npm
 check_installed python2
 check_installed python3
-$echo_cmd
+echo
 
-$echo_cmd "# editing"
+echo "# editing"
 check_installed nvim
 check_installed ag
 check_installed fzf
 check_installed tmux
-$echo_cmd
+check_installed sed "$(sed --version 2>&1 | head -n1 | grep -o '(GNU sed)')"
+echo
 
-$echo_cmd "# tools"
+echo "# tools"
 check_installed xargs
 check_installed watch
 check_installed jq
 check_installed meld
 check_installed csvtojson
 check_installed sqlite3
-$echo_cmd
+echo
 
-$echo_cmd "# npm"
+echo "# npm"
 check_installed ramda
 check_installed jsonlint
 check_installed eslint_d
@@ -57,7 +55,4 @@ check_installed tsc
 check_installed diff-so-fancy
 check_installed npm-check
 check_installed http-server
-$echo_cmd
-
-# TODO check sed has gsed capabilities
-# TODO maybe link my coreutils more effectively
+echo

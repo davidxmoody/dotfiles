@@ -216,8 +216,10 @@ noremap <leader>Q :q!<CR>
 " Window movement
 noremap <leader>s <C-W>s
 noremap <leader>v <C-W>v
-noremap <leader>w <C-W>w
-noremap <leader>W <C-W>W
+" noremap <leader>w <C-W>w
+" noremap <leader>W <C-W>W
+noremap <leader>w <Nop>
+noremap <leader>W <Nop>
 
 " Search
 nnoremap <leader>* :Ag! <C-R><C-W><CR>
@@ -330,7 +332,11 @@ noremap s l
 
 noremap T 
 noremap N 
-noremap S L
+noremap H 0
+noremap S $
+onoremap H 0
+" Conflicts with surround plugin
+" onoremap S $
 
 noremap gt gj
 noremap gn gk

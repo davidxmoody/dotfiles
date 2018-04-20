@@ -90,12 +90,20 @@ add_to_path() {
   fi
 }
 
+add_to_path "/usr/local/opt/coreutils/libexec/gnubin"
+MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+add_to_path "/usr/local/opt/findutils/libexec/gnubin"
+MANPATH="/usr/local/opt/findutils/libexec/gnuman:$MANPATH"
+add_to_path "/usr/local/opt/gnu-sed/libexec/gnubin"
+MANPATH="/usr/local/opt/gnu-sed/libexec/gnuman:$MANPATH"
+
 export N_PREFIX="$HOME/.n"
 add_to_path "$N_PREFIX/bin"
 
 add_to_path "$RC_DIR/bin"
 add_to_path "$HOME/.bin"
 add_to_path "$HOME/.local/bin"
+add_to_path "$HOME/.cargo/bin"
 
 export ANDROID_HOME=$HOME/Library/Android/sdk
 add_to_path "$ANDROID_HOME/platform-tools"
@@ -106,6 +114,3 @@ export GRADLE_OPTS="-Dorg.gradle.daemon=true"
 # Alias definitions
 [ -f ~/.bash_aliases ] && source ~/.bash_aliases
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
-# Launch tmux if not already in tmux
-# [ -z "$TMUX" ] && echo "Launching tmux..." && tmux
