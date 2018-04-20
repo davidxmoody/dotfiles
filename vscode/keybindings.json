@@ -1,8 +1,0 @@
-// Place your key bindings in this file to overwrite the defaults
-[
-    {
-        "key": "ctrl+c",
-        "command": "workbench.action.closeQuickOpen",
-        "when": "inQuickOpen"
-    }
-]

@@ -87,3 +87,9 @@ export default class ${1:ComponentName} extends React.PureComponent<Props> {
 	}
 }
 endsnippet
+
+snippet notnull "not null function"
+function notNull<T>(maybeNull: T | null): maybeNull is T {
+	return maybeNull !== null
+}
+endsnippet
