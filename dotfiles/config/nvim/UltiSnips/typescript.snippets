@@ -30,6 +30,12 @@ snippet ce "console.error()"
 ;(console).error(${1:"${2:string}"})
 endsnippet
 
+snippet int "Interface"
+interface ${1:InterfaceName} {
+	${2:${3:propertyName}: ${4:any}}
+}
+endsnippet
+
 snippet describe "mocha describe"
 describe("${1:thing}", () => {
 	${2}
@@ -56,14 +62,26 @@ export default function ${1:ComponentName}(props: Props) {
 }
 endsnippet
 
-snippet reactc "React class component"
+snippet reactcs "React class component with state"
 import * as React from "react"
 
 interface Props {
 	${2:children: any}
 }
 
-export default class ${1:ComponentName} extends React.Component<Props> {
+interface State {
+	value: any
+}
+
+export default class ${1:ComponentName} extends React.Component<Props, State> {
+	constructor(props: Props) {
+		super(props)
+
+		this.state = {
+			value: null,
+		}
+	}
+
 	public render() {
 		return (
 			<div>TODO</div>
@@ -82,8 +100,36 @@ interface Props {
 export default class ${1:ComponentName} extends React.PureComponent<Props> {
 	public render() {
 		return (
-				<div>TODO</div>
-				)
+			<div>TODO</div>
+		)
+	}
+}
+endsnippet
+
+snippet reactpcs "React pure class component with state"
+import * as React from "react"
+
+interface Props {
+	${2:children: any}
+}
+
+interface State {
+	value: any
+}
+
+export default class ${1:ComponentName} extends React.PureComponent<Props, State> {
+	constructor(props: Props) {
+		super(props)
+
+		this.state = {
+			value: null
+		}
+	}
+
+	public render() {
+		return (
+			<div>TODO</div>
+		)
 	}
 }
 endsnippet
