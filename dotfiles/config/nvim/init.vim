@@ -17,6 +17,15 @@ Plug 'tpope/vim-fugitive'
 Plug 'SirVer/ultisnips'
 Plug 'michaeljsmith/vim-indent-object'
 
+Plug 'christoomey/vim-tmux-navigator'
+let g:tmux_navigator_no_mappings = 1
+let g:tmux_navigator_disable_when_zoomed = 1
+nnoremap <silent> <C-H> :TmuxNavigateLeft<cr>
+nnoremap <silent> <C-T> :TmuxNavigateDown<cr>
+nnoremap <silent> <C-N> :TmuxNavigateUp<cr>
+nnoremap <silent> <C-S> :TmuxNavigateRight<cr>
+" nnoremap <silent> {Previous-Mapping} :TmuxNavigatePrevious<cr>
+
 Plug 'airblade/vim-gitgutter'
 set updatetime=250
 set signcolumn=yes
@@ -175,6 +184,8 @@ set undoreload=10000
 " Status line
 set laststatus=2
 set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
+highlight StatusLine ctermfg=White cterm=reverse
+highlight StatusLineNC cterm=reverse
 
 " Leader key
 map <space> <Nop>
