@@ -194,22 +194,22 @@ let mapleader=' '
 " File movement
 noremap <leader>u ZZ
 
-noremap <leader>e :update<CR>:Files!<CR>
-noremap <leader>E :update<CR>:Files!<space><C-R>=expand("%:p:h")<CR>
+noremap <leader>e :Files!<CR>
+noremap <leader>E :Files!<space><C-R>=expand("%:p:h")<CR>
 
-noremap <leader>o :update<CR>:GFiles!?<CR>
-noremap <leader>O :update<CR>:Buffers!<CR>
+noremap <leader>o :GFiles!?<CR>
+noremap <leader>O :Buffers!<CR>
 
-noremap <leader>a :update<CR>:Ag!<space>
-noremap <leader>A :update<CR>:Ag!<space><Up><CR>
+noremap <leader>a :Ag!<space>
+noremap <leader>A :Ag!<space><Up><CR>
 
-noremap <leader>i :update<CR>:Ag!<space>/<C-R>=fnameescape(expand('%:t:r'))<CR><CR>
+noremap <leader>i :Ag!<space>/<C-R>=fnameescape(expand('%:t:r'))<CR><CR>
 
 noremap <leader>c :cd<space><C-R>=fnameescape(expand("%:p:h"))<CR>
 noremap <leader>C :cd <C-R>=fnameescape(systemlist('git rev-parse --show-toplevel')[0])<CR><CR>
 
 noremap <leader>b <C-^>
-noremap <leader>B :update<CR>:History!<CR>
+noremap <leader>B :History!<CR>
 noremap <leader>q :q<CR>
 noremap <leader>Q :q!<CR>
 
