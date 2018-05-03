@@ -17,6 +17,11 @@ Plug 'tpope/vim-fugitive'
 Plug 'SirVer/ultisnips'
 Plug 'michaeljsmith/vim-indent-object'
 
+Plug 'jpalardy/vim-slime'
+let g:slime_target = "tmux"
+let g:slime_default_config = {"socket_name": split($TMUX, ",")[0], "target_pane": ":.2"}
+let g:slime_no_mappings = 1
+
 Plug 'christoomey/vim-tmux-navigator'
 let g:tmux_navigator_no_mappings = 1
 let g:tmux_navigator_disable_when_zoomed = 1
@@ -269,6 +274,11 @@ omap ih <Plug>GitGutterTextObjectInnerPending
 omap ah <Plug>GitGutterTextObjectOuterPending
 xmap ih <Plug>GitGutterTextObjectInnerVisual
 xmap ah <Plug>GitGutterTextObjectOuterVisual
+
+" Vim Slime
+xmap <leader>p <Plug>SlimeRegionSend
+nmap <leader>p <Plug>SlimeParagraphSend
+nmap <leader>P <Plug>SlimeConfig
 
 " '.' in visual mode repeats the last change on every line
 vnoremap . :norm.<CR>
