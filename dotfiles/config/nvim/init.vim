@@ -21,6 +21,7 @@ Plug 'jpalardy/vim-slime'
 let g:slime_target = "tmux"
 let g:slime_default_config = {"socket_name": split($TMUX, ",")[0], "target_pane": ":.2"}
 let g:slime_no_mappings = 1
+let g:slime_dont_ask_default = 1
 
 Plug 'christoomey/vim-tmux-navigator'
 let g:tmux_navigator_no_mappings = 1
@@ -48,6 +49,9 @@ let g:vim_json_syntax_conceal = 0
 Plug 'leafgarland/typescript-vim'
 Plug 'mhartington/nvim-typescript'
 let g:nvim_typescript#type_info_on_hold = 1
+let g:nvim_typescript#signature_complete = 1
+let g:nvim_typescript#tsimport#template = 'import {%s} from "%s"'
+set noshowmode
 
 Plug 'justinmk/vim-sneak'
 let g:sneak#absolute_dir = 1
@@ -172,7 +176,8 @@ highlight ColorColumn ctermbg=Black
 
 " Coloured cursorline (:help cterm-colors)
 set cursorline
-highlight CursorLine ctermbg=Black cterm=NONE
+highlight CursorLine ctermbg=Black cterm=underline
+" highlight CursorLine ctermbg=Black cterm=NONE
 " autocmd InsertEnter * highlight CursorLine ctermbg=Red guifg=fg
 " autocmd InsertLeave * highlight CursorLine ctermbg=Blue guifg=fg
 
@@ -240,12 +245,15 @@ nnoremap <leader>R :!ag -l '\b<C-R><C-W>\b' \| xargs -I@ sed -i 's/\b<C-R><C-W>\
 vnoremap <leader>R "zy:!ag -l '\b<C-R><C-W>\b' \| xargs -I@ sed -i 's/\b<C-R><C-W>\b//g; T; w /dev/stdout' @ \| wc -l \| sed 's/$/ lines changed\n\n/'<C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><Left><Left><Left><Left>
 
 " TypeScript
-nnoremap gd :TSDef<CR>
-nnoremap gD :TSTypeDef<CR>
-nnoremap gr :TSRefs<CR>
-nnoremap gR :TSRename<CR>
-nnoremap gs :TSImport<CR>
-nnoremap gS :TSType<CR>
+nnoremap gd :YcmCompleter GoTo<CR>
+nnoremap gD :YcmCompleter GoToType<CR>
+nnoremap gr :YcmCompleter GoToReferences<CR>
+nnoremap gR :YcmCompleter RefactorRename 
+nnoremap gs :YcmCompleter FixIt<CR>
+nnoremap gS :YcmCompleter GetType<CR>
+nnoremap gl :YcmCompleter Format<CR>
+nnoremap gL :YcmCompleter OrganizeImports<CR>
+" nnoremap ... :YcmCompleter GetDoc<CR>
 
 " Unused potentially useful commands ('gm' and 'gl' are still available):
 " - TSDoc
