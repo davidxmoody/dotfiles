@@ -47,11 +47,6 @@ Plug 'elzr/vim-json', { 'for': 'json' }
 let g:vim_json_syntax_conceal = 0
 
 Plug 'leafgarland/typescript-vim'
-Plug 'mhartington/nvim-typescript'
-let g:nvim_typescript#type_info_on_hold = 1
-let g:nvim_typescript#signature_complete = 1
-let g:nvim_typescript#tsimport#template = 'import {%s} from "%s"'
-set noshowmode
 
 Plug 'justinmk/vim-sneak'
 let g:sneak#absolute_dir = 1
@@ -253,11 +248,10 @@ nnoremap gs :YcmCompleter FixIt<CR>
 nnoremap gS :YcmCompleter GetType<CR>
 nnoremap gl :YcmCompleter Format<CR>
 nnoremap gL :YcmCompleter OrganizeImports<CR>
-" nnoremap ... :YcmCompleter GetDoc<CR>
+nnoremap gm :YcmCompleter GetDoc<CR>
 
-" Unused potentially useful commands ('gm' and 'gl' are still available):
-" - TSDoc
-" - TSDefPreview
+" Quick hacky way to run prettier (should use ALE or other plugin instead)
+nnoremap <leader>P :silent %!./node_modules/.bin/prettier --stdin --parser=typescript --config=./src/.prettierrc<CR>
 
 " Quickfix/Location List window mappings
 autocmd FileType qf setl wrap
