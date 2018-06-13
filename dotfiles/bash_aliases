@@ -60,7 +60,7 @@ mkbash() {
   nvim + +startinsert "$1"
 }
 
-export SCRIPTS_DIR=$HOME/tmp/scripts
+export SCRIPTS_DIR=$HOME/.ad-hoc-scripts
 
 mkscript() {
   mkdir -p "$SCRIPTS_DIR"
