@@ -67,6 +67,7 @@ Plug 'scrooloose/nerdtree'
 let NERDTreeMapActivateNode='h'
 let NERDTreeIgnore=['^node_modules$', '^npm-debug.log$', '^.git$']
 let NERDTreeCaseSensitiveSort=1
+let NERDTreeNaturalSort=1
 let NERDTreeMapOpenInTab='X'
 let NERDTreeShowBookmarks=1
 
@@ -183,8 +184,6 @@ highlight CursorLine ctermbg=Black cterm=underline
 
 " Persistent undo
 set undofile
-set undolevels=1000
-set undoreload=10000
 
 " Status line
 set laststatus=2
