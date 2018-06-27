@@ -3,6 +3,7 @@ build/
 dist/
 android-sdk-linux/
 package-lock.json
+composer.lock
 *.png
 *.jpg
 *.svg
