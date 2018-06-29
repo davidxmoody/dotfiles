@@ -114,3 +114,6 @@ export GRADLE_OPTS="-Dorg.gradle.daemon=true"
 # Alias definitions
 [ -f ~/.bash_aliases ] && source ~/.bash_aliases
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+# Per-machine config
+[ -f ~/.bashrc-local ] && source ~/.bashrc-local
