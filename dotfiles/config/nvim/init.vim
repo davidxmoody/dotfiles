@@ -209,19 +209,12 @@ noremap <leader>C :cd <C-R>=fnameescape(systemlist('git rev-parse --show-topleve
 
 noremap <leader>b <C-^>
 noremap <leader>B :History!<CR>
-" noremap <leader>q :q<CR>
-" noremap <leader>Q :q!<CR>
 
-noremap <C-b> :q<CR>
-inoremap <C-b> <Esc>:q<CR>
+noremap <C-d> :q<CR>
+inoremap <C-d> <Esc>:q<CR>
 
-" Window movement
 noremap <leader>s <C-W>s
 noremap <leader>v <C-W>v
-" noremap <leader>w <C-W>w
-" noremap <leader>W <C-W>W
-noremap <leader>w <Nop>
-noremap <leader>W <Nop>
 
 " Search
 nnoremap <leader>* :Ag! <C-R><C-W><CR>
