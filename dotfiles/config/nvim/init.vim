@@ -165,25 +165,20 @@ set number
 set showcmd
 set backupcopy=yes
 set mouse=nv
-highlight! link QuickFixLine Normal
+set nowrap
+set undofile
 
+" Highlighting
 set colorcolumn=80
 highlight ColorColumn ctermbg=Black
-
-" Coloured cursorline (:help cterm-colors)
+highlight link QuickFixLine Normal
 set cursorline
 highlight CursorLine ctermbg=Black cterm=underline
 " highlight CursorLine ctermbg=Black cterm=NONE
 " autocmd InsertEnter * highlight CursorLine ctermbg=Red guifg=fg
 " autocmd InsertLeave * highlight CursorLine ctermbg=Blue guifg=fg
-
-" Temp fix for printing '[2 q' spam to the console, see here for more details:
-" https://github.com/neovim/neovim/issues/7049
-" https://github.com/neovim/neovim/pull/6997
-" set guicursor=
-
-" Persistent undo
-set undofile
+" highlight Normal
+highlight NormalNC cterm=NONE ctermbg=236
 
 " Status line
 set laststatus=2
@@ -214,8 +209,8 @@ noremap <leader>C :cd <C-R>=fnameescape(systemlist('git rev-parse --show-topleve
 
 noremap <leader>b <C-^>
 noremap <leader>B :History!<CR>
-noremap <leader>q :q<CR>
-noremap <leader>Q :q!<CR>
+" noremap <leader>q :q<CR>
+" noremap <leader>Q :q!<CR>
 
 noremap <C-b> :q<CR>
 inoremap <C-b> <Esc>:q<CR>
@@ -335,9 +330,6 @@ set shiftwidth=2
 set expandtab
 set smarttab
 set autoindent
-
-" No wrapping
-set nowrap
 
 " Navigation with htns
 noremap t j
