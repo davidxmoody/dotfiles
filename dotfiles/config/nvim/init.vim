@@ -217,6 +217,9 @@ noremap <leader>B :History!<CR>
 noremap <leader>q :q<CR>
 noremap <leader>Q :q!<CR>
 
+noremap <C-b> :q<CR>
+inoremap <C-b> <Esc>:q<CR>
+
 " Window movement
 noremap <leader>s <C-W>s
 noremap <leader>v <C-W>v
