@@ -139,3 +139,9 @@ function notNull<T>(maybeNull: T | null): maybeNull is T {
 	return maybeNull !== null
 }
 endsnippet
+
+snippet stc "styled-component"
+const ${1:Component} = styled.${2:div}\`
+	${3:display: flex;}
+\`
+endsnippet
