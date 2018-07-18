@@ -149,6 +149,7 @@ alias gdp='git diff ORIG_HEAD -- package.json'
 alias groot='cd "$(git rev-parse --show-toplevel)"'
 alias gy='git_show_yesterday'
 alias gitcountdiff='git --no-pager diff --color=never | grep -v -E "^(\+\+\+|---) "| grep -E "^(-|\+)" | count'
+alias gw='git show'
 
 gg() {
   local dir=${1-$P_DIR}
@@ -217,6 +218,13 @@ alias nb='npm run build'
 alias nverp='npm version patch'
 alias nverm='npm version minor'
 alias nc='npm-check -u'
+
+# Navy
+alias nvd='navy develop'
+alias nvu='navy update'
+alias nvl='navy live'
+alias nvp='navy ps'
+alias nv='navy'
 
 # Misc
 alias f='fg'
