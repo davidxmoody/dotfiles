@@ -160,6 +160,19 @@ gg() {
     xargs -n1 -P0 git_fetch_project
 }
 
+ggl() {
+  (
+    local dir=${1-$P_DIR}
+    dir=${dir%/}
+
+    for gr in "$dir"/*/.git; do
+      local proj_dir="${gr%/.git}"
+      cd "$proj_dir"
+      echo "$(git_status)	$(tmux-get-window-name "$proj_dir")" | expand -t8
+    done
+  )
+}
+
 gclone() {
   local git_repo=$1
   local project_dir=${2-p}
