@@ -64,12 +64,23 @@ let g:fzf_commits_log_options = '--color --graph --pretty=tformat:"%Cred%h%Crese
 
 " NERDTree
 Plug 'scrooloose/nerdtree'
-let NERDTreeMapActivateNode='h'
 let NERDTreeIgnore=['^node_modules$', '^npm-debug.log$', '^.git$']
 let NERDTreeCaseSensitiveSort=1
 let NERDTreeNaturalSort=1
-let NERDTreeMapOpenInTab='X'
 let NERDTreeShowBookmarks=1
+
+let NERDTreeMapActivateNode='h'
+let NERDTreeMapPreview='H'
+let NERDTreeMapOpenSplit='s'
+let NERDTreeMapPreviewSplit='S'
+let NERDTreeMapOpenVSplit='v'
+let NERDTreeMapPreviewVSplit='V'
+let NERDTreeMapJumpFirstChild='{'
+let NERDTreeMapJumpLastChild='}'
+
+" 'Disable' these by mapping to a key I don't use
+let NERDTreeMapOpenInTab='X'
+let NERDTreeMapOpenInTabSilent='X'
 
 Plug 'Xuyuanp/nerdtree-git-plugin'
 let g:NERDTreeIndicatorMapCustom = {
