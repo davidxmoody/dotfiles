@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+set -e
+
+cd "${1-$P_DIR}"
+
+for gd in */.git; do
+  [[ "$gd" == "k8s-resources/.git" ]] && continue
+
+  commits="$(git --git-dir="$gd" --no-pager lg --after=yesterday)"
+
+  if [[ ! -z "$commits" ]]; then
+    echo "# ${gd%/.git}"
+    echo "$commits"
+    echo
+  fi
+done

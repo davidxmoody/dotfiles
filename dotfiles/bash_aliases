@@ -147,18 +147,12 @@ alias gstd='git stash drop'
 alias glm='git lg --author="David Moody"'
 alias gdp='git diff ORIG_HEAD -- package.json'
 alias groot='cd "$(git rev-parse --show-toplevel)"'
-alias gy='git_show_yesterday'
 alias gitcountdiff='git --no-pager diff --color=never | grep -v -E "^(\+\+\+|---) "| grep -E "^(-|\+)" | count'
+alias gitcopydiff='git --no-pager diff --color=never | copy'
 alias gw='git show'
-
-gg() {
-  local dir=${1-$P_DIR}
-  dir=${dir%/}
-
-  echo "$dir"/*/.git | \
-    sed 's/\/.git \?/\n/g' | \
-    xargs -n1 -P0 git_fetch_project
-}
+alias gy='git-show-yesterday'
+alias gyy='git-projects-recent-commits'
+alias gg='git-fetch-all-projects'
 
 ggl() {
   (

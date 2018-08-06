@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+set -e
+
+{
+  echo "Fetching..."
+  echo
+  git-fetch-all-projects
+  echo "Finished"
+} | less -R
