@@ -153,6 +153,7 @@ alias gw='git show'
 alias gy='git-show-yesterday'
 alias gyy='git-projects-recent-commits'
 alias gg='git-fetch-all-projects'
+alias ggh='cat "$HOME/.fetch-all-projects-history/$(ls $HOME/.fetch-all-projects-history | head -n1)"'
 
 ggl() {
   (
