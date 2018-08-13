@@ -14,8 +14,8 @@ if [ -d "$proj/.git" ] && cd "$proj" && [[ ! -z "$(git remote -v)" ]] && git fet
   color=$color_bad
   if [[ "$commits_behind" -gt 0 ]]; then
     git merge --ff-only --quiet @{upstream} && color=$color_good
-    echo -e "${color}${padded_commits_behind}${color_reset} $(basename "$proj")"
-    git --no-pager lg ORIG_HEAD..
+    echo -e "#${color}${padded_commits_behind}${color_reset} $(basename "$proj")"
+    git --no-pager lgs ORIG_HEAD..
     echo
   fi
 else

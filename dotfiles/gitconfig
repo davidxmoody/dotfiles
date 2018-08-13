@@ -9,7 +9,8 @@
 [blame]
   date = short
 [alias]
-  lg = log --color --graph --pretty=tformat:'%Cred%h%Creset - %C(bold blue)%<(19)%aN %C(yellow)%d%Creset %s %Cgreen(%ar)%Creset' --abbrev-commit
+  lg = log --color --graph --pretty=tformat:'%Cred%h%Creset - %C(bold blue)%<(19)%aN %C(yellow)%d%Creset %s %Cgreen(%ar)%Creset'
+  lgs = log --color --pretty=tformat:'%C(bold blue)%<(16)%aN %Creset%s %Cgreen(%ar)%Creset'
 [include]
   path = ~/.git_include
 [pull]
