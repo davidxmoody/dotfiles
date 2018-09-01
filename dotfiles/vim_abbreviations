@@ -1,33 +1,53 @@
+" vi: ft=vim
+
 if !exists(":Abolish")
   finish
 endif
 
 let g:abolish_save_file = expand('<sfile>:p')
 
+iab <buffer> i I
+iab <buffer> (i (I
+
 iab <buffer> h the
 iab <buffer> H The
+iab <buffer> (h (the
+
 iab <buffer> t to
 iab <buffer> T To
+iab <buffer> (t (to
+
 iab <buffer> d and
 iab <buffer> D And
+iab <buffer> (d (and
+
 iab <buffer> j just
 iab <buffer> J Just
+iab <buffer> (j (just
+
 iab <buffer> q quick
 iab <buffer> Q Quick
+iab <buffer> (q (quick
+
 iab <buffer> w with
 iab <buffer> W With
+iab <buffer> (w (with
+
 iab <buffer> v very
 iab <buffer> V Very
+iab <buffer> (v (very
+
 iab <buffer> b be
 iab <buffer> B Be
+iab <buffer> (b (be
+
 iab <buffer> f of
 iab <buffer> F Of
+iab <buffer> (f (of
 
 Abolish -buffer wh{,s} what{,'s}
 Abolish -buffer th{,s} that{,'s}
 
-iab <buffer> i I
-iab <buffer> (i (I
 Abolish -buffer im I'm
 Abolish -buffer iv I've
 Abolish -buffer il I'll
@@ -42,6 +62,8 @@ Abolish -buffer {do,did,ca,is,wo,have,has,was,does,could,would,are,were,had,shou
 
 Abolish -buffer {al,}tho{,u} {}though
 Abolish -buffer thro{,u} through
+Abolish -buffer mb maybe
+Abolish -buffer ab about
 
 Abolish -buffer monday Monday
 Abolish -buffer tuesday Tuesday
@@ -62,10 +84,6 @@ Abolish -buffer october October
 Abolish -buffer november November
 Abolish -buffer december December
 
-Abolish -buffer jsc JavaScript
-Abolish -buffer cof CoffeeScript
-
-Abolish -buffer pmo{,s} Pomodoro{}
 Abolish -buffer def definitely
 Abolish -buffer prob probably
 Abolish -buffer bc because

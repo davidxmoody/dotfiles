@@ -235,6 +235,9 @@ alias nvp='navy ps'
 alias nv='navy'
 
 # Misc
+alias dn='diary new -e nvim'
+alias de='diary edit -e nvim'
+alias dl='diary list'
 alias f='fg'
 alias ag='ag --smart-case'
 alias dus='du -Dhs'
