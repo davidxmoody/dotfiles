@@ -48,7 +48,12 @@ vnoremap <C-F> <Nop>
 let g:user_emmet_leader_key='<C-F>'
 
 Plug 'michaeljsmith/vim-indent-object'
+
 Plug 'SirVer/ultisnips'
+let g:UltiSnipsExpandTrigger = '<C-T>'
+let g:UltiSnipsJumpForwardTrigger = '<C-T>'
+let g:UltiSnipsJumpBackwardTrigger = '<C-N>'
+
 
 " Git plugins ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -83,7 +88,7 @@ let g:fzf_commits_log_options = '--color --graph --pretty=tformat:"%Cred%h%Crese
 
 " NERDTree plugin ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
 let NERDTreeIgnore=['^node_modules$', '^npm-debug.log$', '^.git$']
 let NERDTreeCaseSensitiveSort=1
 let NERDTreeNaturalSort=1
@@ -102,7 +107,7 @@ let NERDTreeMapJumpLastChild='}'
 let NERDTreeMapOpenInTab='X'
 let NERDTreeMapOpenInTabSilent='X'
 
-Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'Xuyuanp/nerdtree-git-plugin', {'on': 'NERDTreeToggle'}
 let g:NERDTreeIndicatorMapCustom = {
   \ "Modified"  : "✹",
   \ "Staged"    : "✚",
@@ -140,10 +145,6 @@ let g:vim_json_syntax_conceal = 0
 
 Plug 'leafgarland/typescript-vim'
 " Plug 'HerringtonDarkholme/yats.vim'
-" Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
-
-" Plug 'Quramy/tsuquyomi'
-" let g:tsuquyomi_disable_default_mappings = 1
 
 Plug 'jparise/vim-graphql', {'for': 'graphql'}
 
@@ -158,40 +159,18 @@ au FileType css setlocal omnifunc=csscomplete#CompleteCSS
 au FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 let g:ycm_always_populate_location_list = 1
 
-let g:UltiSnipsExpandTrigger = '<C-T>'
-let g:UltiSnipsJumpForwardTrigger = '<C-T>'
-let g:UltiSnipsJumpBackwardTrigger = '<C-N>'
-
-" Syntastic
-" Plug 'scrooloose/syntastic'
-" let g:syntastic_aggregate_errors = 1
-
-" let g:syntastic_javascript_checkers = ['eslint']
-" let g:syntastic_javascript_eslint_exec = 'eslint_d'
-" let g:syntastic_typescript_checkers = ['tslint']
-
-" let g:syntastic_json_checkers = ['jsonlint']
-" au! BufRead,BufNewFile *.json set filetype=json
-
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 0
-" let g:syntastic_check_on_open = 0
-" let g:syntastic_check_on_wq = 0
-
-" let g:syntastic_typescript_checkers = ['tsuquyomi']
-
-" let g:ale_lint_on_text_changed = 'never'
-" let g:ale_lint_on_enter = 0
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_enter = 0
+let g:ale_completion_enabled = 1
+let g:ale_linters_explicit = 1
 let g:ale_linters = {
-\   'typescript': ['tslint', 'tsserver'],
+\   'typescript': ['tslint'],
 \   'graphql': ['gqlint', 'prettier'],
 \}
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'typescript': ['prettier', 'tslint', 'remove_trailing_lines', 'trim_whitespace'],
 \}
-let g:ale_completion_enabled = 1
-let g:ale_linters_explicit = 1
 Plug 'w0rp/ale'
 
 " End of plugin manager setup ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -253,7 +232,6 @@ highlight NormalNC cterm=NONE ctermbg=236
 
 " Status line ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-set laststatus=2
 set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
 highlight StatusLine ctermfg=White cterm=reverse
 highlight StatusLineNC cterm=reverse
@@ -310,16 +288,6 @@ nnoremap gl :YcmCompleter Format<CR>
 nnoremap gL :YcmCompleter OrganizeImports<CR>
 nnoremap gm :YcmCompleter GetDoc<CR>
 
-" nnoremap gd :TsuDefinition<CR>
-" nnoremap gD :TsuTypeDefinition<CR>
-" nnoremap gr :TsuReferences<CR>
-" nnoremap gR :TsuRenameSymbol 
-" nnoremap gs :TsuQuickFix<CR>
-" nnoremap gS :YcmCompleter GetType<CR>
-" nnoremap gl :YcmCompleter Format<CR>
-" nnoremap gL :YcmCompleter OrganizeImports<CR>
-" nnoremap gm :YcmCompleter GetDoc<CR>
-
 autocmd FileType qf setl wrap
 autocmd FileType qf setl nonumber
 autocmd FileType qf nnoremap <buffer> <Enter> <Enter>
@@ -355,10 +323,10 @@ nnoremap ; :
 imap  <Nop>
 inoremap ! 
 
-" noremap _ :lfirst<CR>
-" noremap \| :lnext<CR>
-nmap <silent> - <Plug>(ale_next_wrap)
-nmap <silent> _ <Plug>(ale_previous_wrap)
+noremap _ :lfirst<CR>
+noremap \| :lnext<CR>
+" nmap <silent> - <Plug>(ale_next_wrap)
+" nmap <silent> _ <Plug>(ale_previous_wrap)
 
 noremap <C-K> cl<CR><Esc>lf<Space>
 
