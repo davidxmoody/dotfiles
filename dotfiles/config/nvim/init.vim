@@ -19,7 +19,6 @@ Plug 'tpope/vim-commentary'
 " Navigation plugins ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Plug 'haya14busa/incsearch.vim'
-set hlsearch
 let g:incsearch#auto_nohlsearch = 1
 map j  <Plug>(incsearch-nohl-n)
 map J  <Plug>(incsearch-nohl-N)
@@ -37,7 +36,6 @@ let g:sneak#use_ic_scs = 1
 " Editing plugins ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Plug 'Raimondi/delimitMate'
-set backspace=indent,eol,start
 let delimitMate_expand_cr = 1
 let delimitMate_nesting_quotes = ['"',"'",'`']
 
@@ -183,7 +181,6 @@ syntax on
 
 set ignorecase
 set smartcase
-set report=0
 set scrolloff=2
 set sidescrolloff=1
 set list
@@ -197,14 +194,13 @@ set backupcopy=yes
 set mouse=nv
 set nowrap
 set undofile
+set lazyredraw
 
 " Indenting
 set tabstop=2
 set softtabstop=2
-set shiftwidth=2
+set shiftwidth=0 " Use value of tabstop
 set expandtab
-set smarttab
-set autoindent
 
 " gf filename options
 set suffixesadd=.js,.json,.jsx,.coffee,.css,.scss,.ts,.tsx
@@ -232,11 +228,12 @@ highlight NormalNC cterm=NONE ctermbg=236
 
 " Status line ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
+set statusline=%<%n\ %f\ %h%q%m%r%=\ %07.(%c%V%)\ %07.(%l/%L%)%(\ %y%)
 highlight StatusLine ctermfg=White cterm=reverse
 highlight StatusLineNC cterm=reverse
 
 " Command line helpers ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 cnoremap cd. lcd %:p:h
 cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<cr>
 command Cppath let @+ = expand("%:p")
@@ -369,7 +366,6 @@ tnoremap <Esc> <C-\><C-n>
 func! PythonMode()
   set tabstop=4
   set softtabstop=4
-  set shiftwidth=4
 endfu
 au BufNewFile,BufRead *.py call PythonMode()
 
@@ -383,7 +379,6 @@ func! WordProcessorMode()
   setl wrap
   setl linebreak
   setl breakat=\ 
-  setl display=lastline
   setl formatoptions=
   setl spell spelllang=en_gb
   source ~/.vim_abbreviations
@@ -391,7 +386,6 @@ func! WordProcessorMode()
   " Indenting
   setl tabstop=2
   setl softtabstop=0
-  setl shiftwidth=2
   setl expandtab
   setl nosmarttab
   setl noautoindent
