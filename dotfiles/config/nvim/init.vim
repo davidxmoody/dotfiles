@@ -228,7 +228,7 @@ highlight NormalNC cterm=NONE ctermbg=236
 
 " Status line ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-set statusline=%<%n\ %f\ %h%q%m%r%=\ %07.(%c%V%)\ %07.(%l/%L%)%(\ %y%)
+set statusline=%<%f\ %h%q%m%r%=\ %07.(%c%V%)\ %07.(%l/%L%)%(\ %y%)
 highlight StatusLine ctermfg=White cterm=reverse
 highlight StatusLineNC cterm=reverse
 
