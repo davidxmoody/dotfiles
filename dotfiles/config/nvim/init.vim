@@ -273,7 +273,7 @@ nnoremap <leader>R :!ag -l '\b<C-R><C-W>\b' \| xargs -I@ sed -i 's/\b<C-R><C-W>\
 vnoremap <leader>R "zy:!ag -l '\b<C-R><C-W>\b' \| xargs -I@ sed -i 's/\b<C-R><C-W>\b//g; T; w /dev/stdout' @ \| wc -l \| sed 's/$/ lines changed\n\n/'<C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><Left><Left><Left><Left>
 
 vnoremap . :norm.<CR>
-map <leader>. /\<+\><CR>.
+map <leader>. /+<CR>.
 
 nnoremap gd :YcmCompleter GoTo<CR>
 nnoremap gD :YcmCompleter GoToType<CR>
