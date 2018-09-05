@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+set -e
+
+p_dir=${P_DIR-$HOME/p}
+all_proj_dirs=$(echo "$p_dir"/*/.git | sed 's/\/.git /\n/g; s/\/.git$//' | while read dir; do echo "$([[ ! -z "$(git --git-dir="${dir}/.git" --work-tree="${dir}" status --porcelain 2>/dev/null)" ]] && echo -n "*" || echo -n " ") ${dir#$P_DIR/}"; done | sort -r)
+
+proj=$(echo "$all_proj_dirs" | fzf --no-sort --preview "git --git-dir='$p_dir/{-1}/.git' --work-tree='$p_dir/{-1}' status -sb -uall" | sed 's/^..//')
+
+echo "$p_dir/$proj"

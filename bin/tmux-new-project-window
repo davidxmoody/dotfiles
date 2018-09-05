@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 p_dir=${P_DIR-$HOME/p}
-proj=$(ls -1t "$p_dir" | fzf --preview "git --git-dir='$p_dir/{}/.git' --work-tree='$p_dir/{}' status -sb -uall")
+proj=$(tmux-choose-project)
 
 if [ -z "$proj" ]; then
   tmux new-window -c "$HOME"
 else
-  tmux new-window -c "$p_dir/$proj"
+  tmux new-window -c "$proj"
 fi

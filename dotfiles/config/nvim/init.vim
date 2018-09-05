@@ -260,6 +260,7 @@ noremap <C-d> :q<CR>
 inoremap <C-d> <Esc>:q<CR>
 noremap <leader>s <C-W>s
 noremap <leader>v <C-W>v
+noremap <leader>w :set wrap!<CR>
 
 nnoremap <leader>* :Ag! <C-R><C-W><CR>
 vnoremap <leader>* "zy:Ag! <C-R><C-R>z<CR>
