@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+set -e
+
+[[ ! -z "$1" ]] && cd "$1"
+
+if branch=$(git rev-parse --abbrev-ref HEAD 2> /dev/null); then
+  if [[ "$branch" == "HEAD" ]]; then
+    echo '(DETACHED*) '
+    exit
+  fi
+
+  [[ "$branch" == "master" ]] && branch="m"
+
+  status=$(git status --porcelain 2> /dev/null)
+  status_indicator=''
+  [[ "$status" != "" ]] && status_indicator='*'
+
+  commits_behind=$(git rev-list --count HEAD..@{upstream} 2>/dev/null)
+  commits_ahead=$(git rev-list --count @{upstream}..HEAD 2>/dev/null)
+  stashes_count=$(git rev-list --count --walk-reflogs stash 2>/dev/null || true)
+  commits_indicator=''
+  [[ "$commits_ahead" -gt 0 ]] && commits_indicator="${commits_indicator}+${commits_ahead}"
+  [[ "$commits_behind" -gt 0 ]] && commits_indicator="${commits_indicator}-${commits_behind}"
+  [[ "$stashes_count" -gt 0 ]] && commits_indicator="${commits_indicator}#${stashes_count}"
+
+  echo "(${branch}${commits_indicator}${status_indicator}) "
+fi

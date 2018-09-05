@@ -35,34 +35,6 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# Custom prompt (with git support)
-git_status() {
-  local branch
-  if branch=$(git rev-parse --abbrev-ref HEAD 2> /dev/null); then
-    if [[ "$branch" == "HEAD" ]]; then
-      echo '(DETACHED*) '
-      return
-    fi
-
-    # Save space by abbreviating the most common branch name
-    [[ "$branch" == "master" ]] && branch="m"
-
-    local status=$(git status --porcelain 2> /dev/null)
-    local status_indicator=''
-    [[ "$status" != "" ]] && status_indicator='*'
-
-    local commits_behind=$(git rev-list --count HEAD..@{upstream} 2>/dev/null)
-    local commits_ahead=$(git rev-list --count @{upstream}..HEAD 2>/dev/null)
-    local stashes_count=$(git rev-list --count --walk-reflogs stash 2>/dev/null)
-    local commits_indicator=''
-    [[ "$commits_ahead" -gt 0 ]] && commits_indicator="${commits_indicator}+${commits_ahead}"
-    [[ "$commits_behind" -gt 0 ]] && commits_indicator="${commits_indicator}-${commits_behind}"
-    [[ "$stashes_count" -gt 0 ]] && commits_indicator="${commits_indicator}#${stashes_count}"
-
-    echo "(${branch}${commits_indicator}${status_indicator}) "
-  fi
-}
-
 jobs_status() {
   local last_job_num=$(jobs | tail -n1 | cut -f1 -d'+') 
   if [[ ! -z "$last_job_num" ]]; then
@@ -72,7 +44,7 @@ jobs_status() {
   fi
 }
 
-PS1='\[\033]0;\w\007\]\[\e[0;31m\]\w \[\e[0;33m\]$(git_status)\[\e[0;92m\]$(jobs_status)\[\e[0m\]'
+PS1='\[\033]0;\w\007\]\[\e[0;31m\]\w \[\e[0;33m\]$(git-short-status)\[\e[0;92m\]$(jobs_status)\[\e[0m\]'
 PS2='\[\e[0;31m\]>\[\e[0m\] '
 
 # Set some custom frequently used directories

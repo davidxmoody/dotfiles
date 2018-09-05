@@ -163,7 +163,7 @@ ggl() {
     for gr in "$dir"/*/.git; do
       local proj_dir="${gr%/.git}"
       cd "$proj_dir"
-      echo "$(git_status)	$(tmux-get-window-name "$proj_dir")" | expand -t8
+      echo "$(git-short-status)	$(tmux-get-window-name "$proj_dir")" | expand -t8
     done
   )
 }
