@@ -45,13 +45,15 @@ iab <buffer> f of
 iab <buffer> F Of
 iab <buffer> (f (of
 
+iab <buffer> id I'd
+iab <buffer> Id I'd
+
 Abolish -buffer wh{,s} what{,'s}
 Abolish -buffer th{,s} that{,'s}
 
 Abolish -buffer im I'm
 Abolish -buffer iv I've
 Abolish -buffer il I'll
-Abolish -buffer id I'd
 
 Abolish -buffer ie i.e.
 Abolish -buffer eg e.g.
