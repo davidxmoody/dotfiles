@@ -119,8 +119,8 @@ gl() {
 glp() {
   p "$@" && pwd && gl && cd - >/dev/null
 }
-alias gd='git diff'
-alias gdc='git diff --cached'
+alias gd='git diff -- ":(top)" ":(exclude,top)package-lock.json"'
+alias gdc='git diff --cached -- ":(top)" ":(exclude,top)package-lock.json"'
 alias ga='git add'
 alias gaa='git add -A :/'
 alias gaac='git add -A :/ && git commit'
@@ -149,7 +149,7 @@ alias gdp='git diff ORIG_HEAD -- package.json'
 alias groot='cd "$(git rev-parse --show-toplevel)"'
 alias gitcountdiff='git --no-pager diff --color=never | grep -v -E "^(\+\+\+|---) "| grep -E "^(-|\+)" | count'
 alias gitcopydiff='git --no-pager diff --color=never | copy'
-alias gw='git show'
+alias gw='git show -- ":(top)" ":(exclude,top)package-lock.json"'
 alias gy='git-show-yesterday'
 alias gyy='git-projects-recent-commits'
 alias gg='git-fetch-all-projects'
