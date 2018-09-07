@@ -254,7 +254,6 @@ alias getclip='xclip -selection clipboard -o'
 alias wrstats="grep '^m' ~/.workrave/historystats | rev | cut -d' ' -f 2 | rev | tail -n20"
 alias gpgc='gpg -c --cipher-algo AES256'
 alias ports='netstat -tulpn'
-alias count='sort | uniq -c | sort -nr'
 alias cleanupdocker='docker rmi $(docker images -qf dangling=true)'
 alias restartwifi='sudo service network-manager restart'
 alias echopath='echo $PATH | sed "s/:/\n/g"'
