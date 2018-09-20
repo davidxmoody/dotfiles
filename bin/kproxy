@@ -7,7 +7,7 @@ SERVICE=${2-es-search}
 LOCAL_PORT=${3-9200}
 REMOTE_PORT=${4-9200}
 
-POD=$(kubectl -n "$NAMESPACE" get pods | grep "$SERVICE" | awk '{print $1}' | head -n1)
+POD=$(kubectl -n "$NAMESPACE" get pods | grep "Running" | grep "$SERVICE" | awk '{print $1}' | head -n1)
 
 [[ -z "$POD" ]] && echo "No pod found for namespace: '$NAMESPACE' and service: '$SERVICE'" >&2 && exit 1
 
