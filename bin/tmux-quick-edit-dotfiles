@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+rc_dir=${RC_DIR-$HOME/p/dotfiles}
+
+file=$(git --git-dir="$rc_dir/.git" ls-files | fzf --preview "git --git-dir='$rc_dir/.git' --work-tree='$rc_dir' diff -- '{}'")
+
+tmux new-window -c "$RC_DIR" "nvim '$file'"
