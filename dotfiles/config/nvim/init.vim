@@ -142,6 +142,7 @@ Plug 'elzr/vim-json', {'for': 'json'}
 let g:vim_json_syntax_conceal = 0
 
 Plug 'leafgarland/typescript-vim'
+" Plug 'peitalin/vim-jsx-typescript'
 " Plug 'HerringtonDarkholme/yats.vim'
 
 Plug 'jparise/vim-graphql', {'for': 'graphql'}
@@ -167,7 +168,7 @@ let g:ale_linters = {
 \}
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'typescript': ['prettier', 'tslint', 'remove_trailing_lines', 'trim_whitespace'],
+\   'typescript': ['prettier', 'remove_trailing_lines', 'trim_whitespace'],
 \}
 Plug 'w0rp/ale'
 
@@ -276,6 +277,8 @@ vnoremap <leader>R "zy:!ag -l '\b<C-R><C-W>\b' \| xargs -I@ sed -i 's/\b<C-R><C-
 vnoremap . :norm.<CR>
 map <leader>. /+<CR>.
 
+noremap <leader>f :ALEFix<CR>
+
 nnoremap gd :YcmCompleter GoTo<CR>
 nnoremap gD :YcmCompleter GoToType<CR>
 nnoremap gr :YcmCompleter GoToReferences<CR>
@@ -364,6 +367,7 @@ noremap <silent> <leader>T :NERDTreeFind<CR>
 tnoremap <Esc> <C-\><C-n>
 
 " Python mode ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 func! PythonMode()
   set tabstop=4
   set softtabstop=4
@@ -371,6 +375,7 @@ endfu
 au BufNewFile,BufRead *.py call PythonMode()
 
 " English text editing (local to buffer) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 func! WordProcessorMode()
   setl filetype=markdown
 
