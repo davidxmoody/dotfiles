@@ -273,6 +273,7 @@ alias https='http --default-scheme=https'
 dotpreview() {
   mkdir -p /tmp/dotpreview
   local outfile=/tmp/dotpreview/$(basename "${1%.dot}").png
+  echo "$outfile"
   dot -Tpng "$1" -o "$outfile" && op "$outfile"
 }
 
