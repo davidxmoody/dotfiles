@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+set -e
+
+[[ ! -d "$DIARY_DIR" ]] && echo "DIARY_DIR does not exist" >&2 && exit 1
+
+cd "$DIARY_DIR"
+
+subdir=new-entries/$(date +%Y/%m/%d)
+filename=diary-$(date +%H-%M).md
+
+mkdir -p "$subdir"
+
+nvim "$subdir/$filename"
+
+rmdir --ignore-fail-on-non-empty "$subdir"
