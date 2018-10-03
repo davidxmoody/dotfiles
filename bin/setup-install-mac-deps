@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+set -e
+
+brew install tmux neovim ag bash python3 coreutils findutils gnu-sed n vifm tree
+brew cask install iterm2

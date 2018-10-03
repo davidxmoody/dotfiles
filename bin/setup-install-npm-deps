@@ -5,10 +5,10 @@ npm info "eslint-config-airbnb@latest" peerDependencies --json | \
   xargs npm i -g "eslint_d" "eslint-config-airbnb@latest"
 
 npm i -g \
-  npm-check \
+  diff-so-fancy \
   http-server \
   jsonlint \
-  diff-so-fancy \
+  npm-check \
   ramda-cli \
   tslint \
   typescript

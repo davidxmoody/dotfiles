@@ -23,9 +23,7 @@ check_installed() {
 echo "# core"
 check_installed bash "${BASH_VERSION%%\(*}"
 check_installed git "$(git --version 2>/dev/null | sed 's/git version //')"
-check_installed node "$(node --version 2>/dev/null)"
-check_installed npm "$(npm --version 2>/dev/null)"
-check_installed python2 "$(python2 --version 2>&1 | grep -o '[0-9.]\+')"
+check_installed python "$(python --version 2>&1 | grep -o '[0-9.]\+')"
 check_installed python3 "$(python3 --version | grep -o '[0-9.]\+')"
 echo
 
@@ -34,6 +32,7 @@ check_installed nvim "$(nvim --version | head -n1 | grep -o 'v[0-9.]\+')"
 check_installed ag
 check_installed fzf
 check_installed tmux
+check_installed vifm
 check_installed sed "$(sed --version 2>&1 | head -n1 | grep -o '(GNU sed)')"
 echo
 
@@ -41,18 +40,20 @@ echo "# tools"
 check_installed xargs
 check_installed watch
 check_installed jq
-check_installed meld
 check_installed sqlite3
+check_installed tree
 echo
 
-echo "# npm"
-check_installed ramda
-check_installed jsonlint
-check_installed eslint_d
-check_installed tslint
-check_installed tsc
+echo "# node"
+check_installed n
+check_installed node "$(node --version 2>/dev/null)"
+check_installed npm "$(npm --version 2>/dev/null)"
 check_installed diff-so-fancy
-check_installed npm-check
+check_installed eslint_d
 check_installed http-server
-check_installed csvtojson
+check_installed jsonlint
+check_installed npm-check
+check_installed ramda
+check_installed tsc
+check_installed tslint
 echo
