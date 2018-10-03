@@ -185,7 +185,8 @@ set smartcase
 set scrolloff=2
 set sidescrolloff=1
 set list
-set listchars=tab:›\ ,trail:•,extends:>,precedes:<,nbsp:.
+set listchars=tab:→\ ,nbsp:␣,trail:•,extends:⟩,precedes:⟨
+set showbreak=↪\ 
 set directory=~/.vim-swap,~/tmp,/var/tmp,/tmp,.
 set clipboard=unnamedplus
 set nojoinspaces
@@ -380,6 +381,8 @@ func! WordProcessorMode()
   setl filetype=markdown
 
   " Other options
+  setl listchars=tab:→\ ,nbsp:␣,extends:⟩,precedes:⟨
+  setl showbreak=
   setl nocursorline
   setl nonumber
   setl wrap
