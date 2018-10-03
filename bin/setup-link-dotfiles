@@ -9,7 +9,7 @@ for source_file in $(find "$SOURCE_DIR" -type f); do
     target_file=$TARGET_DIR/.${without_suffix#$SOURCE_DIR/}
     [[ -f "$target_file" ]] && continue
     mkdir -pv "$(dirname "$target_file")"
-    cp -bv "$source_file" "$target_file"
+    cp -v "$source_file" "$target_file"
   else
     target_file=$TARGET_DIR/.${source_file#$SOURCE_DIR/}
     [[ "$(readlink "$target_file")" = "$source_file" ]] && continue
