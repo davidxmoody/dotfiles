@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+for dir in tmp p .vim-swap .desktop .templates .public .config; do
+  mkdir -pv "$HOME/$dir"
+done
+
 SOURCE_DIR=$HOME/p/dotfiles/dotfiles
 TARGET_DIR=$HOME
 
