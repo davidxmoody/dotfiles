@@ -209,7 +209,6 @@ alias uppp='cd ../../..'
 alias b='cd - >/dev/null'
 alias cdp='cd $P_DIR'
 alias cdt='cd $TMP_DIR'
-alias cdd='cd $DIARY_DIR'
 alias cddb='cd $DBOX'
 
 # NPM
@@ -234,9 +233,13 @@ alias nvl='navy live'
 alias nvp='navy ps'
 alias nv='navy'
 
-# Misc
+# Diary
+alias cdd='cd $DIARY_DIR'
 alias dn='diary-new'
 alias de='diary-edit'
+alias dl='diary-list'
+
+# Misc
 alias ag='ag --smart-case'
 alias dus='du -Dhs'
 alias dun='du -Ds node_modules/{@*/*,*} | sort -nr'
