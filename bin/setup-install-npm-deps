@@ -8,6 +8,7 @@ npm i -g \
   diff-so-fancy \
   http-server \
   jsonlint \
+  markdownlint-cli \
   npm-check \
   ramda-cli \
   tslint \

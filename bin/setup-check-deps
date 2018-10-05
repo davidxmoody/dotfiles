@@ -56,4 +56,5 @@ check_installed npm-check
 check_installed ramda
 check_installed tsc
 check_installed tslint
+check_installed markdownlint
 echo

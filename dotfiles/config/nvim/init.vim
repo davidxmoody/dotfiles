@@ -165,6 +165,7 @@ let g:ale_linters_explicit = 1
 let g:ale_linters = {
 \   'typescript': ['tslint'],
 \   'graphql': ['gqlint', 'prettier'],
+\   'markdown': ['markdownlint'],
 \}
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
@@ -262,7 +263,9 @@ noremap <C-d> :q<CR>
 inoremap <C-d> <Esc>:q<CR>
 noremap <leader>s <C-W>s
 noremap <leader>v <C-W>v
+noremap <leader>V ggVG
 noremap <leader>w :set wrap!<CR>
+noremap <leader>; :<Up><CR>
 
 nnoremap <leader>* :Ag! <C-R><C-W><CR>
 vnoremap <leader>* "zy:Ag! <C-R><C-R>z<CR>
@@ -362,6 +365,9 @@ noremap l t
 
 noremap K gJ
 noremap L T
+
+noremap q @
+noremap Q q
 
 noremap <silent> <leader>t :NERDTreeToggle<CR>
 noremap <silent> <leader>T :NERDTreeFind<CR>
