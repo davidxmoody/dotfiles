@@ -10,6 +10,7 @@ npm i -g \
   jsonlint \
   markdownlint-cli \
   npm-check \
+  prettier \
   ramda-cli \
   tslint \
   typescript
