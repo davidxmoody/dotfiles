@@ -42,6 +42,7 @@ check_installed watch
 check_installed jq
 check_installed sqlite3
 check_installed tree
+check_installed http
 echo
 
 echo "# node"
