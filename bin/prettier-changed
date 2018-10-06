@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+set -e
+
+changed=$(git status --porcelain -uall | sed "s/^...//" | grep -E "\\.tsx?$")
+
+[[ -z "$changed" ]] && exit 0
+
+if [[ -x ./node_modules/.bin/prettier ]]; then
+  ./node_modules/.bin/prettier --write $changed
+else
+  prettier --write $changed
+fi
