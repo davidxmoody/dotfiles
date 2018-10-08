@@ -18,16 +18,7 @@ Plug 'tpope/vim-commentary'
 
 " Navigation plugins ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Plug 'haya14busa/incsearch.vim'
-let g:incsearch#auto_nohlsearch = 1
-map j  <Plug>(incsearch-nohl-n)
-map J  <Plug>(incsearch-nohl-N)
-map *  <Plug>(incsearch-nohl-*)
-map g* <Plug>(incsearch-nohl-g*)
-map #  <Nop>
-map /  <Plug>(incsearch-forward)
-map ?  <Plug>(incsearch-backward)
-map g/ <Plug>(incsearch-stay)
+Plug 'haya14busa/is.vim'
 
 Plug 'justinmk/vim-sneak'
 let g:sneak#absolute_dir = 1
@@ -359,6 +350,9 @@ onoremap H 0
 noremap gt gj
 noremap gn gk
 noremap gj gn
+
+noremap j n
+noremap J N
 
 noremap k J
 noremap l t
