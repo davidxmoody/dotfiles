@@ -414,7 +414,6 @@ endif
 
 com! WP call WordProcessorMode()
 au BufNewFile,BufRead *.md call WordProcessorMode()
-au BufNewFile,BufRead diary-*.txt call WordProcessorMode()
 
 " These seem to be valid but mapping the '(' char breaks syntax highlighting
 map m <Plug>Sneak_s

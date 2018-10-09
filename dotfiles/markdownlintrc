@@ -1,6 +1,5 @@
 {
   "default": true,
-  "MD009": false,
   "MD024": false,
   "MD026": {"punctuation": ".,;:"},
   "MD040": false,
