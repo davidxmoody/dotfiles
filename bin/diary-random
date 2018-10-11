@@ -9,8 +9,9 @@ cd "$DIARY_DIR/new-entries"
 terminal_width=$(tput cols)
 preview_width=$((terminal_width - 33))
 
-last_year=$(ls -r | head -n1)
+files=$(ag -g "" | shuf -n40)
+sorted_files=$(wc -w $files | head -n-1 | sort -nr | awk '{print $2}')
 
-selected=$(ag -g "" "$last_year" | sort -r | fzf --preview-window=right:$preview_width --preview 'fmt -s --width=$COLUMNS {}')
+selected=$(echo "$sorted_files" | fzf --preview-window=right:$preview_width --preview 'fmt -s --width=$COLUMNS {}')
 
 [[ ! -z "$selected" ]] && nvim "$selected"
