@@ -222,9 +222,10 @@ highlight NormalNC cterm=NONE ctermbg=236
 
 " Status line ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-set statusline=%<%f\ %h%q%m%r%=\ %03.(%c%)\ %07.(%l/%L%)%(\ %y%)
+highlight CustomModifiedFlag ctermbg=5 ctermfg=White
 highlight StatusLine ctermfg=White cterm=reverse
 highlight StatusLineNC cterm=reverse
+set statusline=%<%f\ %h%q%r%#CustomModifiedFlag#%m%*%=\ %03.(%c%)\ %07.(%l/%L%)%(\ %y%)
 
 " Command line helpers ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -385,6 +386,7 @@ func! WordProcessorMode()
   setl showbreak=
   setl nocursorline
   setl nonumber
+  setl colorcolumn=
   setl wrap
   setl linebreak
   setl breakat=\ 
