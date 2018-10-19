@@ -8,5 +8,5 @@ mkdir -p "$log_dir"
 chosen_log="$(ls -r "$log_dir" | fzf --select-1 --query "$*")"
 
 if [[ -n "$chosen_log" ]]; then
-  less "$log_dir/$chosen_log"
+  nvim "$log_dir/$chosen_log"
 fi
