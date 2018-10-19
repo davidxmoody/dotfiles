@@ -43,7 +43,6 @@ let g:UltiSnipsExpandTrigger = '<C-T>'
 let g:UltiSnipsJumpForwardTrigger = '<C-T>'
 let g:UltiSnipsJumpBackwardTrigger = '<C-N>'
 
-
 " Git plugins ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Plug 'airblade/vim-gitgutter'
@@ -214,10 +213,6 @@ highlight ColorColumn ctermbg=Black
 highlight link QuickFixLine Normal
 set cursorline
 highlight CursorLine ctermbg=Black cterm=underline
-" highlight CursorLine ctermbg=Black cterm=NONE
-" autocmd InsertEnter * highlight CursorLine ctermbg=Red guifg=fg
-" autocmd InsertLeave * highlight CursorLine ctermbg=Blue guifg=fg
-" highlight Normal
 highlight NormalNC cterm=NONE ctermbg=236
 
 " Status line ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -225,7 +220,14 @@ highlight NormalNC cterm=NONE ctermbg=236
 highlight CustomModifiedFlag ctermbg=5 ctermfg=White
 highlight StatusLine ctermfg=White cterm=reverse
 highlight StatusLineNC cterm=reverse
-set statusline=%<%f\ %h%q%r%#CustomModifiedFlag#%m%*%=\ %03.(%c%)\ %07.(%l/%L%)%(\ %y%)
+
+set statusline=
+set statusline+=%<%f
+set statusline+=\ %h%q%r
+set statusline+=%#CustomModifiedFlag#%m%*
+set statusline+=%=\ 
+set statusline+=%03.(%c%)\ %07.(%l/%L%)
+set statusline+=%(\ %y%)
 
 " Command line helpers ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
