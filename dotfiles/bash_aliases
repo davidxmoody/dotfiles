@@ -120,7 +120,19 @@ glp() {
 }
 alias gd='git diff -- ":(top)" ":(exclude,top)package-lock.json"'
 alias gdc='git diff --cached -- ":(top)" ":(exclude,top)package-lock.json"'
-alias ga='git add'
+ga() {
+  if [[ $# == 0 ]]; then
+    (
+      cd "$(git rev-parse --show-toplevel)" && \
+      git status -sb -uall | \
+      fzf --ansi --header-lines=1 --multi | \
+      sed 's/^.. //' | \
+      xargs -d '\n' git add
+    )
+  else
+    git add "$@"
+  fi
+}
 alias gaa='git add -A :/'
 alias gaac='git add -A :/ && git commit'
 alias gaaca='git add -A :/ && git commit --amend'
