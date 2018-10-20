@@ -1,9 +1,8 @@
 # Vim
 type nvim 2> /dev/null > /dev/null && alias vim='nvim'
 alias v='nvim'
-alias vv='nvim -c "Files!"'
-alias vo='nvim -c "GFiles!?"'
-alias vd='nvim -c "cd $RC_DIR" -c "Files!"'
+alias vv='(cd "$RC_DIR" && nvim "dotfiles/config/nvim/init.vim")'
+alias vb='(cd "$RC_DIR" && nvim "dotfiles/bash_aliases")'
 
 # Tmux
 if type tmux-next 2> /dev/null > /dev/null; then
