@@ -275,6 +275,8 @@ vnoremap <leader>R "zy:!ag -l '\b<C-R><C-W>\b' \| xargs -I@ sed -i 's/\b<C-R><C-
 vnoremap . :norm.<CR>
 map <leader>. /+<CR>.
 
+noremap <leader>/ :nohlsearch<CR>
+
 noremap <leader>f :ALEFix<CR>
 
 nnoremap gd :YcmCompleter GoTo<CR>
