@@ -43,6 +43,8 @@ let g:UltiSnipsExpandTrigger = '<C-T>'
 let g:UltiSnipsJumpForwardTrigger = '<C-T>'
 let g:UltiSnipsJumpBackwardTrigger = '<C-N>'
 
+Plug 'sedm0784/vim-you-autocorrect'
+
 " Git plugins ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Plug 'airblade/vim-gitgutter'
@@ -407,6 +409,8 @@ func! WordProcessorMode()
   setl nocindent
   setl nosmartindent
   setl indentexpr=
+
+  EnableAutocorrect
 
   augroup auto_capitalize_sentences
     au!
