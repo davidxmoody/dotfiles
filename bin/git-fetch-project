@@ -22,4 +22,4 @@ if [ -d "$proj/.git" ] && cd "$proj" && [[ ! -z "$(git remote -v)" ]]; then
   else
     echo -e "${color_bad}  !${color_reset} $(basename "$proj")"
   fi
-fi
+fi | tac | tac
