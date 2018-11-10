@@ -315,6 +315,15 @@ nmap <leader>P <Plug>SlimeConfig
 noremap <silent> <leader>t :NERDTreeToggle<CR>
 noremap <silent> <leader>T :NERDTreeFind<CR>
 
+map m <Plug>Sneak_s
+map M <Plug>Sneak_S
+map f <Plug>Sneak_f
+map F <Plug>Sneak_F
+map l <Plug>Sneak_t
+map L <Plug>Sneak_T
+map ( <Plug>Sneak_,
+map ) <Plug>Sneak_;
+
 nmap + <Nop>
 imap + <Esc>s
 vmap + <Esc><Esc>
@@ -434,13 +443,3 @@ endif
 
 com! WP call WordProcessorMode()
 au BufNewFile,BufRead *.md call WordProcessorMode()
-
-" These seem to be valid but mapping the '(' char breaks syntax highlighting
-map m <Plug>Sneak_s
-map M <Plug>Sneak_S
-map f <Plug>Sneak_f
-map F <Plug>Sneak_F
-map l <Plug>Sneak_t
-map L <Plug>Sneak_T
-map ) <Plug>Sneak_;
-map ( <Plug>Sneak_,
