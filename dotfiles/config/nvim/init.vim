@@ -275,7 +275,7 @@ nnoremap <leader>R :!ag -l '\b<C-R><C-W>\b' \| xargs -I@ sed -i 's/\b<C-R><C-W>\
 vnoremap <leader>R "zy:!ag -l '\b<C-R><C-W>\b' \| xargs -I@ sed -i 's/\b<C-R><C-W>\b//g; T; w /dev/stdout' @ \| wc -l \| sed 's/$/ lines changed\n\n/'<C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><Left><Left><Left><Left>
 
 vnoremap . :norm.<CR>
-map <leader>. /+<CR>.
+noremap <leader>. /\C+<CR>"_.
 
 noremap <leader>/ :nohlsearch<CR>
 
@@ -290,11 +290,6 @@ nnoremap gS :YcmCompleter GetType<CR>
 nnoremap gl :YcmCompleter Format<CR>
 nnoremap gL :YcmCompleter OrganizeImports<CR>
 nnoremap gm :YcmCompleter GetDoc<CR>
-
-autocmd FileType qf setl wrap
-autocmd FileType qf setl nonumber
-autocmd FileType qf nnoremap <buffer> <Enter> <Enter>
-autocmd FileType qf nnoremap <buffer> h <Enter><C-W><C-W>
 
 noremap <leader>gb :Gblame<CR>
 noremap <leader>gr :Gread<CR>
@@ -317,6 +312,9 @@ xmap <leader>p <Plug>SlimeRegionSend
 nmap <leader>p <Plug>SlimeParagraphSend
 nmap <leader>P <Plug>SlimeConfig
 
+noremap <silent> <leader>t :NERDTreeToggle<CR>
+noremap <silent> <leader>T :NERDTreeFind<CR>
+
 nmap + <Nop>
 imap + <Esc>s
 vmap + <Esc><Esc>
@@ -333,12 +331,17 @@ noremap \| :lnext<CR>
 
 noremap <C-K> cl<CR><Esc>lf<Space>
 
-" noremap gp p`[V`]=
-" noremap gP P`[V`]=
-" vnoremap gp p`[V`]=
-" vnoremap gP P`[V`]=
-xnoremap gp "0p
-xnoremap gP "0P
+noremap gp p`[V`]=
+noremap gP P`[V`]=
+vnoremap gp p`[V`]=
+vnoremap gP P`[V`]=
+
+xnoremap <leader>p "0p
+xnoremap <leader>P "0P
+noremap <leader>d "_d
+noremap <leader>D "_D
+xnoremap <leader>d "_d
+xnoremap <leader>D "_D
 
 noremap , A
 noremap <CR> o
@@ -371,9 +374,15 @@ noremap L T
 noremap q @
 noremap Q q
 
-noremap <silent> <leader>t :NERDTreeToggle<CR>
-noremap <silent> <leader>T :NERDTreeFind<CR>
+" Exit terminal
 tnoremap <Esc> <C-\><C-n>
+
+" Quickfix window style ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+autocmd FileType qf setl wrap
+autocmd FileType qf setl nonumber
+autocmd FileType qf nnoremap <buffer> <Enter> <Enter>
+autocmd FileType qf nnoremap <buffer> h <Enter><C-W><C-W>
 
 " Python mode ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
