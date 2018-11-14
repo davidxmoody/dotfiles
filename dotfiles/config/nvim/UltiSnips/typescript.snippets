@@ -1,14 +1,18 @@
+# Functions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 snippet fun "Function"
-function ${1:function_name}(${2:argument}) {
-	${VISUAL}$0
+function ${1:fn}($2) {
+	${VISUAL}$3
 }
 endsnippet
 
 snippet fn "Arrow function"
 ($1) => {
-	$2
+	${VISUAL}$2
 }
 endsnippet
+
+# Imports ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 snippet im "Import"
 import ${1:module_name} from "${2:module_path}"
@@ -22,138 +26,116 @@ snippet imm "Import moment"
 import * as moment from "moment"
 endsnippet
 
-snippet ims "Import styled"
+snippet ims "Import styled-components"
 import styled from "styled-components"
+endsnippet
+
+snippet imsn "Import RN styled-components"
+import styled from "styled-components/native"
 endsnippet
 
 snippet ex "Export default"
 export default $1
 endsnippet
 
+# Console ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 snippet cl "console.log()"
-;(console).log(${1:"${2:string}"})
+;(console).log(${1:"${2:message}"})
 endsnippet
 
 snippet cw "console.warn()"
-;(console).warn(${1:"${2:string}"})
+;(console).warn(${1:"${2:message}"})
 endsnippet
 
 snippet ce "console.error()"
-;(console).error(${1:"${2:string}"})
+;(console).error(${1:"${2:message}"})
 endsnippet
+
+# Misc ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 snippet int "Interface"
 interface ${1:InterfaceName} {
-	${2:${3:propertyName}: ${4:any}}
+	$2
 }
 endsnippet
 
 snippet describe "mocha describe"
-describe("${1:thing}", () => {
-	${2}
+describe("$1", () => {
+	$2
 })
 endsnippet
 
 snippet it "mocha it"
-it("${1:should ${2:...}}", () => {
-	${3}
+it("$1", () => {
+	$2
 })
 endsnippet
 
-snippet react "React functional component"
-import * as React from "react"
+snippet it "mocha async it"
+it("$1", async () => {
+	$2
+})
+endsnippet
 
-interface Props {
-	${2:children: any}
-}
-
-export default function ${1:ComponentName}(props: Props) {
-	return (
-		<div>TODO</div>
-	)
+snippet notnull "not null function"
+function notNull<X>(maybeNull: X | null): maybeNull is X {
+	return maybeNull !== null
 }
 endsnippet
 
-snippet reactcs "React class component with state"
-import * as React from "react"
+# Styled components ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-interface Props {
-	${2:children: any}
-}
-
-interface State {
-	value: any
-}
-
-export default class ${1:ComponentName} extends React.Component<Props, State> {
-	constructor(props: Props) {
-		super(props)
-
-		this.state = {
-			value: null,
-		}
-	}
-
-	public render() {
-		return (
-			<div>TODO</div>
-		)
-	}
-}
+snippet stc "RN styled component"
+const ${1:Container} = styled.${2:div}\`
+	$3
+\`
 endsnippet
 
-snippet reactpc "React pure class component"
+snippet stn "RN styled component"
+const ${1:Container} = styled.${2:View}\`
+	$3
+\`
+endsnippet
+
+# React ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+snippet react "React pure class component"
 import * as React from "react"
 
 interface Props {
-	${2:children: any}
+	${2:// TODO}
 }
 
 export default class ${1:ComponentName} extends React.PureComponent<Props> {
 	public render() {
 		return (
-			<div>TODO</div>
+			${3:<div>TODO</div>}
 		)
 	}
 }
 endsnippet
 
-snippet reactpcs "React pure class component with state"
+snippet reacts "React pure class component with state"
 import * as React from "react"
 
 interface Props {
-	${2:children: any}
+	${2:// TODO}
 }
 
 interface State {
-	value: any
+	${3:// TODO}
 }
 
 export default class ${1:ComponentName} extends React.PureComponent<Props, State> {
-	constructor(props: Props) {
-		super(props)
-
-		this.state = {
-			value: null
-		}
+	public state: State = {
+		${4:// TODO}
 	}
 
 	public render() {
 		return (
-			<div>TODO</div>
+			${3:<div>TODO</div>}
 		)
 	}
 }
-endsnippet
-
-snippet notnull "not null function"
-function notNull<T>(maybeNull: T | null): maybeNull is T {
-	return maybeNull !== null
-}
-endsnippet
-
-snippet stc "styled-component"
-const ${1:Component} = styled.${2:div}\`
-	${3:display: flex;}
-\`
 endsnippet
