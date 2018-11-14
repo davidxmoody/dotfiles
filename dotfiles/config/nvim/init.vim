@@ -333,11 +333,12 @@ noremap \| :lnext<CR>
 
 noremap <C-K> cl<CR><Esc>lf<Space>
 
-" Autoindent on paste
-noremap gp p`[V`]=
-noremap gP P`[V`]=
-vnoremap gp p`[V`]=
-vnoremap gP P`[V`]=
+" noremap gp p`[V`]=
+" noremap gP P`[V`]=
+" vnoremap gp p`[V`]=
+" vnoremap gP P`[V`]=
+xnoremap gp "0p
+xnoremap gP "0P
 
 noremap , A
 noremap <CR> o
