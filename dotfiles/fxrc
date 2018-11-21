@@ -1,0 +1,6 @@
+// vim: filetype=javascript
+const R = require("ramda")
+const moment = require("moment")
+
+Object.assign(global, R)
+Object.assign(global, {m: moment, moment})

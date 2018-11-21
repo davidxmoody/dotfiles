@@ -158,10 +158,12 @@ let g:ale_linters = {
 \   'typescript': ['tslint'],
 \   'graphql': ['gqlint', 'prettier'],
 \   'markdown': ['markdownlint'],
+\   'html': ['prettier'],
 \}
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'typescript': ['prettier', 'remove_trailing_lines', 'trim_whitespace'],
+\   'html': ['prettier'],
 \}
 Plug 'w0rp/ale'
 
@@ -210,11 +212,9 @@ au FileType gitcommit set textwidth=72
 
 " Highlighting ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-set colorcolumn=80
-highlight ColorColumn ctermbg=Black
 highlight link QuickFixLine Normal
 set cursorline
-highlight CursorLine ctermbg=Black cterm=underline
+highlight CursorLine cterm=underline
 highlight NormalNC cterm=NONE ctermbg=236
 
 " Status line ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
