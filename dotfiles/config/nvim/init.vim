@@ -122,8 +122,6 @@ Plug 'elzr/vim-json', {'for': 'json'}
 let g:vim_json_syntax_conceal = 0
 
 Plug 'leafgarland/typescript-vim'
-" Plug 'peitalin/vim-jsx-typescript'
-" Plug 'HerringtonDarkholme/yats.vim'
 
 Plug 'jparise/vim-graphql', {'for': 'graphql'}
 
@@ -348,24 +346,23 @@ noremap t j
 noremap n k
 noremap s l
 
-noremap T 
-noremap N 
+" noremap T 
+" noremap N 
+noremap T 7j
+noremap N 7k
 noremap H 0
 noremap S $
 onoremap H 0
 
 noremap gt gj
 noremap gn gk
-noremap gj gn
 
 noremap j n
 noremap J N
+noremap gj gn
 
 noremap k J
-noremap l t
-
 noremap K gJ
-noremap L T
 
 " Exit terminal
 tnoremap <Esc> <C-\><C-n>
