@@ -33,7 +33,7 @@ let delimitMate_nesting_quotes = ['"',"'",'`']
 Plug 'mattn/emmet-vim'
 nnoremap <C-F> <Nop>
 inoremap <C-F> <Nop>
-vnoremap <C-F> <Nop>
+xnoremap <C-F> <Nop>
 let g:user_emmet_leader_key='<C-F>'
 
 Plug 'michaeljsmith/vim-indent-object'
@@ -97,19 +97,7 @@ let NERDTreeMapJumpLastChild='}'
 let NERDTreeMapOpenInTab='X'
 let NERDTreeMapOpenInTabSilent='X'
 
-Plug 'Xuyuanp/nerdtree-git-plugin', {'on': 'NERDTreeToggle'}
-let g:NERDTreeIndicatorMapCustom = {
-  \ "Modified"  : "✹",
-  \ "Staged"    : "✚",
-  \ "Untracked" : "✭",
-  \ "Renamed"   : "➜",
-  \ "Unmerged"  : "═",
-  \ "Deleted"   : "✖",
-  \ "Dirty"     : "✗",
-  \ "Clean"     : "✔︎",
-  \ "Unknown"   : "?"
-  \ }
-
+Plug 'Xuyuanp/nerdtree-git-plugin', {'on': ['NERDTreeToggle', 'NERDTreeFind']}
 
 " Writing plugins ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -256,7 +244,6 @@ noremap <leader>C :cd <C-R>=fnameescape(systemlist('git rev-parse --show-topleve
 noremap <leader>b <C-^>
 noremap <leader>B :History!<CR>
 noremap <C-d> :q<CR>
-inoremap <C-d> <Esc>:q<CR>
 noremap <leader>s <C-W>s
 noremap <leader>v <C-W>v
 noremap <leader>V ggVG
@@ -264,17 +251,17 @@ noremap <leader>w :set wrap!<CR>
 noremap <leader>; :<Up><CR>
 
 nnoremap <leader>* :Ag! <C-R><C-W><CR>
-vnoremap <leader>* "zy:Ag! <C-R><C-R>z<CR>
+xnoremap <leader>* "zy:Ag! <C-R><C-R>z<CR>
 nnoremap * /\C\<<C-R><C-W>\><CR>
 nnoremap g* /\C<C-R><C-W><CR>
-vnoremap * "zy:Ag! <C-R><C-R>z<CR>
+xnoremap * "zy:Ag! <C-R><C-R>z<CR>
 
 nnoremap <leader>r :%s/\<<C-R><C-W>\>//g<Left><Left>
-vnoremap <leader>r "zy:%s/\<<C-R><C-R>z\>//g<Left><Left>
+xnoremap <leader>r "zy:%s/\<<C-R><C-R>z\>//g<Left><Left>
 nnoremap <leader>R :!ag -l '\b<C-R><C-W>\b' \| xargs -I@ sed -i 's/\b<C-R><C-W>\b//g; T; w /dev/stdout' @ \| wc -l \| sed 's/$/ lines changed\n\n/'<C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><Left><Left><Left><Left>
-vnoremap <leader>R "zy:!ag -l '\b<C-R><C-W>\b' \| xargs -I@ sed -i 's/\b<C-R><C-W>\b//g; T; w /dev/stdout' @ \| wc -l \| sed 's/$/ lines changed\n\n/'<C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><Left><Left><Left><Left>
+xnoremap <leader>R "zy:!ag -l '\b<C-R><C-W>\b' \| xargs -I@ sed -i 's/\b<C-R><C-W>\b//g; T; w /dev/stdout' @ \| wc -l \| sed 's/$/ lines changed\n\n/'<C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><Left><Left><Left><Left>
 
-vnoremap . :norm.<CR>
+xnoremap . :norm.<CR>
 noremap <leader>. /\C+<CR>"_.
 
 noremap <leader>/ :nohlsearch<CR>
@@ -342,8 +329,8 @@ noremap <C-K> cl<CR><Esc>lf<Space>
 
 noremap gp p`[V`]=
 noremap gP P`[V`]=
-vnoremap gp p`[V`]=
-vnoremap gP P`[V`]=
+xnoremap gp p`[V`]=
+xnoremap gP P`[V`]=
 
 xnoremap <leader>p "0p
 xnoremap <leader>P "0P
@@ -379,9 +366,6 @@ noremap l t
 
 noremap K gJ
 noremap L T
-
-noremap q @
-noremap Q q
 
 " Exit terminal
 tnoremap <Esc> <C-\><C-n>
