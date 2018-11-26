@@ -138,7 +138,6 @@ let g:ycm_always_populate_location_list = 1
 
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0
-let g:ale_completion_enabled = 1
 let g:ale_linters_explicit = 1
 let g:ale_linters = {
 \   'typescript': ['tslint'],
@@ -346,10 +345,8 @@ noremap t j
 noremap n k
 noremap s l
 
-" noremap T 
-" noremap N 
-noremap T 7j
-noremap N 7k
+noremap T 15j
+noremap N 15k
 noremap H 0
 noremap S $
 onoremap H 0
