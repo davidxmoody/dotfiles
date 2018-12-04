@@ -185,13 +185,13 @@ set shiftwidth=0 " Use value of tabstop
 set expandtab
 
 " gf filename options
-set suffixesadd=.js,.json,.jsx,.coffee,.css,.scss,.ts,.tsx
+set suffixesadd=.ts,.tsx,.js,.jsx,.json,.coffee,.scss,.css
 
 " Check for changes to file
 au CursorHold * checktime
 
 " Auto wrap comments
-set formatoptions=crqn1j
+set formatoptions=rqn1j
 set textwidth=79
 au FileType gitcommit set textwidth=72
 
