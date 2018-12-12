@@ -245,7 +245,6 @@ noremap <leader>s <C-W>s
 noremap <leader>v <C-W>v
 noremap <leader>V ggVG
 noremap <leader>w :set wrap!<CR>
-noremap <leader>; :<Up><CR>
 
 nnoremap <leader>* :Ag! <C-R><C-W><CR>
 xnoremap <leader>* "zy:Ag! <C-R><C-R>z<CR>
@@ -253,8 +252,8 @@ nnoremap * /\C\<<C-R><C-W>\><CR>
 nnoremap g* /\C<C-R><C-W><CR>
 xnoremap * "zy:Ag! <C-R><C-R>z<CR>
 
-nnoremap <leader>r :%s/\<<C-R><C-W>\>//g<Left><Left>
-xnoremap <leader>r "zy:%s/\<<C-R><C-R>z\>//g<Left><Left>
+nnoremap <leader>r :%s/\<<C-R><C-W>\>/<C-R><C-W>/g<Left><Left>
+xnoremap <leader>r "zy:%s/\<<C-R><C-R>z\>/<C-R><C-R>z/g<Left><Left>
 nnoremap <leader>R :!ag -l '\b<C-R><C-W>\b' \| xargs -I@ sed -i 's/\b<C-R><C-W>\b//g; T; w /dev/stdout' @ \| wc -l \| sed 's/$/ lines changed\n\n/'<C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><Left><Left><Left><Left>
 xnoremap <leader>R "zy:!ag -l '\b<C-R><C-W>\b' \| xargs -I@ sed -i 's/\b<C-R><C-W>\b//g; T; w /dev/stdout' @ \| wc -l \| sed 's/$/ lines changed\n\n/'<C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><C-Left><Left><Left><Left><Left>
 
