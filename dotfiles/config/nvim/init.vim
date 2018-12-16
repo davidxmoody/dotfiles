@@ -367,33 +367,14 @@ autocmd FileType qf setl nonumber
 autocmd FileType qf nnoremap <buffer> <Enter> <Enter>
 autocmd FileType qf nnoremap <buffer> h <Enter><C-W><C-W>
 
-" English text editing (local to buffer) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+" English text editing ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+if filereadable(glob("~/sync/diary-data/vim/en.utf-8.add"))
+  set spellfile=~/sync/diary-data/vim/en.utf-8.add
+endif
 
 func! WordProcessorMode()
-  setl filetype=markdown
-
-  " Other options
-  setl listchars=tab:→\ ,nbsp:␣,extends:⟩,precedes:⟨
-  setl showbreak=
-  setl nocursorline
-  setl nonumber
-  setl colorcolumn=
-  setl wrap
-  setl linebreak
-  setl breakat=\ 
-  setl formatoptions=
-  setl spell spelllang=en_gb
   source ~/.vim_abbreviations
-
-  " Indenting
-  setl tabstop=2
-  setl softtabstop=0
-  setl expandtab
-  setl nosmarttab
-  setl noautoindent
-  setl nocindent
-  setl nosmartindent
-  setl indentexpr=
 
   EnableAutocorrect
 
@@ -403,9 +384,6 @@ func! WordProcessorMode()
   augroup END
 endfu
 
-if filereadable(glob("~/sync/diary-data/vim/en.utf-8.add"))
-  set spellfile=~/sync/diary-data/vim/en.utf-8.add
-endif
-
 com! WP call WordProcessorMode()
-au BufNewFile,BufRead *.md call WordProcessorMode()
+noremap <leader>W :call WordProcessorMode()<CR>
+au BufNewFile,BufRead diary-*.md call WordProcessorMode()

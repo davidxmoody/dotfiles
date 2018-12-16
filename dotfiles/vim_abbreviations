@@ -100,5 +100,3 @@ Abolish -buffer tm tomorrow
 Abolish -buffer yd yesterday
 Abolish -buffer obv obviously
 Abolish -buffer speach speech
-
-" New abbreviations (added with `:Abolish!` will get added below this line)
