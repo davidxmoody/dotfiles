@@ -132,8 +132,6 @@ Plug 'jparise/vim-graphql', {'for': 'graphql'}
 
 Plug 'Valloric/YouCompleteMe', {'do': './install.py'}
 let g:ycm_filetype_blacklist = {'md': 1, 'mkd': 1, 'markdown': 1, 'text': 1, 'gitcommit': 1}
-au FileType css setlocal omnifunc=csscomplete#CompleteCSS
-au FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 let g:ycm_always_populate_location_list = 1
 
 let g:ale_lint_on_text_changed = 'never'
@@ -193,7 +191,6 @@ au CursorHold * checktime
 " Auto wrap comments
 set formatoptions=rqn1j
 set textwidth=79
-au FileType gitcommit set textwidth=72
 
 " Highlighting ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -369,14 +366,6 @@ autocmd FileType qf setl wrap
 autocmd FileType qf setl nonumber
 autocmd FileType qf nnoremap <buffer> <Enter> <Enter>
 autocmd FileType qf nnoremap <buffer> h <Enter><C-W><C-W>
-
-" Python mode ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-func! PythonMode()
-  set tabstop=4
-  set softtabstop=4
-endfu
-au BufNewFile,BufRead *.py call PythonMode()
 
 " English text editing (local to buffer) ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
