@@ -4,7 +4,7 @@ set -e
 
 [[ ! -d "$DIARY_DIR" ]] && echo "DIARY_DIR does not exist" >&2 && exit 1
 
-cd "$DIARY_DIR/new-entries"
+cd "$DIARY_DIR/entries"
 
 last_year=$(ls -r | head -n1)
 last_month=$(ls -r "$last_year" | head -n1)

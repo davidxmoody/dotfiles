@@ -4,7 +4,7 @@ set -e
 
 [[ ! -d "$DIARY_DIR" ]] && echo "DIARY_DIR does not exist" >&2 && exit 1
 
-cd "$DIARY_DIR/new-entries"
+cd "$DIARY_DIR/entries"
 
 subdir=$(date +%Y/%m/%d)
 filename=diary-$(date +%H-%M).md
