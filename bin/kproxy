@@ -3,9 +3,9 @@
 set -e
 
 NAMESPACE=${1-dev}
-SERVICE=${2-es-search}
-LOCAL_PORT=${3-9200}
-REMOTE_PORT=${4-9200}
+SERVICE=${2-knowledge-base}
+LOCAL_PORT=${3-6666}
+REMOTE_PORT=${4-80}
 
 POD=$(kubectl -n "$NAMESPACE" get pods | grep "Running" | grep "$SERVICE" | awk '{print $1}' | head -n1)
 

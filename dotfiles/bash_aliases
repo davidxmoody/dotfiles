@@ -123,8 +123,7 @@ gl() {
 glp() {
   p "$@" && pwd && gl && cd - >/dev/null
 }
-# alias gd='git diff -- ":(top)" ":(exclude,top)package-lock.json"'
-# alias gdc='git diff --cached -- ":(top)" ":(exclude,top)package-lock.json"'
+alias gS='git log -p -S'
 alias gd='git diff'
 alias gdc='git diff --cached'
 ga() {
@@ -167,7 +166,6 @@ alias gdp='git diff ORIG_HEAD -- package.json'
 alias groot='cd "$(git rev-parse --show-toplevel)"'
 alias gitcountdiff='git --no-pager diff --color=never | grep -v -E "^(\+\+\+|---) "| grep -E "^(-|\+)" | count'
 alias gitcopydiff='git --no-pager diff --color=never | tee >(copy) && echo -e "\nCopied!"'
-# alias gw='git show -- ":(top)" ":(exclude,top)package-lock.json"'
 alias gw='git show'
 alias gy='git-show-yesterday'
 alias gyy='git-projects-recent-commits'
@@ -294,6 +292,7 @@ alias ff='prettier-changed'
 alias ramdam='ramda --import m=moment'
 alias launchemulator='( cd ~/Library/Android/sdk/tools && ./emulator @Nexus_5X_API_26 )'
 alias https='http --default-scheme=https'
+alias kp='kproxy'
 
 dotpreview() {
   mkdir -p /tmp/dotpreview
