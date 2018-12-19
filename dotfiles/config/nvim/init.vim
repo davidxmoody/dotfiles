@@ -238,8 +238,13 @@ noremap <leader>C :cd <C-R>=fnameescape(systemlist('git rev-parse --show-topleve
 noremap <leader>b <C-^>
 noremap <leader>B :History!<CR>
 noremap <C-d> :q<CR>
-noremap <leader>s <C-W>s
-noremap <leader>v <C-W>v
+
+noremap <leader>h :aboveleft vsplit<CR>
+noremap <leader>t :belowright split<CR>
+noremap <leader>n :aboveleft split<CR>
+noremap <leader>s :belowright vsplit<CR>
+noremap <leader>v <Nop>
+
 noremap <leader>V ggVG
 noremap <leader>w :set wrap!<CR>
 
@@ -276,11 +281,11 @@ noremap <leader>gr :Gread<CR>
 noremap <leader>gw :Gwrite<CR>
 noremap <leader>gs :Gbrowse<CR>
 
-noremap <leader>ha :GitGutterStageHunk<CR>
-noremap <leader>hu :GitGutterUndoHunk<CR>
-noremap <leader>hr <Nop>
-noremap <leader>hv :GitGutterPreviewHunk<CR>
-noremap <leader>ht :GitGutterToggle<CR>
+noremap <leader>Ha :GitGutterStageHunk<CR>
+noremap <leader>Hu :GitGutterUndoHunk<CR>
+noremap <leader>Hr <Nop>
+noremap <leader>Hv :GitGutterPreviewHunk<CR>
+noremap <leader>Ht :GitGutterToggle<CR>
 nmap ]h <Plug>GitGutterNextHunk
 nmap [h <Plug>GitGutterPrevHunk
 omap ih <Plug>GitGutterTextObjectInnerPending
@@ -292,7 +297,7 @@ xmap <leader>p <Plug>SlimeRegionSend
 nmap <leader>p <Plug>SlimeParagraphSend
 nmap <leader>P <Plug>SlimeConfig
 
-noremap <silent> <leader>t :NERDTreeToggle<CR>
+" noremap <silent> <leader>t :NERDTreeToggle<CR>
 noremap <silent> <leader>T :NERDTreeFind<CR>
 
 map m <Plug>Sneak_s
