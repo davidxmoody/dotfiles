@@ -17,3 +17,6 @@ setl noautoindent
 setl nocindent
 setl nosmartindent
 setl indentexpr=
+setl scrolloff=0
+
+noremap <buffer> - o-<Space>

@@ -135,7 +135,7 @@ Plug 'jparise/vim-graphql', {'for': 'graphql'}
 " Completion and linting ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Plug 'Valloric/YouCompleteMe', {'do': './install.py'}
-let g:ycm_filetype_blacklist = {'md': 1, 'mkd': 1, 'markdown': 1, 'text': 1, 'gitcommit': 1}
+let g:ycm_filetype_blacklist = {'markdown': 1, 'text': 1, 'gitcommit': 1}
 let g:ycm_always_populate_location_list = 1
 
 let g:ale_lint_on_text_changed = 'never'
