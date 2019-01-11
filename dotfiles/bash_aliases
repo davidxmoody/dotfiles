@@ -324,3 +324,5 @@ tmuxcolors() {
   done
   echo
 }
+alias nw='npm run watch'
+alias pgclikb='PGPASSWORD="$DATASTUDIO_READONLY_PASSWORD" pgcli -h localhost -p 6644 -U datastudio-readonly -d knowledge-base'

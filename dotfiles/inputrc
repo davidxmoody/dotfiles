@@ -19,4 +19,3 @@ set convert-meta off
 "\e[B": history-search-forward
 
 TAB: menu-complete
-Space: magic-space

@@ -330,8 +330,8 @@ noremap gP P`[V`]=
 xnoremap gp p`[V`]=
 xnoremap gP P`[V`]=
 
-xnoremap <leader>p "0p
-xnoremap <leader>P "0P
+" xnoremap <leader>p "0p
+" xnoremap <leader>P "0P
 noremap <leader>d "_d
 noremap <leader>D "_D
 xnoremap <leader>d "_d
