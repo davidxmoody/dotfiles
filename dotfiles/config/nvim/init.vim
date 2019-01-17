@@ -15,6 +15,7 @@ Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
+Plug 'lifepillar/vim-solarized8'
 
 " Navigation plugins ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -191,6 +192,11 @@ au CursorHold * checktime
 " Auto wrap comments
 set formatoptions=rqn1j
 set textwidth=79
+
+" Colorscheme ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+set termguicolors
+colorscheme solarized8_high
 
 " Highlighting ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
