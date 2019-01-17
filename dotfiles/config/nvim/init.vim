@@ -197,6 +197,7 @@ set textwidth=79
 
 set termguicolors
 colorscheme solarized8_high
+let g:solarized_term_italics = 1
 
 " Highlighting ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
