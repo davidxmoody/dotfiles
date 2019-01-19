@@ -12,9 +12,9 @@ if branch=$(git rev-parse --abbrev-ref HEAD 2> /dev/null); then
 
   [[ "$branch" == "master" ]] && branch="m"
 
-  status=$(git status --porcelain 2> /dev/null)
+  status=$(git status --porcelain -uall 2> /dev/null | wc -l)
   status_indicator=''
-  [[ "$status" != "" ]] && status_indicator='*'
+  [[ "$status" -gt "0" ]] && status_indicator="*$status"
 
   commits_behind=$(git rev-list --count HEAD..@{upstream} 2>/dev/null || true)
   commits_ahead=$(git rev-list --count @{upstream}..HEAD 2>/dev/null || true)
