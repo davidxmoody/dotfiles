@@ -356,8 +356,8 @@ noremap t j
 noremap n k
 noremap s l
 
-noremap T 15j
-noremap N 15k
+noremap T 10j
+noremap N 10k
 noremap H 0
 noremap S $
 onoremap H 0
