@@ -108,6 +108,12 @@ mkpn() {
   npm init --yes
 }
 
+mkt() {
+  local dir="$TMP_DIR/$(date +%F-%H-%M-%S)-${1-tmp}"
+  mkdir -p "$dir"
+  cd "$dir"
+}
+
 # Git ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 alias g='git'
