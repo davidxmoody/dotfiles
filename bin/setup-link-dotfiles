@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-for dir in tmp p .vim-swap .desktop .templates .public .config; do
+for dir in t p .vim-swap .desktop .templates .public .config; do
   mkdir -pv "$HOME/$dir"
 done
 

@@ -169,7 +169,7 @@ set sidescrolloff=1
 set list
 set listchars=tab:→\ ,nbsp:␣,trail:•,extends:⟩,precedes:⟨
 set showbreak=↪\ 
-set directory=~/.vim-swap,~/tmp,/var/tmp,/tmp,.
+set directory=~/.vim-swap,~/t,/var/tmp,/tmp,.
 set clipboard=unnamedplus
 set nojoinspaces
 set number
