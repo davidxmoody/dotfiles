@@ -25,6 +25,10 @@ Plug 'justinmk/vim-sneak'
 let g:sneak#absolute_dir = 1
 let g:sneak#use_ic_scs = 1
 
+Plug 'easymotion/vim-easymotion'
+let g:EasyMotion_smartcase = 1
+let g:EasyMotion_keys = 'aoeuipyqjkxfgcrlbmwvzdhtns'
+
 " Editing plugins ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Plug 'Raimondi/delimitMate'
@@ -314,8 +318,10 @@ nmap <leader>P <Plug>SlimeConfig
 " noremap <silent> <leader>t :NERDTreeToggle<CR>
 noremap <silent> <leader>T :NERDTreeFind<CR>
 
-map m <Plug>Sneak_s
-map M <Plug>Sneak_S
+map m <Plug>(easymotion-overwin-f)
+map M <Plug>(easymotion-overwin-f2)
+" map m <Plug>Sneak_s
+" map M <Plug>Sneak_S
 map f <Plug>Sneak_f
 map F <Plug>Sneak_F
 map l <Plug>Sneak_t
