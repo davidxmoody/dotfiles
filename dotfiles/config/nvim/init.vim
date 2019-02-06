@@ -109,12 +109,10 @@ Plug 'Xuyuanp/nerdtree-git-plugin', {'on': ['NERDTreeToggle', 'NERDTreeFind']}
 
 " Writing plugins ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
-let g:vim_markdown_folding_disabled=1
-let g:markdown_no_default_key_mappings=1
-let g:vim_markdown_frontmatter=1
-
-Plug 'junegunn/goyo.vim'
+" Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
+" let g:vim_markdown_folding_disabled=1
+" let g:markdown_no_default_key_mappings=1
+" let g:vim_markdown_frontmatter=1
 
 " Language specific plugins ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -412,3 +410,4 @@ endfu
 com! WP call WordProcessorMode()
 noremap <leader>W :call WordProcessorMode()<CR>
 au BufNewFile,BufRead diary-*.md call WordProcessorMode()
+" au BufNewFile,BufRead diary-*.md set background=light
