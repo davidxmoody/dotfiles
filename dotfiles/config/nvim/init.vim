@@ -143,7 +143,7 @@ let g:ale_lint_on_enter = 0
 let g:ale_linters_explicit = 1
 let g:ale_linters = {
 \   'typescript': ['tslint'],
-\   'graphql': ['gqlint', 'prettier'],
+\   'graphql': ['prettier'],
 \   'markdown': ['markdownlint'],
 \   'html': ['prettier'],
 \}
@@ -196,24 +196,28 @@ au CursorHold * checktime
 set formatoptions=rqn1j
 set textwidth=79
 
-" Colorscheme ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+" Colorscheme and highlighting ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 set termguicolors
 colorscheme solarized8_high
 let g:solarized_term_italics = 1
 
-" Highlighting ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-highlight link QuickFixLine Normal
 set cursorline
-highlight CursorLine cterm=underline
-highlight NormalNC cterm=NONE ctermbg=236
+set colorcolumn=80
+highlight link QuickFixLine Normal
+
+" For focused windows, use the 'default' background color (from tmux). This
+" means the current Vim window will be highlighted only if the tmux pane that
+" vim is running in is also currently active.
+highlight Normal guibg=NONE
+" Unfocused background color duplicated in tmux config
+highlight NormalNC guibg=#001f28
 
 " Status line ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-highlight CustomModifiedFlag ctermbg=5 ctermfg=White
-highlight StatusLine ctermfg=White cterm=reverse
-highlight StatusLineNC cterm=reverse
+highlight CustomModifiedFlag guibg=Red guifg=White
+highlight StatusLine guifg=White gui=reverse
+highlight StatusLineNC gui=reverse
 
 set statusline=
 set statusline+=%<%f

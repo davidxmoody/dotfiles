@@ -299,6 +299,7 @@ alias ramdam='ramda --import m=moment'
 alias launchemulator='( cd ~/Library/Android/sdk/tools && ./emulator @Nexus_5X_API_26 )'
 alias https='http --default-scheme=https'
 alias kp='kproxy'
+alias noheader='tail -n+2'
 
 dotpreview() {
   mkdir -p /tmp/dotpreview
