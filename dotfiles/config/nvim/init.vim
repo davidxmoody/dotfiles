@@ -27,7 +27,11 @@ let g:sneak#use_ic_scs = 1
 
 Plug 'easymotion/vim-easymotion'
 let g:EasyMotion_smartcase = 1
-let g:EasyMotion_keys = 'aoeuipyqjkxfgcrlbmwvzdhtns'
+let g:EasyMotion_do_mapping = 0
+let g:EasyMotion_enter_jump_first = 1
+let g:EasyMotion_space_jump_first = 1
+let g:EasyMotion_use_upper = 1
+let g:EasyMotion_keys = 'NTHSDCGRLFWMVZBPYQJKXIAOEU'
 
 " Editing plugins ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -316,8 +320,8 @@ nmap <leader>P <Plug>SlimeConfig
 " noremap <silent> <leader>t :NERDTreeToggle<CR>
 noremap <silent> <leader>T :NERDTreeFind<CR>
 
-map m <Plug>(easymotion-overwin-f)
-map M <Plug>(easymotion-overwin-f2)
+map o <Plug>(easymotion-overwin-f)
+map O <Plug>(easymotion-overwin-f2)
 " map m <Plug>Sneak_s
 " map M <Plug>Sneak_S
 map f <Plug>Sneak_f
