@@ -88,6 +88,8 @@ Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --bin'}
 Plug 'junegunn/fzf.vim'
 let g:fzf_commits_log_options = '--color --graph --pretty=tformat:"%Cred%h%Creset - %C(bold blue)%<(18)%an %C(yellow)%d%Creset %s %Cgreen(%ar)%Creset" --abbrev-commit'
 
+" Plug 'wsdjeg/FlyGrep.vim'
+
 " NERDTree plugin ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Plug 'scrooloose/nerdtree', {'on': ['NERDTreeToggle', 'NERDTreeFind']}
@@ -219,6 +221,9 @@ highlight Normal guibg=NONE
 " Unfocused background color duplicated in tmux config
 highlight NormalNC guibg=#001f28
 
+" highlight ColorColumn guibg=#001f28
+" highlight CursorLine guibg=#001f28
+
 " Status line ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 highlight CustomModifiedFlag guibg=Red guifg=White
@@ -320,10 +325,10 @@ nmap <leader>P <Plug>SlimeConfig
 " noremap <silent> <leader>t :NERDTreeToggle<CR>
 noremap <silent> <leader>T :NERDTreeFind<CR>
 
-map o <Plug>(easymotion-overwin-f)
-map O <Plug>(easymotion-overwin-f2)
-" map m <Plug>Sneak_s
-" map M <Plug>Sneak_S
+map o <Plug>(easymotion-overwin-f2)
+map O <Plug>(easymotion-overwin-f)
+map m <Plug>Sneak_s
+map M <Plug>Sneak_S
 map f <Plug>Sneak_f
 map F <Plug>Sneak_F
 map l <Plug>Sneak_t
@@ -334,11 +339,13 @@ map ) <Plug>Sneak_;
 nmap + <Nop>
 imap + <Esc>s
 vmap + <Esc><Esc>
-imap  <Nop>
 noremap + :update<CR>
 nnoremap ; :
+
+" TODO should I get rid of these?
 imap  <Nop>
 inoremap ! 
+" imap  <Nop>
 
 noremap _ :lfirst<CR>
 noremap \| :lnext<CR>
