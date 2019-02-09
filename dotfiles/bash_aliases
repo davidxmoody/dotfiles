@@ -341,3 +341,4 @@ truecolors() {
       printf "\n";
   }'
 }
+alias brewi='brew-install-fzf'

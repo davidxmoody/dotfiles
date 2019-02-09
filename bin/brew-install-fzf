@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+set -e
+
+chosen_packages=$(brew search | fzf -m --query "$1")
+
+while read package; do
+  brew install "$package"
+done <<< "$chosen_packages"
