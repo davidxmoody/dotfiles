@@ -88,15 +88,14 @@ Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --bin'}
 Plug 'junegunn/fzf.vim'
 let g:fzf_commits_log_options = '--color --graph --pretty=tformat:"%Cred%h%Creset - %C(bold blue)%<(18)%an %C(yellow)%d%Creset %s %Cgreen(%ar)%Creset" --abbrev-commit'
 
-" Plug 'wsdjeg/FlyGrep.vim'
-
 " NERDTree plugin ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Plug 'scrooloose/nerdtree', {'on': ['NERDTreeToggle', 'NERDTreeFind']}
-let NERDTreeIgnore=['^node_modules$', '^npm-debug.log$', '^.git$']
+let NERDTreeIgnore=['^node_modules$', '^npm-debug.log$', '^.git$', '^build$', '^dist$']
 let NERDTreeCaseSensitiveSort=1
 let NERDTreeNaturalSort=1
-let NERDTreeShowBookmarks=1
+let NERDTreeAutoDeleteBuffer=1
+let NERDTreeMinimalUI=1
 
 let NERDTreeMapActivateNode='h'
 let NERDTreeMapPreview='H'
@@ -255,9 +254,9 @@ noremap <leader>e :Files!<CR>
 noremap <leader>E :Files!<space><C-R>=expand("%:p:h")<CR>
 noremap <leader>o :GFiles!?<CR>
 noremap <leader>O :Buffers!<CR>
-noremap <leader>a :Ag!<space>
-noremap <leader>A :Ag!<space><Up><CR>
-noremap <leader>i :Ag!<space>/<C-R>=fnameescape(expand('%:t:r'))<CR><CR>
+noremap <leader>a :Rg!<space>
+noremap <leader>A :Rg!<space><Up><CR>
+noremap <leader>i :Rg!<space>/<C-R>=fnameescape(expand('%:t:r'))<CR><CR>
 noremap <leader>c :cd<space><C-R>=fnameescape(expand("%:p:h"))<CR>
 noremap <leader>C :cd <C-R>=fnameescape(systemlist('git rev-parse --show-toplevel')[0])<CR><CR>
 noremap <leader>b <C-^>
