@@ -2,15 +2,15 @@
 
 set -e
 
-initial_dir=${1%/}
+initial_input=${1%/}
 
-if [ ! -z "$initial_dir" -a -d "$P_DIR/$initial_dir" ]; then
-  chosen_dir="$P_DIR/$initial_dir"
+if [ ! -z "$initial_input" -a -d "$P_DIR/$initial_input" ]; then
+  chosen_project=$initial_input
 else
-  chosen_dir=$(list-projects | fzf --ansi --select-1 --query "$initial_dir" --preview "git --git-dir='$P_DIR/{}/.git' --work-tree='$P_DIR/{}' status -sb -uall")
+  chosen_project=$(list-projects | fzf --ansi --select-1 --query "$initial_input" --preview "git --git-dir='$P_DIR/{}/.git' --work-tree='$P_DIR/{}' status -sb -uall")
 fi
 
-if [ ! -z "$chosen_dir" ]; then
-  echo "$P_DIR/$chosen_dir"
-  echo "$(date +%F)	$chosen_dir" >> ~/.choose-project-history
+if [ ! -z "$chosen_project" ]; then
+  echo "$P_DIR/$chosen_project"
+  echo "$(date +%F)	$chosen_project" >> ~/.choose-project-history
 fi
