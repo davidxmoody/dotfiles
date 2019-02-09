@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-
-set -e
-
-curl -s -H "Content-Type: application/json" "$@" | jq .
