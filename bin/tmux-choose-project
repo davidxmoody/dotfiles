@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-
-set -e
-
-p_dir=${P_DIR-$HOME/p}
-
-proj=$(ls -t "$p_dir" | fzf --preview "git --git-dir='$p_dir/{}/.git' --work-tree='$p_dir/{}' status -sb -uall")
-
-echo "$p_dir/$proj"
