@@ -79,7 +79,6 @@ add_to_path "$HOME/.linkerd2/bin"
 export ANDROID_HOME=$HOME/Library/Android/sdk
 add_to_path "$ANDROID_HOME/platform-tools"
 add_to_path "$ANDROID_HOME/tools"
-export JAVA_HOME=$([ -x /usr/libexec/java_home ] && /usr/libexec/java_home -v 1.8 2>/dev/null)
 export GRADLE_OPTS="-Dorg.gradle.daemon=true"
 
 export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
