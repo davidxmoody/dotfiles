@@ -261,7 +261,7 @@ alias dl='diary-list'
 
 # Misc ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-alias ag='ag --smart-case'
+alias ag='echo "Use rg instead"'
 alias dus='du -Dhs'
 alias dun='du -Ds node_modules/{@*/*,*} | sort -nr'
 alias df='df -hT'
@@ -300,6 +300,7 @@ dotpreview() {
   dot -Tpng "$1" -o "$outfile" && op "$outfile"
 }
 
+# TODO use rg instead and split this into it's own script
 r() {
   if (( $# == 0)); then
     echo "Please provide at least one argument"

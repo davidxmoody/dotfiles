@@ -11,6 +11,6 @@ preview_width=$((terminal_width - 33))
 
 last_year=$(ls -r | head -n1)
 
-selected=$(ag -g "" "$last_year" | sort -r | fzf --preview-window=right:$preview_width --preview 'fmt -s --width=$COLUMNS {}')
+selected=$(rg --files "$last_year" | sort -r | fzf --preview-window=right:$preview_width --preview 'fmt -s --width=$COLUMNS {}')
 
 [[ ! -z "$selected" ]] && nvim "$selected"

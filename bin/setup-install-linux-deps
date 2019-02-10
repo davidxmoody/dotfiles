@@ -27,9 +27,6 @@ install xclip
 install gnome-tweak-tool
 install_fedora perl-core
 
-install_ubuntu silversearcher-ag
-install_fedora the_silver_searcher
-
 install_fedora neovim python3-neovim python2-neovim
 
 # For compiling YouCompleteMe

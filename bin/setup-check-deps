@@ -29,7 +29,7 @@ echo
 
 echo "# editing"
 check_installed nvim "$(nvim --version | head -n1 | grep -o 'v[0-9.]\+')"
-check_installed ag
+check_installed rg
 check_installed fzf
 check_installed tmux
 check_installed vifm
