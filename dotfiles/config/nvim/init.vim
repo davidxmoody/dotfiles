@@ -367,6 +367,7 @@ xnoremap <leader>D "_D
 
 noremap , A
 noremap <CR> o
+noremap g<CR> O
 
 nnoremap Y y$
 
