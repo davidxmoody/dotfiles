@@ -285,13 +285,6 @@ alias https='http --default-scheme=https'
 alias kp='kproxy'
 alias noheader='tail -n+2'
 
-dotpreview() {
-  mkdir -p /tmp/dotpreview
-  local outfile=/tmp/dotpreview/$(basename "${1%.dot}").png
-  echo "$outfile"
-  dot -Tpng "$1" -o "$outfile" && op "$outfile"
-}
-
 # TODO use rg instead and split this into it's own script
 r() {
   if (( $# == 0)); then
