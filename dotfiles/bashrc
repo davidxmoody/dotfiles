@@ -29,8 +29,23 @@ __prompt_git_status() {
   [[ ! -z "$git_status" ]] && echo "($git_status) "
 }
 
+__prompt_timer_start() {
+  timer=${timer:-$SECONDS}
+}
+
+__prompt_timer_stop() {
+  local duration=$(($SECONDS - $timer))
+  __prompt_timer_value=
+  [[ "$duration" -gt 5 ]] && __prompt_timer_value="{${duration}s} "
+  unset timer
+}
+
+trap '__prompt_timer_start' DEBUG
+PROMPT_COMMAND=__prompt_timer_stop
+
 PS1='\[\e[$(( $? == 0 ? 0 : 7 ));31m\]\w'
 PS1+='\[\e[0;33m\] $(__prompt_git_status)'
+PS1+='\[\e[0;32m\]${__prompt_timer_value}\[\e[0m\]'
 PS1+='\[\e[0;92m\]$(__prompt_jobs_status)\[\e[0m\]'
 
 PS2='\[\e[0;31m\]>\[\e[0m\] '
