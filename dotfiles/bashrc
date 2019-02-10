@@ -29,7 +29,10 @@ __prompt_git_status() {
   [[ ! -z "$git_status" ]] && echo "($git_status) "
 }
 
-PS1='\[\e[$([ "$?" == 0 ] && echo 0 || echo 7);31m\]\w\[\e[0;33m\] $(__prompt_git_status)\[\e[0;92m\]$(__prompt_jobs_status)\[\e[0m\]'
+PS1='\[\e[$(( $? == 0 ? 0 : 7 ));31m\]\w'
+PS1+='\[\e[0;33m\] $(__prompt_git_status)'
+PS1+='\[\e[0;92m\]$(__prompt_jobs_status)\[\e[0m\]'
+
 PS2='\[\e[0;31m\]>\[\e[0m\] '
 
 # Common dirs ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
