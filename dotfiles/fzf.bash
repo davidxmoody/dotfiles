@@ -10,10 +10,6 @@ if [[ ! "$MANPATH" == *$HOME/.fzf/man* && -d "$HOME/.fzf/man" ]]; then
   export MANPATH="$MANPATH:$HOME/.fzf/man"
 fi
 
-# Auto-completion
-# ---------------
-[[ $- == *i* ]] && source "$HOME/.fzf/shell/completion.bash" 2> /dev/null
-
 complete -o bashdefault -o default -F _fzf_path_completion v
 
 # Key bindings
