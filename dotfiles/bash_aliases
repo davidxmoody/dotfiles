@@ -217,7 +217,6 @@ alias uppp='cd ../../..'
 alias b='cd - >/dev/null'
 alias cdp='cd "$P_DIR"'
 alias cdt='cd "$TMP_DIR"'
-alias cddb='cd "$DBOX"'
 alias pd='p dotfiles'
 
 # npm ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

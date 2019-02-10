@@ -33,7 +33,6 @@ export P_DIR="$HOME/p"
 export RC_DIR="$P_DIR/dotfiles"
 export TMP_DIR="$HOME/t"
 export SYNC_DIR="$HOME/sync"
-export DBOX="$HOME/.dbox/Dropbox"
 export DIARY_DIR="$HOME/sync/diary-data"
 
 # Path stuff ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
