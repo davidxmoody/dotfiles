@@ -12,7 +12,7 @@ HISTFILESIZE=100000
 
 shopt -s checkwinsize
 shopt -s globstar
-PROMPT_DIRTRIM=2
+PROMPT_DIRTRIM=3
 export LESS=RSci
 export LC_COLLATE=C
 export EDITOR=nvim
