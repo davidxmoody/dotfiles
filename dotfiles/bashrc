@@ -82,15 +82,18 @@ add_to_path "$ANDROID_HOME/tools"
 export JAVA_HOME=$([ -x /usr/libexec/java_home ] && /usr/libexec/java_home -v 1.8 2>/dev/null)
 export GRADLE_OPTS="-Dorg.gradle.daemon=true"
 
-export RIPGREP_CONFIG_PATH=~/.ripgreprc
+export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 
 # Source other files ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-[ -f ~/.bash_aliases ] && source ~/.bash_aliases
+source_if_exists() {
+  [ -f "$1" ] && source "$1"
+}
 
-[ -f "~/.fzf/shell/key-bindings.bash" ] && source "~/.fzf/shell/key-bindings.bash"
+source_if_exists "$HOME/.bash_aliases"
+
+source_if_exists "$HOME/.fzf/shell/key-bindings.bash"
 export FZF_DEFAULT_COMMAND='rg --files --sortr=modified'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
-# Per-machine config
-[ -f ~/.bashrc-local ] && source ~/.bashrc-local
+source_if_exists "$HOME/.bashrc-local"
