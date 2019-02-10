@@ -87,7 +87,10 @@ export RIPGREP_CONFIG_PATH=~/.ripgreprc
 # Source other files ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 [ -f ~/.bash_aliases ] && source ~/.bash_aliases
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+[ -f "~/.fzf/shell/key-bindings.bash" ] && source "~/.fzf/shell/key-bindings.bash"
+export FZF_DEFAULT_COMMAND='rg --files --sortr=modified'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # Per-machine config
 [ -f ~/.bashrc-local ] && source ~/.bashrc-local
