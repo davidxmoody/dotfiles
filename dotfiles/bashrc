@@ -1,10 +1,5 @@
-# If not running interactively, don't do anything
-case $- in
-  *i*) ;;
-    *) return;;
-esac
+# History settings ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-# History settings
 HISTCONTROL="erasedups:ignoreboth"
 export HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history:clear:u:b"
 HISTTIMEFORMAT='%F %T '
@@ -13,13 +8,16 @@ shopt -s cmdhist
 HISTSIZE=50000
 HISTFILESIZE=100000
 
-# Misc options
+# Misc options ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 shopt -s checkwinsize
 shopt -s globstar
 PROMPT_DIRTRIM=2
 export LESS=RSci
 export LC_COLLATE=C
 export EDITOR=nvim
+
+# Bash prompt ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 jobs_status() {
   local last_job_num=$(jobs | tail -n1 | cut -f1 -d'+') 
@@ -33,7 +31,8 @@ jobs_status() {
 PS1='\[\033]0;\w\007\]\[\e[0;31m\]\w \[\e[0;33m\]$(git-short-status)\[\e[0;92m\]$(jobs_status)\[\e[0m\]'
 PS2='\[\e[0;31m\]>\[\e[0m\] '
 
-# Set some custom frequently used directories
+# Common dirs ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 export P_DIR="$HOME/p"
 export RC_DIR="$P_DIR/dotfiles"
 export TMP_DIR="$HOME/t"
@@ -41,19 +40,31 @@ export SYNC_DIR="$HOME/sync"
 export DBOX="$HOME/.dbox/Dropbox"
 export DIARY_DIR="$HOME/sync/diary-data"
 
-# Path stuff
+# Path stuff ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 add_to_path() {
-  if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
+  if [[ -d "$1" && ":$PATH:" != *":$1:"* ]]; then
     PATH="$1${PATH:+":$PATH"}"
   fi
 }
 
+export MANPATH=
+add_to_manp() {
+  if [[ -d "$1" && ":$MANPATH:" != *":$1:"* ]]; then
+    MANPATH="$1:${MANPATH}"
+  fi
+}
+
 add_to_path "/usr/local/opt/coreutils/libexec/gnubin"
-MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+add_to_manp "/usr/local/opt/coreutils/libexec/gnuman"
+
 add_to_path "/usr/local/opt/findutils/libexec/gnubin"
-MANPATH="/usr/local/opt/findutils/libexec/gnuman:$MANPATH"
+add_to_manp "/usr/local/opt/findutils/libexec/gnuman"
+
 add_to_path "/usr/local/opt/gnu-sed/libexec/gnubin"
-MANPATH="/usr/local/opt/gnu-sed/libexec/gnuman:$MANPATH"
+add_to_manp "/usr/local/opt/gnu-sed/libexec/gnuman"
+
+add_to_path "$HOME/.fzf/bin"
 
 export N_PREFIX="$HOME/.n"
 add_to_path "$N_PREFIX/bin"
@@ -73,7 +84,8 @@ export GRADLE_OPTS="-Dorg.gradle.daemon=true"
 
 export RIPGREP_CONFIG_PATH=~/.ripgreprc
 
-# Alias definitions
+# Source other files ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 [ -f ~/.bash_aliases ] && source ~/.bash_aliases
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
