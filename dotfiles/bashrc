@@ -20,12 +20,8 @@ export EDITOR=nvim
 # Bash prompt ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 jobs_status() {
-  local last_job_num=$(jobs | tail -n1 | cut -f1 -d'+') 
-  if [[ ! -z "$last_job_num" ]]; then
-    echo "$last_job_num "
-  else
-    echo ""
-  fi
+  local last_job_num=$(jobs | tail -n1 | cut -f1 -d'+')
+  [[ ! -z "$last_job_num" ]] && echo "$last_job_num "
 }
 
 PS1='\[\033]0;\w\007\]\[\e[0;31m\]\w \[\e[0;33m\]$(git-short-status)\[\e[0;92m\]$(jobs_status)\[\e[0m\]'
