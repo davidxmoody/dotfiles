@@ -71,6 +71,8 @@ add_to_path "$ANDROID_HOME/tools"
 export JAVA_HOME=$([ -x /usr/libexec/java_home ] && /usr/libexec/java_home -v 1.8 2>/dev/null)
 export GRADLE_OPTS="-Dorg.gradle.daemon=true"
 
+export RIPGREP_CONFIG_PATH=~/.ripgreprc
+
 # Alias definitions
 [ -f ~/.bash_aliases ] && source ~/.bash_aliases
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash

@@ -1,7 +1,10 @@
+.git/
+.idea/
 node_modules/
 build/
 dist/
 android-sdk-linux/
+.DS_Store
 package-lock.json
 composer.lock
 *.png
@@ -12,3 +15,6 @@ composer.lock
 *.woff2
 *.ttf
 *.eot
+*.jar
+*.tgz
+*.zip
