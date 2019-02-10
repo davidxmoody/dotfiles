@@ -19,12 +19,17 @@ export EDITOR=nvim
 
 # Bash prompt ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-jobs_status() {
+__prompt_jobs_status() {
   local last_job_num=$(jobs | tail -n1 | cut -f1 -d'+')
   [[ ! -z "$last_job_num" ]] && echo "$last_job_num "
 }
 
-PS1='\[\e[$([ "$?" == 0 ] && echo 0 || echo 7);31m\]\w\[\e[0;33m\] $(git-short-status)\[\e[0;92m\]$(jobs_status)\[\e[0m\]'
+__prompt_git_status() {
+  local git_status=$(git-short-status)
+  [[ ! -z "$git_status" ]] && echo "($git_status) "
+}
+
+PS1='\[\e[$([ "$?" == 0 ] && echo 0 || echo 7);31m\]\w\[\e[0;33m\] $(__prompt_git_status)\[\e[0;92m\]$(__prompt_jobs_status)\[\e[0m\]'
 PS2='\[\e[0;31m\]>\[\e[0m\] '
 
 # Common dirs ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

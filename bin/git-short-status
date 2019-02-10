@@ -6,7 +6,7 @@ set -e
 
 if branch=$(git rev-parse --abbrev-ref HEAD 2> /dev/null); then
   if [[ "$branch" == "HEAD" ]]; then
-    echo '(DETACHED*) '
+    echo 'DETACHED'
     exit
   fi
 
@@ -24,5 +24,5 @@ if branch=$(git rev-parse --abbrev-ref HEAD 2> /dev/null); then
   [[ "$commits_behind" -gt 0 ]] && commits_indicator="${commits_indicator}-${commits_behind}"
   [[ "$stashes_count" -gt 0 ]] && commits_indicator="${commits_indicator}#${stashes_count}"
 
-  echo "(${branch}${commits_indicator}${status_indicator}) "
+  echo "${branch}${commits_indicator}${status_indicator}"
 fi
