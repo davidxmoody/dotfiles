@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+set -e
+
+for git_dir in "$P_DIR"/*/.git; do
+  without_p_dir="${git_dir#$P_DIR/}"
+  repo_name="${without_p_dir%/.git}"
+  cd "$P_DIR/$repo_name"
+
+  date_of_my_last_commit=$(git log -1 --author="$(git config --get user.name)" --format=%cd --date=iso-strict)
+  # date_of_my_last_commit=${date_of_my_last_commit:-0000-00-00}
+
+  if [ ! -z "$date_of_my_last_commit" ]; then
+    last_commit_in_seconds=$(date -d "$date_of_my_last_commit" +%s)
+  else
+    last_commit_in_seconds=_
+  fi
+
+  echo "$last_commit_in_seconds	$repo_name"
+
+  # echo $(to_human_readable_time_diff "$last_commit_in_seconds") $repo_name
+
+  # time_diff=$((now_in_seconds - last_commit_in_seconds))
+  # time_diff=$((time_diff < 0 ? 0 : time_diff))
+
+  # echo "$date_of_my_last_commit	$last_commit_in_seconds	$repo_name"
+
+  # echo $time_diff $repo_name
+
+  # echo "${date_of_my_last_commit:0:10}	$repo_name"
+  # echo "${date_of_my_last_commit}	$(date -d "$date_of_my_last_commit" )	$repo_name"
+  # echo "$(())	$repo_name"
+done | sort -nr > ~/.projects-with-second-timestamps.tsv

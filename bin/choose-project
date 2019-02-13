@@ -11,12 +11,41 @@
 
 set -e
 
+now_seconds=$(date +%s)
+
+to_human_readable_time_diff() {
+  local past_seconds=$1
+  local time_diff=$(( now_seconds < past_seconds ? 0 : (now_seconds - past_seconds) ))
+
+  local minutes=$((time_diff / 60 % 60))
+  local hours=$((time_diff / 60 / 60 % 24))
+  local days=$((time_diff / 60 / 60 / 24))
+
+  if ((days > 999)); then
+    echo "___"
+  elif ((days > 0)); then
+    echo "${days}d"
+  elif ((hours > 0)); then
+    echo "${hours}h"
+  else
+    echo "${minutes}m"
+  fi
+}
+
 list_projects() {
   # { cut -f2 ~/.choose-project-history; ls -1 "$P_DIR"; } | count | while read count proj; do
   #   echo -e "\033[48;2;$((count * 40 > 200 ? 200 : count * 40));44;44m$proj\033[0m"
   # done
 
-  cat ~/.project-list.tsv; comm -13 <(cut -f2 ~/.project-list.tsv | sort) <(ls -1 "$P_DIR") | sed 's/^/_	/'
+  # cat ~/.project-list.tsv; comm -13 <(cut -f2 ~/.project-list.tsv | sort) <(ls -1 "$P_DIR") | sed 's/^/_	/'
+
+  while read seconds repo_name; do
+    if [[ "$seconds" == "_" ]]; then
+      echo "_	$repo_name"
+    else
+      echo "$(to_human_readable_time_diff "$seconds")	$repo_name"
+    fi
+  done < ~/.projects-with-second-timestamps.tsv
 }
 
 initial_input=${1%/}
