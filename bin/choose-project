@@ -16,7 +16,7 @@ list_projects() {
   #   echo -e "\033[48;2;$((count * 40 > 200 ? 200 : count * 40));44;44m$proj\033[0m"
   # done
 
-  { cat ~/.project-list.tsv; ls -1 "$P_DIR" | sed 's/^/_	/'; } | uniq -f1
+  cat ~/.project-list.tsv; comm -13 <(cut -f2 ~/.project-list.tsv | sort) <(ls -1 "$P_DIR") | sed 's/^/_	/'
 }
 
 initial_input=${1%/}
@@ -24,7 +24,8 @@ initial_input=${1%/}
 if [ ! -z "$initial_input" -a -d "$P_DIR/$initial_input" ]; then
   chosen_project=$initial_input
 else
-  output=$(list_projects | fzf --no-sort --ansi --select-1 --query "$initial_input" --preview "git --git-dir='$P_DIR/{2}/.git' --work-tree='$P_DIR/{2}' status -sb -uall")
+  # output=$(list_projects | fzf --no-sort --ansi --select-1 --query "$initial_input" --preview "git --git-dir='$P_DIR/{2}/.git' --work-tree='$P_DIR/{2}' status -sb -uall")
+  output=$(list_projects | fzf --no-sort --ansi --select-1 --query "$initial_input")
   chosen_project=${output#*	}
 fi
 
