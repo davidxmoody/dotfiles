@@ -1,13 +1,31 @@
 #!/usr/bin/env bash
 
+# Ideas for things I could do to colorise this:
+# - Last file access date, project enter date or commit date
+# - File type distribution (mostly ts/tsx or other things)
+# - Number of files
+# - Number of commits, repo age, number of contributors
+# - Hash based on the letters in the name (cyan for things starting with 'c', etc.)
+# - Completely custom configurable map
+# - Number of commits by me (also take into account number of commits overall)
+
 set -e
+
+list_projects() {
+  # { cut -f2 ~/.choose-project-history; ls -1 "$P_DIR"; } | count | while read count proj; do
+  #   echo -e "\033[48;2;$((count * 40 > 200 ? 200 : count * 40));44;44m$proj\033[0m"
+  # done
+
+  { cat ~/.project-list.tsv; ls -1 "$P_DIR" | sed 's/^/_	/'; } | uniq -f1
+}
 
 initial_input=${1%/}
 
 if [ ! -z "$initial_input" -a -d "$P_DIR/$initial_input" ]; then
   chosen_project=$initial_input
 else
-  chosen_project=$(list-projects | fzf --ansi --select-1 --query "$initial_input" --preview "git --git-dir='$P_DIR/{}/.git' --work-tree='$P_DIR/{}' status -sb -uall")
+  output=$(list_projects | fzf --no-sort --ansi --select-1 --query "$initial_input" --preview "git --git-dir='$P_DIR/{2}/.git' --work-tree='$P_DIR/{2}' status -sb -uall")
+  chosen_project=${output#*	}
 fi
 
 if [ ! -z "$chosen_project" ]; then
