@@ -1,51 +1,9 @@
 #!/usr/bin/env bash
 
-# Ideas for things I could do to colorise this:
-# - Last file access date, project enter date or commit date
-# - File type distribution (mostly ts/tsx or other things)
-# - Number of files
-# - Number of commits, repo age, number of contributors
-# - Hash based on the letters in the name (cyan for things starting with 'c', etc.)
-# - Completely custom configurable map
-# - Number of commits by me (also take into account number of commits overall)
-
 set -e
 
-now_seconds=$(date +%s)
-
-to_human_readable_time_diff() {
-  local past_seconds=$1
-  local time_diff=$(( now_seconds < past_seconds ? 0 : (now_seconds - past_seconds) ))
-
-  local minutes=$((time_diff / 60 % 60))
-  local hours=$((time_diff / 60 / 60 % 24))
-  local days=$((time_diff / 60 / 60 / 24))
-
-  if ((days > 999)); then
-    echo "___"
-  elif ((days > 0)); then
-    echo "${days}d"
-  elif ((hours > 0)); then
-    echo "${hours}h"
-  else
-    echo "${minutes}m"
-  fi
-}
-
 list_projects() {
-  # { cut -f2 ~/.choose-project-history; ls -1 "$P_DIR"; } | count | while read count proj; do
-  #   echo -e "\033[48;2;$((count * 40 > 200 ? 200 : count * 40));44;44m$proj\033[0m"
-  # done
-
-  # cat ~/.project-list.tsv; comm -13 <(cut -f2 ~/.project-list.tsv | sort) <(ls -1 "$P_DIR") | sed 's/^/_	/'
-
-  while read seconds repo_name; do
-    if [[ "$seconds" == "_" ]]; then
-      echo "_	$repo_name"
-    else
-      echo "$(to_human_readable_time_diff "$seconds")	$repo_name"
-    fi
-  done < ~/.projects-with-second-timestamps.tsv
+  cat ~/.project-list.tsv; comm -13 <(cut -f2 ~/.project-list.tsv | sort) <(ls -1 "$P_DIR") | sed 's/^/_	/'
 }
 
 initial_input=${1%/}
@@ -53,9 +11,8 @@ initial_input=${1%/}
 if [ ! -z "$initial_input" -a -d "$P_DIR/$initial_input" ]; then
   chosen_project=$initial_input
 else
-  # output=$(list_projects | fzf --no-sort --ansi --select-1 --query "$initial_input" --preview "git --git-dir='$P_DIR/{2}/.git' --work-tree='$P_DIR/{2}' status -sb -uall")
-  output=$(list_projects | fzf --no-sort --ansi --select-1 --query "$initial_input")
-  chosen_project=${output#*	}
+  selected_line=$(list_projects | fzf --no-sort --ansi --select-1 --query "$initial_input")
+  chosen_project=${selected_line#*	}
 fi
 
 if [ ! -z "$chosen_project" ]; then
