@@ -210,7 +210,6 @@ colorscheme solarized8_high
 let g:solarized_term_italics = 1
 
 set cursorline
-set colorcolumn=80
 highlight link QuickFixLine Normal
 
 " For focused windows, use the 'default' background color (from tmux). This
@@ -219,9 +218,6 @@ highlight link QuickFixLine Normal
 highlight Normal guibg=NONE
 " Unfocused background color duplicated in tmux config
 highlight NormalNC guibg=#001f28
-
-" highlight ColorColumn guibg=#001f28
-" highlight CursorLine guibg=#001f28
 
 " Status line ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -271,6 +267,7 @@ noremap <leader>v <Nop>
 
 noremap <leader>V ggVG
 noremap <leader>w :set wrap!<CR>
+noremap <leader>W :set colorcolumn=80<CR>
 
 nnoremap <leader>* :Rg! <C-R><C-W><CR>
 xnoremap <leader>* "zy:Rg! <C-R><C-R>z<CR>
@@ -419,6 +416,4 @@ func! WordProcessorMode()
 endfu
 
 com! WP call WordProcessorMode()
-noremap <leader>W :call WordProcessorMode()<CR>
 au BufNewFile,BufRead diary-*.md call WordProcessorMode()
-" au BufNewFile,BufRead diary-*.md set background=light
