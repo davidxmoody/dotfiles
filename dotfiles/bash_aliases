@@ -228,6 +228,7 @@ alias nid='npm install --save-dev'
 alias nud='npm uninstall --save-dev'
 alias nig='npm install -g'
 alias nug='npm uninstall -g'
+nit() { npm install --save-dev "@types/$1"; }
 alias nr='npm run'
 alias ns='npm start'
 alias nb='npm run build'
