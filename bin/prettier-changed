@@ -2,12 +2,14 @@
 
 set -e
 
-changed=$(git status --porcelain -uall | sed "s/^...//" | grep -E "\\.tsx?$")
+if [[ -x ./node_modules/.bin/prettier ]]; then
+  prettier_cmd=./node_modules/.bin/prettier
+else
+  prettier_cmd=prettier
+fi
+
+changed=$(git status --porcelain -uall | sed -n "s/^...//; /\.tsx\?$/p")
 
 [[ -z "$changed" ]] && exit 0
 
-if [[ -x ./node_modules/.bin/prettier ]]; then
-  ./node_modules/.bin/prettier --write $changed
-else
-  prettier --write $changed
-fi
+$prettier_cmd --write $changed
