@@ -1,10 +1,35 @@
-function getTmuxWindow() return hs.window.find("tmux") end
-function getChromeWindow() return hs.window.find("Google Chrome") end
-function getSlackWindow() return hs.window.find("Slack") end
+hs.window.animationDuration = 0
 
-function focusTmuxWindow() getTmuxWindow():focus() end
-function focusChromeWindow() getChromeWindow():focus() end
-function focusSlackWindow() getSlackWindow():focus() end
+function focusTmuxWindow()
+  local win = hs.window.find("tmux")
+  if win == nil then
+    hs.alert.show("Could not find tmux window")
+  else
+    win:focus()
+  end
+end
+
+function focusChromeWindow()
+  local win = hs.window.find("Google Chrome")
+  if win == nil then
+    hs.alert.show("Could not find Chrome window")
+  else
+    win:focus()
+  end
+end
+
+function focusSlackWindow()
+  local win = hs.window.find("Slack")
+  if win == nil then
+    hs.alert.show("Could not find Slack window")
+  else
+    win:focus()
+  end
+end
+
+function focusPosticoWindow()
+  hs.application.launchOrFocus("postico.app")
+end
 
 function newChromeTab()
   focusChromeWindow()
@@ -16,6 +41,24 @@ function openSlackChannel()
   hs.eventtap.keyStroke({"cmd"}, "K")
 end
 
+function moveToOtherScreen()
+  local win = hs.window.focusedWindow()
+  local currentScreenName = win:screen():name()
+  local nextScreenName = nil
+
+  for k, v in pairs(hs.screen.allScreens()) do
+    if v:name() ~= currentScreenName then
+      nextScreenName = v:name()
+      break
+    end
+  end
+
+  if nextScreenName ~= nil then
+    win:moveToScreen(nextScreenName)
+    win:focus()
+  end
+end
+
 hs.hotkey.bind({"cmd", "ctrl"}, "S", focusSlackWindow)
 hs.hotkey.bind({"cmd", "ctrl"}, "L", openSlackChannel)
 
@@ -24,4 +67,10 @@ hs.hotkey.bind({"cmd", "ctrl"}, "H", focusTmuxWindow)
 hs.hotkey.bind({"cmd", "ctrl"}, "C", focusChromeWindow)
 hs.hotkey.bind({"cmd", "ctrl"}, "T", newChromeTab)
 
+hs.hotkey.bind({"cmd", "ctrl"}, "B", focusPosticoWindow)
+
+hs.hotkey.bind({"cmd", "ctrl"}, "F", moveToOtherScreen)
+
 hs.hotkey.bind({"cmd", "ctrl", "shift"}, "R", hs.reload)
+
+hs.alert.show("Config loaded")
