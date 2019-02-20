@@ -23,18 +23,13 @@ p() {
 mkcd() { mkdir "$@" && cd "$@"; }
 
 mkalias() {
-  # Flatten arguments into one string
   local full_string=$*
 
-  # Extract the first and last parts
   local alias_name=${full_string%%=*}
   local alias_result=${full_string#*=}
 
-  # Construct the new command
   local alias_command="alias $alias_name='$alias_result'"
 
-  # Execute the command, if successful then print
-  # out the alias and add it to ~/.bash_aliases
   eval "$alias_command" && \
   alias "$alias_name" | tee -a "$HOME/.bash_aliases"
 }
@@ -43,29 +38,6 @@ mkbash() {
   echo -e "#!/usr/bin/env bash\n\nset -e\n\n" > "$1" && \
   chmod +x "$1" && \
   nvim + +startinsert "$1"
-}
-
-export SCRIPTS_DIR=$HOME/.ad-hoc-scripts
-
-mkscript() {
-  mkdir -p "$SCRIPTS_DIR"
-  mkbash "$SCRIPTS_DIR/$(date +%F-%H-%M-%S)-${1-unnamed}"
-}
-
-editscript() {
-  local script_file=$(ls -r1 "$SCRIPTS_DIR" | fzf --select-1 --query "$1")
-  [ -n "$script_file" ] && v "$SCRIPTS_DIR/$script_file"
-}
-
-runscript() {
-  local script_file=$(ls -r1 "$SCRIPTS_DIR" | fzf --select-1 --query "$1")
-  shift
-  [ -n "$script_file" ] && "$SCRIPTS_DIR/$script_file" "$@"
-}
-
-watchscript() {
-  local script_file=$(ls -r1 "$SCRIPTS_DIR" | fzf --select-1 --query "$1")
-  [ -n "$script_file" ] && entr -c "$SCRIPTS_DIR/$script_file" <<< "$SCRIPTS_DIR/$script_file"
 }
 
 mkp() {
@@ -96,6 +68,31 @@ mkt() {
   cd "$dir"
 }
 
+# Ad-hoc script management ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+export SCRIPTS_DIR=$HOME/.ad-hoc-scripts
+
+mkscript() {
+  mkdir -p "$SCRIPTS_DIR"
+  mkbash "$SCRIPTS_DIR/$(date +%F-%H-%M-%S)-${1-unnamed}"
+}
+
+editscript() {
+  local script_file=$(ls -r1 "$SCRIPTS_DIR" | fzf --select-1 --query "$1")
+  [ -n "$script_file" ] && v "$SCRIPTS_DIR/$script_file"
+}
+
+runscript() {
+  local script_file=$(ls -r1 "$SCRIPTS_DIR" | fzf --select-1 --query "$1")
+  shift
+  [ -n "$script_file" ] && "$SCRIPTS_DIR/$script_file" "$@"
+}
+
+watchscript() {
+  local script_file=$(ls -r1 "$SCRIPTS_DIR" | fzf --select-1 --query "$1")
+  [ -n "$script_file" ] && entr -c "$SCRIPTS_DIR/$script_file" <<< "$SCRIPTS_DIR/$script_file"
+}
+
 # Git ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 alias g='git'
@@ -108,12 +105,9 @@ gl() {
     git lg "$@"
   fi
 }
-glp() {
-  p "$@" && pwd && gl && cd - >/dev/null
-}
-gS() {
-  GIT_PAGER="less '+/$1'" git log -p -S "$1"
-}
+glp() { p "$@" && pwd && gl && cd - >/dev/null; }
+gS() { GIT_PAGER="less '+/$1'" git log -p -S "$1"; }
+gG() { GIT_PAGER="less '+/$1'" git log -p -G "$1"; }
 alias gd='git diff'
 alias gdc='git diff --cached'
 ga() {
@@ -235,6 +229,7 @@ alias nb='npm run build'
 alias nverp='npm version patch'
 alias nverm='npm version minor'
 alias nc='npm-check -u'
+alias nw='npm run watch'
 
 # Navy ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -255,36 +250,33 @@ alias dl='diary-list'
 
 alias ag='echo "Use rg instead"'
 alias dus='du -Dhs'
-alias dun='du -Ds node_modules/{@*/*,*} | sort -nr'
 alias df='df -hT'
-alias op='xdg-open'
-type open 2>/dev/null >/dev/null && alias op='open'
+alias op='open'
 alias mkdir='mkdir -p'
-removekernels() { sudo apt-get remove --purge $(dpkg -l 'linux-*' | sed '/^ii/!d;/'"$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]* [^ ]* \([^ ]*\).*/\1/;/[0-9]/!d'); }
-alias ins='sudo apt-get install'
-alias uns='sudo apt-get remove'
-alias xclip='xclip -selection clipboard'
-alias getclip='xclip -selection clipboard -o'
-alias wrstats="grep '^m' ~/.workrave/historystats | rev | cut -d' ' -f 2 | rev | tail -n20"
 alias gpgc='gpg -c --cipher-algo AES256'
-alias ports='netstat -tulpn'
-alias cleanupdocker='docker rmi $(docker images -qf dangling=true)'
-alias restartwifi='sudo service network-manager restart'
 alias echopath='echo $PATH | sed "s/:/\n/g"'
 alias echomanpath='echo $MANPATH | sed "s/:/\n/g"'
 alias mochaw='./node_modules/.bin/_mocha -w'
 alias stripjpg='exiftool -all= '
 alias android-proxy='adb reverse tcp:8097 tcp:8097; adb reverse tcp:8081 tcp:8081'
 alias rndebug='open "rndebugger://set-debugger-loc?host=localhost&port=8081"'
+alias launchemulator='( cd ~/Library/Android/sdk/tools && ./emulator @Nexus_5X_API_26 )'
 alias wcl='wc -l'
 alias bashal='source ~/.bash_aliases'
 alias bashtimestamps='grep "^#" ~/.bash_history | sed "s/#//" | sort -n'
 alias ff='prettier-changed'
 alias ramdam='ramda --import m=moment'
-alias launchemulator='( cd ~/Library/Android/sdk/tools && ./emulator @Nexus_5X_API_26 )'
 alias https='http --default-scheme=https'
 alias kp='kproxy'
 alias noheader='tail -n+2'
+alias brewi='brew-install-fzf'
+alias alsowc='tee >(wc -l)'
+alias alsocount='tee >(sort | uniq -c | sort -nr)'
+alias pgclikb='PGPASSWORD="$DATASTUDIO_READONLY_PASSWORD" pgcli -h localhost -p 6644 -U datastudio-readonly -d knowledge-base'
+
+for i in {1..9}; do
+  alias col$i="awk '{print \$$i}'"
+done
 
 # TODO use rg instead and split this into it's own script
 r() {
@@ -297,12 +289,6 @@ r() {
   fi
 }
 
-alias alsowc='tee >(wc -l)'
-alias alsocount='tee >(sort | uniq -c | sort -nr)'
-for i in {1..9}; do
-  alias col$i="awk '{print \$$i}'"
-done
-
 tmuxcolors() {
   for i in {0..255}; do
     (( $i % 8 == 0 )) && printf "\n"
@@ -310,8 +296,6 @@ tmuxcolors() {
   done
   echo
 }
-alias nw='npm run watch'
-alias pgclikb='PGPASSWORD="$DATASTUDIO_READONLY_PASSWORD" pgcli -h localhost -p 6644 -U datastudio-readonly -d knowledge-base'
 
 truecolors() {
   awk 'BEGIN{
@@ -328,4 +312,3 @@ truecolors() {
       printf "\n";
   }'
 }
-alias brewi='brew-install-fzf'

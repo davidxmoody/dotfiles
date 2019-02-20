@@ -263,8 +263,8 @@ noremap <leader>h :aboveleft vsplit<CR>
 noremap <leader>t :belowright split<CR>
 noremap <leader>n :aboveleft split<CR>
 noremap <leader>s :belowright vsplit<CR>
-noremap <leader>v <Nop>
 
+map <leader>v Vii
 noremap <leader>V ggVG
 noremap <leader>w :set wrap!<CR>
 noremap <leader>W :set colorcolumn=80<CR>
