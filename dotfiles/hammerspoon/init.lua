@@ -9,6 +9,15 @@ function focusTmuxWindow()
   end
 end
 
+function focusIphoneSimulatorWindow()
+  local win = hs.window.find("iPhone ")
+  if win == nil then
+    hs.alert.show("Could not find simulator window")
+  else
+    win:focus()
+  end
+end
+
 function focusChromeWindow()
   local win = hs.window.find("Google Chrome")
   if win == nil then
@@ -19,7 +28,7 @@ function focusChromeWindow()
 end
 
 function focusSlackWindow()
-  local win = hs.window.find("Slack")
+  local win = hs.window.find("Slack - ")
   if win == nil then
     hs.alert.show("Could not find Slack window")
   else
@@ -68,6 +77,7 @@ hs.hotkey.bind({"cmd", "ctrl"}, "C", focusChromeWindow)
 hs.hotkey.bind({"cmd", "ctrl"}, "T", newChromeTab)
 
 hs.hotkey.bind({"cmd", "ctrl"}, "B", focusPosticoWindow)
+hs.hotkey.bind({"cmd", "ctrl"}, "M", focusIphoneSimulatorWindow)
 
 hs.hotkey.bind({"cmd", "ctrl"}, "F", moveToOtherScreen)
 
