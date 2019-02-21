@@ -59,6 +59,7 @@ Plug 'sedm0784/vim-you-autocorrect'
 Plug 'airblade/vim-gitgutter'
 set updatetime=250
 set signcolumn=yes
+let g:gitgutter_map_keys = 0
 let g:gitgutter_diff_args = '-w'
 
 Plug 'tpope/vim-fugitive'
@@ -332,15 +333,16 @@ map L <Plug>Sneak_T
 map ( <Plug>Sneak_,
 map ) <Plug>Sneak_;
 
-nmap + <Nop>
-imap + <Esc>s
-vmap + <Esc><Esc>
+inoremap + <Esc>l
+vnoremap + <Esc><Esc>
 noremap + :update<CR>
-nnoremap ; :
+
+nnoremap ~ gUlw
 
 " TODO should I get rid of these?
-imap  <Nop>
 inoremap ! 
+" imap  <Nop>
+" nnoremap ; :
 " imap  <Nop>
 
 noremap _ :lfirst<CR>
