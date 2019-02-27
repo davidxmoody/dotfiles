@@ -97,6 +97,7 @@ let NERDTreeCaseSensitiveSort=1
 let NERDTreeNaturalSort=1
 let NERDTreeAutoDeleteBuffer=1
 let NERDTreeMinimalUI=1
+let NERDTreeMinimalMenu=1
 
 let NERDTreeMapActivateNode='h'
 let NERDTreeMapPreview='H'
@@ -336,14 +337,8 @@ map ) <Plug>Sneak_;
 inoremap + <Esc>l
 vnoremap + <Esc><Esc>
 noremap + :update<CR>
-
-nnoremap ~ gUlw
-
-" TODO should I get rid of these?
 inoremap ! 
-" imap  <Nop>
-" nnoremap ; :
-" imap  <Nop>
+nnoremap ~ gUlw
 
 noremap _ :lfirst<CR>
 noremap \| :lnext<CR>

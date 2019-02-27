@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+set -e
+
+replace_in_one_file() {
+  local filename=$1
+  local search_string=$2
+  local replacement_string=$3
+
+  local new_contents=$(rg --passthru --case-sensitive "$search_string" --replace "$replacement_string" < "$filename")
+  cat <<< "$new_contents" > "$filename"
+}
+
+if (( $# == 0)); then
+  echo "Please provide at least one argument"
+elif (( $# == 1)); then
+  rg --case-sensitive "$1"
+else
+  for filename in $(rg --case-sensitive --files-with-matches "$1"); do
+    replace_in_one_file "$filename" "$1" "$2"
+  done
+fi

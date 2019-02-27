@@ -272,20 +272,6 @@ alias noheader='tail -n+2'
 alias brewi='brew-install-fzf'
 alias alsowc='tee >(wc -l)'
 alias alsocount='tee >(sort | uniq -c | sort -nr)'
-alias pgclikb='PGPASSWORD="$DATASTUDIO_READONLY_PASSWORD" pgcli -h localhost -p 6644 -U datastudio-readonly -d knowledge-base'
 alias rgg='rg --files'
-
-for i in {1..9}; do
-  alias col$i="awk '{print \$$i}'"
-done
-
-# TODO use rg instead and split this into it's own script
-r() {
-  if (( $# == 0)); then
-    echo "Please provide at least one argument"
-  elif (( $# == 1)); then
-    ag "$1"
-  else
-    ag -l "$1" | xargs -I@ sed -i "s^${1}^${2}^g; T; w /dev/stdout" @
-  fi
-}
+alias r='find-and-replace'
+for i in {1..9}; do alias col$i="awk '{print \$$i}'"; done
