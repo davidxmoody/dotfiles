@@ -1,18 +1,3 @@
-# Vim ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-alias vim='nvim'
-alias v='nvim'
-alias vv='(cd "$RC_DIR" && nvim "dotfiles/config/nvim/init.vim")'
-alias vb='(cd "$RC_DIR" && nvim "dotfiles/bash_aliases")'
-
-# List ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-alias u='ls -FCBH --group-directories-first --color=auto --hide node_modules'
-alias uu='u -A'
-alias ur='u -R'
-alias ll='ls -FBH -l --color=auto'
-alias lt='ll -t'
-
 # Functions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 p() {
@@ -24,14 +9,11 @@ mkcd() { mkdir "$@" && cd "$@"; }
 
 mkalias() {
   local full_string=$*
-
   local alias_name=${full_string%%=*}
   local alias_result=${full_string#*=}
-
   local alias_command="alias $alias_name='$alias_result'"
 
-  eval "$alias_command" && \
-  alias "$alias_name" | tee -a "$HOME/.bash_aliases"
+  eval "$alias_command" && alias "$alias_name" | tee -a "$HOME/.bash_aliases"
 }
 
 mkp() {
@@ -197,16 +179,6 @@ clone() {
   fi
 }
 
-# cd shortcuts ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-alias up='cd ..'
-alias upp='cd ../..'
-alias uppp='cd ../../..'
-alias b='cd - >/dev/null'
-alias cdp='cd "$P_DIR"'
-alias cdt='cd "$TMP_DIR"'
-alias pd='p dotfiles'
-
 # npm ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 alias npmls='npm ls --depth=0'
@@ -240,14 +212,45 @@ alias dn='diary-new'
 alias de='diary-edit'
 alias dl='diary-list'
 
-# Misc ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Vim ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+alias vim='nvim'
+alias v='nvim'
+alias vv='(cd "$RC_DIR" && nvim "dotfiles/config/nvim/init.vim")'
+
+# List ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+alias u='ls -FCBH --group-directories-first --color=auto --hide node_modules'
+alias uu='u -A'
+
+# cd shortcuts ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+alias up='cd ..'
+alias upp='cd ../..'
+alias uppp='cd ../../..'
+alias b='cd - >/dev/null'
+alias cdp='cd "$P_DIR"'
+alias cdt='cd "$TMP_DIR"'
+alias pd='p dotfiles'
+
+# Data hacks ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 alias ag='echo "Use rg instead"'
+alias rgg='rg --files'
+alias r='find-and-replace'
+alias ramdam='ramda --import m=moment'
+alias noheader='tail -n+2'
+alias wcl='wc -l'
+alias alsowc='tee >(wc -l)'
+alias alsocount='tee >(sort | uniq -c | sort -nr)'
+for i in {1..9}; do alias col$i="awk '{print \$$i}'"; done
+
+# Misc ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 alias dus='du -Dhs'
 alias df='df -hT'
 alias op='open'
 alias mkdir='mkdir -p'
-alias gpgc='gpg -c --cipher-algo AES256'
 alias echopath='echo $PATH | sed "s/:/\n/g"'
 alias echomanpath='echo $MANPATH | sed "s/:/\n/g"'
 alias mochaw='./node_modules/.bin/_mocha -w'
@@ -255,17 +258,8 @@ alias stripjpg='exiftool -all= '
 alias android-proxy='adb reverse tcp:8097 tcp:8097; adb reverse tcp:8081 tcp:8081'
 alias rndebug='open "rndebugger://set-debugger-loc?host=localhost&port=8081"'
 alias launchemulator='( cd ~/Library/Android/sdk/tools && ./emulator @Nexus_5X_API_26 )'
-alias wcl='wc -l'
 alias bashal='source ~/.bash_aliases'
 alias bashtimestamps='grep "^#" ~/.bash_history | sed "s/#//" | sort -n'
 alias ff='prettier-changed'
-alias ramdam='ramda --import m=moment'
 alias https='http --default-scheme=https'
-alias kp='kproxy'
-alias noheader='tail -n+2'
 alias brewi='brew-install-fzf'
-alias alsowc='tee >(wc -l)'
-alias alsocount='tee >(sort | uniq -c | sort -nr)'
-alias rgg='rg --files'
-alias r='find-and-replace'
-for i in {1..9}; do alias col$i="awk '{print \$$i}'"; done
