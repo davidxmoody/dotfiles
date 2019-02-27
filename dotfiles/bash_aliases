@@ -273,6 +273,7 @@ alias brewi='brew-install-fzf'
 alias alsowc='tee >(wc -l)'
 alias alsocount='tee >(sort | uniq -c | sort -nr)'
 alias pgclikb='PGPASSWORD="$DATASTUDIO_READONLY_PASSWORD" pgcli -h localhost -p 6644 -U datastudio-readonly -d knowledge-base'
+alias rgg='rg --files'
 
 for i in {1..9}; do
   alias col$i="awk '{print \$$i}'"
@@ -287,28 +288,4 @@ r() {
   else
     ag -l "$1" | xargs -I@ sed -i "s^${1}^${2}^g; T; w /dev/stdout" @
   fi
-}
-
-tmuxcolors() {
-  for i in {0..255}; do
-    (( $i % 8 == 0 )) && printf "\n"
-    printf "\x1b[38;5;${i}m%-8s\x1b[0m    " "color${i}"
-  done
-  echo
-}
-
-truecolors() {
-  awk 'BEGIN{
-      s="/\\/\\/\\/\\/\\"; s=s s s s s s s s;
-      for (colnum = 0; colnum<77; colnum++) {
-          r = 255-(colnum*255/76);
-          g = (colnum*510/76);
-          b = (colnum*255/76);
-          if (g>255) g = 510-g;
-          printf "\033[48;2;%d;%d;%dm", r,g,b;
-          printf "\033[38;2;%d;%d;%dm", 255-r,255-g,255-b;
-          printf "%s\033[0m", substr(s,colnum+1,1);
-      }
-      printf "\n";
-  }'
 }

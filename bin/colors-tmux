@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+set -e
+
+for i in {0..255}; do
+  (( $i % 8 == 0 )) && printf "\n"
+  printf "\x1b[38;5;${i}m%-8s\x1b[0m    " "color${i}"
+done
+echo
