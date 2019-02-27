@@ -17,19 +17,8 @@ mkalias() {
 }
 
 mkp() {
-  if [ -z "$1" ]; then
-    echo "Error: Please enter a project name"
-    return 1
-  fi
-
-  if [ -e "$P_DIR/$1" ]; then
-    echo "Error: Project already exists: \"$P_DIR/$1\""
-    return 1
-  fi
-
-  mkdir -p "$P_DIR/$1"
-  cd "$P_DIR/$1"
-  git init
+  local new_project_path=$(mkproject "$@")
+  [[ ! -z "$new_project_path" ]] && cd "$new_project_path"
 }
 
 mkpn() {

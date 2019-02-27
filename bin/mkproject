@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+set -e
+
+project_name=$1
+project_path="$P_DIR/$project_name"
+
+if [[ -z "$project_name" ]]; then
+  echo "Error: Please enter a project name" >&2
+  exit 1
+fi
+
+if [[ -e "$project_path" ]]; then
+  echo "Error: Project already exists" >&2
+  exit 1
+fi
+
+mkdir -p "$project_path"
+cd "$project_path"
+
+git init >/dev/null
+
+echo "$project_path"
