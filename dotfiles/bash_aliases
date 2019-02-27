@@ -34,12 +34,6 @@ mkalias() {
   alias "$alias_name" | tee -a "$HOME/.bash_aliases"
 }
 
-mkbash() {
-  echo -e "#!/usr/bin/env bash\n\nset -e\n\n" > "$1" && \
-  chmod +x "$1" && \
-  nvim + +startinsert "$1"
-}
-
 mkp() {
   if [ -z "$1" ]; then
     echo "Error: Please enter a project name"

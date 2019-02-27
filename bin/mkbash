@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+set -e
+
+scriptfile=$1
+if [[ -z "$scriptfile" ]]; then
+  echo "Please provide a filename" >&2
+  exit 1
+fi
+
+template="#!/usr/bin/env bash\n\nset -e\n\n"
+
+echo -e "$template" > "$scriptfile"
+chmod +x "$scriptfile"
+
+nvim + +startinsert "$scriptfile"
+
+contents_after_edit=$(cat "$scriptfile")
+if diff -q <(echo -e "$template") "$scriptfile" >/dev/null; then
+  echo "Removing unchanged file: $scriptfile"
+  rm "$scriptfile"
+fi
