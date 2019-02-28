@@ -21,12 +21,6 @@ mkp() {
   [[ ! -z "$new_project_path" ]] && cd "$new_project_path"
 }
 
-mkpn() {
-  mkp "$@" && \
-  echo "node_modules/" > .gitignore && \
-  npm init --yes
-}
-
 mkt() {
   local dir="$TMP_DIR/$(date +%F-%H-%M-%S)-${1-tmp}"
   mkdir -p "$dir"
