@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+set -e
+
+if [[ $# == 0 ]]; then
+  echo "Please provide a script file as the first argument" >&2
+  exit 1
+fi
+
+scriptfile=$(readlink -f "$1")
+
+if [[ ! -x "$scriptfile" ]]; then
+  echo "File is not executable" >&2
+  exit 1
+fi
+
+entr -c "$scriptfile" <<< "$scriptfile"
