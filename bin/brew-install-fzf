@@ -2,8 +2,8 @@
 
 set -e
 
-chosen_packages=$(brew search | fzf -m --query "$1")
+chosen_packages=$(brew search | fzf --multi --query "$1")
 
-while read package; do
-  brew install "$package"
-done <<< "$chosen_packages"
+if [[ ! -z "$chosen_packages" ]]; then
+  brew install $chosen_packages
+fi
