@@ -1,0 +1,3 @@
+source-bash "echo loading xonsh foreign shell"
+
+$PROMPT = '{cwd} '
