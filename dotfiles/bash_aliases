@@ -191,9 +191,9 @@ alias nv='navy'
 # Diary ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 alias cdd='cd $DIARY_DIR'
-alias dn='diary-new'
-alias de='diary-edit'
-alias dl='diary-list'
+alias dn='diary new'
+alias de='diary edit'
+alias dl='diary list'
 
 # Vim ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

@@ -1,0 +1,64 @@
+#!/usr/bin/env bash
+
+set -e
+
+if [[ ! -d "$DIARY_DIR" || ! -d "$DIARY_DIR/entries" ]]; then
+  echo '$DIARY_DIR/entries does not exist' >&2
+  exit 1
+fi
+
+cd "$DIARY_DIR/entries"
+
+diary_new() {
+  subdir=$(date +%Y/%m/%d)
+  filename=diary-$(date +%H-%M).md
+  mkdir -p "$subdir"
+
+  nvim "+norm a## " "+startinsert!" "$subdir/$filename"
+
+  rmdir --ignore-fail-on-non-empty "$subdir"
+}
+
+diary_edit() {
+  last_year=$(ls -r | head -n1)
+  last_month=$(ls -r "$last_year" | head -n1)
+  last_day=$(ls -r "$last_year/$last_month" | head -n1)
+  last_entry=$(ls -r "$last_year/$last_month/$last_day" | head -n1)
+
+  nvim "$last_year/$last_month/$last_day/$last_entry"
+}
+
+diary_fzf_show_provided() {
+  terminal_width=$(tput cols)
+  preview_width=$((terminal_width - 33))
+
+  selected=$(fzf --preview-window=right:$preview_width --preview 'fmt -s --width=$COLUMNS {}')
+
+  [[ ! -z "$selected" ]] && nvim "$selected"
+}
+
+diary_list() {
+  last_year=$(ls -r | head -n1)
+  sorted_files=$(rg --files "$last_year" | sort -r)
+  diary_fzf_show_provided <<< "$sorted_files"
+}
+
+diary_random() {
+  files=$(rg --files | shuf -n40)
+  sorted_files=$(wc -w $files | head -n-1 | sort -nr | awk '{print $2}')
+  diary_fzf_show_provided <<< "$sorted_files"
+}
+
+case "$1" in
+  new)
+    diary_new ;;
+  edit)
+    diary_edit ;;
+  list)
+    diary_list ;;
+  random)
+    diary_random ;;
+  *)
+    echo "commands: new|edit|list|random" >&2
+    exit 1
+esac
