@@ -83,4 +83,13 @@ hs.hotkey.bind({"cmd", "ctrl"}, "F", moveToOtherScreen)
 
 hs.hotkey.bind({"cmd", "ctrl", "shift"}, "R", hs.reload)
 
+-- Trying a different modifier key (to avoid having too many different modifiers).
+-- These currently only work using my ErgoDox layout, would be good to get them
+-- working on the standard Macbook Pro keyboard in Programmer Dvorak layout.
+-- Would also be good to get auto keyboard switching working.
+
+hs.hotkey.bind({"cmd", "shift"}, 29, focusSlackWindow) -- ")"
+hs.hotkey.bind({"cmd", "shift"}, 24, focusTmuxWindow) -- "+"
+hs.hotkey.bind({"cmd"}, 30, focusChromeWindow) -- "]"
+
 hs.alert.show("Config loaded")
