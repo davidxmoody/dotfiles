@@ -5,7 +5,6 @@ set -e
 echo "Make sure nothing else is connected to the database before trying to recreate it"
 
 db_name=$1
-
 if [[ -z "$db_name" ]]; then
   echo "Please provide a service name as the first argument" >&2
   exit 1
@@ -27,6 +26,13 @@ if [[ -z "$chosen_export" ]]; then
 fi
 echo "Using export file: $chosen_export"
 
+db_host=$(navy url postgres | sed 's/^[^0-9]*\([0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+\).*$/\1/')
+if [[ -z "$db_host" ]]; then
+  echo "Could not find db_host" >&2
+  exit 1
+fi
+echo "Using navy postgres host: $db_host"
+
 db_port="$(navy port postgres 5432)"
 if [[ -z "$db_port" ]]; then
   echo "Could not find navy port"
@@ -34,5 +40,5 @@ if [[ -z "$db_port" ]]; then
 fi
 echo "Using navy postgres port: $db_port"
 
-psql --user postgres --host=localhost --port="$db_port" -v ON_ERROR_STOP=1 <<< "DROP DATABASE IF EXISTS \"$db_name\"; CREATE DATABASE \"$db_name\""
-psql --user postgres --host=localhost --port="$db_port" -d "$db_name" < "$chosen_export"
+psql --user postgres --host="$db_host" --port="$db_port" -v ON_ERROR_STOP=1 <<< "DROP DATABASE IF EXISTS \"$db_name\"; CREATE DATABASE \"$db_name\""
+psql --user postgres --host="$db_host" --port="$db_port" -d "$db_name" < "$chosen_export"
