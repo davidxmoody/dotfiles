@@ -1,17 +1,18 @@
 # History settings ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+HISTSIZE=1000000
+HISTFILESIZE=1000000
 HISTCONTROL="erasedups:ignoreboth"
-export HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history:clear:u:b"
+HISTIGNORE="&:[ ]*:exit:ls:bg:fg:clear:u:b"
 HISTTIMEFORMAT='%F %T '
 shopt -s histappend
 shopt -s cmdhist
-HISTSIZE=50000
-HISTFILESIZE=100000
 
 # Misc options ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 shopt -s checkwinsize
 shopt -s globstar
+shopt -s nocaseglob
 PROMPT_DIRTRIM=3
 export LESS=RSci
 export LC_COLLATE=C
