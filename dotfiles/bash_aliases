@@ -117,13 +117,11 @@ alias ggh='cat "$HOME/.fetch-all-projects-history/$(ls $HOME/.fetch-all-projects
 
 ggl() {
   (
-    local dir=${1-$P_DIR}
-    dir=${dir%/}
-
-    for gr in "$dir"/*/.git; do
+    cd "$P_DIR"
+    for gr in */.git; do
       local proj_dir="${gr%/.git}"
-      cd "$proj_dir"
-      echo "$(git-short-status)	$(tmux-get-window-name "$proj_dir")" | expand -t8
+      cd "$P_DIR/$proj_dir"
+      echo "$(git-short-status)	${proj_dir}" | expand -t8
     done
   )
 }
