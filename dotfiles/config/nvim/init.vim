@@ -318,8 +318,8 @@ xmap <leader>p <Plug>SlimeRegionSend
 nmap <leader>p <Plug>SlimeParagraphSend
 nmap <leader>P <Plug>SlimeConfig
 
-" noremap <silent> <leader>t :NERDTreeToggle<CR>
-noremap <silent> <leader>T :NERDTreeFind<CR>
+noremap <silent> <leader>m :NERDTreeToggle<CR>
+noremap <silent> <leader>M :NERDTreeFind<CR>
 
 map o <Plug>(easymotion-overwin-f2)
 map O <Plug>(easymotion-overwin-f)

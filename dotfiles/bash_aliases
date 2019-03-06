@@ -38,7 +38,7 @@ mkscript() {
 
 editscript() {
   local script_file=$(ls -r1 "$SCRIPTS_DIR" | fzf --select-1 --query "$1")
-  [ -n "$script_file" ] && v "$SCRIPTS_DIR/$script_file"
+  [ -n "$script_file" ] && nvim "$SCRIPTS_DIR/$script_file"
 }
 
 runscript() {
