@@ -27,7 +27,18 @@ function focusChromeWindow()
   end
 end
 
+-- function focusSlackWindow()
+--   local win = hs.window.find("Slack - ")
+--   if win == nil then
+--     hs.alert.show("Could not find Slack window")
+--   else
+--     win:focus()
+--   end
+-- end
+
 function focusSlackWindow()
+  focusChromeWindow()
+  hs.eventtap.keyStroke({"cmd"}, "1")
   local win = hs.window.find("Slack - ")
   if win == nil then
     hs.alert.show("Could not find Slack window")
@@ -38,11 +49,6 @@ end
 
 function focusPosticoWindow()
   hs.application.launchOrFocus("postico.app")
-end
-
-function newChromeTab()
-  focusChromeWindow()
-  hs.eventtap.keyStroke({"cmd"}, "T")
 end
 
 function openSlackChannel()
@@ -68,14 +74,6 @@ function moveToOtherScreen()
   end
 end
 
-hs.hotkey.bind({"cmd", "ctrl"}, "S", focusSlackWindow)
-hs.hotkey.bind({"cmd", "ctrl"}, "L", openSlackChannel)
-
-hs.hotkey.bind({"cmd", "ctrl"}, "H", focusTmuxWindow)
-
-hs.hotkey.bind({"cmd", "ctrl"}, "C", focusChromeWindow)
-hs.hotkey.bind({"cmd", "ctrl"}, "T", newChromeTab)
-
 hs.hotkey.bind({"cmd", "ctrl"}, "B", focusPosticoWindow)
 hs.hotkey.bind({"cmd", "ctrl"}, "M", focusIphoneSimulatorWindow)
 
@@ -88,8 +86,14 @@ hs.hotkey.bind({"cmd", "ctrl", "shift"}, "R", hs.reload)
 -- working on the standard Macbook Pro keyboard in Programmer Dvorak layout.
 -- Would also be good to get auto keyboard switching working.
 
+hs.hotkey.bind({"cmd", "shift"}, 28, openSlackChannel) -- "*"
 hs.hotkey.bind({"cmd", "shift"}, 29, focusSlackWindow) -- ")"
 hs.hotkey.bind({"cmd", "shift"}, 24, focusTmuxWindow) -- "+"
 hs.hotkey.bind({"cmd"}, 30, focusChromeWindow) -- "]"
+
+-- TODO find a way to trigger these when external monitors are changed (or
+-- on some other event)
+-- hs.keycodes.setLayout("Programmer Dvorak")
+-- hs.keycodes.setLayout("U.S.")
 
 hs.alert.show("Config loaded")
