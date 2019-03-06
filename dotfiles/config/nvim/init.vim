@@ -145,7 +145,12 @@ Plug 'jparise/vim-graphql', {'for': 'graphql'}
 
 Plug 'Valloric/YouCompleteMe', {'do': './install.py'}
 let g:ycm_filetype_blacklist = {'markdown': 1, 'text': 1, 'gitcommit': 1}
-let g:ycm_always_populate_location_list = 1
+" let g:ycm_always_populate_location_list = 1
+let g:ycm_collect_identifiers_from_comments_and_strings = 1
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_autoclose_preview_window_after_insertion = 1
+" TODO look at g:ycm_goto_buffer_command (for controlling direction of GoTo splits)
+" TODO bind something to :YcmDiags and :YcmShowDetailedDiagnostics
 
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0
@@ -336,7 +341,7 @@ inoremap + <Esc>l
 vnoremap + <Esc><Esc>
 noremap + :update<CR>
 inoremap ! 
-nnoremap ~ gUlw
+nnoremap ~ g~lw
 
 noremap _ :lfirst<CR>
 noremap \| :lnext<CR>
