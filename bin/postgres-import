@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+set -e
+
+echo "Make sure nothing else is connected to the database before trying to recreate it"
+
+db_name=$1
+
+if [[ -z "$db_name" ]]; then
+  echo "Please provide a service name as the first argument" >&2
+  exit 1
+fi
+
+downloads_dir=$HOME/Downloads/
+echo "Looking for database exports matching 'Cloud_SQL_Export_*' in $downloads_dir"
+
+potential_exports=$(find "$downloads_dir" -iname "Cloud_SQL_Export_*" | sort -r)
+if [[ -z "$potential_exports" ]]; then
+  echo "No files found" >&2
+  exit 1
+fi
+
+chosen_export=$(fzf <<< "$potential_exports" --header="Please choose which file to import")
+if [[ -z "$chosen_export" ]]; then
+  echo "No file chosen" >&2
+  exit 1
+fi
+echo "Using export file: $chosen_export"
+
+db_port="$(navy port postgres 5432)"
+if [[ -z "$db_port" ]]; then
+  echo "Could not find navy port"
+  exit 1
+fi
+echo "Using navy postgres port: $db_port"
+
+psql --user postgres --host=localhost --port="$db_port" -v ON_ERROR_STOP=1 <<< "DROP DATABASE IF EXISTS \"$db_name\"; CREATE DATABASE \"$db_name\""
+psql --user postgres --host=localhost --port="$db_port" -d "$db_name" < "$chosen_export"
