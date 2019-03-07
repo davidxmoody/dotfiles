@@ -74,26 +74,44 @@ function moveToOtherScreen()
   end
 end
 
-hs.hotkey.bind({"cmd", "ctrl"}, "B", focusPosticoWindow)
-hs.hotkey.bind({"cmd", "ctrl"}, "M", focusIphoneSimulatorWindow)
+function focusIphoneSimulatorOrPosticoWindow()
+  local win = hs.window.find("iPhone ")
+  if win == nil then
+    focusPosticoWindow()
+  else
+    win:focus()
+  end
+end
 
-hs.hotkey.bind({"cmd", "ctrl"}, "F", moveToOtherScreen)
+-- hs.hotkey.bind({"cmd", "ctrl"}, "B", focusPosticoWindow)
+-- hs.hotkey.bind({"cmd", "ctrl"}, "M", focusIphoneSimulatorWindow)
 
-hs.hotkey.bind({"cmd", "ctrl", "shift"}, "R", hs.reload)
+-- hs.hotkey.bind({"cmd", "ctrl"}, "F", moveToOtherScreen)
+
+-- hs.hotkey.bind({"cmd", "ctrl", "shift"}, "R", hs.reload)
 
 -- Trying a different modifier key (to avoid having too many different modifiers).
 -- These currently only work using my ErgoDox layout, would be good to get them
 -- working on the standard Macbook Pro keyboard in Programmer Dvorak layout.
 -- Would also be good to get auto keyboard switching working.
 
-hs.hotkey.bind({"cmd", "shift"}, 28, openSlackChannel) -- "*"
-hs.hotkey.bind({"cmd", "shift"}, 29, focusSlackWindow) -- ")"
-hs.hotkey.bind({"cmd", "shift"}, 24, focusTmuxWindow) -- "+"
-hs.hotkey.bind({"cmd"}, 30, focusChromeWindow) -- "]"
+-- hs.hotkey.bind({"cmd", "shift"}, 28, openSlackChannel) -- "*"
+-- hs.hotkey.bind({"cmd", "shift"}, 29, focusSlackWindow) -- ")"
+-- hs.hotkey.bind({"cmd", "shift"}, 24, focusTmuxWindow) -- "+"
+-- hs.hotkey.bind({"cmd"}, 30, focusChromeWindow) -- "]"
 
 -- TODO find a way to trigger these when external monitors are changed (or
 -- on some other event)
 -- hs.keycodes.setLayout("Programmer Dvorak")
 -- hs.keycodes.setLayout("U.S.")
+
+mod = {"cmd", "ctrl"}
+
+hs.hotkey.bind(mod, "T", focusTmuxWindow)
+hs.hotkey.bind(mod, "N", focusChromeWindow)
+hs.hotkey.bind(mod, "H", focusSlackWindow)
+hs.hotkey.bind(mod, "C", focusIphoneSimulatorOrPosticoWindow)
+hs.hotkey.bind(mod, "R", focusIphoneSimulatorOrPosticoWindow)
+hs.hotkey.bind({"cmd", "ctrl", "shift"}, "R", hs.reload)
 
 hs.alert.show("Config loaded")
