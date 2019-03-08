@@ -286,7 +286,7 @@ nnoremap <leader>r :%s/\<<C-R><C-W>\>/<C-R><C-W>/g<Left><Left>
 xnoremap <leader>r "zy:%s/\<<C-R><C-R>z\>/<C-R><C-R>z/g<Left><Left>
 
 xnoremap . :norm.<CR>
-noremap <leader>. /\C+<CR>"_.
+noremap <leader>. :,$s%"%.%gce\|1,''-&&<CR>
 
 noremap <leader>/ :nohlsearch<CR>
 
@@ -323,8 +323,8 @@ xmap <leader>p <Plug>SlimeRegionSend
 nmap <leader>p <Plug>SlimeParagraphSend
 nmap <leader>P <Plug>SlimeConfig
 
-noremap <silent> <leader>m :NERDTreeToggle<CR>
-noremap <silent> <leader>M :NERDTreeFind<CR>
+noremap <silent> <leader>m :NERDTreeFind<CR>
+noremap <silent> <leader>M :NERDTreeToggle<CR>
 
 map o <Plug>(easymotion-overwin-f2)
 map O <Plug>(easymotion-overwin-f)
@@ -355,12 +355,18 @@ noremap gP P`[V`]=
 xnoremap gp p`[V`]=
 xnoremap gP P`[V`]=
 
-" xnoremap <leader>p "0p
-" xnoremap <leader>P "0P
-noremap <leader>d "_d
-noremap <leader>D "_D
-xnoremap <leader>d "_d
-xnoremap <leader>D "_D
+" TODO figure out how to paste/delete in a nice way without affecting the
+" unnamed register
+" xnoremap P "_p
+" xnoremap P :<BS><BS><BS><BS><BS>let @p=@"<CR>"pp
+" function! PasteWithoutYank()
+"   let @p = @"
+"   return '"pp'
+" endfunction
+" xnoremap <expr> P PasteWithoutYank()
+
+xnoremap D "_d
+xnoremap C "_c
 
 noremap , A
 noremap <CR> o
