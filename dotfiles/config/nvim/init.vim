@@ -88,6 +88,7 @@ endif
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --bin'}
 Plug 'junegunn/fzf.vim'
 let g:fzf_commits_log_options = '--color --graph --pretty=tformat:"%Cred%h%Creset - %C(bold blue)%<(18)%an %C(yellow)%d%Creset %s %Cgreen(%ar)%Creset" --abbrev-commit'
+let g:fzf_buffers_jump = 1
 
 " NERDTree plugin ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -193,6 +194,7 @@ set mouse=nv
 set nowrap
 set undofile
 set lazyredraw
+set hidden
 
 " Indenting
 set tabstop=2
@@ -253,17 +255,17 @@ map <space> <Nop>
 let mapleader=' '
 
 noremap <leader>u ZZ
-noremap <leader>e :Files!<CR>
-noremap <leader>E :Files!<space><C-R>=expand("%:p:h")<CR>
+noremap <leader>e :Buffers<CR>
+noremap <leader>E :Files<CR>
 noremap <leader>o :GFiles!?<CR>
-noremap <leader>O :Buffers!<CR>
+" noremap <leader>O :Buffers!<CR>
 noremap <leader>a :Rg!<space>
 noremap <leader>A :Rg!<space><Up><CR>
 noremap <leader>i :Rg!<space>/<C-R>=fnameescape(expand('%:t:r'))<CR><CR>
-noremap <leader>c :cd<space><C-R>=fnameescape(expand("%:p:h"))<CR>
-noremap <leader>C :cd <C-R>=fnameescape(systemlist('git rev-parse --show-toplevel')[0])<CR><CR>
+" noremap <leader>c :cd<space><C-R>=fnameescape(expand("%:p:h"))<CR>
+" noremap <leader>C :cd <C-R>=fnameescape(systemlist('git rev-parse --show-toplevel')[0])<CR><CR>
 noremap <leader>b <C-^>
-noremap <leader>B :History!<CR>
+noremap <leader>B :History<CR>
 noremap <C-d> :q<CR>
 
 noremap <leader>h :aboveleft vsplit<CR>

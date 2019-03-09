@@ -39,12 +39,6 @@ end
 function focusSlackWindow()
   focusChromeWindow()
   hs.eventtap.keyStroke({"cmd"}, "1")
-  local win = hs.window.find("Slack - ")
-  if win == nil then
-    hs.alert.show("Could not find Slack window")
-  else
-    win:focus()
-  end
 end
 
 function focusPosticoWindow()
