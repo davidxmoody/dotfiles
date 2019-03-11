@@ -1,5 +1,11 @@
 hs.window.animationDuration = 0
 
+function printTable(t)
+  for k, v in pairs(t) do
+    print(k, v)
+  end
+end
+
 function focusTmuxWindow()
   local win = hs.window.find("tmux")
   if win == nil then
@@ -99,13 +105,48 @@ end
 -- hs.keycodes.setLayout("Programmer Dvorak")
 -- hs.keycodes.setLayout("U.S.")
 
+function openChromeThenSlack()
+  local app = hs.application.applicationsForBundleID("com.google.Chrome")[1]
+  local win = app:mainWindow()
+
+  if win == nil then
+    -- No Chrome window: Can't continue
+    hs.alert.show("Could not find Chrome window")
+
+  elseif win ~= hs.window.focusedWindow() then
+    -- Chrome not focused: Focus it
+    win:focus()
+
+  elseif not string.match(win:title(), " | Candide Slack %- Google Chrome$") then
+    -- Chrome focused but Slack not: Focus Slack
+    hs.eventtap.keyStroke({"cmd"}, "1")
+
+  else
+    -- Chrome and Slack focused: Open Slack channel
+    hs.eventtap.keyStroke({"cmd"}, "K")
+  end
+end
+
+function toggleItermFocus()
+  local app = hs.application.applicationsForBundleID("com.googlecode.iterm2")[1]
+  local win = app:mainWindow()
+
+  if win == nil then
+    hs.alert.show("Could not find iTerm window")
+  elseif win ~= hs.window.focusedWindow() then
+    win:focus()
+  else
+    app:hide()
+  end
+end
+
 mod = {"cmd", "ctrl"}
 
-hs.hotkey.bind(mod, "T", focusTmuxWindow)
-hs.hotkey.bind(mod, "N", focusChromeWindow)
-hs.hotkey.bind(mod, "H", focusSlackWindow)
+hs.hotkey.bind(mod, "T", toggleItermFocus)
+hs.hotkey.bind(mod, "N", openChromeThenSlack)
+hs.hotkey.bind(mod, "H", openChromeThenSlack)
 hs.hotkey.bind(mod, "C", focusIphoneSimulatorOrPosticoWindow)
-hs.hotkey.bind(mod, "R", focusIphoneSimulatorOrPosticoWindow)
+hs.hotkey.bind(mod, "W", focusIphoneSimulatorOrPosticoWindow)
 hs.hotkey.bind({"cmd", "ctrl", "shift"}, "R", hs.reload)
 
 hs.alert.show("Config loaded")
