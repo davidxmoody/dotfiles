@@ -136,14 +136,17 @@ function toggleItermFocus()
   elseif win ~= hs.window.focusedWindow() then
     win:focus()
   else
-    app:hide()
+    -- Do nothing
+    -- app:hide()
   end
 end
 
 mod = {"cmd", "ctrl"}
 
-hs.hotkey.bind(mod, "T", toggleItermFocus)
+hs.hotkey.bind(mod, "Z", openChromeThenSlack) -- Mouse
+
 hs.hotkey.bind(mod, "N", openChromeThenSlack)
+hs.hotkey.bind(mod, "T", toggleItermFocus)
 hs.hotkey.bind(mod, "H", openChromeThenSlack)
 hs.hotkey.bind(mod, "C", focusIphoneSimulatorOrPosticoWindow)
 hs.hotkey.bind(mod, "W", focusIphoneSimulatorOrPosticoWindow)

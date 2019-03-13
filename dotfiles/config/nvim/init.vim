@@ -255,17 +255,14 @@ map <space> <Nop>
 let mapleader=' '
 
 noremap <leader>u ZZ
-noremap <leader>e :Buffers<CR>
-noremap <leader>E :Files<CR>
+noremap <leader>e :Files!<CR>
+noremap <leader>E :Buffers!<CR>
 noremap <leader>o :GFiles!?<CR>
-" noremap <leader>O :Buffers!<CR>
 noremap <leader>a :Rg!<space>
 noremap <leader>A :Rg!<space><Up><CR>
 noremap <leader>i :Rg!<space>/<C-R>=fnameescape(expand('%:t:r'))<CR><CR>
-" noremap <leader>c :cd<space><C-R>=fnameescape(expand("%:p:h"))<CR>
-" noremap <leader>C :cd <C-R>=fnameescape(systemlist('git rev-parse --show-toplevel')[0])<CR><CR>
 noremap <leader>b <C-^>
-noremap <leader>B :History<CR>
+noremap <leader>B :History!<CR>
 noremap <C-d> :q<CR>
 
 noremap <leader>h :aboveleft vsplit<CR>
@@ -286,6 +283,13 @@ xnoremap * "zy:Rg! <C-R><C-R>z<CR>
 
 nnoremap <leader>r :%s/\<<C-R><C-W>\>/<C-R><C-W>/g<Left><Left>
 xnoremap <leader>r "zy:%s/\<<C-R><C-R>z\>/<C-R><C-R>z/g<Left><Left>
+
+function! ExecuteMacroOverVisualRange()
+  echo "@".getcmdline()
+  execute ":'<,'>normal @".nr2char(getchar())
+endfunction
+
+xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
 
 xnoremap . :norm.<CR>
 noremap <leader>. :,$s%"%.%gce\|1,''-&&<CR>
