@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+set -e
+
+local_user=postgres
+local_dbname=postgres
+local_host=${NAVY_EXTERNAL_IP-127.0.0.1}
+local_port=$(navy port postgres 5432)
+
+pgcli --user="$local_user" --dbname="$local_dbname" --host="$local_host" --port="$local_port" "$@"
