@@ -1,3 +1,5 @@
+-- Helpers and config ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 hs.window.animationDuration = 0
 
 function printTable(t)
@@ -6,41 +8,45 @@ function printTable(t)
   end
 end
 
-function focusIphoneSimulatorWindow()
-  local win = hs.window.find("iPhone ")
-  if win == nil then
-    hs.alert.show("Could not find simulator window")
-  else
-    win:focus()
+function getMainWindow(bundleID)
+  local app = hs.application.applicationsForBundleID(bundleID)[1]
+  if app == nil then
+    hs.alert.show("No application found for bundleID: " + bundleID)
+    return nil
   end
+
+  local win = app:mainWindow()
+  if win == nil then
+    hs.alert.show("No main window found for bundleID: " + bundleID)
+    return nil
+  end
+
+  return win
 end
+
+-- Functions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 function focusPosticoWindow()
   hs.application.launchOrFocus("postico.app")
 end
 
-function openSlackChannel()
-  focusSlackWindow()
-  hs.eventtap.keyStroke({"cmd"}, "K")
-end
+-- function moveToOtherScreen()
+--   local win = hs.window.focusedWindow()
+--   local currentScreenName = win:screen():name()
+--   local nextScreenName = nil
 
-function moveToOtherScreen()
-  local win = hs.window.focusedWindow()
-  local currentScreenName = win:screen():name()
-  local nextScreenName = nil
+--   for k, v in pairs(hs.screen.allScreens()) do
+--     if v:name() ~= currentScreenName then
+--       nextScreenName = v:name()
+--       break
+--     end
+--   end
 
-  for k, v in pairs(hs.screen.allScreens()) do
-    if v:name() ~= currentScreenName then
-      nextScreenName = v:name()
-      break
-    end
-  end
-
-  if nextScreenName ~= nil then
-    win:moveToScreen(nextScreenName)
-    win:focus()
-  end
-end
+--   if nextScreenName ~= nil then
+--     win:moveToScreen(nextScreenName)
+--     win:focus()
+--   end
+-- end
 
 function focusIphoneSimulatorOrPosticoWindow()
   local win = hs.window.find("iPhone ")
@@ -57,72 +63,39 @@ end
 -- hs.keycodes.setLayout("U.S.")
 
 function openChromeThenSlack()
-  local app = hs.application.applicationsForBundleID("com.google.Chrome")[1]
-  if app == nil then
-    hs.alert.show("Could not find Chrome window")
-    return
-  end
-
-  local win = app:mainWindow()
-  if win == nil then
-    hs.alert.show("Could not find Chrome window")
-    return
-  end
+  local win = getMainWindow("com.google.Chrome")
 
   if win ~= hs.window.focusedWindow() then
     win:focus()
-    return
-  end
-
-  if not string.match(win:title(), " | Candide Slack %- Google Chrome$") then
+  elseif not string.match(win:title(), " | Candide Slack %- Google Chrome$") then
     hs.eventtap.keyStroke({"cmd"}, "1") -- Focus first tab (Slack)
-    return
+  else
+    hs.eventtap.keyStroke({"cmd"}, "K") -- Open Slack channel chooser
   end
-
-  hs.eventtap.keyStroke({"cmd"}, "K") -- Open Slack channel chooser
 end
 
 function focusIterm()
-  local app = hs.application.applicationsForBundleID("com.googlecode.iterm2")[1]
-  local win = app:mainWindow()
-
-  if win == nil then
-    hs.alert.show("Could not find iTerm window")
-  elseif win ~= hs.window.focusedWindow() then
-    win:focus()
-  else
-    -- Do nothing
-  end
+  local win = getMainWindow("com.googlecode.iterm2")
+  win:focus()
 end
 
 function focusSimulatorAndChrome()
-  local app = hs.application.applicationsForBundleID("com.apple.iphonesimulator")[1]
-  if app == nil then
-    hs.alert.show("No simulator application")
-    return
-  end
-
-  local win = app:mainWindow()
-  if win == nil then
-    hs.alert.show("No simulator window")
-    return
-  end
-
-  local chrome_app = hs.application.applicationsForBundleID("com.google.Chrome")[1]
-  if chrome_app == nil then
-    hs.alert.show("Could not find Chrome window")
-    return
-  end
-
-  local chrome_win = chrome_app:mainWindow()
-  if chrome_win == nil then
-    hs.alert.show("Could not find Chrome window")
-    return
-  end
-
-  chrome_win:focus()
-  win:focus()
+  local chromeWin = getMainWindow("com.google.Chrome")
+  local simulatorWin = getMainWindow("com.apple.iphonesimulator")
+  chromeWin:focus()
+  simulatorWin:focus()
 end
+
+function focusNextNonChromeOrItermWindow()
+  for k, win in pairs(hs.window.orderedWindows()) do
+    if win:application():bundleID() ~= "com.google.Chrome" and win:application():bundleID() ~= "com.googlecode.iterm2" then
+      win:focus()
+      return
+    end
+  end
+end
+
+-- Keybindings ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 mod = {"cmd", "ctrl"}
 
@@ -132,7 +105,7 @@ hs.hotkey.bind(mod, "T", focusIterm) -- Left bottom
 
 hs.hotkey.bind(mod, "N", openChromeThenSlack) -- Right bottom
 hs.hotkey.bind(mod, "H", focusSimulatorAndChrome) -- Right middle
-hs.hotkey.bind(mod, "C", focusIphoneSimulatorOrPosticoWindow) -- Right top
+hs.hotkey.bind(mod, "C", focusNextNonChromeOrItermWindow) -- Right top
 hs.hotkey.bind(mod, "W", focusIphoneSimulatorOrPosticoWindow) -- Right top-right
 
 hs.hotkey.bind({"cmd", "ctrl", "shift"}, "R", hs.reload)
