@@ -349,6 +349,16 @@ noremap + :update<CR>
 inoremap ! 
 nnoremap ~ g~lw
 
+function! FillLine(str)
+  .s/\s*$//
+  let reps = (79 - col('$')) / len(a:str)
+  if reps > 0
+    .s/$/\=(' '.repeat(a:str, reps))/
+  endif
+endfunction
+
+nnoremap <leader>~ :call FillLine('~')<CR>
+
 noremap _ :lfirst<CR>
 noremap \| :lnext<CR>
 " nmap <silent> - <Plug>(ale_next_wrap)
