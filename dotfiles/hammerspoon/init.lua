@@ -1,7 +1,5 @@
 -- Helpers and config ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-hs.window.animationDuration = 0
-
 function printTable(t)
   for k, v in pairs(t) do
     print(k, v)
@@ -29,24 +27,6 @@ end
 function focusPosticoWindow()
   hs.application.launchOrFocus("postico.app")
 end
-
--- function moveToOtherScreen()
---   local win = hs.window.focusedWindow()
---   local currentScreenName = win:screen():name()
---   local nextScreenName = nil
-
---   for k, v in pairs(hs.screen.allScreens()) do
---     if v:name() ~= currentScreenName then
---       nextScreenName = v:name()
---       break
---     end
---   end
-
---   if nextScreenName ~= nil then
---     win:moveToScreen(nextScreenName)
---     win:focus()
---   end
--- end
 
 function focusIphoneSimulatorOrPosticoWindow()
   local win = hs.window.find("iPhone ")
@@ -95,11 +75,27 @@ function focusNextNonChromeOrItermWindow()
   end
 end
 
+chosenWin = nil
+
+function chooseMouseWin()
+  chosenWin = hs.window.focusedWindow()
+end
+
+function focusMouseWin()
+  if chosenWin == nil then
+    hs.alert.show("Chosen window is nil")
+  else
+    chosenWin:focus()
+  end
+end
+
 -- Keybindings ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 mod = {"cmd", "ctrl"}
+shiftedMod = {"cmd", "ctrl", "shift"}
 
-hs.hotkey.bind(mod, "Z", openChromeThenSlack) -- Mouse
+hs.hotkey.bind(shiftedMod, "Z", chooseMouseWin) -- Mouse
+hs.hotkey.bind(mod, "Z", focusMouseWin) -- Mouse
 
 hs.hotkey.bind(mod, "T", focusIterm) -- Left bottom
 
@@ -108,6 +104,6 @@ hs.hotkey.bind(mod, "H", focusSimulatorAndChrome) -- Right middle
 hs.hotkey.bind(mod, "C", focusNextNonChromeOrItermWindow) -- Right top
 hs.hotkey.bind(mod, "W", focusIphoneSimulatorOrPosticoWindow) -- Right top-right
 
-hs.hotkey.bind({"cmd", "ctrl", "shift"}, "R", hs.reload)
+hs.hotkey.bind(shiftedMod, "R", hs.reload)
 
 hs.alert.show("Config loaded")
