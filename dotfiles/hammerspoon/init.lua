@@ -1,4 +1,9 @@
--- Helpers and config ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-- TODO find a way to trigger these when external monitors are changed (or
+-- on some other event)
+-- hs.keycodes.setLayout("Programmer Dvorak")
+-- hs.keycodes.setLayout("U.S.")
+
+-- Helpers ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 function printTable(t)
   for k, v in pairs(t) do
@@ -6,16 +11,20 @@ function printTable(t)
   end
 end
 
-function getMainWindow(bundleID)
+function getMainWindow(bundleID, quiet)
   local app = hs.application.applicationsForBundleID(bundleID)[1]
   if app == nil then
-    hs.alert.show("No application found for bundleID: " + bundleID)
+    if not quiet then
+      hs.alert.show("No application found for bundleID: " .. bundleID)
+    end
     return nil
   end
 
   local win = app:mainWindow()
   if win == nil then
-    hs.alert.show("No main window found for bundleID: " + bundleID)
+    if not quiet then
+      hs.alert.show("No main window found for bundleID: " .. bundleID)
+    end
     return nil
   end
 
@@ -23,24 +32,6 @@ function getMainWindow(bundleID)
 end
 
 -- Functions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-function focusPosticoWindow()
-  hs.application.launchOrFocus("postico.app")
-end
-
-function focusIphoneSimulatorOrPosticoWindow()
-  local win = hs.window.find("iPhone ")
-  if win == nil then
-    focusPosticoWindow()
-  else
-    win:focus()
-  end
-end
-
--- TODO find a way to trigger these when external monitors are changed (or
--- on some other event)
--- hs.keycodes.setLayout("Programmer Dvorak")
--- hs.keycodes.setLayout("U.S.")
 
 function openChromeThenSlack()
   local win = getMainWindow("com.google.Chrome")
@@ -60,10 +51,10 @@ function focusIterm()
 end
 
 function focusSimulatorAndChrome()
-  local chromeWin = getMainWindow("com.google.Chrome")
-  local simulatorWin = getMainWindow("com.apple.iphonesimulator")
-  chromeWin:focus()
-  simulatorWin:focus()
+  local chromeWin = getMainWindow("com.google.Chrome", true)
+  local simulatorWin = getMainWindow("com.apple.iphonesimulator", true)
+  if chromeWin ~= nil then chromeWin:focus() end
+  if simulatorWin ~= nil then simulatorWin:focus() end
 end
 
 function focusNextNonChromeOrItermWindow()
@@ -75,34 +66,19 @@ function focusNextNonChromeOrItermWindow()
   end
 end
 
-chosenWin = nil
-
-function chooseMouseWin()
-  chosenWin = hs.window.focusedWindow()
-end
-
-function focusMouseWin()
-  if chosenWin == nil then
-    hs.alert.show("Chosen window is nil")
-  else
-    chosenWin:focus()
-  end
-end
-
 -- Keybindings ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 mod = {"cmd", "ctrl"}
 shiftedMod = {"cmd", "ctrl", "shift"}
 
-hs.hotkey.bind(shiftedMod, "Z", chooseMouseWin) -- Mouse
-hs.hotkey.bind(mod, "Z", focusMouseWin) -- Mouse
+hs.hotkey.bind(mod, "Z", focusSimulatorAndChrome) -- Mouse
 
 hs.hotkey.bind(mod, "T", focusIterm) -- Left bottom
 
 hs.hotkey.bind(mod, "N", openChromeThenSlack) -- Right bottom
 hs.hotkey.bind(mod, "H", focusSimulatorAndChrome) -- Right middle
 hs.hotkey.bind(mod, "C", focusNextNonChromeOrItermWindow) -- Right top
-hs.hotkey.bind(mod, "W", focusIphoneSimulatorOrPosticoWindow) -- Right top-right
+hs.hotkey.bind(mod, "W", focusNextNonChromeOrItermWindow) -- Right top-right
 
 hs.hotkey.bind(shiftedMod, "R", hs.reload)
 
