@@ -187,7 +187,7 @@ set showbreak=↪\
 set directory=~/.vim-swap,~/t,/var/tmp,/tmp,.
 set clipboard=unnamedplus
 set nojoinspaces
-set number
+set nonumber
 set showcmd
 set backupcopy=yes
 set mouse=nv
@@ -394,8 +394,10 @@ noremap t j
 noremap n k
 noremap s l
 
-noremap T 10j
-noremap N 10k
+" noremap T 10j
+" noremap N 10k
+noremap T 
+noremap N 
 noremap H 0
 noremap S $
 onoremap H 0
