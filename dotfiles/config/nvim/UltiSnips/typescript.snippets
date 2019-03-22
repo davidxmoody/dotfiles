@@ -140,6 +140,21 @@ export default class ${1:ComponentName} extends React.PureComponent<Props, State
 }
 endsnippet
 
+# Class methods ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+snippet pr "Private class method"
+private ${1:onThing} = (${3}) => {
+	${2}${4}
+}
+endsnippet
+
+snippet pubs "Public state"
+public state: State = {
+	${1}
+}
+
+endsnippet
+
 # JSON stringify/parse ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 snippet js "JSON stringify"
