@@ -48,6 +48,7 @@ let g:user_emmet_leader_key='<C-F>'
 Plug 'michaeljsmith/vim-indent-object'
 
 Plug 'SirVer/ultisnips'
+" TODO try a different key combination so that <C-T> can be mapped to change panes
 let g:UltiSnipsExpandTrigger = '<C-T>'
 let g:UltiSnipsJumpForwardTrigger = '<C-T>'
 let g:UltiSnipsJumpBackwardTrigger = '<C-N>'
@@ -333,9 +334,9 @@ noremap <silent> <leader>m :NERDTreeFind<CR>
 noremap <silent> <leader>M :NERDTreeToggle<CR>
 
 " map o <Plug>(easymotion-overwin-f2)
-map o <Plug>(easymotion-bd-f2)
+map O <Plug>(easymotion-bd-f2)
 " map O <Plug>(easymotion-overwin-f)
-map O <Plug>(easymotion-bd-f)
+map o <Plug>(easymotion-bd-f)
 map m <Plug>Sneak_s
 map M <Plug>Sneak_S
 map f <Plug>Sneak_f
