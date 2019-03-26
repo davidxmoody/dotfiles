@@ -333,10 +333,8 @@ nmap <leader>P <Plug>SlimeConfig
 noremap <silent> <leader>m :NERDTreeFind<CR>
 noremap <silent> <leader>M :NERDTreeToggle<CR>
 
-" map o <Plug>(easymotion-overwin-f2)
-map O <Plug>(easymotion-bd-f2)
-" map O <Plug>(easymotion-overwin-f)
-map o <Plug>(easymotion-bd-f)
+map o <Plug>(easymotion-bd-f2)
+map O <Plug>(easymotion-bd-f)
 map m <Plug>Sneak_s
 map M <Plug>Sneak_S
 map f <Plug>Sneak_f
