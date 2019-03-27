@@ -296,7 +296,7 @@ endfunction
 xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
 
 xnoremap . :norm.<CR>
-noremap <leader>. :,$s%"%.%gce\|1,''-&&<CR>
+map <leader>. /\C\<"\><CR>.
 
 noremap <leader>/ :nohlsearch<CR>
 
