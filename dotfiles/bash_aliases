@@ -65,10 +65,12 @@ gl() {
   fi
 }
 glp() { p "$@" && pwd && gl && cd - >/dev/null; }
+alias gls='gl HEAD~10.. --stat'
 gS() { GIT_PAGER="less '+/$1'" git log -p -S "$1"; }
 gG() { GIT_PAGER="less '+/$1'" git log -p -G "$1"; }
 alias gd='git diff'
 alias gdc='git diff --cached'
+alias gds='gd src'
 ga() {
   if [[ $# == 0 ]]; then
     (
@@ -249,6 +251,7 @@ alias https='http --default-scheme=https'
 alias brewi='brew-install-fzf'
 alias brewu='brew-upgrade-fzf'
 alias tsize='echo "$(tput cols)x$(tput lines)"'
+alias watchtsize='while true; do tsize; sleep 0.1; done | uniq'
 alias tmuxa='tmux-attach-fzf'
 alias podi='([ -d ios ] && cd ios; pod install)'
 alias tolower='tr "[:upper:]" "[:lower:]"'

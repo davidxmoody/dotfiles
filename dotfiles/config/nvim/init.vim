@@ -33,6 +33,9 @@ let g:EasyMotion_space_jump_first = 1
 let g:EasyMotion_use_upper = 1
 let g:EasyMotion_keys = 'TNSRHLDMGYCWFPBVUOAIE'
 
+let g:SignatureMarkTextHLDynamic = 1
+Plug 'kshenoy/vim-signature'
+
 " Editing plugins ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Plug 'Raimondi/delimitMate'
@@ -335,8 +338,8 @@ noremap <silent> <leader>M :NERDTreeToggle<CR>
 
 map o <Plug>(easymotion-bd-f2)
 map O <Plug>(easymotion-bd-f)
-map m <Plug>Sneak_s
-map M <Plug>Sneak_S
+" map m <Plug>Sneak_s
+" map M <Plug>Sneak_S
 map f <Plug>Sneak_f
 map F <Plug>Sneak_F
 map l <Plug>Sneak_t
