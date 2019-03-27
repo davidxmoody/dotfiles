@@ -216,7 +216,7 @@ set textwidth=79
 " Colorscheme and highlighting ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 set termguicolors
-colorscheme solarized8_high
+colorscheme solarized8
 let g:solarized_term_italics = 1
 
 set cursorline
