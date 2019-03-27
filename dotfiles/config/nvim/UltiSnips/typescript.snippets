@@ -1,14 +1,20 @@
 # Functions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-snippet fun "Function"
-function ${1:fn}($2) {
-	${VISUAL}$3
+snippet fn "Arrow function"
+(${2}) => {
+	${1}${3}
 }
 endsnippet
 
-snippet fn "Arrow function"
-($1) => {
-	${VISUAL}$2
+snippet fun "Function"
+function ${1:fun}(${3}) {
+	${2}${4}
+}
+endsnippet
+
+snippet func "Anonymous function"
+function(${2}) {
+	${1}${3}
 }
 endsnippet
 
@@ -87,14 +93,14 @@ endsnippet
 # Styled components ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 snippet stc "HTML styled component"
-const ${1:Container} = styled.${2:div}\`
-	$3
+const ${1:Container} = styled.${3:div}\`
+	${2}${4}
 \`
 endsnippet
 
 snippet stn "RN styled component"
-const ${1:Container} = styled.${2:View}({
-	$3
+const ${1:Container} = styled.${3:View}({
+	${2}${4}
 })
 endsnippet
 
