@@ -64,7 +64,7 @@ gl() {
     git lg "$@"
   fi
 }
-glp() { p "$@" && pwd && gl && cd - >/dev/null; }
+glp() { (p "$@" && gl) }
 alias gls='gl HEAD~10.. --stat'
 gS() { GIT_PAGER="less '+/$1'" git log -p -S "$1"; }
 gG() { GIT_PAGER="less '+/$1'" git log -p -G "$1"; }
@@ -117,6 +117,9 @@ alias gy='git-show-yesterday'
 alias gyy='git-projects-recent-commits'
 alias gg='git-fetch-all-projects'
 alias ggh='cat "$HOME/.fetch-all-projects-history/$(ls $HOME/.fetch-all-projects-history | tail -n1)"'
+alias gunl='git ls-files -v | grep ^h | col2'
+alias guna='git update-index --assume-unchanged'
+alias gunr='git update-index --no-assume-unchanged'
 
 ggl() {
   (
@@ -204,11 +207,6 @@ alias vv='(cd "$RC_DIR" && nvim "dotfiles/config/nvim/init.vim")'
 alias vb='(cd "$RC_DIR" && nvim "dotfiles/bash_aliases")'
 alias vbl='(cd "$HOME" && nvim ".bashrc-local")'
 
-# List ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-alias u='ls -FCBH --group-directories-first --color=auto --hide node_modules'
-alias uu='u -A'
-
 # cd shortcuts ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 alias up='cd ..'
@@ -229,30 +227,30 @@ alias noheader='tail -n+2'
 alias wcl='wc -l'
 alias alsowc='tee >(wc -l)'
 alias alsocount='tee >(sort | uniq -c | sort -nr)'
+alias tolower='tr "[:upper:]" "[:lower:]"'
+alias toupper='tr "[:lower:]" "[:upper:]"'
 for i in {1..9}; do alias col$i="awk '{print \$$i}'"; done
+
+# Shortcuts to custom-scripts ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+alias ff='prettier-changed'
+alias brewi='brew-install-fzf'
+alias brewu='brew-upgrade-fzf'
+alias tmuxa='tmux-attach-fzf'
 
 # Misc ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+alias u='ls -FCBH --group-directories-first --color=auto --hide node_modules'
+alias uu='u -A'
 alias dus='du -Dhs'
 alias df='df -hT'
 alias op='open'
 alias mkdir='mkdir -p'
 alias echopath='echo $PATH | sed "s/:/\n/g"'
 alias echomanpath='echo $MANPATH | sed "s/:/\n/g"'
-alias mochaw='./node_modules/.bin/_mocha -w'
-alias stripjpg='exiftool -all= '
 alias android-proxy='adb reverse tcp:8097 tcp:8097; adb reverse tcp:8081 tcp:8081'
-alias rndebug='open "rndebugger://set-debugger-loc?host=localhost&port=8081"'
 alias launchemulator='( cd ~/Library/Android/sdk/tools && ./emulator @Nexus_5X_API_26 )'
 alias bashal='source ~/.bash_aliases'
-alias bashtimestamps='grep "^#" ~/.bash_history | sed "s/#//" | sort -n'
-alias ff='prettier-changed'
-alias https='http --default-scheme=https'
-alias brewi='brew-install-fzf'
-alias brewu='brew-upgrade-fzf'
 alias tsize='echo "$(tput cols)x$(tput lines)"'
 alias watchtsize='while true; do tsize; sleep 0.1; done | uniq'
-alias tmuxa='tmux-attach-fzf'
 alias podi='([ -d ios ] && cd ios; pod install)'
-alias tolower='tr "[:upper:]" "[:lower:]"'
-alias toupper='tr "[:lower:]" "[:upper:]"'
