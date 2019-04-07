@@ -19,7 +19,3 @@ setl indentexpr=
 setl scrolloff=0
 
 noremap <buffer> - o-<Space>
-noremap <buffer> t gj
-noremap <buffer> n gk
-noremap <buffer> T 10gj
-noremap <buffer> N 10gk

@@ -48,7 +48,7 @@ inoremap <C-F> <Nop>
 xnoremap <C-F> <Nop>
 let g:user_emmet_leader_key='<C-F>'
 
-Plug 'michaeljsmith/vim-indent-object'
+Plug 'davidxmoody/vim-indent-object'
 
 Plug 'SirVer/ultisnips'
 " TODO try a different key combination so that <C-T> can be mapped to change panes
@@ -424,7 +424,7 @@ tnoremap <Esc> <C-\><C-n>
 autocmd FileType qf setl wrap
 autocmd FileType qf setl nonumber
 autocmd FileType qf nnoremap <buffer> <Enter> <Enter>
-autocmd FileType qf nnoremap <buffer> h <Enter><C-W><C-W>
+" autocmd FileType qf nnoremap <buffer> h <Enter><C-W><C-W>
 
 " English text editing ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -445,3 +445,10 @@ endfu
 
 com! WP call WordProcessorMode()
 au BufNewFile,BufRead diary-*.md call WordProcessorMode()
+
+func! HideText()
+  syntax off
+  hi Normal guibg=#001f28 guifg=#103030
+endfu
+
+com HT call HideText()
