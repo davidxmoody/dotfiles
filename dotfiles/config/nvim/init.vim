@@ -312,6 +312,8 @@ nnoremap gl :YcmCompleter Format<CR>
 nnoremap gL :YcmCompleter OrganizeImports<CR>
 nnoremap gm :YcmCompleter GetDoc<CR>
 
+nnoremap gx /export default<CR>
+
 noremap <leader>gb :Gblame<CR>
 noremap <leader>gr :Gread<CR>
 noremap <leader>gw :Gwrite<CR>
