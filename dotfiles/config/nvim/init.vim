@@ -335,6 +335,8 @@ xmap <leader>p <Plug>SlimeRegionSend
 nmap <leader>p <Plug>SlimeParagraphSend
 nmap <leader>P <Plug>SlimeConfig
 
+xmap <leader>l "lc<C-R>=substitute(system('node -p', @l), '\n\+$', '', '')<CR><ESC>
+
 noremap <silent> <leader>m :NERDTreeFind<CR>
 noremap <silent> <leader>M :NERDTreeToggle<CR>
 
