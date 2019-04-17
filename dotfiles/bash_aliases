@@ -64,7 +64,8 @@ gl() {
     git lg "$@"
   fi
 }
-glp() { (p "$@" && gl) }
+pgl() { (p "$@" && gl) }
+alias glp='gl HEAD~10.. -p'
 alias gls='gl HEAD~10.. --stat'
 gS() { GIT_PAGER="less '+/$1'" git log -p -S "$1"; }
 gG() { GIT_PAGER="less '+/$1'" git log -p -G "$1"; }
