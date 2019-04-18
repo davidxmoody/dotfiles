@@ -182,7 +182,7 @@ alias ns='npm start'
 alias nb='npm run build'
 alias nverp='npm version patch'
 alias nverm='npm version minor'
-alias nc='npm-check -u'
+alias nc='npx npm-check -u'
 alias nw='npm run watch'
 
 # Navy ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

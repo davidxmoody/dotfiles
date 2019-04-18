@@ -54,7 +54,6 @@ check_installed diff-so-fancy
 check_installed eslint_d
 check_installed http-server
 check_installed jsonlint
-check_installed npm-check
 check_installed ramda
 check_installed tsc
 check_installed tslint

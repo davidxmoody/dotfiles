@@ -10,7 +10,6 @@ npm i -g \
   http-server \
   jsonlint \
   markdownlint-cli \
-  npm-check \
   prettier \
   ramda-cli \
   tslint \
