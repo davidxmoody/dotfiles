@@ -402,10 +402,10 @@ noremap t j
 noremap n k
 noremap s l
 
-" noremap T 10j
-" noremap N 10k
-noremap T 
-noremap N 
+noremap T 10j
+noremap N 10k
+" noremap T 
+" noremap N 
 noremap H 0
 noremap S $
 onoremap H 0
