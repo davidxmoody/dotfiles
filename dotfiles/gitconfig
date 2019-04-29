@@ -9,6 +9,7 @@
   path = ~/.git_include
 [push]
   default = simple
+  followTags = true
 [blame]
   date = short
 [alias]
