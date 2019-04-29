@@ -181,6 +181,9 @@ syntax on
 
 " Miscellaneous config ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+map <space> <Nop>
+let mapleader=' '
+
 set ignorecase
 set smartcase
 set scrolloff=2
@@ -253,10 +256,21 @@ cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<cr>
 command Cppath let @+ = expand("%:p")
 command Vimrc e ~/.config/nvim/init.vim
 
-" Keybindings ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+" Searching ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-map <space> <Nop>
-let mapleader=' '
+set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
+
+nnoremap <leader>j :silent grep!<Space>
+nnoremap <silent> [j :cprevious<CR>
+nnoremap <silent> ]j :cnext<CR>
+
+augroup myvimrc
+  autocmd!
+  autocmd QuickFixCmdPost [^l]* vertical belowright cwindow 120
+  autocmd QuickFixCmdPost l*    vertical belowright lwindow 120
+augroup END
+
+" Keybindings ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 noremap <leader>u ZZ
 noremap <leader>e :Files!<CR>
