@@ -262,14 +262,12 @@ command Vimrc e ~/.config/nvim/init.vim
 set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
 
 nnoremap <leader>j :silent grep!<Space>
+xnoremap <leader>j "zy:silent grep!<Space><C-R><C-R>z<CR>
 nnoremap <silent> [j :cprevious<CR>
 nnoremap <silent> ]j :cnext<CR>
 
-augroup myvimrc
-  autocmd!
-  autocmd QuickFixCmdPost [^l]* vertical belowright cwindow 120
-  autocmd QuickFixCmdPost l*    vertical belowright lwindow 120
-augroup END
+autocmd QuickFixCmdPost [^l]* vertical belowright cwindow 120
+autocmd QuickFixCmdPost l*    vertical belowright lwindow 120
 
 " Keybindings ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -350,7 +348,7 @@ xmap <leader>p <Plug>SlimeRegionSend
 nmap <leader>p <Plug>SlimeParagraphSend
 nmap <leader>P <Plug>SlimeConfig
 
-xmap <leader>l "lc<C-R>=substitute(system('node -p', @l), '\n\+$', '', '')<CR><ESC>
+xmap <leader>x "lc<C-R>=substitute(system('node -p', @l), '\n\+$', '', '')<CR><ESC>
 
 noremap <silent> <leader>m :NERDTreeFind<CR>
 noremap <silent> <leader>M :NERDTreeToggle<CR>

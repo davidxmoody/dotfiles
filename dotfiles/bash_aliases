@@ -187,7 +187,7 @@ alias nw='npm run watch'
 
 # Navy ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-alias nvd='navy develop'
+alias nvd='[ -x ./develop.sh ] && ./develop.sh || navy develop'
 alias nvu='navy update'
 alias nvl='navy live'
 alias nvp='navy ps'
