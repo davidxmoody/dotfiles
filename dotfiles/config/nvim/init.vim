@@ -154,6 +154,7 @@ let g:ycm_always_populate_location_list = 1
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
+autocmd User YcmQuickFixOpened autocmd! ycmquickfix WinLeave
 " TODO look at g:ycm_goto_buffer_command (for controlling direction of GoTo splits)
 " TODO bind something to :YcmDiags and :YcmShowDetailedDiagnostics
 
