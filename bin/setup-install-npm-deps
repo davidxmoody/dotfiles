@@ -6,7 +6,6 @@ npm info "eslint-config-airbnb@latest" peerDependencies --json | \
 
 npm i -g \
   diff-so-fancy \
-  fx \
   http-server \
   jsonlint \
   markdownlint-cli \
