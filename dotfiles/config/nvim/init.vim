@@ -155,8 +155,6 @@ let g:ycm_collect_identifiers_from_comments_and_strings = 1
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
 autocmd User YcmQuickFixOpened autocmd! ycmquickfix WinLeave
-" TODO look at g:ycm_goto_buffer_command (for controlling direction of GoTo splits)
-" TODO bind something to :YcmDiags and :YcmShowDetailedDiagnostics
 
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0
@@ -320,10 +318,9 @@ nnoremap gD :YcmCompleter GoToType<CR>
 nnoremap gr :YcmCompleter GoToReferences<CR>
 nnoremap gR :YcmCompleter RefactorRename 
 nnoremap gs :YcmCompleter FixIt<CR>
-nnoremap gS :YcmCompleter GetType<CR>
-nnoremap gl :YcmCompleter Format<CR>
-nnoremap gL :YcmCompleter OrganizeImports<CR>
-nnoremap gm :YcmCompleter GetDoc<CR>
+nnoremap gS :YcmShowDetailedDiagnostics<CR>
+nnoremap gl :YcmCompleter GetType<CR>
+nnoremap gL :YcmCompleter GetDoc<CR>
 
 nnoremap gx /export default<CR>
 
