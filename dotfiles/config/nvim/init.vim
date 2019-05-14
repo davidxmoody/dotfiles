@@ -318,7 +318,7 @@ nnoremap gD :YcmCompleter GoToType<CR>
 nnoremap gr :YcmCompleter GoToReferences<CR>
 nnoremap gR :YcmCompleter RefactorRename 
 nnoremap gs :YcmCompleter FixIt<CR>
-nnoremap gS :YcmShowDetailedDiagnostics<CR>
+nnoremap gS :YcmShowDetailedDiagnostic<CR>
 nnoremap gl :YcmCompleter GetType<CR>
 nnoremap gL :YcmCompleter GetDoc<CR>
 
