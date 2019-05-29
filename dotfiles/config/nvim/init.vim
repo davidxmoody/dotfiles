@@ -167,7 +167,8 @@ let g:ale_linters = {
 \}
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'typescript': ['prettier', 'remove_trailing_lines', 'trim_whitespace'],
+\   'typescript': ['prettier'],
+\   'graphql': ['prettier'],
 \   'html': ['prettier'],
 \}
 Plug 'w0rp/ale'
