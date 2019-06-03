@@ -110,17 +110,19 @@
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>1353 406 752 521 0 0 2560 1417 </string>
 	<key>NSWindow Frame SUAutomaticUpdateAlert</key>
-	<string>412 527 616 174 0 0 1440 877 </string>
+	<string>972 932 616 174 0 0 2560 1417 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>-1270 498 620 392 -1920 0 1920 1057 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>1400 733 796 486 0 0 2560 1417 </string>
+	<string>808 788 918 452 0 0 2560 1417 </string>
+	<key>NSWindow Frame UKCrashReporter</key>
+	<string>230 833 592 584 0 0 2560 1417 </string>
 	<key>NSWindow Frame com.apple.typography_panel_Monaco</key>
 	<string>346 482 260 148 0 0 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 0 2146 1417 0 0 2560 1417 </string>
+	<string>0 0 2560 1417 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>626 393 570 426 0 0 1920 1057 </string>
+	<string>923 541 650 501 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
 	<string>397 105 570 426 0 0 1920 1057 </string>
 	<key>New Bookmarks</key>
@@ -345,7 +347,7 @@
 			<key>Blur</key>
 			<true/>
 			<key>Blur Radius</key>
-			<real>30</real>
+			<real>13.149827490482233</real>
 			<key>Bold Color</key>
 			<dict>
 				<key>Blue Component</key>
@@ -795,7 +797,7 @@
 			<key>Terminal Type</key>
 			<string>xterm-256color</string>
 			<key>Transparency</key>
-			<real>0.0</real>
+			<real>0.042651491116751268</real>
 			<key>Unlimited Scrollback</key>
 			<false/>
 			<key>Use Bold Font</key>
@@ -892,7 +894,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2019-04-17T13:04:31Z</date>
+	<date>2019-05-19T11:59:43Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>ShowBookmarkName</key>
@@ -913,6 +915,8 @@
 	<integer>9</integer>
 	<key>SwitchWindowModifier</key>
 	<integer>9</integer>
+	<key>UKCrashReporterLastCrashReportDate</key>
+	<real>1557827712</real>
 	<key>UseBorder</key>
 	<false/>
 	<key>UseLionStyleFullscreen</key>
@@ -922,7 +926,7 @@
 	<key>WordCharacters</key>
 	<string>/-+\~_.</string>
 	<key>iTerm Version</key>
-	<string>3.2.8</string>
+	<string>3.2.9</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>0</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
