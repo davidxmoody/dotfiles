@@ -16,7 +16,7 @@ if [ -d "$proj/.git" ] && cd "$proj" && [[ ! -z "$(git remote -v)" ]]; then
     if [[ "$commits_behind" -gt 0 ]]; then
       git merge --ff-only --quiet @{upstream} && color=$color_good
       echo -e "#${color}${padded_commits_behind}${color_reset} $(basename "$proj")"
-      [[ "$proj" != "$HOME/p/k8s-resources" ]] && git --no-pager lgs ORIG_HEAD..
+      [[ ! -e "$proj/.git/.hide-from-logs" ]] && git --no-pager lgs ORIG_HEAD..
       echo
     fi
   else
