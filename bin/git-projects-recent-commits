@@ -6,6 +6,7 @@ cd "${1-$P_DIR}"
 
 for gd in */.git; do
   [[ "$gd" == "k8s-resources/.git" ]] && continue
+  [[ "$gd" == "qmk_firmware/.git" ]] && continue
 
   commits="$(git --git-dir="$gd" --no-pager lg --after=yesterday)"
 
