@@ -168,6 +168,8 @@ let g:ale_linters = {
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'typescript': ['prettier'],
+\   'javascript': ['prettier'],
+\   'json': ['prettier'],
 \   'graphql': ['prettier'],
 \   'html': ['prettier'],
 \}
@@ -323,7 +325,7 @@ nnoremap gS :YcmShowDetailedDiagnostic<CR>
 nnoremap gl :YcmCompleter GetType<CR>
 nnoremap gL :YcmCompleter GetDoc<CR>
 
-nnoremap gx /export default<CR>
+nnoremap gx /export<CR>
 
 noremap <leader>gb :Gblame<CR>
 noremap <leader>gr :Gread<CR>

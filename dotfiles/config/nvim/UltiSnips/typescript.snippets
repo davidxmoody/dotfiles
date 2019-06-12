@@ -106,41 +106,67 @@ endsnippet
 
 # React ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-snippet react "React pure class component"
+snippet uses "React useState"
+const [${1:thing}, ${2:set${1/\w?/\u$0/}}] = useState${4}(${3:undefined})
+endsnippet
+
+snippet react "React functional component"
 import * as React from "react"
 
 interface Props {
-	${2:// TODO}
+	${1:// TODO}
 }
 
-export default class ${1:ComponentName} extends React.PureComponent<Props> {
+export default function ${3:`!p snip.rv = snip.basename`}(props: Props) {
+	return (
+		${2:<></>}
+	)
+}
+endsnippet
+
+snippet reacte "React functional component (without imports)"
+function ${1:Component}(props: {${2}}) {
+	return (
+		${3:<></>}
+	)
+}
+endsnippet
+
+snippet reactpc "React pure class component"
+import * as React from "react"
+
+interface Props {
+	${1:// TODO}
+}
+
+export default class ${3:`!p snip.rv = snip.basename`} extends React.PureComponent<Props> {
 	public render() {
 		return (
-			${3:<div>TODO</div>}
+			${2:<></>}
 		)
 	}
 }
 endsnippet
 
-snippet reacts "React pure class component with state"
+snippet reactpcs "React pure class component with state"
 import * as React from "react"
 
 interface Props {
-	${2:// TODO}
+	${1:// TODO}
 }
 
 interface State {
-	${3:// TODO}
+	${2:// TODO}
 }
 
-export default class ${1:ComponentName} extends React.PureComponent<Props, State> {
+export default class ${4:`!p snip.rv = snip.basename`} extends React.PureComponent<Props, State> {
 	public state: State = {
-		${4:// TODO}
+		${3:// TODO}
 	}
 
 	public render() {
 		return (
-			${3:<div>TODO</div>}
+			${3:<></>}
 		)
 	}
 }
