@@ -59,7 +59,15 @@ end
 
 function focusNextNonChromeOrItermWindow()
   for k, win in pairs(hs.window.orderedWindows()) do
-    if win:application():bundleID() ~= "com.google.Chrome" and win:application():bundleID() ~= "com.googlecode.iterm2" then
+    bundleID = win:application():bundleID()
+
+    if
+      k ~= 1 and
+      bundleID ~= "com.google.Chrome" and
+      bundleID ~= "com.googlecode.iterm2" and
+      bundleID ~= "org.hammerspoon.Hammerspoon" and
+      bundleID ~= "org.openstenoproject.plover"
+    then
       win:focus()
       return
     end
@@ -71,13 +79,12 @@ end
 mod = {"cmd", "ctrl"}
 shiftedMod = {"cmd", "ctrl", "shift"}
 
-hs.hotkey.bind(mod, "Z", focusSimulatorAndChrome) -- Mouse
+hs.hotkey.bind(mod, "X", focusSimulatorAndChrome) -- Mouse
 
 -- hs.hotkey.bind(mod, "T", focusIterm) -- Left bottom
 
 hs.hotkey.bind(mod, "N", openChromeThenSlack) -- Right bottom
-hs.hotkey.bind(mod, "H", focusSimulatorAndChrome) -- Right middle
-hs.hotkey.bind(mod, "C", focusNextNonChromeOrItermWindow) -- Right top
+hs.hotkey.bind(mod, "H", focusNextNonChromeOrItermWindow) -- Right middle
 hs.hotkey.bind(mod, "W", focusIterm) -- Right top-right
 
 hs.hotkey.bind(shiftedMod, "R", hs.reload)
