@@ -172,6 +172,7 @@ let g:ale_fixers = {
 \   'json': ['prettier'],
 \   'graphql': ['prettier'],
 \   'html': ['prettier'],
+\   'css': ['prettier'],
 \   'vim': [],
 \}
 Plug 'w0rp/ale'
