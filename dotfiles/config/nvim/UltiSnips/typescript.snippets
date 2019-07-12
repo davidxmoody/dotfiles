@@ -2,19 +2,19 @@
 
 snippet fn "Arrow function"
 (${2}) => {
-	${1}${3}
+	${VISUAL}${1}${3}
 }
 endsnippet
 
 snippet fun "Function"
 function ${1:fun}(${3}) {
-	${2}${4}
+	${VISUAL}${2}${4}
 }
 endsnippet
 
 snippet func "Anonymous function"
 function(${2}) {
-	${1}${3}
+	${VISUAL}${1}${3}
 }
 endsnippet
 
@@ -50,6 +50,14 @@ snippet cl "console.log()"
 console.log(${1:"${2:message}"})
 endsnippet
 
+snippet clv "console.log() visual"
+console.log(${VISUAL})
+endsnippet
+
+snippet clvj "console.log() visual json"
+console.log(JSON.stringify(${VISUAL}, null, 2))
+endsnippet
+
 snippet cw "console.warn()"
 console.warn(${1:"${2:message}"})
 endsnippet
@@ -82,12 +90,6 @@ snippet ita "mocha async it"
 it("$1", async () => {
 	$2
 })
-endsnippet
-
-snippet notnull "not null function"
-function notNull<X>(maybeNull: X | null): maybeNull is X {
-	return maybeNull !== null
-}
 endsnippet
 
 # Styled components ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -190,13 +192,13 @@ endsnippet
 # JSON stringify/parse ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 snippet js "JSON stringify"
-JSON.stringify(${1})
+JSON.stringify(${VISUAL}${1})
 endsnippet
 
 snippet j2 "JSON stringify null 2"
-JSON.stringify(${1}, null, 2)
+JSON.stringify(${VISUAL}${1}, null, 2)
 endsnippet
 
 snippet jp "JSON parse"
-JSON.parse(${1})
+JSON.parse(${VISUAL}${1})
 endsnippet
