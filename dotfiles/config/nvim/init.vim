@@ -316,6 +316,8 @@ map <leader>. /\C\<"\><CR>.
 
 noremap <leader>/ :nohlsearch<CR>
 
+noremap g, :.Subvert/[{ ,x}]/[{x, }]<CR>:nohlsearch<CR>
+
 noremap <leader>f :ALEFix<CR>
 
 nnoremap gd :YcmCompleter GoTo<CR>
@@ -356,9 +358,9 @@ noremap <silent> <leader>m :NERDTreeFind<CR>
 noremap <silent> <leader>M :NERDTreeToggle<CR>
 
 map o <Plug>(easymotion-bd-f2)
-map O <Plug>(easymotion-bd-f)
-" map m <Plug>Sneak_s
-" map M <Plug>Sneak_S
+map O <Plug>(easymotion-overwin-f2)
+map m <Plug>Sneak_s
+map M <Plug>Sneak_S
 map f <Plug>Sneak_f
 map F <Plug>Sneak_F
 map l <Plug>Sneak_t
@@ -429,6 +431,7 @@ noremap gn gk
 noremap j n
 noremap J N
 noremap gj gn
+noremap gJ gN
 
 noremap k J
 noremap K gJ
