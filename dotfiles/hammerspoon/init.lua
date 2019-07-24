@@ -38,7 +38,7 @@ function openChromeThenSlack()
 
   if win ~= hs.window.focusedWindow() then
     win:focus()
-  elseif not string.match(win:title(), " | Candide Slack %- Google Chrome$") then
+  elseif not string.match(win:title(), " | Candide %- Google Chrome$") then
     hs.eventtap.keyStroke({"cmd"}, "1") -- Focus first tab (Slack)
   else
     hs.eventtap.keyStroke({"cmd"}, "K") -- Open Slack channel chooser
