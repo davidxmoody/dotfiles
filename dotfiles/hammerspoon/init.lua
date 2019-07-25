@@ -51,10 +51,10 @@ function focusIterm()
 end
 
 function focusSimulatorAndChrome()
-  local chromeWin = getMainWindow("com.google.Chrome", true)
   local simulatorWin = getMainWindow("com.apple.iphonesimulator", true)
-  if chromeWin ~= nil then chromeWin:focus() end
+  local chromeWin = getMainWindow("com.google.Chrome", true)
   if simulatorWin ~= nil then simulatorWin:focus() end
+  if chromeWin ~= nil then chromeWin:focus() end
 end
 
 function focusNextNonChromeOrItermWindow()
