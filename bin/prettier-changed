@@ -8,7 +8,7 @@ else
   prettier_cmd=prettier
 fi
 
-changed=$(git status --porcelain -uall | sed -n 's/^...//; /\.(ts\|tsx\|js\|graphql)$/p')
+changed=$(git status --porcelain -uall | sed -n 's/^...//; /\.\(ts\|tsx\|js\|graphql\)$/p')
 
 [[ -z "$changed" ]] && exit 0
 
