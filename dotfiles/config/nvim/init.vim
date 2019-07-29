@@ -464,7 +464,10 @@ func! WordProcessorMode()
 endfu
 
 com! WP call WordProcessorMode()
-au BufNewFile,BufRead diary-*.md call WordProcessorMode()
+
+if empty($DISABLE_AUTO_WP_MODE)
+  au BufNewFile,BufRead diary-*.md call WordProcessorMode()
+endif
 
 func! HideText()
   syntax off

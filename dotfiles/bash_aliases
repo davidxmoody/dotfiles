@@ -207,6 +207,7 @@ alias v='nvim'
 alias vv='(cd "$RC_DIR" && nvim "dotfiles/config/nvim/init.vim")'
 alias vb='(cd "$RC_DIR" && nvim "dotfiles/bash_aliases")'
 alias vbl='(cd "$HOME" && nvim ".bashrc-local")'
+alias vp='v package.json'
 
 # cd shortcuts ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
