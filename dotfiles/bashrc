@@ -45,6 +45,7 @@ trap '__prompt_timer_start' DEBUG
 PROMPT_COMMAND=__prompt_timer_stop
 
 PS1='\[\e[$(( $? == 0 ? 0 : 7 ));31m\]\w'
+PS1+='$(tmux select-pane -T "$(tmux-get-pane-title)")'
 PS1+='\[\e[0;33m\] $(__prompt_git_status)'
 PS1+='\[\e[0;32m\]${__prompt_timer_value}\[\e[0m\]'
 PS1+='\[\e[0;92m\]$(__prompt_jobs_status)\[\e[0m\]'
