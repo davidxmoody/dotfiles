@@ -10,7 +10,7 @@ proj=${1%/}
 
 if [ -d "$proj/.git" ] && cd "$proj" && [[ ! -z "$(git remote -v)" ]]; then
   if git fetch --quiet; then
-    commits_behind=$(git rev-list --count HEAD..@{upstream} 2>/dev/null)
+    commits_behind=$(git rev-list --count HEAD..@{upstream} 2> /dev/null)
     padded_commits_behind=$(printf '%3s' "$commits_behind")
     color=$color_bad
     if [[ "$commits_behind" -gt 0 ]]; then

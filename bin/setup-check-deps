@@ -13,7 +13,7 @@ echo_bad() {
 }
 
 check_installed() {
-  if type "$1" >/dev/null 2>/dev/null; then
+  if type "$1" > /dev/null 2> /dev/null; then
     echo_good "$1" "${2#v}"
   else
     echo_bad "$1"
@@ -22,7 +22,7 @@ check_installed() {
 
 echo "# core"
 check_installed bash "${BASH_VERSION%%\(*}"
-check_installed git "$(git --version 2>/dev/null | sed 's/git version //')"
+check_installed git "$(git --version 2> /dev/null | sed 's/git version //')"
 check_installed python "$(python --version 2>&1 | grep -o '[0-9.]\+')"
 check_installed python3 "$(python3 --version | grep -o '[0-9.]\+')"
 echo
@@ -48,8 +48,8 @@ echo
 
 echo "# node"
 check_installed n
-check_installed node "$(node --version 2>/dev/null)"
-check_installed npm "$(npm --version 2>/dev/null)"
+check_installed node "$(node --version 2> /dev/null)"
+check_installed npm "$(npm --version 2> /dev/null)"
 check_installed diff-so-fancy
 check_installed eslint_d
 check_installed http-server

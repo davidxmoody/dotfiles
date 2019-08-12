@@ -16,7 +16,7 @@ for source_file in $(find "$SOURCE_DIR" -type f); do
     cp -v "$source_file" "$target_file"
   else
     target_file=$TARGET_DIR/.${source_file#$SOURCE_DIR/}
-    [[ "$(readlink "$target_file")" = "$source_file" ]] && continue
+    [[ "$(readlink "$target_file")" == "$source_file" ]] && continue
     mkdir -pv "$(dirname "$target_file")"
     ln -isv "$source_file" "$target_file"
   fi

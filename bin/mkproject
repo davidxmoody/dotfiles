@@ -6,10 +6,11 @@ while getopts "n" opt; do
   case "$opt" in
     n)
       npm_init=true
+      ;;
   esac
 done
 
-shift $((OPTIND-1))
+shift $((OPTIND - 1))
 
 project_name=$1
 project_path="$P_DIR/$project_name"
@@ -27,11 +28,11 @@ fi
 mkdir -p "$project_path"
 cd "$project_path"
 
-git init >/dev/null
+git init > /dev/null
 
 if [[ "$npm_init" == true ]]; then
   echo "node_modules/" > .gitignore
-  npm init --yes >/dev/null
+  npm init --yes > /dev/null
 fi
 
 echo "$project_path"

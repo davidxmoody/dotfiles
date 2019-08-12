@@ -16,7 +16,7 @@ chmod +x "$scriptfile"
 nvim + +startinsert "$scriptfile"
 
 contents_after_edit=$(cat "$scriptfile")
-if diff -q <(echo -e "$template") "$scriptfile" >/dev/null; then
+if diff -q <(echo -e "$template") "$scriptfile" > /dev/null; then
   echo "Removing unchanged file: $scriptfile"
   rm "$scriptfile"
 fi

@@ -2,7 +2,7 @@
 
 set -e
 
-available_sessions=$(tmux list-sessions 2>/dev/null || true)
+available_sessions=$(tmux list-sessions 2> /dev/null || true)
 
 if [ -z "$available_sessions" ]; then
   tmux

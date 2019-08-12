@@ -11,9 +11,9 @@ replace_in_one_file() {
   cat <<< "$new_contents" > "$filename"
 }
 
-if (( $# == 0)); then
+if (($# == 0)); then
   echo "Please provide at least one argument"
-elif (( $# == 1)); then
+elif (($# == 1)); then
   rg --case-sensitive "$1"
 else
   for filename in $(rg --case-sensitive --files-with-matches "$1"); do

@@ -34,7 +34,7 @@ else
     diff)
       git_track diff
       ;;
-    log|lg)
+    log | lg)
       git_track lg
       ;;
     show)

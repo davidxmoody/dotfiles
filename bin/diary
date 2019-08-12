@@ -51,14 +51,19 @@ diary_random() {
 
 case "$1" in
   new)
-    diary_new ;;
+    diary_new
+    ;;
   edit)
-    diary_edit ;;
+    diary_edit
+    ;;
   list)
-    diary_list ;;
+    diary_list
+    ;;
   random)
-    diary_random ;;
+    diary_random
+    ;;
   *)
     echo "commands: new|edit|list|random" >&2
     exit 1
+    ;;
 esac
