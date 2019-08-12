@@ -174,7 +174,9 @@ let g:ale_fixers = {
 \   'html': ['prettier'],
 \   'css': ['prettier'],
 \   'vim': [],
+\   'sh': ['shfmt'],
 \}
+let g:ale_sh_shfmt_options='-i 2 -sr -ci'
 Plug 'w0rp/ale'
 
 " End of plugin manager setup ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
