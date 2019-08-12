@@ -58,13 +58,13 @@ alias g='git'
 alias gs='git status -sb -uall'
 alias gc='git commit'
 gl() {
-  if git rev-parse @{u} 2>/dev/null 1>/dev/null; then
+  if git rev-parse @{u} 2> /dev/null 1> /dev/null; then
     git lg @ @{u} "$@"
   else
     git lg "$@"
   fi
 }
-pgl() { (p "$@" && gl) }
+pgl() { (p "$@" && gl); }
 alias glp='gl HEAD~50.. -p'
 alias gls='gl HEAD~50.. --stat'
 gS() { GIT_PAGER="less '+/$1'" git log -p -S "$1"; }
@@ -75,11 +75,11 @@ alias gds='gd src'
 ga() {
   if [[ $# == 0 ]]; then
     (
-      cd "$(git rev-parse --show-toplevel)" && \
-      git status -sb -uall | \
-      fzf --ansi --header-lines=1 --multi --preview='git diff {2}' | \
-      sed 's/^.. //' | \
-      xargs -d '\n' git add
+      cd "$(git rev-parse --show-toplevel)" &&
+        git status -sb -uall |
+        fzf --ansi --header-lines=1 --multi --preview='git diff {2}' |
+        sed 's/^.. //' |
+        xargs -d '\n' git add
     )
   else
     git add "$@"
@@ -139,19 +139,19 @@ gclone() {
   [ -z "$git_repo" ] && echo "Please enter the name of a git repository" && return 1
 
   (
-    cd "$HOME/${project_dir}" && \
+    cd "$HOME/${project_dir}" &&
       git clone git@bitbucket.org:candide-garden-app/${git_repo}.git
   ) && cd "$HOME/${project_dir}/${git_repo}"
 }
 
 fetch_repo_list() {
-  curl https://api.github.com/users/davidxmoody/repos 2>/dev/null | \
-    ramda --unslurp "pluck('name')" | \
+  curl https://api.github.com/users/davidxmoody/repos 2> /dev/null |
+    ramda --unslurp "pluck('name')" |
     sed 's/"//g' > ~/.github-repos
 }
 
 clone() {
-  if [ -z "$(find ~/.github-repos -mtime -3 2>/dev/null)" ]; then
+  if [ -z "$(find ~/.github-repos -mtime -3 2> /dev/null)" ]; then
     echo "Re-fetching repo list from GitHub..."
     fetch_repo_list
   fi
