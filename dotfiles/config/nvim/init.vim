@@ -164,6 +164,7 @@ let g:ale_linters = {
 \   'graphql': ['prettier'],
 \   'markdown': ['markdownlint'],
 \   'html': ['prettier'],
+\   'sh': ['shellcheck'],
 \}
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],

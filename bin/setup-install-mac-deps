@@ -2,5 +2,5 @@
 
 set -e
 
-brew install tmux neovim ripgrep bash python3 coreutils findutils gnu-sed n vifm tree cmake httpie shfmt
+brew install tmux neovim ripgrep bash python3 coreutils findutils gnu-sed n vifm tree cmake httpie shfmt shellcheck
 brew cask install iterm2
