@@ -18,7 +18,7 @@ git_track() {
   git --git-dir="${git_dir}" --work-tree="${full_path}" "$@"
 }
 
-if [ ! -d "$git_dir" -o "$cmd" = "init" ]; then
+if [ ! -d "$git_dir" ] || [ "$cmd" = "init" ]; then
   git_track init
   git_track add -A :/
   git_track commit -m "Automatic commit"

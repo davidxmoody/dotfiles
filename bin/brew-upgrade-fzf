@@ -6,6 +6,6 @@ brew update
 
 chosen_packages=$(brew outdated --verbose | fzf --multi --query "$1" | sed 's/ .*$//')
 
-if [[ ! -z "$chosen_packages" ]]; then
+if [[ -n "$chosen_packages" ]]; then
   brew upgrade $chosen_packages
 fi

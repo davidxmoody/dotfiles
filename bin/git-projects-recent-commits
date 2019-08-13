@@ -9,7 +9,7 @@ for gd in */.git; do
 
   commits="$(git --git-dir="$gd" --no-pager lg --after=yesterday)"
 
-  if [[ ! -z "$commits" ]]; then
+  if [[ -n "$commits" ]]; then
     echo "# ${gd%/.git}"
     echo "$commits"
     echo

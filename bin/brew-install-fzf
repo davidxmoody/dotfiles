@@ -4,6 +4,6 @@ set -e
 
 chosen_packages=$(brew search | fzf --multi --query "$1")
 
-if [[ ! -z "$chosen_packages" ]]; then
+if [[ -n "$chosen_packages" ]]; then
   brew install $chosen_packages
 fi
