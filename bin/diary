@@ -49,18 +49,34 @@ diary_random() {
   diary_fzf_show_provided <<< "$sorted_files"
 }
 
-case "$1" in
+diary_words() {
+  local limit=${1-50}
+
+  find -iname '*.md' | xargs cat |
+    tr -sc "[A-Z][a-z][0-9]'" '[\012*]' | tr '[A-Z]' '[a-z]' |
+    sed 's/\bi\b/I/' |
+    sort | uniq -c | sort -nr |
+    head -n "$limit"
+}
+
+command=$1
+shift
+
+case "$command" in
   new)
-    diary_new
+    diary_new "$@"
     ;;
   edit)
-    diary_edit
+    diary_edit "$@"
     ;;
   list)
-    diary_list
+    diary_list "$@"
     ;;
   random)
-    diary_random
+    diary_random "$@"
+    ;;
+  words)
+    diary_words "$@"
     ;;
   *)
     echo "commands: new|edit|list|random" >&2
