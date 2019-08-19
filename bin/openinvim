@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+set -e
+
+(
+  filename=${1}
+
+  echo
+  echo
+  echo "$filename"
+
+  vim_pane_id=$(tmux list-panes -a -F '#{pane_id} #{pane_current_command}' | grep '^%[0-9]\+ nvim$' | head -n1 | cut -f1 -d' ')
+
+  tmux list-panes -a -F '#{pane_id} #{pane_current_command}'
+  echo found "$vim_pane_id"
+
+  if [[ -z "$vim_pane_id" ]]; then
+    tmux display-message "Could not find a nvim window"
+    exit 1
+  fi
+
+  tmux display-message "Found nvim window in pane $vim_pane_id"
+
+  echo tmux display-message -c 0 "Found nvim window in pane $vim_pane_id"
+
+) 2>> ~/t/test-logs.txt >> ~/t/test-logs.txt
