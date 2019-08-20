@@ -2,6 +2,10 @@
 
 set -e
 
+top_level=$(git rev-parse --show-toplevel)
+
+cd "$top_level"
+
 if [[ -x ./node_modules/.bin/prettier ]]; then
   prettier_cmd=./node_modules/.bin/prettier
 else
