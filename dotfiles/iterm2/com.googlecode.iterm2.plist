@@ -110,19 +110,19 @@
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>1353 406 752 521 0 0 2560 1417 </string>
 	<key>NSWindow Frame SUAutomaticUpdateAlert</key>
-	<string>972 932 616 174 0 0 2560 1417 </string>
+	<string>2412 1649 616 174 1440 717 2560 1417 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>-1270 498 620 392 -1920 0 1920 1057 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>808 788 918 452 0 0 2560 1417 </string>
+	<string>1973 1271 918 512 1440 717 2560 1417 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>230 833 592 584 0 0 2560 1417 </string>
 	<key>NSWindow Frame com.apple.typography_panel_Monaco</key>
 	<string>346 482 260 148 0 0 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 0 2560 1417 0 0 2560 1417 </string>
+	<string>0 0 2082 1417 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>923 541 650 501 0 0 2560 1417 </string>
+	<string>341 561 650 501 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
 	<string>397 105 570 426 0 0 1920 1057 </string>
 	<key>New Bookmarks</key>
@@ -784,6 +784,15 @@
 				<key>Red Component</key>
 				<real>0.027450980392156862</real>
 			</dict>
+			<key>Semantic History</key>
+			<dict>
+				<key>action</key>
+				<string>command</string>
+				<key>editor</key>
+				<string>com.sublimetext.3</string>
+				<key>text</key>
+				<string>/Users/david/p/dotfiles/bin/openinvim \1 \5</string>
+			</dict>
 			<key>Send Code When Idle</key>
 			<false/>
 			<key>Shortcut</key>
@@ -894,7 +903,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2019-05-19T11:59:43Z</date>
+	<date>2019-08-01T15:39:53Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>ShowBookmarkName</key>
@@ -916,7 +925,7 @@
 	<key>SwitchWindowModifier</key>
 	<integer>9</integer>
 	<key>UKCrashReporterLastCrashReportDate</key>
-	<real>1557827712</real>
+	<real>1559033216</real>
 	<key>UseBorder</key>
 	<false/>
 	<key>UseLionStyleFullscreen</key>
@@ -925,6 +934,8 @@
 	<false/>
 	<key>WordCharacters</key>
 	<string>/-+\~_.</string>
+	<key>disableMetalWhenUnplugged</key>
+	<false/>
 	<key>iTerm Version</key>
 	<string>3.2.9</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
