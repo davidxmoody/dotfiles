@@ -3,7 +3,7 @@
 set -e
 
 if [[ ! -d "$DIARY_DIR" || ! -d "$DIARY_DIR/entries" ]]; then
-  echo '$DIARY_DIR/entries does not exist' >&2
+  echo "\$DIARY_DIR/entries does not exist" >&2
   exit 1
 fi
 
@@ -34,7 +34,7 @@ diary_fzf_show_provided() {
 
   selected=$(fzf --preview-window=right:$preview_width --preview 'fmt -s --width=$COLUMNS {}')
 
-  [[ ! -z "$selected" ]] && nvim "$selected"
+  [[ -n "$selected" ]] && nvim "$selected"
 }
 
 diary_list() {
@@ -79,7 +79,7 @@ case "$command" in
     diary_words "$@"
     ;;
   *)
-    echo "commands: new|edit|list|random" >&2
+    echo "commands: new|edit|list|random|words" >&2
     exit 1
     ;;
 esac
