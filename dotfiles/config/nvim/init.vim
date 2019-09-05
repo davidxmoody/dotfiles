@@ -340,8 +340,8 @@ noremap <leader>gr :Gread<CR>
 noremap <leader>gw :Gwrite<CR>
 noremap <leader>gs :Gbrowse<CR>
 
-noremap <leader>ga <Plug>(GitGutterStageHunk)
-noremap <leader>gu <Plug>(GitGutterUndoHunk)
+map <leader>ga <Plug>(GitGutterStageHunk)
+map <leader>gu <Plug>(GitGutterUndoHunk)
 nmap ]h <Plug>(GitGutterNextHunk)
 nmap [h <Plug>(GitGutterPrevHunk)
 omap ih <Plug>(GitGutterTextObjectInnerPending)
