@@ -61,10 +61,10 @@ Plug 'sedm0784/vim-you-autocorrect'
 " Git plugins ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Plug 'airblade/vim-gitgutter'
-set updatetime=250
+set updatetime=100
 set signcolumn=yes
 let g:gitgutter_map_keys = 0
-let g:gitgutter_diff_args = '-w'
+" let g:gitgutter_diff_args = '-w'
 
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
@@ -155,7 +155,7 @@ let g:ycm_always_populate_location_list = 1
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
-autocmd User YcmQuickFixOpened autocmd! ycmquickfix WinLeave
+" autocmd User YcmQuickFixOpened autocmd! ycmquickfix WinLeave
 
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0
@@ -340,17 +340,14 @@ noremap <leader>gr :Gread<CR>
 noremap <leader>gw :Gwrite<CR>
 noremap <leader>gs :Gbrowse<CR>
 
-noremap <leader>Ha :GitGutterStageHunk<CR>
-noremap <leader>Hu :GitGutterUndoHunk<CR>
-noremap <leader>Hr <Nop>
-noremap <leader>Hv :GitGutterPreviewHunk<CR>
-noremap <leader>Ht :GitGutterToggle<CR>
-nmap ]h <Plug>GitGutterNextHunk
-nmap [h <Plug>GitGutterPrevHunk
-omap ih <Plug>GitGutterTextObjectInnerPending
-omap ah <Plug>GitGutterTextObjectOuterPending
-xmap ih <Plug>GitGutterTextObjectInnerVisual
-xmap ah <Plug>GitGutterTextObjectOuterVisual
+noremap <leader>ga <Plug>(GitGutterStageHunk)
+noremap <leader>gu <Plug>(GitGutterUndoHunk)
+nmap ]h <Plug>(GitGutterNextHunk)
+nmap [h <Plug>(GitGutterPrevHunk)
+omap ih <Plug>(GitGutterTextObjectInnerPending)
+omap ah <Plug>(GitGutterTextObjectOuterPending)
+xmap ih <Plug>(GitGutterTextObjectInnerVisual)
+xmap ah <Plug>(GitGutterTextObjectOuterVisual)
 
 xmap <leader>p <Plug>SlimeRegionSend
 nmap <leader>p <Plug>SlimeParagraphSend
