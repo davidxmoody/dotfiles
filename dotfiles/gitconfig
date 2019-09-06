@@ -13,8 +13,7 @@
 [blame]
   date = short
 [alias]
-  lg = log --color --graph --pretty=tformat:'%Cred%h%Creset - %C(bold blue)%<(19)%aN %C(yellow)%d%Creset %s %Cgreen(%ar)%Creset'
-  lgs = log --color --pretty=tformat:'%Cred%h%Creset - %C(bold blue)%<(16)%aN %Creset%s %Cgreen(%ar)%Creset'
+  lg = log --graph --date=format:"%a\\ %F\\ %H:%M" --pretty=tformat:"%C(red)%h%C(reset)\\ \\ %C(green)%ad\\ \\ %C(bold\\ blue)%<(19)%aN\\ %C(reset)\\ %s%C(#ff69b4)%d%C(reset)"
 [pull]
   rebase = true
 [color]
