@@ -14,6 +14,7 @@
   date = short
 [alias]
   lg = log --graph --date=format:"%a\\ %F\\ %H:%M" --pretty=tformat:"%C(red)%h%C(reset)\\ \\ %C(green)%ad\\ \\ %C(bold\\ blue)%<(19)%aN\\ %C(reset)\\ %s%C(#ff69b4)%d%C(reset)"
+  lgs = log --color --pretty=tformat:"%C(red)%h%C(reset) - %C(bold blue)%<(16)%aN %C(reset)%s %C(green)(%ar)%C(reset)"
 [pull]
   rebase = true
 [color]
