@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+set -e
+
+git log --color=never --shortstat | sed -n '/^commit /{s/^commit \(............\).*$/\1/; h}; /[0-9]\+ deletion/{s/^ *[0-9]\+ files\? changed, \(\([0-9]\+\) insertions\?.... \)\?\([0-9]\+\) deletions\?.*$/\3del \2ins/; G; s/\n/ /g; p}' | while read del ins hash; do
+  del=${del%del}
+  ins=${ins%ins}
+  ins=${ins:-0}
+  difference=$((del - ins))
+  [[ "difference" -gt 1000 ]] && git --no-pager show --shortstat "$hash" && echo
+done | less -R
