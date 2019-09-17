@@ -19,4 +19,4 @@ setl indentexpr=
 setl scrolloff=0
 
 noremap <buffer> - o-<Space>
-noremap  cl<CR><CR><Esc>
+noremap <buffer>  cl<CR><CR><Esc>
