@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+defaults write com.apple.screencapture location "$HOME/Downloads"
+
 for dir in t p .vim-swap .desktop .templates .public .config; do
   mkdir -pv "$HOME/$dir"
 done
