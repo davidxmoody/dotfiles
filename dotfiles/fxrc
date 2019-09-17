@@ -1,0 +1,22 @@
+// vim: ft=javascript
+
+global.parseDate = date => {
+  const moment = require("moment")
+
+  const mDate = moment(date, "YYYY-MM-DD", true)
+  if (!mDate.isValid()) {
+    throw new Error(`Invalid date: "${date}"`)
+  }
+
+  return mDate
+}
+
+global.getWeekStart = date => {
+  return parseDate(date)
+    .startOf("isoWeek")
+    .format("YYYY-MM-DD")
+}
+
+global.R = require("ramda")
+
+global.id = x => x

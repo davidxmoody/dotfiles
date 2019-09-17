@@ -1,0 +1,9 @@
+{
+  "name": "dotfiles",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "moment": "^2.24.0",
+    "ramda": "^0.26.1"
+  }
+}
