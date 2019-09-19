@@ -1,0 +1,28 @@
+#!/usr/bin/env node
+
+const moment = require("moment")
+
+function validateDate(date) {
+  const mDate = moment(date, "YYYY-MM-DD", true)
+  if (!mDate.isValid()) {
+    throw new Error(`Invalid date: "${date}"`)
+  }
+}
+
+const start = process.argv[2]
+const end = process.argv[3] ? process.argv[3] : moment().format("YYYY-MM-DD")
+
+validateDate(start)
+validateDate(end)
+
+const direction = start <= end ? 1 : -1
+
+let current = start
+
+while (direction === 1 ? current <= end : current >= end) {
+  console.log(current)
+
+  current = moment(current)
+    .add(direction, "day")
+    .format("YYYY-MM-DD")
+}
