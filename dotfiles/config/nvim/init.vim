@@ -178,6 +178,7 @@ let g:ale_fixers = {
 \   'vim': [],
 \   'sh': ['shfmt'],
 \}
+let g:ale_sh_shellcheck_dialect='bash'
 let g:ale_sh_shfmt_options='-i 2 -sr -ci'
 Plug 'w0rp/ale'
 

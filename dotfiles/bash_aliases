@@ -39,7 +39,7 @@ mkscript() {
 }
 
 editscript() {
-  local script_file=$(ls -r1 "$SCRIPTS_DIR" | fzf --select-1 --query "$1")
+  local script_file=$(ls -r1 "$SCRIPTS_DIR" | fzf --select-1 --query "$1" --preview "cat $SCRIPTS_DIR/{}")
   [ -n "$script_file" ] && nvim "$SCRIPTS_DIR/$script_file"
 }
 
