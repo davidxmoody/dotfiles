@@ -52,7 +52,7 @@ Abolish -buffer wh{,s} what{,'s}
 Abolish -buffer th{,s} that{,'s}
 
 Abolish -buffer im I'm
-Abolish -buffer iv I've
+Abolish -buffer iv{,e} I've
 Abolish -buffer il I'll
 
 Abolish -buffer ie i.e.
@@ -72,6 +72,9 @@ Abolish -buffer sho should
 Abolish -buffer wo would
 Abolish -buffer viment environment
 Abolish -buffer wout without
+
+Abolish -buffer praps perhaps
+Abolish -buffer rn{,s} reason{,s}
 
 Abolish -buffer monday Monday
 Abolish -buffer tuesday Tuesday
@@ -103,6 +106,6 @@ Abolish -buffer prev previous
 Abolish -buffer dif different
 Abolish -buffer td today
 Abolish -buffer tm tomorrow
-Abolish -buffer yd yesterday
+Abolish -buffer y{,e}d yesterday
 Abolish -buffer obv obviously
 Abolish -buffer speach speech
