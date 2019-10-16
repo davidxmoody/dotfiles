@@ -43,13 +43,13 @@ PS1+='\[\e[0;92m\]$(__prompt_jobs_status)\[\e[0m\]'
 
 PS2='\[\e[0;31m\]>\[\e[0m\] '
 
-# Common dirs ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Common dirs/files ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 export P_DIR="$HOME/p"
 export RC_DIR="$P_DIR/dotfiles"
 export TMP_DIR="$HOME/t"
-export SYNC_DIR="$HOME/sync"
-export DIARY_DIR="$HOME/sync/diary-data"
+export DIARY_DIR="$HOME/Dropbox/diary-data"
+export VIM_SPELLFILE="$HOME/Dropbox/diary-data/vim/en.utf-8.add"
 
 # Path stuff ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

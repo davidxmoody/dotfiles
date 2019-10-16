@@ -450,8 +450,8 @@ autocmd FileType qf nnoremap <buffer> <Enter> <Enter>
 
 " English text editing ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-if filereadable(glob("~/sync/diary-data/vim/en.utf-8.add"))
-  set spellfile=~/sync/diary-data/vim/en.utf-8.add
+if filereadable($VIM_SPELLFILE)
+  set spellfile=$VIM_SPELLFILE
 endif
 
 func! WordProcessorMode()
