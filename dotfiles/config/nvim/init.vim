@@ -228,6 +228,8 @@ au CursorHold * checktime
 set formatoptions=rqn1j
 set textwidth=79
 
+autocmd bufnewfile,bufread *.tsx set filetype=typescript.tsx
+
 " Colorscheme and highlighting ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 set termguicolors
