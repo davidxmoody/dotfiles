@@ -82,6 +82,7 @@ add_to_path "$N_PREFIX/bin"
 
 add_to_path "$RC_DIR/bin"
 add_to_path "$HOME/.bin"
+add_to_path "$DIARY_DIR/bin"
 add_to_path "$HOME/.local/bin"
 add_to_path "$HOME/.cargo/bin"
 add_to_path "$HOME/go/bin"
