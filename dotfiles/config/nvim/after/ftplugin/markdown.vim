@@ -18,5 +18,5 @@ setl nosmartindent
 setl indentexpr=
 setl scrolloff=0
 
-noremap <buffer> - o-<Space>
+" noremap <buffer> - o-<Space>
 noremap <buffer>  cl<CR><CR><Esc>

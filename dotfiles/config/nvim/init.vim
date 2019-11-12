@@ -120,7 +120,7 @@ let g:fzf_layout = {'window': 'enew'}
 
 " Plug 'Xuyuanp/nerdtree-git-plugin', {'on': ['NERDTreeToggle', 'NERDTreeFind']}
 
-Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/defx.nvim', {'do': ':UpdateRemotePlugins'}
 autocmd FileType defx call s:defx_my_settings()
 function! s:defx_my_settings() abort
   nnoremap <silent><buffer><expr> c defx#do_action('copy')
@@ -132,6 +132,7 @@ function! s:defx_my_settings() abort
   nnoremap <silent><buffer><expr> <CR> defx#do_action('open')
   nnoremap <silent><buffer><expr> s defx#do_action('open')
   nnoremap <silent><buffer><expr> h defx#do_action('cd', ['..'])
+  nnoremap <silent><buffer><expr> - defx#do_action('cd', ['..'])
   nnoremap <silent><buffer><expr> i defx#do_action('open_or_close_tree')
   nnoremap <silent><buffer><expr> ~ defx#do_action('cd')
 
@@ -139,12 +140,18 @@ function! s:defx_my_settings() abort
   nnoremap <silent><buffer><expr> x defx#do_action('execute_system')
   nnoremap <silent><buffer><expr> yy defx#do_action('yank_path')
 
+  " nnoremap [c <Plug>(defx-git-prev)
+  " nnoremap ]c <Plug>(defx-git-next)
+  " nnoremap <buffer><silent> ]a <Plug>(defx-git-stage)
+  " nnoremap <buffer><silent> ]r <Plug>(defx-git-reset)
+  " nnoremap <buffer><silent> ]d <Plug>(defx-git-discard)
+
   " nnoremap <silent><buffer><expr> E defx#do_action('open', 'vsplit')
   " nnoremap <silent><buffer><expr> P defx#do_action('open', 'pedit')
   " nnoremap <silent><buffer><expr> K defx#do_action('new_directory')
   " nnoremap <silent><buffer><expr> N defx#do_action('new_file')
   " nnoremap <silent><buffer><expr> M defx#do_action('new_multiple_files')
-  " nnoremap <silent><buffer><expr> C defx#do_action('toggle_columns', 'mark:indent:icon:filename:type:size:time')
+  " nnoremap <silent><buffer><expr> C defx#do_action('toggle_columns', 'git:icon:mark:indent:filename')
   " nnoremap <silent><buffer><expr> S defx#do_action('toggle_sort', 'time')
   " nnoremap <silent><buffer><expr> . defx#do_action('toggle_ignored_files')
   " nnoremap <silent><buffer><expr> ; defx#do_action('repeat')
@@ -157,6 +164,9 @@ function! s:defx_my_settings() abort
   " nnoremap <silent><buffer><expr> <C-g> defx#do_action('print')
   " nnoremap <silent><buffer><expr> cd defx#do_action('change_vim_cwd')
 endfunction
+
+Plug 'kristijanhusak/defx-git'
+Plug 'kristijanhusak/defx-icons'
 
 " Writing plugins ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -385,8 +395,10 @@ noremap <leader>gs :Gbrowse<CR>
 
 map <leader>ga <Plug>(GitGutterStageHunk)
 map <leader>gu <Plug>(GitGutterUndoHunk)
-nmap ]h <Plug>(GitGutterNextHunk)
-nmap [h <Plug>(GitGutterPrevHunk)
+" nmap ]h <Plug>(GitGutterNextHunk)
+" nmap [h <Plug>(GitGutterPrevHunk)
+nmap S <Plug>(GitGutterNextHunk)
+nmap H <Plug>(GitGutterPrevHunk)
 omap ih <Plug>(GitGutterTextObjectInnerPending)
 omap ah <Plug>(GitGutterTextObjectOuterPending)
 xmap ih <Plug>(GitGutterTextObjectInnerVisual)
@@ -401,7 +413,8 @@ xmap <leader>x "lc<C-R>=substitute(system('node -p', @l), '\n\+$', '', '')<CR><E
 " noremap <silent> <leader>m :NERDTreeFind<CR>
 " noremap <silent> <leader>M :NERDTreeToggle<CR>
 
-noremap <silent> <leader>m :Defx `expand('%:p:h')` -search=`expand('%:p')`<CR>
+noremap <silent> - :Defx `expand('%:p:h')` -columns=mark:indent:git:icons:filename -search=`expand('%:p')`<CR>
+" noremap <silent> <leader>m :Defx `expand('%:p:h')` -search=`expand('%:p')`<CR>
 noremap <silent> <leader>M :Defx<CR>
 
 map o <Plug>(easymotion-bd-f2)
@@ -468,9 +481,9 @@ noremap s l
 
 noremap T 
 noremap N 
-noremap H 0
-noremap S $
-onoremap H 0
+" noremap H 0
+" noremap S $
+" onoremap H 0
 
 noremap gt gj
 noremap gn gk
