@@ -95,30 +95,30 @@ Plug 'junegunn/fzf.vim'
 let g:fzf_commits_log_options = '--color --graph --pretty=tformat:"%Cred%h%Creset - %C(bold blue)%<(18)%an %C(yellow)%d%Creset %s %Cgreen(%ar)%Creset" --abbrev-commit'
 let g:fzf_layout = {'window': 'enew'}
 
-" NERDTree plugin ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+" File explorers ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Plug 'scrooloose/nerdtree', {'on': ['NERDTreeToggle', 'NERDTreeFind']}
-let NERDTreeIgnore=['^node_modules$', '^npm-debug.log$', '^.git$', '^build$', '^dist$']
-let NERDTreeCaseSensitiveSort=1
-let NERDTreeNaturalSort=1
-let NERDTreeAutoDeleteBuffer=1
-let NERDTreeMinimalUI=1
-let NERDTreeMinimalMenu=1
+" Plug 'scrooloose/nerdtree', {'on': ['NERDTreeToggle', 'NERDTreeFind']}
+" let NERDTreeIgnore=['^node_modules$', '^npm-debug.log$', '^.git$', '^build$', '^dist$']
+" let NERDTreeCaseSensitiveSort=1
+" let NERDTreeNaturalSort=1
+" let NERDTreeAutoDeleteBuffer=1
+" let NERDTreeMinimalUI=1
+" let NERDTreeMinimalMenu=1
 
-let NERDTreeMapActivateNode='h'
-let NERDTreeMapPreview='H'
-let NERDTreeMapOpenSplit='s'
-let NERDTreeMapPreviewSplit='S'
-let NERDTreeMapOpenVSplit='v'
-let NERDTreeMapPreviewVSplit='V'
-let NERDTreeMapJumpFirstChild='{'
-let NERDTreeMapJumpLastChild='}'
+" let NERDTreeMapActivateNode='h'
+" let NERDTreeMapPreview='H'
+" let NERDTreeMapOpenSplit='s'
+" let NERDTreeMapPreviewSplit='S'
+" let NERDTreeMapOpenVSplit='v'
+" let NERDTreeMapPreviewVSplit='V'
+" let NERDTreeMapJumpFirstChild='{'
+" let NERDTreeMapJumpLastChild='}'
 
-" 'Disable' these by mapping to a key I don't use
-let NERDTreeMapOpenInTab='X'
-let NERDTreeMapOpenInTabSilent='X'
+" " 'Disable' these by mapping to a key I don't use
+" let NERDTreeMapOpenInTab='X'
+" let NERDTreeMapOpenInTabSilent='X'
 
-Plug 'Xuyuanp/nerdtree-git-plugin', {'on': ['NERDTreeToggle', 'NERDTreeFind']}
+" Plug 'Xuyuanp/nerdtree-git-plugin', {'on': ['NERDTreeToggle', 'NERDTreeFind']}
 
 Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 autocmd FileType defx call s:defx_my_settings()
@@ -398,8 +398,11 @@ nmap <leader>P <Plug>SlimeConfig
 
 xmap <leader>x "lc<C-R>=substitute(system('node -p', @l), '\n\+$', '', '')<CR><ESC>
 
-noremap <silent> <leader>m :NERDTreeFind<CR>
-noremap <silent> <leader>M :NERDTreeToggle<CR>
+" noremap <silent> <leader>m :NERDTreeFind<CR>
+" noremap <silent> <leader>M :NERDTreeToggle<CR>
+
+noremap <silent> <leader>m :Defx `expand('%:p:h')` -search=`expand('%:p')`<CR>
+noremap <silent> <leader>M :Defx<CR>
 
 map o <Plug>(easymotion-bd-f2)
 map O <Plug>(easymotion-overwin-f2)
