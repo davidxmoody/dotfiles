@@ -395,10 +395,8 @@ noremap <leader>gs :Gbrowse<CR>
 
 map <leader>ga <Plug>(GitGutterStageHunk)
 map <leader>gu <Plug>(GitGutterUndoHunk)
-" nmap ]h <Plug>(GitGutterNextHunk)
-" nmap [h <Plug>(GitGutterPrevHunk)
-nmap S <Plug>(GitGutterNextHunk)
-nmap H <Plug>(GitGutterPrevHunk)
+nmap ]h <Plug>(GitGutterNextHunk)
+nmap [h <Plug>(GitGutterPrevHunk)
 omap ih <Plug>(GitGutterTextObjectInnerPending)
 omap ah <Plug>(GitGutterTextObjectOuterPending)
 xmap ih <Plug>(GitGutterTextObjectInnerVisual)
@@ -481,9 +479,9 @@ noremap s l
 
 noremap T 
 noremap N 
-" noremap H 0
-" noremap S $
-" onoremap H 0
+noremap H 0
+noremap S $
+onoremap H 0
 
 noremap gt gj
 noremap gn gk
