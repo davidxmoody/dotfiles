@@ -130,8 +130,8 @@ function! s:defx_my_settings() abort
   nnoremap <silent><buffer><expr> r defx#do_action('rename')
 
   nnoremap <silent><buffer><expr> <CR> defx#do_action('open')
-  nnoremap <silent><buffer><expr> s defx#do_action('open')
-  nnoremap <silent><buffer><expr> h defx#do_action('cd', ['..'])
+  " nnoremap <silent><buffer><expr> s defx#do_action('open')
+  " nnoremap <silent><buffer><expr> h defx#do_action('cd', ['..'])
   nnoremap <silent><buffer><expr> - defx#do_action('cd', ['..'])
   nnoremap <silent><buffer><expr> i defx#do_action('open_or_close_tree')
   nnoremap <silent><buffer><expr> ~ defx#do_action('cd')
@@ -166,7 +166,6 @@ function! s:defx_my_settings() abort
 endfunction
 
 Plug 'kristijanhusak/defx-git'
-Plug 'kristijanhusak/defx-icons'
 
 " Writing plugins ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -411,7 +410,7 @@ xmap <leader>x "lc<C-R>=substitute(system('node -p', @l), '\n\+$', '', '')<CR><E
 " noremap <silent> <leader>m :NERDTreeFind<CR>
 " noremap <silent> <leader>M :NERDTreeToggle<CR>
 
-noremap <silent> - :Defx `expand('%:p:h')` -columns=mark:indent:git:icons:filename -search=`expand('%:p')`<CR>
+noremap <silent> - :Defx `expand('%:p:h')` -columns=mark:indent:git:icon:filename -search=`expand('%:p')`<CR>
 " noremap <silent> <leader>m :Defx `expand('%:p:h')` -search=`expand('%:p')`<CR>
 noremap <silent> <leader>M :Defx<CR>
 
