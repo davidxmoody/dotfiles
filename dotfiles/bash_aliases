@@ -242,7 +242,8 @@ alias ff='prettier-changed'
 alias brewi='brew-install-fzf'
 alias brewu='brew-upgrade-fzf'
 alias ta='tmux-attach-fzf'
-kpdb() { kproxy "${1-prod}" postgres-proxy 6644 5432; }
+alias kpdb-prod='kproxy prod postgres-proxy 6644 5432'
+alias kpdb-dev='kproxy dev postgres-proxy 6645 5432'
 
 # Misc ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
