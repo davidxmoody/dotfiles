@@ -140,6 +140,9 @@ function! s:defx_my_settings() abort
   nnoremap <silent><buffer><expr> x defx#do_action('execute_system')
   nnoremap <silent><buffer><expr> yy defx#do_action('yank_path')
 
+  nnoremap <silent><buffer><expr> k defx#do_action('new_file')
+  nnoremap <silent><buffer><expr> K defx#do_action('new_directory')
+
   " nnoremap [c <Plug>(defx-git-prev)
   " nnoremap ]c <Plug>(defx-git-next)
   " nnoremap <buffer><silent> ]a <Plug>(defx-git-stage)
@@ -148,8 +151,6 @@ function! s:defx_my_settings() abort
 
   " nnoremap <silent><buffer><expr> E defx#do_action('open', 'vsplit')
   " nnoremap <silent><buffer><expr> P defx#do_action('open', 'pedit')
-  " nnoremap <silent><buffer><expr> K defx#do_action('new_directory')
-  " nnoremap <silent><buffer><expr> N defx#do_action('new_file')
   " nnoremap <silent><buffer><expr> M defx#do_action('new_multiple_files')
   " nnoremap <silent><buffer><expr> C defx#do_action('toggle_columns', 'git:icon:mark:indent:filename')
   " nnoremap <silent><buffer><expr> S defx#do_action('toggle_sort', 'time')
