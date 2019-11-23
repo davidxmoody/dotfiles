@@ -63,7 +63,6 @@ Plug 'airblade/vim-gitgutter'
 set updatetime=100
 set signcolumn=yes
 let g:gitgutter_map_keys = 0
-" let g:gitgutter_diff_args = '-w'
 
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
@@ -188,13 +187,6 @@ endfunction
 
 Plug 'kristijanhusak/defx-git'
 
-" Writing plugins ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-" Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
-" let g:vim_markdown_folding_disabled=1
-" let g:markdown_no_default_key_mappings=1
-" let g:vim_markdown_frontmatter=1
-
 " Language specific plugins ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Plug 'pangloss/vim-javascript'
@@ -212,9 +204,6 @@ Plug 'leafgarland/typescript-vim'
 
 Plug 'jparise/vim-graphql', {'for': 'graphql'}
 
-" Plug 'neovimhaskell/haskell-vim'
-" Plug 'ElmCast/elm-vim'
-
 " Completion and linting ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Plug 'Valloric/YouCompleteMe', {'do': './install.py'}
@@ -223,7 +212,6 @@ let g:ycm_always_populate_location_list = 1
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
-" autocmd User YcmQuickFixOpened autocmd! ycmquickfix WinLeave
 
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0
@@ -432,8 +420,6 @@ xmap <leader>x "lc<C-R>=substitute(system('node -p', @l), '\n\+$', '', '')<CR><E
 " noremap <silent> <leader>M :NERDTreeToggle<CR>
 
 noremap <silent> - :Defx `expand('%:p:h')` -columns=mark:indent:git:icon:filename -search=`expand('%:p')`<CR>
-" noremap <silent> <leader>m :Defx `expand('%:p:h')` -search=`expand('%:p')`<CR>
-noremap <silent> <leader>M :Defx<CR>
 
 map o <Plug>(easymotion-bd-f2)
 map O <Plug>(easymotion-overwin-f2)
@@ -522,7 +508,6 @@ tnoremap <Esc> <C-\><C-n>
 autocmd FileType qf setl wrap
 autocmd FileType qf setl nonumber
 autocmd FileType qf nnoremap <buffer> <Enter> <Enter>
-" autocmd FileType qf nnoremap <buffer> h <Enter><C-W><C-W>
 
 " English text editing ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
