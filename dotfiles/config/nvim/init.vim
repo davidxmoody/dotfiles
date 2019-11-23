@@ -51,10 +51,9 @@ let g:user_emmet_leader_key='<C-F>'
 Plug 'davidxmoody/vim-indent-object'
 
 Plug 'SirVer/ultisnips'
-" TODO try a different key combination so that <C-T> can be mapped to change panes
-let g:UltiSnipsExpandTrigger = '<C-T>'
-let g:UltiSnipsJumpForwardTrigger = '<C-T>'
-let g:UltiSnipsJumpBackwardTrigger = '<C-N>'
+let g:UltiSnipsExpandTrigger = '<C-F><C-F>'
+let g:UltiSnipsJumpForwardTrigger = '<C-F><C-F>'
+let g:UltiSnipsJumpBackwardTrigger = '<C-F><C-B>'
 
 Plug 'sedm0784/vim-you-autocorrect'
 
@@ -74,10 +73,31 @@ Plug 'junegunn/gv.vim'
 Plug 'christoomey/vim-tmux-navigator'
 let g:tmux_navigator_no_mappings = 1
 let g:tmux_navigator_disable_when_zoomed = 1
-nnoremap <silent> <C-H> :TmuxNavigateLeft<cr>
-nnoremap <silent> <C-T> :TmuxNavigateDown<cr>
-nnoremap <silent> <C-N> :TmuxNavigateUp<cr>
-nnoremap <silent> <C-S> :TmuxNavigateRight<cr>
+
+nnoremap <silent> <C-H> :TmuxNavigateLeft<CR>
+nnoremap <silent> <C-T> :TmuxNavigateDown<CR>
+nnoremap <silent> <C-N> :TmuxNavigateUp<CR>
+nnoremap <silent> <C-S> :TmuxNavigateRight<CR>
+
+vnoremap <silent> <C-H> <Esc><Esc>:TmuxNavigateLeft<CR>
+vnoremap <silent> <C-T> <Esc><Esc>:TmuxNavigateDown<CR>
+vnoremap <silent> <C-N> <Esc><Esc>:TmuxNavigateUp<CR>
+vnoremap <silent> <C-S> <Esc><Esc>:TmuxNavigateRight<CR>
+
+inoremap <silent> <C-H> <Right><Esc>:TmuxNavigateLeft<CR>
+inoremap <silent> <C-T> <Right><Esc>:TmuxNavigateDown<CR>
+inoremap <silent> <C-N> <Right><Esc>:TmuxNavigateUp<CR>
+inoremap <silent> <C-S> <Right><Esc>:TmuxNavigateRight<CR>
+
+tnoremap <silent> <C-H> <C-\><C-N>:TmuxNavigateLeft<CR>
+tnoremap <silent> <C-T> <C-\><C-N>:TmuxNavigateDown<CR>
+tnoremap <silent> <C-N> <C-\><C-N>:TmuxNavigateUp<CR>
+tnoremap <silent> <C-S> <C-\><C-N>:TmuxNavigateRight<CR>
+
+cnoremap <silent> <C-H> <Nop>
+cnoremap <silent> <C-T> <Nop>
+cnoremap <silent> <C-N> <Nop>
+cnoremap <silent> <C-S> <Nop>
 
 Plug 'jpalardy/vim-slime'
 let g:slime_target = "tmux"
@@ -426,7 +446,7 @@ map L <Plug>Sneak_T
 map ( <Plug>Sneak_,
 map ) <Plug>Sneak_;
 
-inoremap + <Esc>l
+inoremap + <Right><Esc>
 vnoremap + <Esc><Esc>
 noremap + :update<CR>
 inoremap ! 

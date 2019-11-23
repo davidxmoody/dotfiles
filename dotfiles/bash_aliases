@@ -202,6 +202,7 @@ alias cdd='cd $DIARY_DIR'
 alias dn='diary edit'
 alias de='diary edit'
 alias dl='diary list'
+alias ds='diary search'
 
 # Vim ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
