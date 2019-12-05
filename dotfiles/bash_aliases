@@ -124,13 +124,6 @@ alias ggh='cat "$HOME/.fetch-all-projects-history/$(ls $HOME/.fetch-all-projects
 alias gunl='git ls-files -v | grep ^h | col2'
 alias guna='git update-index --assume-unchanged'
 alias gunr='git update-index --no-assume-unchanged'
-gunt() {
-  if [[ "$(gunl)" == "ios/Podfile.lock" ]]; then
-    gunr ios/Podfile.lock
-  else
-    guna ios/Podfile.lock
-  fi
-}
 
 ggl() {
   (
@@ -269,6 +262,7 @@ alias bashal='source ~/.bash_aliases'
 alias tsize='echo "$(tput cols)x$(tput lines)"'
 alias watchtsize='while true; do tsize; sleep 0.1; done | uniq'
 alias podi='([ -d ios ] && cd ios; pod install)'
+alias npi='ni && podi'
 alias tsw='npx tsc -w --noEmit'
 alias copypostgresport='navy port postgres 5432 | tee >(tr -d \\n | copy)'
 alias shfmt='shfmt -i 2 -sr -ci'
