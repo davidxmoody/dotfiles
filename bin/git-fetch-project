@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-[ $# = 0 ] && echo "Please specify a project dir" >&2 && exit 1
+[[ $# == 0 ]] && echo "Please specify a project dir" >&2 && exit 1
 
 color_reset="\e[0m"
 color_bad="\e[31m"
@@ -8,18 +8,21 @@ color_good="\e[32m"
 
 proj=${1%/}
 
-if [ -d "$proj/.git" ] && cd "$proj" && [[ -n "$(git remote -v)" ]]; then
+if [[ -d "$proj/.git" ]] && cd "$proj" && [[ -n "$(git remote -v)" ]]; then
   if git fetch --quiet; then
     commits_behind=$(git rev-list --count "HEAD..@{upstream}" 2> /dev/null)
     padded_commits_behind=$(printf '%3s' "$commits_behind")
     color=$color_bad
     if [[ "$commits_behind" -gt 0 ]]; then
-      git merge --ff-only --quiet "@{upstream}" && color=$color_good
-      echo -e "#${color}${padded_commits_behind}${color_reset} $(basename "$proj")"
-      [[ ! -e "$proj/.git/.hide-from-logs" ]] && git --no-pager lgs ORIG_HEAD..
-      echo
+      git merge --ff-only --quiet "@{upstream}" 2> /dev/null && color=$color_good
+
+      if [[ ! -e "$proj/.git/.hide-from-logs" ]]; then
+        echo -e "#${color}${padded_commits_behind}${color_reset} $(basename "$proj")"
+        git --no-pager lgs ORIG_HEAD..
+        echo
+      fi
     fi
   else
-    echo -e "${color_bad}  !${color_reset} $(basename "$proj")"
+    echo -e "#${color_bad}  !${color_reset} $(basename "$proj")"
   fi
 fi | tac | tac

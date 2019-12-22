@@ -2,15 +2,9 @@
 
 set -e
 
-log_dir=$HOME/.fetch-all-projects-history
-mkdir -p "$log_dir"
-
 dir=${1-$P_DIR}
 dir=${dir%/}
 
 echo "$dir"/*/.git |
   sed 's/\/.git \?/\n/g' |
-  xargs -n1 -P0 git-fetch-project 2>&1 |
-  tee "$log_dir/$(date +%F-%H-%M-%S).log"
-
-date +%s > ~/.fetch-all-last-date
+  xargs -n1 -P0 git-fetch-project
