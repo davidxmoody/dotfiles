@@ -22,12 +22,7 @@ mkp() {
   local new_project_path=$(mkproject "$@")
   [[ ! -z "$new_project_path" ]] && cd "$new_project_path"
 }
-
-mkt() {
-  local dir="$TMP_DIR/$(date +%F-%H-%M-%S)-${1-tmp}"
-  mkdir -p "$dir"
-  cd "$dir"
-}
+alias mkt='mkp -t'
 
 # Ad-hoc script management ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
