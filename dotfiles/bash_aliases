@@ -7,6 +7,11 @@ p() {
   cd "$chosen_dir"
 }
 
+t() {
+  local chosen_dir=$(choose-project-tmp "$1")
+  cd "$chosen_dir"
+}
+
 mkcd() { mkdir "$@" && cd "$@"; }
 
 mkalias() {

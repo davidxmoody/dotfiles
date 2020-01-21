@@ -2,13 +2,16 @@
 
 set -e
 
+base_dir=$P_DIR
+
 while getopts "nt" opt; do
   case "$opt" in
     n)
       npm_init=true
       ;;
     t)
-      tmp_prefix=tmp-$(date +%F)-
+      tmp_prefix=$(date +%F)-
+      base_dir=$TMP_DIR
       ;;
     *)
       echo "Invalid flags" >&2
@@ -19,7 +22,7 @@ done
 shift $((OPTIND - 1))
 
 project_name=$1
-project_path="$P_DIR/$tmp_prefix$project_name"
+project_path="$base_dir/$tmp_prefix$project_name"
 
 if [[ -z "$project_name" ]]; then
   echo "Error: Please enter a project name" >&2

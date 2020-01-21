@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+set -e
+
+initial_input=${1%/}
+
+chosen_project=$(ls -1r "$TMP_DIR" | fzf --no-sort --ansi --select-1 --query "$initial_input")
+
+if [[ -z "$chosen_project" ]]; then
+  exit 1
+fi
+
+echo "$TMP_DIR/$chosen_project"

@@ -9,14 +9,15 @@ list_projects() {
 
 initial_input=${1%/}
 
-if [ -n "$initial_input" ] && [ -d "$P_DIR/$initial_input" ]; then
+if [[ -n "$initial_input" ]] && [[ -d "$P_DIR/$initial_input" ]]; then
   chosen_project=$initial_input
 else
   selected_line=$(list_projects | fzf --no-sort --ansi --select-1 --query "$initial_input")
   chosen_project=${selected_line#*	}
 fi
 
-if [ -n "$chosen_project" ]; then
-  echo "$P_DIR/$chosen_project"
-  echo "$(date +%F)	$chosen_project" >> ~/.choose-project-history
+if [[ -z "$chosen_project" ]]; then
+  exit 1
 fi
+
+echo "$P_DIR/$chosen_project"
