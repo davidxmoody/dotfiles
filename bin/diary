@@ -9,26 +9,36 @@ fi
 
 cd "$DIARY_DIR/entries"
 
-diary_edit() {
+diary_new() {
   subdir=$(date +%Y/%m/%d)
+  filename=diary-$(date +%H-%M).md
   mkdir -p "$subdir"
 
-  nvim "$subdir/diary.md"
+  nvim "+norm a## " "+startinsert!" "$subdir/$filename"
 
   rmdir --ignore-fail-on-non-empty "$subdir"
 }
 
+diary_edit() {
+  last_year=$(ls -r | head -n1)
+  last_month=$(ls -r "$last_year" | head -n1)
+  last_day=$(ls -r "$last_year/$last_month" | head -n1)
+  last_entry=$(ls -r "$last_year/$last_month/$last_day" | head -n1)
+
+  nvim "$last_year/$last_month/$last_day/$last_entry"
+}
+
 diary_fzf_show_provided() {
   terminal_width=$(tput cols)
-  preview_width=$((terminal_width - 20))
+  preview_width=$((terminal_width - 33))
 
   terminal_height=$(tput lines)
-  before_context=$(( (terminal_height - 2) / 3 ))
-  after_context=$(( terminal_height - 2 - 1 - before_context ))
+  before_context=$(((terminal_height - 2) / 3))
+  after_context=$((terminal_height - 2 - 1 - before_context))
 
-  selected=$(sed 's%/diary.md%%' | fzf --preview-window=right:$preview_width --preview 'fmt -s --width=$COLUMNS {}/diary.md | rg --color=always --before-context='$before_context' --after-context='$after_context' "'"$1"'"')
+  selected=$(fzf --preview-window=right:$preview_width --preview 'fmt -s --width=$COLUMNS {} | rg --color=always --before-context='$before_context' --after-context='$after_context' "'"$1"'"')
 
-  [[ -n "$selected" ]] && nvim "$selected/diary.md"
+  [[ -n "$selected" ]] && nvim "$selected"
 }
 
 diary_list() {
@@ -43,7 +53,8 @@ diary_search() {
 
 diary_random() {
   files=$(rg --files | shuf -n40)
-  diary_fzf_show_provided <<< "$files"
+  sorted_files=$(wc -w $files | head -n-1 | sort -nr | awk '{print $2}')
+  diary_fzf_show_provided <<< "$sorted_files"
 }
 
 diary_words() {
@@ -60,6 +71,9 @@ command=$1
 shift
 
 case "$command" in
+  new)
+    diary_new "$@"
+    ;;
   edit)
     diary_edit "$@"
     ;;
@@ -76,7 +90,7 @@ case "$command" in
     diary_words "$@"
     ;;
   *)
-    echo "commands: edit|list|random|words" >&2
+    echo "commands: new|edit|list|random|words" >&2
     exit 1
     ;;
 esac
