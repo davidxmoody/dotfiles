@@ -33,9 +33,6 @@ let g:EasyMotion_space_jump_first = 1
 let g:EasyMotion_use_upper = 1
 let g:EasyMotion_keys = 'TNSRHLDMGYCWFPBVUOAIE'
 
-let g:SignatureMarkTextHLDynamic = 1
-Plug 'kshenoy/vim-signature'
-
 " Editing plugins ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Plug 'Raimondi/delimitMate'
@@ -138,6 +135,8 @@ let g:fzf_layout = {'window': 'enew'}
 " let NERDTreeMapOpenInTabSilent='X'
 
 " Plug 'Xuyuanp/nerdtree-git-plugin', {'on': ['NERDTreeToggle', 'NERDTreeFind']}
+
+" TODO find a faster alternative to Defx
 
 Plug 'Shougo/defx.nvim', {'do': ':UpdateRemotePlugins'}
 autocmd FileType defx call s:defx_my_settings()

@@ -187,6 +187,8 @@ alias nverp='npm version patch'
 alias nverm='npm version minor'
 alias nc='npx npm-check -u'
 alias nw='npm run watch'
+alias podi='([ -d ios ] && cd ios; pod install)'
+alias npi='ni && podi'
 
 # Navy ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -198,7 +200,6 @@ alias nv='navy'
 
 # Diary ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-alias cdd='cd $DIARY_DIR'
 alias dn='diary new'
 alias de='diary edit'
 alias dl='diary list'
@@ -221,6 +222,8 @@ alias uppp='cd ../../..'
 alias b='cd - >/dev/null'
 alias cdp='cd "$P_DIR"'
 alias cdt='cd "$TMP_DIR"'
+alias cdd='cd $DIARY_DIR'
+alias cdl='cd ~/Downloads'
 alias pd='p dotfiles'
 
 # Data hacks ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -261,8 +264,6 @@ alias launchemulator='( cd ~/Library/Android/sdk/tools && ./emulator @Nexus_5X_A
 alias bashal='source ~/.bash_aliases'
 alias tsize='echo "$(tput cols)x$(tput lines)"'
 alias watchtsize='while true; do tsize; sleep 0.1; done | uniq'
-alias podi='([ -d ios ] && cd ios; pod install)'
-alias npi='ni && podi'
 alias tsw='npx tsc -w --noEmit'
 alias copypostgresport='navy port postgres 5432 | tee >(tr -d \\n | copy)'
 alias shfmt='shfmt -i 2 -sr -ci'
