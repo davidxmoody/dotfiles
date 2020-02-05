@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+
+set -e
+
+width=60
+
+repo1=$1
+repo2=$2
+
+color1='\e[31m'
+color2='\e[32m'
+colorreset='\e[0m'
+
+basename1=$(basename "$repo1")
+basename2=$(basename "$repo2")
+
+char1=$(cut -c1 <<< "$basename1")
+char2=$(cut -c1 <<< "$basename2")
+
+if [[ -z "$repo1" || -z "$repo2" ]]; then
+  echo "usage: compare-repo-commits path/to/repo1 path/to/repo2" >&2
+  exit 1
+fi
+
+git_user=$(git config user.name)
+
+if [[ -z "$git_user" ]]; then
+  echo "Git user not found" >&2
+  exit 1
+fi
+
+get_commits() {
+  (
+    cd "$1" &&
+      git log --author "$git_user" --pretty=tformat:%cd --date=format:%Y-%m |
+      sort |
+      uniq -c |
+      awk '{print $2"\t"$1}'
+  )
+}
+
+repeat() {
+  [[ "$2" -ne "0" ]] && printf "$1"'%.0s' $(seq 1 "$2")
+}
+
+join -a 1 -a 2 -e 0 -o '0,1.2,2.2' <(get_commits "$repo1") <(get_commits "$repo2") |
+  while read -r month count1 count2; do
+    relative_count1=$(( (count1 * width) / (count1 + count2) ))
+    relative_count2=$(( width - relative_count1 ))
+    echo -e "$month $color1$(repeat "$char1" "$relative_count1")$color2$(repeat "$char2" "$relative_count2")$colorreset $(printf '%3s' "$count1") $basename1 $(printf '%3s' "$count2") $basename2"
+  done
