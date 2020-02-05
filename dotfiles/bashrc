@@ -88,6 +88,7 @@ add_to_path "$HOME/.cargo/bin"
 add_to_path "$HOME/go/bin"
 add_to_path "$HOME/.linkerd2/bin"
 add_to_path "/usr/local/opt/ruby/bin"
+add_to_path "$HOME/.composer/vendor/bin"
 
 export ANDROID_HOME=$HOME/Library/Android/sdk
 add_to_path "$ANDROID_HOME/platform-tools"
