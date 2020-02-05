@@ -3,6 +3,7 @@
 set -e
 
 width=60
+git_user=${3-$(git config user.name)}
 
 repo1=$1
 repo2=$2
@@ -18,11 +19,9 @@ char1=$(cut -c1 <<< "$basename1")
 char2=$(cut -c1 <<< "$basename2")
 
 if [[ -z "$repo1" || -z "$repo2" ]]; then
-  echo "usage: compare-repo-commits path/to/repo1 path/to/repo2" >&2
+  echo "Please specify two git repos" >&2
   exit 1
 fi
-
-git_user=$(git config user.name)
 
 if [[ -z "$git_user" ]]; then
   echo "Git user not found" >&2
@@ -45,7 +44,7 @@ repeat() {
 
 join -a 1 -a 2 -e 0 -o '0,1.2,2.2' <(get_commits "$repo1") <(get_commits "$repo2") |
   while read -r month count1 count2; do
-    relative_count1=$(( (count1 * width) / (count1 + count2) ))
-    relative_count2=$(( width - relative_count1 ))
+    relative_count1=$(((count1 * width) / (count1 + count2)))
+    relative_count2=$((width - relative_count1))
     echo -e "$month $color1$(repeat "$char1" "$relative_count1")$color2$(repeat "$char2" "$relative_count2")$colorreset $(printf '%3s' "$count1") $basename1 $(printf '%3s' "$count2") $basename2"
   done
