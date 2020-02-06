@@ -67,8 +67,8 @@ gl() {
   fi
 }
 pgl() { (p "$@" && gl); }
-alias glp='gl HEAD~50.. -p'
-alias gls='gl HEAD~50.. --stat'
+alias glp='gl HEAD~20.. -p'
+alias gls='gl HEAD~20.. --stat'
 gS() { GIT_PAGER="less '+/$1'" git log -p -S "$1"; }
 gG() { GIT_PAGER="less '+/$1'" git log -p -G "$1"; }
 alias gd='git diff'
