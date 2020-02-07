@@ -111,4 +111,4 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 source_if_exists "$HOME/.bashrc-local"
 
-source /Users/david/Library/Preferences/org.dystroy.broot/launcher/bash/br
+source "$HOME/Library/Preferences/org.dystroy.broot/launcher/bash/br"
