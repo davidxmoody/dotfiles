@@ -99,6 +99,7 @@ Plug 'jpalardy/vim-slime'
 let g:slime_target = "tmux"
 let g:slime_no_mappings = 1
 let g:slime_dont_ask_default = 1
+let g:slime_python_ipython = 1
 
 if !empty($TMUX)
   let g:slime_default_config = {"socket_name": split($TMUX, ",")[0], "target_pane": ":.2"}
@@ -386,6 +387,7 @@ noremap <leader>, A,<CR>
 
 noremap <leader>/ :nohlsearch<CR>
 
+noremap ga :.Subvert/{true,false}/{false,true}/g<CR>:nohlsearch<CR>
 noremap g, :.Subvert/[{ ,x}]/[{x, }]<CR>:nohlsearch<CR>
 
 noremap <leader>f :ALEFix<CR>
