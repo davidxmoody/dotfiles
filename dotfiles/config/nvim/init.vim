@@ -373,6 +373,9 @@ xnoremap <leader>g* "zy:Rg <C-R><C-R>z
 nnoremap <leader>r :%s/\<<C-R><C-W>\>/<C-R><C-W>/g<Left><Left>
 xnoremap <leader>r "zy:%s/\<<C-R><C-R>z\>/<C-R><C-R>z/g<Left><Left>
 
+nnoremap <leader>k Vc<C-R>=trim(system('date +%F -d "' . @" . '"'))<CR><Esc>
+xnoremap <leader>k c<C-R>=trim(system('date +%F -d "' . @" . '"'))<CR><Esc>
+
 function! ExecuteMacroOverVisualRange()
   echo "@".getcmdline()
   execute ":'<,'>normal @".nr2char(getchar())

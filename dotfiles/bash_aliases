@@ -110,7 +110,16 @@ alias gstp='git stash pop'
 alias gsta='git stash apply'
 alias gsts='git stash show -p'
 alias gstd='git stash drop'
-alias glm='git lg --author="David Moody"'
+gsti() {
+  (
+    cd "$(git rev-parse --show-toplevel)" &&
+      git status -sb -uall |
+      fzf --ansi --header-lines=1 --multi --preview='git diff {2}' |
+      sed 's/^.. //' |
+      xargs -d '\n' git stash push --include-untracked --
+  )
+}
+alias glm='git lg --author="$(git config user.name)"'
 alias gdp='git diff ORIG_HEAD -- package.json'
 alias groot='cd "$(git rev-parse --show-toplevel)"'
 alias gitcountdiff='git --no-pager diff --color=never | grep -v -E "^(\+\+\+|---) "| grep -E "^(-|\+)" | count'
@@ -270,3 +279,5 @@ alias shfmt='shfmt -i 2 -sr -ci'
 alias rgm='rg --multiline --multiline-dotall'
 alias vpl='( cd ~/Library/Application\ Support/plover; v user.json )'
 alias rn='npx react-native'
+alias ipy='ipython3'
+alias py='python3'
