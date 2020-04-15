@@ -321,6 +321,8 @@ set statusline+=%(\ %y%)
 cnoremap cd. lcd %:p:h
 cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<cr>
 command Cppath let @+ = expand("%:p")
+command Opdir :silent exec "!open " . fnameescape(expand("%:p:h"))
+command Opfile :silent exec "!open " . fnameescape(expand("%:p"))
 command Vimrc e ~/.config/nvim/init.vim
 
 " Searching ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
