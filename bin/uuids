@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+set -e
+
+num_to_generate=${1-1}
+
+while [[ "$num_to_generate" -gt 0 ]]; do
+  uuidgen | tr "[:upper:]" "[:lower:]"
+  num_to_generate=$((num_to_generate - 1))
+done
