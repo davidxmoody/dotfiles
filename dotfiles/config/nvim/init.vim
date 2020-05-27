@@ -364,13 +364,13 @@ noremap <leader>W :set colorcolumn=80<CR>
 
 nnoremap         *  /\C\<<C-R><C-W>\><CR>
 nnoremap         g* /<C-R><C-W>
-nnoremap <leader>*  :Rg <C-R><C-W><CR>
-nnoremap <leader>g* :Rg <C-R><C-W>
+nnoremap <leader>*  :Rg! <C-R><C-W><CR>
+nnoremap <leader>g* :Rg! <C-R><C-W>
 
 xnoremap         *  "zy/<C-R><C-R>z<CR>
 xnoremap         g* "zy/<C-R><C-R>z
-xnoremap <leader>*  "zy:Rg <C-R><C-R>z<CR>
-xnoremap <leader>g* "zy:Rg <C-R><C-R>z
+xnoremap <leader>*  "zy:Rg! <C-R><C-R>z<CR>
+xnoremap <leader>g* "zy:Rg! <C-R><C-R>z
 
 nnoremap <leader>r :%s/\<<C-R><C-W>\>/<C-R><C-W>/g<Left><Left>
 xnoremap <leader>r "zy:%s/\<<C-R><C-R>z\>/<C-R><C-R>z/g<Left><Left>

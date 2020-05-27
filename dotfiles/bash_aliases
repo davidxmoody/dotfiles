@@ -73,6 +73,7 @@ gS() { GIT_PAGER="less '+/$1'" git log -p -S "$1"; }
 gG() { GIT_PAGER="less '+/$1'" git log -p -G "$1"; }
 alias gd='git diff'
 alias gdc='git diff --cached'
+alias gdt='git diff --text'
 alias gds='gd src'
 alias gas='git add src'
 ga() {
@@ -126,6 +127,7 @@ alias gitcountdiff='git --no-pager diff --color=never | grep -v -E "^(\+\+\+|---
 alias gitcopydiff='git --no-pager diff --color=never | tee >(copy) && echo -e "\nCopied!"'
 alias gitcopyhead='git --no-pager show --color=never | tee >(copy) && echo -e "\nCopied!"'
 alias gw='git show'
+alias gwt='git show --text'
 alias gy='git-show-yesterday'
 alias gyy='git-projects-recent-commits'
 alias gg='git-fetch-all-projects'
@@ -239,6 +241,7 @@ alias pd='p dotfiles'
 
 alias ag='echo "Use rg instead"'
 alias rgg='rg --files'
+alias rgz='rgg --files --no-ignore | fzf'
 alias r='find-and-replace'
 alias ramdam='ramda --import m=moment'
 alias noheader='tail -n+2'
