@@ -340,14 +340,14 @@ autocmd QuickFixCmdPost l*    vertical belowright lwindow 120
 " Keybindings ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 noremap <leader>u ZZ
-noremap <leader>e :Files<CR>
-noremap <leader>E :Buffers<CR>
-noremap <leader>o :GFiles?<CR>
-noremap <leader>a :Rg<space>
-noremap <leader>A :Rg<space><Up><CR>
-noremap <leader>i :Rg<space>/<C-R>=fnameescape(expand('%:t:r'))<CR><CR>
+noremap <leader>e :Files!<CR>
+noremap <leader>E :Buffers!<CR>
+noremap <leader>o :GFiles!?<CR>
+noremap <leader>a :Rg!<space>
+noremap <leader>A :Rg!<space><Up><CR>
+noremap <leader>i :Rg!<space>/<C-R>=fnameescape(expand('%:t:r'))<CR><CR>
 noremap <leader>b <C-^>
-noremap <leader>B :History<CR>
+noremap <leader>B :History!<CR>
 noremap <C-d> :q<CR>
 
 noremap <leader>h :aboveleft vsplit<CR>
