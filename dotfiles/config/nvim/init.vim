@@ -206,6 +206,12 @@ Plug 'jparise/vim-graphql'
 
 " Completion and linting ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+let g:coc_global_extensions = [
+\ 'coc-git',
+\ 'coc-tsserver',
+\ 'coc-prettier',
+\ 'coc-json']
+
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 set shortmess+=c
 inoremap <silent><expr> <TAB>
