@@ -202,41 +202,86 @@ let g:vim_json_syntax_conceal = 0
 
 Plug 'leafgarland/typescript-vim'
 
-Plug 'jparise/vim-graphql', {'for': 'graphql'}
+Plug 'jparise/vim-graphql'
 
 " Completion and linting ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Plug 'Valloric/YouCompleteMe', {'do': './install.py'}
-let g:ycm_filetype_blacklist = {'markdown': 1, 'text': 1, 'gitcommit': 1, 'tsv': 1}
-let g:ycm_always_populate_location_list = 1
-let g:ycm_collect_identifiers_from_comments_and_strings = 1
-let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_autoclose_preview_window_after_insertion = 1
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+set shortmess+=c
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+inoremap <silent><expr> <c-space> coc#refresh()
 
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_enter = 0
-let g:ale_linters_explicit = 1
-let g:ale_linters = {
-\   'typescript': ['tslint', 'eslint'],
-\   'graphql': ['prettier'],
-\   'markdown': ['markdownlint'],
-\   'html': ['prettier'],
-\   'sh': ['shellcheck'],
-\}
-let g:ale_fixers = {
-\   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'typescript': ['prettier'],
-\   'javascript': ['prettier'],
-\   'json': ['prettier'],
-\   'graphql': ['prettier'],
-\   'html': ['prettier'],
-\   'css': ['prettier'],
-\   'vim': [],
-\   'sh': ['shfmt'],
-\}
-let g:ale_sh_shellcheck_dialect='bash'
-let g:ale_sh_shfmt_options='-i 2 -sr -ci'
-Plug 'w0rp/ale'
+" if exists('*complete_info')
+"   inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+" else
+"   inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" endif
+
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gD <Plug>(coc-type-definition)
+" nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+nmap <leader>gR <Plug>(coc-rename)
+nnoremap <silent> gL :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" xmap <leader>f  <Plug>(coc-format-selected)
+" nmap <leader>f  <Plug>(coc-format-selected)
+"
+" xmap <leader>a  <Plug>(coc-codeaction-selected)
+" nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Plug 'Valloric/YouCompleteMe', {'do': './install.py'}
+" let g:ycm_filetype_blacklist = {'markdown': 1, 'text': 1, 'gitcommit': 1, 'tsv': 1}
+" let g:ycm_always_populate_location_list = 1
+" let g:ycm_collect_identifiers_from_comments_and_strings = 1
+" let g:ycm_autoclose_preview_window_after_completion = 1
+" let g:ycm_autoclose_preview_window_after_insertion = 1
+
+" let g:ale_lint_on_text_changed = 'never'
+" let g:ale_lint_on_enter = 0
+" let g:ale_linters_explicit = 1
+" let g:ale_linters = {
+" \   'typescript': ['tslint', 'eslint'],
+" \   'graphql': ['prettier'],
+" \   'markdown': ['markdownlint'],
+" \   'html': ['prettier'],
+" \   'sh': ['shellcheck'],
+" \}
+" let g:ale_fixers = {
+" \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+" \   'typescript': ['prettier'],
+" \   'javascript': ['prettier'],
+" \   'json': ['prettier'],
+" \   'graphql': ['prettier'],
+" \   'html': ['prettier'],
+" \   'css': ['prettier'],
+" \   'vim': [],
+" \   'sh': ['shfmt'],
+" \}
+" let g:ale_sh_shellcheck_dialect='bash'
+" let g:ale_sh_shfmt_options='-i 2 -sr -ci'
+" Plug 'w0rp/ale'
 
 " End of plugin manager setup ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -278,7 +323,7 @@ set expandtab
 set suffixesadd=.ts,.tsx,.js,.jsx,.json,.coffee,.scss,.css
 
 " Check for changes to file
-au CursorHold * checktime
+" au CursorHold * checktime
 
 " Auto wrap comments
 set formatoptions=rqn1j
@@ -315,6 +360,7 @@ set statusline+=%#CustomModifiedFlag#%m%*
 set statusline+=%=\ 
 set statusline+=%03.(%c%)\ %07.(%l/%L%)
 set statusline+=%(\ %y%)
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Command line helpers ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -395,16 +441,16 @@ noremap <leader>/ :nohlsearch<CR>
 noremap ga :.Subvert/{true,false}/{false,true}/g<CR>:nohlsearch<CR>
 noremap g, :.Subvert/[{ ,x}]/[{x, }]<CR>:nohlsearch<CR>
 
-noremap <leader>f :ALEFix<CR>
+noremap <leader>f :CocCommand prettier.formatFile<CR>
 
-nnoremap gd :YcmCompleter GoTo<CR>
-nnoremap gD :YcmCompleter GoToType<CR>
-nnoremap gr :YcmCompleter GoToReferences<CR>
-nnoremap gR :YcmCompleter RefactorRename 
-nnoremap gs :YcmCompleter FixIt<CR>
-nnoremap gS :YcmShowDetailedDiagnostic<CR>
-nnoremap gl :YcmCompleter GetType<CR>
-nnoremap gL :YcmCompleter GetDoc<CR>
+" nnoremap gd :YcmCompleter GoTo<CR>
+" nnoremap gD :YcmCompleter GoToType<CR>
+" nnoremap gr :YcmCompleter GoToReferences<CR>
+" nnoremap gR :YcmCompleter RefactorRename 
+" nnoremap gs :YcmCompleter FixIt<CR>
+" nnoremap gS :YcmShowDetailedDiagnostic<CR>
+" nnoremap gl :YcmCompleter GetType<CR>
+" nnoremap gL :YcmCompleter GetDoc<CR>
 
 nnoremap gx /export<CR>
 
