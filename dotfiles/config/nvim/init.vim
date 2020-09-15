@@ -207,7 +207,6 @@ Plug 'jparise/vim-graphql'
 " Completion and linting ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 let g:coc_global_extensions = [
-\ 'coc-git',
 \ 'coc-tsserver',
 \ 'coc-prettier',
 \ 'coc-json']
@@ -231,15 +230,16 @@ inoremap <silent><expr> <c-space> coc#refresh()
 "   inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 " endif
 
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gD <Plug>(coc-type-definition)
-" nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-nmap <leader>gR <Plug>(coc-rename)
+nnoremap <silent> gd <Plug>(coc-definition)
+nnoremap <silent> gD <Plug>(coc-type-definition)
+nnoremap <silent> gr <Plug>(coc-references)
+nnoremap <leader>gR <Plug>(coc-rename)
 nnoremap <silent> gL :call <SID>show_documentation()<CR>
+nnoremap <silent> gL :call <SID>show_documentation()<CR>
+nnoremap <silent> gs <Plug>(coc-fix-current)
+nnoremap <silent> gS <Plug>(coc-diagnostic-info)
+noremap <silent> _ <Plug>(coc-diagnostic-next)
+noremap <silent> \| <Plug>(coc-diagnostic-prev)
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
@@ -510,8 +510,8 @@ endfunction
 
 nnoremap <leader>~ :call FillLine('~')<CR>
 
-noremap _ :lfirst<CR>
-noremap \| :lnext<CR>
+" noremap _ :lfirst<CR>
+" noremap \| :lnext<CR>
 " nmap <silent> - <Plug>(ale_next_wrap)
 " nmap <silent> _ <Plug>(ale_previous_wrap)
 
