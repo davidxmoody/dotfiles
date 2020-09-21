@@ -230,16 +230,15 @@ inoremap <silent><expr> <c-space> coc#refresh()
 "   inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 " endif
 
-nnoremap <silent> gd <Plug>(coc-definition)
-nnoremap <silent> gD <Plug>(coc-type-definition)
-nnoremap <silent> gr <Plug>(coc-references)
-nnoremap <leader>gR <Plug>(coc-rename)
-nnoremap <silent> gL :call <SID>show_documentation()<CR>
-nnoremap <silent> gL :call <SID>show_documentation()<CR>
-nnoremap <silent> gs <Plug>(coc-fix-current)
-nnoremap <silent> gS <Plug>(coc-diagnostic-info)
-noremap <silent> _ <Plug>(coc-diagnostic-next)
-noremap <silent> \| <Plug>(coc-diagnostic-prev)
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gD <Plug>(coc-type-definition)
+nmap <silent> gr <Plug>(coc-references)
+nmap <silent> gR <Plug>(coc-rename)
+nmap <silent> gl :call <SID>show_documentation()<CR>
+nmap <silent> gs <Plug>(coc-fix-current)
+nmap <silent> gS <Plug>(coc-diagnostic-info)
+nmap <silent> _ <Plug>(coc-diagnostic-next)
+nmap <silent> \| <Plug>(coc-diagnostic-prev)
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
