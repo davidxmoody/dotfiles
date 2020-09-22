@@ -18,5 +18,6 @@ setl nosmartindent
 setl indentexpr=
 setl scrolloff=0
 
-" noremap <buffer> - o-<Space>
 noremap <buffer>  cl<CR><CR><Esc>
+
+let b:coc_suggest_disable = 1
