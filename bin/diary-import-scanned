@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+set -e
+
+output_script=script
+
+imgcat=$HOME/.iterm2/imgcat
+
+for f in "$@"; do
+  $imgcat "$f"
+
+  if [[ -z "$last_date" ]]; then
+    echo -n "Enter start date (YYYY-MM-DD): "
+    read -r last_date
+    filenum=1
+  else
+    num_days_to_add=
+    echo -n "(Optional) Enter number of days to add: "
+    read -r num_days_to_add
+    if [[ "$num_days_to_add" -gt 0 ]]; then
+      last_date=$(date -d "$last_date + ${num_days_to_add} days" +%F)
+      filenum=1
+    else
+      filenum=$((filenum + 1))
+    fi
+  fi
+
+  echo "$(date -d "$last_date") -- $last_date -- #$filenum"
+
+  dir=$DIARY_DIR/scanned/${last_date//-/\/}
+  filename=scanned-$(printf "%02d" "$filenum").jpg
+
+  if [[ "$filenum" == 1 ]]; then
+    echo "mkdir -p '$dir'" >> "$output_script"
+  fi
+
+  echo "cp -n '$f' '$dir/$filename'" >> "$output_script"
+done
