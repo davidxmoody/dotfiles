@@ -235,8 +235,8 @@ nmap <silent> gD <Plug>(coc-type-definition)
 nmap <silent> gr <Plug>(coc-references)
 nmap <silent> gR <Plug>(coc-rename)
 nmap <silent> gl :call <SID>show_documentation()<CR>
-nmap <silent> gs <Plug>(coc-fix-current)
-nmap <silent> gS <Plug>(coc-diagnostic-info)
+nmap <silent> gs <Plug>(coc-codeaction-line)
+nmap <silent> gS <Plug>(coc-codeaction)
 nmap <silent> _ <Plug>(coc-diagnostic-next)
 nmap <silent> \| <Plug>(coc-diagnostic-prev)
 
