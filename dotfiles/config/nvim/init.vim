@@ -236,7 +236,7 @@ nmap <silent> gr <Plug>(coc-references)
 nmap <silent> gR <Plug>(coc-rename)
 nmap <silent> gl :call <SID>show_documentation()<CR>
 nmap <silent> gs <Plug>(coc-codeaction-line)
-nmap <silent> gS <Plug>(coc-codeaction)
+nmap <silent> gS <Plug>(coc-fix-current)
 nmap <silent> _ <Plug>(coc-diagnostic-next)
 nmap <silent> \| <Plug>(coc-diagnostic-prev)
 
@@ -509,27 +509,12 @@ endfunction
 
 nnoremap <leader>~ :call FillLine('~')<CR>
 
-" noremap _ :lfirst<CR>
-" noremap \| :lnext<CR>
-" nmap <silent> - <Plug>(ale_next_wrap)
-" nmap <silent> _ <Plug>(ale_previous_wrap)
-
 noremap <C-K> cl<CR><Esc>lf<Space>
 
-noremap gp p`[V`]=
-noremap gP P`[V`]=
-xnoremap gp p`[V`]=
-xnoremap gP P`[V`]=
-
-" TODO figure out how to paste/delete in a nice way without affecting the
-" unnamed register
-" xnoremap P "_p
-" xnoremap P :<BS><BS><BS><BS><BS>let @p=@"<CR>"pp
-" function! PasteWithoutYank()
-"   let @p = @"
-"   return '"pp'
-" endfunction
-" xnoremap <expr> P PasteWithoutYank()
+xnoremap gp "0p
+xnoremap gP "0P
+nnoremap gp V"0p
+nnoremap gP V"0p
 
 xnoremap D "_d
 xnoremap C "_c
