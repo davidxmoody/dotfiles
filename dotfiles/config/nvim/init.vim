@@ -52,8 +52,6 @@ let g:UltiSnipsExpandTrigger = '<C-F><C-F>'
 let g:UltiSnipsJumpForwardTrigger = '<C-F><C-F>'
 let g:UltiSnipsJumpBackwardTrigger = '<C-F><C-B>'
 
-Plug 'sedm0784/vim-you-autocorrect'
-
 " Git plugins ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Plug 'airblade/vim-gitgutter'
@@ -564,8 +562,6 @@ endif
 func! WordProcessorMode()
   source ~/.vim_abbreviations
 
-  EnableAutocorrect
-
   augroup auto_capitalize_sentences
     au!
     au InsertCharPre <buffer> if search('\v(%^|%^[1-7]{2}\s|[.!?]\_s+|\_^\s*\-\s|\_^#+\s|\_^title\:\s|\n\n)%#', 'bcnw') != 0 | let v:char = toupper(v:char) | endif
@@ -574,9 +570,7 @@ endfu
 
 com! WP call WordProcessorMode()
 
-if empty($DISABLE_AUTO_WP_MODE)
-  au BufNewFile,BufRead diary-*.md call WordProcessorMode()
-endif
+au BufNewFile,BufRead diary-*.md call WordProcessorMode()
 
 func! HideText()
   syntax off
