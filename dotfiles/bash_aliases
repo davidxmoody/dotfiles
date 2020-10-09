@@ -284,3 +284,4 @@ alias copyuuid='uuidgen | tr "[:upper:]" "[:lower:]" | copywithoutnewline'
 alias shfmt='shfmt -i 2 -sr -ci'
 alias ipy='ipython3'
 alias py='python3'
+alias ts="gawk '{ print strftime(\"[%Y-%m-%d %H:%M:%S]\"), \$0 }'"
