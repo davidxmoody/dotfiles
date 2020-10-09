@@ -484,7 +484,7 @@ xmap <leader>x "lc<C-R>=substitute(system('node -p', @l), '\n\+$', '', '')<CR><E
 
 noremap <silent> - :Defx `expand('%:p:h')` -columns=mark:indent:git:icon:filename -search=`expand('%:p')`<CR>
 
-map o <Plug>(easymotion-bd-f2)
+map o <Plug>(easymotion-overwin-f2)
 map O <Plug>(easymotion-overwin-f2)
 map f <Plug>Sneak_f
 map F <Plug>Sneak_F
