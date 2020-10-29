@@ -171,7 +171,7 @@ function! s:defx_my_settings() abort
   " nnoremap <silent><buffer><expr> M defx#do_action('new_multiple_files')
   " nnoremap <silent><buffer><expr> C defx#do_action('toggle_columns', 'git:icon:mark:indent:filename')
   " nnoremap <silent><buffer><expr> S defx#do_action('toggle_sort', 'time')
-  " nnoremap <silent><buffer><expr> . defx#do_action('toggle_ignored_files')
+  nnoremap <silent><buffer><expr> . defx#do_action('toggle_ignored_files')
   " nnoremap <silent><buffer><expr> ; defx#do_action('repeat')
   " nnoremap <silent><buffer><expr> <C-D> defx#do_action('quit')
   " nnoremap <silent><buffer><expr> <Space> defx#do_action('toggle_select') . 'j'

@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+set -e
+
+package_json_file=$(npm prefix)/package.json
+
+if [[ ! -f "$package_json_file" ]]; then
+  echo "Could not find package.json file" >&2
+  exit 1
+fi
+
+export scripts_json=$(jq < "$package_json_file" '.scripts // {}')
+
+if jq --exit-status "has(\"$1\")" <<< "$scripts_json" >/dev/null; then
+  npm run "$1"
+else
+  selected_script=$(jq -r 'keys[]' <<< "$scripts_json" | fzf --query "$1" --preview-window "down:2:wrap" --preview "jq -r '.[\"{}\"]' <<< \"\$scripts_json\"")
+  if [[ -n "$selected_script" ]]; then
+    npm run "$selected_script"
+  fi
+fi
