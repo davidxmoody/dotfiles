@@ -9,13 +9,16 @@ if [[ ! -f "$package_json_file" ]]; then
   exit 1
 fi
 
+script_name=$1
+shift || true
+
 export scripts_json=$(jq < "$package_json_file" '.scripts // {}')
 
-if jq --exit-status "has(\"$1\")" <<< "$scripts_json" >/dev/null; then
-  npm run "$1"
+if jq --exit-status "has(\"$script_name\")" <<< "$scripts_json" >/dev/null; then
+  npm run "$script_name" "$@"
 else
-  selected_script=$(jq -r 'keys[]' <<< "$scripts_json" | fzf --query "$1" --preview-window "down:2:wrap" --preview "jq -r '.[\"{}\"]' <<< \"\$scripts_json\"")
+  selected_script=$(jq -r 'keys[]' <<< "$scripts_json" | fzf --query "$script_name" --preview-window "down:2:wrap" --preview "jq -r '.[\"{}\"]' <<< \"\$scripts_json\"")
   if [[ -n "$selected_script" ]]; then
-    npm run "$selected_script"
+    npm run "$selected_script" "$@"
   fi
 fi
