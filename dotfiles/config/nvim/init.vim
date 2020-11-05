@@ -357,13 +357,13 @@ highlight StatusLine guifg=White gui=reverse
 highlight StatusLineNC gui=reverse
 
 set statusline=
+set statusline+=%{coc#status()}%{get(b:,'coc_current_function','')}\ 
 set statusline+=%<%f
 set statusline+=\ %h%q%r
 set statusline+=%#CustomModifiedFlag#%m%*
 set statusline+=%=\ 
 set statusline+=%03.(%c%)\ %07.(%l/%L%)
 set statusline+=%(\ %y%)
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Command line helpers ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
