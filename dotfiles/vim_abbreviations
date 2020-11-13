@@ -109,3 +109,5 @@ Abolish -buffer tm tomorrow
 Abolish -buffer y{,e}d yesterday
 Abolish -buffer obv obviously
 Abolish -buffer speach speech
+Abolish -buffer {yt,youtube} YouTube
+Abolish -buffer lt although
