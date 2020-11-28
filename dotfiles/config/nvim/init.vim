@@ -285,8 +285,6 @@ set suffixesadd=.ts,.tsx,.js,.jsx,.json,.coffee,.scss,.css
 set formatoptions=rqn1j
 set textwidth=79
 
-autocmd bufnewfile,bufread *.tsx set filetype=typescript.tsx
-
 " Colorscheme and highlighting ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 set termguicolors
