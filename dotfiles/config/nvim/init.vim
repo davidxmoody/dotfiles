@@ -151,7 +151,9 @@ Plug 'kchmck/vim-coffee-script', {'for': 'coffee'}
 Plug 'elzr/vim-json', {'for': 'json'}
 let g:vim_json_syntax_conceal = 0
 
-Plug 'leafgarland/typescript-vim'
+" Plug 'leafgarland/typescript-vim'
+
+Plug 'nvim-treesitter/nvim-treesitter', {'commit': '16fcbd1824727697e8a6625ae56ab7b55374d4ca'}
 
 Plug 'jparise/vim-graphql'
 
