@@ -76,13 +76,13 @@ Abolish -buffer wout without
 Abolish -buffer praps perhaps
 Abolish -buffer rn{,s} reason{,s}
 
-Abolish -buffer monday Monday
-Abolish -buffer tuesday Tuesday
-Abolish -buffer wednesday Wednesday
-Abolish -buffer thursday Thursday
-Abolish -buffer friday Friday
-Abolish -buffer saturday Saturday
-Abolish -buffer sunday Sunday
+Abolish -buffer monday{,s} Monday{,s}
+Abolish -buffer tuesday{,s} Tuesday{,s}
+Abolish -buffer wednesday{,s} Wednesday{,s}
+Abolish -buffer thursday{,s} Thursday{,s}
+Abolish -buffer friday{,s} Friday{,s}
+Abolish -buffer saturday{,s} Saturday{,s}
+Abolish -buffer sunday{,s} Sunday{,s}
 
 Abolish -buffer january January
 Abolish -buffer february February

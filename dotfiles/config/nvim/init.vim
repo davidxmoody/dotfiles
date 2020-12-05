@@ -390,7 +390,7 @@ xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
 xnoremap . :norm.<CR>
 map <leader>. /\C\<"\><CR>.
 
-noremap <leader>, A,<CR>
+noremap <leader>, GA
 
 noremap <leader>/ :nohlsearch<CR>
 
