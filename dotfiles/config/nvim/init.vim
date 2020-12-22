@@ -19,7 +19,7 @@ Plug 'lifepillar/vim-solarized8'
 
 " Navigation plugins ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Plug 'haya14busa/is.vim'
+" Plug 'haya14busa/is.vim'
 
 Plug 'justinmk/vim-sneak'
 let g:sneak#absolute_dir = 1
@@ -60,7 +60,7 @@ set signcolumn=yes
 let g:gitgutter_map_keys = 0
 
 Plug 'tpope/vim-fugitive'
-Plug 'junegunn/gv.vim'
+" Plug 'junegunn/gv.vim'
 
 " Tmux plugins ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -147,7 +147,6 @@ Plug 'mxw/vim-jsx'
 let g:jsx_ext_required = 0
 
 Plug 'moll/vim-node'
-Plug 'kchmck/vim-coffee-script', {'for': 'coffee'}
 Plug 'elzr/vim-json', {'for': 'json'}
 let g:vim_json_syntax_conceal = 0
 
