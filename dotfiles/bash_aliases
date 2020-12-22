@@ -91,6 +91,7 @@ ga() {
 }
 alias gaa='git add -A :/'
 alias gaac='git add -A :/ && git commit'
+gaacm() { git add -A :/ && git commit -m "$*"; }
 alias gaaca='git add -A :/ && git commit --amend'
 alias gaacane='git add -A :/ && git commit --amend --no-edit'
 alias gco='git checkout'
@@ -204,6 +205,7 @@ alias ngd='npm run generate-db-types'
 alias nc='npx npm-check -u'
 alias rn='npx react-native'
 alias tsw='npx tsc -w --noEmit'
+alias generate-readme='npx readme-md-generator'
 
 # Navy ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
