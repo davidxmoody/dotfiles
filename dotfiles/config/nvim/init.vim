@@ -135,8 +135,8 @@ let g:lua_tree_bindings = {
     \ 'next_git_item':   's',
     \ }
 
-noremap - :LuaTreeFind<CR>
-noremap g- :LuaTreeToggle<CR>
+noremap - :NvimTreeFindFile<CR>
+noremap g- :NvimTreeToggle<CR>
 
 " Language specific plugins ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
