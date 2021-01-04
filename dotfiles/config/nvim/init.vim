@@ -114,8 +114,8 @@ let g:fzf_layout = {'window': 'enew'}
 
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'kyazdani42/nvim-tree.lua'
-let g:lua_tree_ignore = [ '.git', 'node_modules', '.DS_Store' ]
-let g:lua_tree_bindings = {
+let g:nvim_tree_ignore = [ '.git', 'node_modules', '.DS_Store' ]
+let g:nvim_tree_bindings = {
     \ 'edit':            ['<CR>', 'i'],
     \ 'edit_vsplit':     ['<leader>h', '<leader>s'],
     \ 'edit_split':      ['<leader>t', '<leader>n'],
