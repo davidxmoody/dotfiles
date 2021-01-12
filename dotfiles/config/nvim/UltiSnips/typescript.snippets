@@ -18,44 +18,10 @@ function(${2}) {
 }
 endsnippet
 
-# Imports ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-snippet im "Import"
-import ${1:module_name} from "${2:module_path}"
-endsnippet
-
-snippet imr "Import React"
-import * as React from "react"
-endsnippet
-
-snippet imm "Import moment"
-import * as moment from "moment"
-endsnippet
-
-snippet ims "Import styled-components"
-import styled from "styled-components"
-endsnippet
-
-snippet imsn "Import RN styled-components"
-import styled from "styled-components/native"
-endsnippet
-
-snippet ex "Export default"
-export default $1
-endsnippet
-
 # Console ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 snippet cl "console.log()"
 console.log(${1:"${2:message}"})
-endsnippet
-
-snippet clv "console.log() visual"
-console.log(${VISUAL})
-endsnippet
-
-snippet clvj "console.log() visual json"
-console.log(JSON.stringify(${VISUAL}, null, 2))
 endsnippet
 
 snippet cw "console.warn()"
@@ -104,89 +70,6 @@ snippet stn "RN styled component"
 const ${1:Container} = styled.${3:View}({
 	${2}${4}
 })
-endsnippet
-
-# React ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-snippet uses "React useState"
-const [${1:thing}, ${2:set${1/\w?/\u$0/}}] = useState${4}(${3:undefined})
-endsnippet
-
-snippet react "React functional component"
-import * as React from "react"
-
-interface Props {
-	${1:// TODO}
-}
-
-export default function ${3:`!p snip.rv = snip.basename`}(props: Props) {
-	return (
-		${2:<></>}
-	)
-}
-endsnippet
-
-snippet reacte "React functional component (without imports)"
-function ${1:Component}(props: {${2}}) {
-	return (
-		${3:<></>}
-	)
-}
-endsnippet
-
-snippet reactpc "React pure class component"
-import * as React from "react"
-
-interface Props {
-	${1:// TODO}
-}
-
-export default class ${3:`!p snip.rv = snip.basename`} extends React.PureComponent<Props> {
-	public render() {
-		return (
-			${2:<></>}
-		)
-	}
-}
-endsnippet
-
-snippet reactpcs "React pure class component with state"
-import * as React from "react"
-
-interface Props {
-	${1:// TODO}
-}
-
-interface State {
-	${2:// TODO}
-}
-
-export default class ${4:`!p snip.rv = snip.basename`} extends React.PureComponent<Props, State> {
-	public state: State = {
-		${3:// TODO}
-	}
-
-	public render() {
-		return (
-			${3:<></>}
-		)
-	}
-}
-endsnippet
-
-# Class methods ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-snippet pr "Private class method"
-private ${1:onThing} = (${3}) => {
-	${2}${4}
-}
-endsnippet
-
-snippet pubs "Public state"
-public state: State = {
-	${1}
-}
-
 endsnippet
 
 # JSON stringify/parse ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
