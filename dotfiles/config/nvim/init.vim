@@ -270,6 +270,10 @@ set undofile
 set lazyredraw
 set hidden
 
+" Auto window resizing
+set equalalways
+autocmd VimResized * wincmd =
+
 " Indenting
 set tabstop=2
 set softtabstop=2
