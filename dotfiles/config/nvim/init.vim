@@ -17,6 +17,10 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'lifepillar/vim-solarized8'
 
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+
 " Navigation plugins ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 " Plug 'haya14busa/is.vim'
@@ -102,13 +106,6 @@ let g:slime_python_ipython = 1
 if !empty($TMUX)
   let g:slime_default_config = {"socket_name": split($TMUX, ",")[0], "target_pane": ":.2"}
 endif
-
-" FZF plugins ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --bin'}
-Plug 'junegunn/fzf.vim'
-let g:fzf_commits_log_options = '--color --graph --pretty=tformat:"%Cred%h%Creset - %C(bold blue)%<(18)%an %C(yellow)%d%Creset %s %Cgreen(%ar)%Creset" --abbrev-commit'
-let g:fzf_layout = {'window': 'enew'}
 
 " File explorers ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -345,14 +342,13 @@ autocmd QuickFixCmdPost l*    vertical belowright lwindow 120
 " Keybindings ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 noremap <leader>u ZZ
-noremap <leader>e :Files!<CR>
-noremap <leader>E :Buffers!<CR>
-noremap <leader>o :GFiles!?<CR>
-noremap <leader>a :Rg!<space>
-noremap <leader>A :Rg!<space><Up><CR>
-noremap <leader>i :Rg!<space>/<C-R>=fnameescape(expand('%:t:r'))<CR><CR>
+noremap <leader>e <cmd>lua require('telescope.builtin').find_files()<cr>
+noremap <leader>E <cmd>lua require('telescope.builtin').buffers()<cr>
+noremap <leader>o <cmd>lua require('telescope.builtin').git_status()<cr>
+noremap <leader>a <cmd>lua require('telescope.builtin').live_grep()<cr>
+" noremap <leader>i :Rg!<space>/<C-R>=fnameescape(expand('%:t:r'))<CR><CR>
 noremap <leader>b <C-^>
-noremap <leader>B :History!<CR>
+noremap <leader>B <cmd>lua require('telescope.builtin').oldfiles()<cr>
 noremap <C-d> :q<CR>
 
 noremap <leader>h :aboveleft vsplit<CR>
@@ -369,13 +365,13 @@ noremap <leader>W :set colorcolumn=80<CR>
 
 nnoremap         *  /\C\<<C-R><C-W>\><CR>
 nnoremap         g* /<C-R><C-W>
-nnoremap <leader>*  :Rg! <C-R><C-W><CR>
-nnoremap <leader>g* :Rg! <C-R><C-W>
+nnoremap <leader>* <cmd>lua require('telescope.builtin').grep_string()<cr>
 
 xnoremap         *  "zy/<C-R><C-R>z<CR>
 xnoremap         g* "zy/<C-R><C-R>z
-xnoremap <leader>*  "zy:Rg! <C-R><C-R>z<CR>
-xnoremap <leader>g* "zy:Rg! <C-R><C-R>z
+" TODO
+" xnoremap <leader>*  "zy:Rg! <C-R><C-R>z<CR>
+" xnoremap <leader>g* "zy:Rg! <C-R><C-R>z
 
 nnoremap <leader>r :%s/\<<C-R><C-W>\>/<C-R><C-W>/g<Left><Left>
 xnoremap <leader>r "zy:%s/\<<C-R><C-R>z\>/<C-R><C-R>z/g<Left><Left>
