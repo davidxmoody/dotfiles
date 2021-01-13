@@ -291,4 +291,4 @@ alias shfmt='shfmt -i 2 -sr -ci'
 alias ipy='ipython3'
 alias py='python3'
 alias ts="gawk '{ print strftime(\"[%Y-%m-%d %H:%M:%S]\"), \$0 }'"
-alias startlifecalendar='cd ~/p/life-calendar && tmux send-keys -t "$(tmux split-window -hP)" "(cd client; nr start)" "Enter" && (cd server; nr start)'
+alias startlifecalendar='cd ~/p/life-calendar && tmux send-keys -t "$(tmux split-window -hP)" "(cd pwa; nr start)" "Enter" && (cd server; nr start)'
