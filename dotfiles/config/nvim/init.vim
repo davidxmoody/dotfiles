@@ -17,13 +17,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'lifepillar/vim-solarized8'
 
-Plug 'nvim-lua/popup.nvim'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
-
 " Navigation plugins ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-" Plug 'haya14busa/is.vim'
 
 Plug 'justinmk/vim-sneak'
 let g:sneak#absolute_dir = 1
@@ -64,7 +58,6 @@ set signcolumn=yes
 let g:gitgutter_map_keys = 0
 
 Plug 'tpope/vim-fugitive'
-" Plug 'junegunn/gv.vim'
 
 " Tmux plugins ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -135,6 +128,10 @@ let g:nvim_tree_bindings = {
 noremap - :NvimTreeFindFile<CR>
 noremap g- :NvimTreeToggle<CR>
 
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+
 " Language specific plugins ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Plug 'pangloss/vim-javascript'
@@ -174,12 +171,6 @@ function! s:check_back_space() abort
 endfunction
 inoremap <silent><expr> <c-space> coc#refresh()
 
-" if exists('*complete_info')
-"   inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-" else
-"   inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-" endif
-
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gD <Plug>(coc-type-definition)
 nmap <silent> gr <Plug>(coc-references)
@@ -197,21 +188,6 @@ function! s:show_documentation()
     call CocAction('doHover')
   endif
 endfunction
-
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
-" xmap <leader>f  <Plug>(coc-format-selected)
-" nmap <leader>f  <Plug>(coc-format-selected)
-"
-" xmap <leader>a  <Plug>(coc-codeaction-selected)
-" nmap <leader>a  <Plug>(coc-codeaction-selected)
-
-" Plug 'Valloric/YouCompleteMe', {'do': './install.py'}
-" let g:ycm_filetype_blacklist = {'markdown': 1, 'text': 1, 'gitcommit': 1, 'tsv': 1}
-" let g:ycm_always_populate_location_list = 1
-" let g:ycm_collect_identifiers_from_comments_and_strings = 1
-" let g:ycm_autoclose_preview_window_after_completion = 1
-" let g:ycm_autoclose_preview_window_after_insertion = 1
 
 " let g:ale_lint_on_text_changed = 'never'
 " let g:ale_lint_on_enter = 0
@@ -294,7 +270,7 @@ set expandtab
 set suffixesadd=.ts,.tsx,.js,.jsx,.json,.coffee,.scss,.css
 
 " Check for changes to file
-" au CursorHold * checktime
+au CursorHold * checktime
 
 " Auto wrap comments
 set formatoptions=rqn1j
@@ -402,15 +378,6 @@ noremap ga :.Subvert/{true,false}/{false,true}/g<CR>:nohlsearch<CR>
 noremap g, :.Subvert/[{ ,x}]/[{x, }]<CR>:nohlsearch<CR>
 
 noremap <leader>f :CocCommand prettier.formatFile<CR>
-
-" nnoremap gd :YcmCompleter GoTo<CR>
-" nnoremap gD :YcmCompleter GoToType<CR>
-" nnoremap gr :YcmCompleter GoToReferences<CR>
-" nnoremap gR :YcmCompleter RefactorRename 
-" nnoremap gs :YcmCompleter FixIt<CR>
-" nnoremap gS :YcmShowDetailedDiagnostic<CR>
-" nnoremap gl :YcmCompleter GetType<CR>
-" nnoremap gL :YcmCompleter GetDoc<CR>
 
 nnoremap gx /export<CR>
 
@@ -523,10 +490,3 @@ endfu
 com! WP call WordProcessorMode()
 
 au BufNewFile,BufRead diary-*.md call WordProcessorMode()
-
-func! HideText()
-  syntax off
-  hi Normal guibg=#001f28 guifg=#103030
-endfu
-
-com HT call HideText()
