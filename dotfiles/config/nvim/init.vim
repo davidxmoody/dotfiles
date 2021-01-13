@@ -149,7 +149,7 @@ let g:vim_json_syntax_conceal = 0
 
 " Plug 'leafgarland/typescript-vim'
 
-Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 Plug 'jparise/vim-graphql'
 
@@ -242,6 +242,18 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 call plug#end()
 filetype plugin indent on
 syntax on
+
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = {"typescript", "tsx", "javascript", "graphql", "python", "regex", "jsdoc", "html", "bash", "json", "yaml", "css", "lua"},
+  highlight = {
+    enable = true,
+  },
+  indent = {
+    enable = true,
+  },
+}
+EOF
 
 " Miscellaneous config ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
