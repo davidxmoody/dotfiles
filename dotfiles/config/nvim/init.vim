@@ -149,6 +149,7 @@ let g:vim_json_syntax_conceal = 0
 
 " Plug 'leafgarland/typescript-vim'
 
+Plug 'bluz71/vim-nightfly-guicolors'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 Plug 'jparise/vim-graphql'
@@ -301,19 +302,11 @@ set textwidth=79
 
 " Colorscheme and highlighting ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-set termguicolors
-colorscheme solarized8
-let g:solarized_term_italics = 1
-
 set cursorline
-highlight link QuickFixLine Normal
-
-" For focused windows, use the 'default' background color (from tmux). This
-" means the current Vim window will be highlighted only if the tmux pane that
-" vim is running in is also currently active.
-highlight Normal guibg=NONE
-" Unfocused background color duplicated in tmux config
-highlight NormalNC guibg=#001f28
+set termguicolors
+colorscheme nightfly
+let g:nightflyCursorColor = 1
+let g:nightflyUnderlineMatchParen = 1
 
 " Status line ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
