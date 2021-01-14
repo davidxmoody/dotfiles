@@ -356,12 +356,13 @@ set termguicolors
 colorscheme nightfly
 let g:nightflyCursorColor = 1
 let g:nightflyUnderlineMatchParen = 1
+hi Pmenu ctermfg=0 ctermbg=13 guifg=fg guibg=#1d3b53
 
 " Status line ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 highlight CustomModifiedFlag guibg=Red guifg=White
-highlight StatusLine guifg=White gui=reverse
-highlight StatusLineNC gui=reverse
+" highlight StatusLine guifg=White gui=reverse
+" highlight StatusLineNC gui=reverse
 
 set statusline=
 " set statusline+=%{coc#status()}%{get(b:,'coc_current_function','')}\ 
