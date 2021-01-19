@@ -154,69 +154,23 @@ Plug 'jparise/vim-graphql'
 
 " Completion and linting ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+" TODO list for lsp/completion:
+" - Fix <C-Space> behaviour
+" - Show messages and/or error counts in status line
+" - Try out other lsp go to commands (implementation maybe?)
+" - Try out better quickfix list navigation and maybe use that instead of telescope
+" - Improve codeaction suggestions interface
+" - Maybe add mapping to do first suggestion or import
+" - Better mappings to jump between errors
+" - See if there's better ways to show docs/type defs in a hover window
+" - Get eslint/tslint working (also shellcheck and maybe markdownlint)
+" - Set up trailing space fixer for all filetypes
+
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
 
-" let g:coc_global_extensions = [
-" \ 'coc-tsserver',
-" \ 'coc-prettier',
-" \ 'coc-json']
-
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" set shortmess+=c
-" inoremap <silent><expr> <TAB>
-"       \ pumvisible() ? "\<C-n>" :
-"       \ <SID>check_back_space() ? "\<TAB>" :
-"       \ coc#refresh()
-" inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-" function! s:check_back_space() abort
-"   let col = col('.') - 1
-"   return !col || getline('.')[col - 1]  =~# '\s'
-" endfunction
-" inoremap <silent><expr> <c-space> coc#refresh()
-
-" nmap <silent> gd <Plug>(coc-definition)
-" nmap <silent> gD <Plug>(coc-type-definition)
-" nmap <silent> gr <Plug>(coc-references)
-" nmap <silent> gR <Plug>(coc-rename)
-" nmap <silent> gl :call <SID>show_documentation()<CR>
-" nmap <silent> gs <Plug>(coc-codeaction-line)
-" nmap <silent> gS <Plug>(coc-fix-current)
-" nmap <silent> _ <Plug>(coc-diagnostic-next)
-" nmap <silent> \| <Plug>(coc-diagnostic-prev)
-
-" function! s:show_documentation()
-"   if (index(['vim','help'], &filetype) >= 0)
-"     execute 'h '.expand('<cword>')
-"   else
-"     call CocAction('doHover')
-"   endif
-" endfunction
-
-" let g:ale_lint_on_text_changed = 'never'
-" let g:ale_lint_on_enter = 0
-" let g:ale_linters_explicit = 1
-" let g:ale_linters = {
-" \   'typescript': ['tslint', 'eslint'],
-" \   'graphql': ['prettier'],
-" \   'markdown': ['markdownlint'],
-" \   'html': ['prettier'],
-" \   'sh': ['shellcheck'],
-" \}
-" let g:ale_fixers = {
-" \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-" \   'typescript': ['prettier'],
-" \   'javascript': ['prettier'],
-" \   'json': ['prettier'],
-" \   'graphql': ['prettier'],
-" \   'html': ['prettier'],
-" \   'css': ['prettier'],
-" \   'vim': [],
-" \   'sh': ['shfmt'],
-" \}
-" let g:ale_sh_shellcheck_dialect='bash'
-" let g:ale_sh_shfmt_options='-i 2 -sr -ci'
-" Plug 'w0rp/ale'
+Plug 'sbdchd/neoformat'
+let g:shfmt_opt='-i 2 -sr -ci'
 
 " End of plugin manager setup ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -269,11 +223,11 @@ local on_attach = function(client, bufnr)
   -- buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
 
   -- Set some keybinds conditional on server capabilities
-  if client.resolved_capabilities.document_formatting then
-    buf_set_keymap("n", "<leader>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
-  elseif client.resolved_capabilities.document_range_formatting then
-    buf_set_keymap("n", "<leader>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
-  end
+  -- if client.resolved_capabilities.document_formatting then
+  --   buf_set_keymap("n", "<leader>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+  -- elseif client.resolved_capabilities.document_range_formatting then
+  --   buf_set_keymap("n", "<leader>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+  -- end
 
   -- Set autocommands conditional on server_capabilities
   -- if client.resolved_capabilities.document_highlight then
@@ -368,7 +322,6 @@ highlight CustomModifiedFlag guibg=Red guifg=White
 " highlight StatusLineNC gui=reverse
 
 set statusline=
-" set statusline+=%{coc#status()}%{get(b:,'coc_current_function','')}\ 
 set statusline+=%<%f
 set statusline+=\ %h%q%r
 set statusline+=%#CustomModifiedFlag#%m%*
@@ -453,7 +406,7 @@ noremap <leader>/ :nohlsearch<CR>
 noremap ga :.Subvert/{true,false}/{false,true}/g<CR>:nohlsearch<CR>
 noremap g, :.Subvert/[{ ,x}]/[{x, }]<CR>:nohlsearch<CR>
 
-" noremap <leader>f :CocCommand prettier.formatFile<CR>
+noremap <leader>f :Neoformat<CR>
 
 nnoremap gx /export<CR>
 
