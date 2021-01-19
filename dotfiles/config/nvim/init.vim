@@ -12,10 +12,10 @@ call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-speeddating'
-Plug 'tpope/vim-eunuch'
+" Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
-Plug 'lifepillar/vim-solarized8'
+" Plug 'lifepillar/vim-solarized8'
 Plug 'lambdalisue/suda.vim'
 
 " Navigation plugins ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -135,22 +135,22 @@ Plug 'nvim-telescope/telescope.nvim'
 
 " Language specific plugins ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Plug 'pangloss/vim-javascript'
-let g:javascript_plugin_flow = 1
+" Plug 'pangloss/vim-javascript'
+" let g:javascript_plugin_flow = 1
 
-Plug 'mxw/vim-jsx'
-let g:jsx_ext_required = 0
+" Plug 'mxw/vim-jsx'
+" let g:jsx_ext_required = 0
 
-Plug 'moll/vim-node'
-Plug 'elzr/vim-json', {'for': 'json'}
-let g:vim_json_syntax_conceal = 0
+" Plug 'moll/vim-node'
+" Plug 'elzr/vim-json', {'for': 'json'}
+" let g:vim_json_syntax_conceal = 0
 
 " Plug 'leafgarland/typescript-vim'
 
 Plug 'bluz71/vim-nightfly-guicolors'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
-Plug 'jparise/vim-graphql'
+" Plug 'jparise/vim-graphql'
 
 " Completion and linting ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -454,6 +454,8 @@ function! FillLine(str)
 endfunction
 
 nnoremap <leader>~ :call FillLine('~')<CR>
+
+command Remove call delete(expand('%')) | bdelete!
 
 noremap <C-K> cl<CR><Esc>lf<Space>
 
