@@ -155,7 +155,6 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 " Completion and linting ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 " TODO list for lsp/completion:
-" - Fix <C-Space> behaviour
 " - Show messages and/or error counts in status line
 " - Try out other lsp go to commands (implementation maybe?)
 " - Try out better quickfix list navigation and maybe use that instead of telescope
@@ -167,7 +166,13 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 " - Set up trailing space fixer for all filetypes
 
 Plug 'neovim/nvim-lspconfig'
+
 Plug 'nvim-lua/completion-nvim'
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+set completeopt=menuone,noinsert,noselect
+set shortmess+=c
+imap <silent> <C-Space> <Plug>(completion_trigger)
 
 Plug 'sbdchd/neoformat'
 let g:shfmt_opt='-i 2 -sr -ci'
@@ -227,16 +232,6 @@ for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup { on_attach = on_attach }
 end
 EOF
-
-" Use <Tab> and <S-Tab> to navigate through popup menu
-inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
-" Set completeopt to have a better completion experience
-set completeopt=menuone,noinsert,noselect
-
-" Avoid showing message extra message when using completion
-set shortmess+=c
 
 " Miscellaneous config ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
