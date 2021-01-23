@@ -105,6 +105,8 @@ endif
 
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'kyazdani42/nvim-tree.lua'
+let g:nvim_tree_hide_dotfiles = 1
+let g:nvim_tree_follow = 1
 let g:nvim_tree_ignore = [ '.git', 'node_modules', '.DS_Store' ]
 let g:nvim_tree_bindings = {
     \ 'edit':            ['<CR>', 'i'],
