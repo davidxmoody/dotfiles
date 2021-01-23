@@ -91,7 +91,16 @@ ga() {
 }
 alias gaa='git add -A :/'
 alias gaac='git add -A :/ && git commit'
-gaacm() { git add -A :/ && git commit -m "$*"; }
+gaacm() {
+  local message="$*"
+  local message_length="${#message}"
+  if [[ "$message_length" -gt 50 ]]; then
+    echo "Error: Message is $((message_length - 50)) characters too long" >&2
+    return 1
+  else
+    git add -A :/ && git commit -m "$message"
+  fi
+}
 alias gaaca='git add -A :/ && git commit --amend'
 alias gaacane='git add -A :/ && git commit --amend --no-edit'
 alias gco='git checkout'
