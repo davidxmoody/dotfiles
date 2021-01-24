@@ -12,7 +12,7 @@ else
   prettier_cmd=prettier
 fi
 
-changed=$(git status --porcelain -uall | sed -n 's/^...//; /\.\(ts\|tsx\|js\|graphql\|css\)$/p')
+changed=$(git status --porcelain -uall | grep -v "^ D " | sed -n 's/^...//; /\.\(ts\|tsx\|js\|graphql\|css\)$/p')
 
 [[ -z "$changed" ]] && exit 0
 
