@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+set -e
+
+hex=$(tr "[:lower:]" "[:upper:]" | sed 's/#//g')
+
+a=$(cut -c-2 <<< "$hex")
+b=$(cut -c3-4 <<< "$hex")
+c=$(cut -c5-6 <<< "$hex")
+
+r=$(bc <<< "ibase=16; $a")
+g=$(bc <<< "ibase=16; $b")
+b=$(bc <<< "ibase=16; $c")
+
+echo "rgb($r, $g, $b)"
