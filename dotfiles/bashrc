@@ -66,16 +66,22 @@ add_to_manp() {
   fi
 }
 
+add_to_path "/opt/homebrew/bin"
+
 add_to_path "/usr/local/opt/coreutils/libexec/gnubin"
 add_to_manp "/usr/local/opt/coreutils/libexec/gnuman"
+add_to_path "/opt/homebrew/opt/coreutils/libexec/gnubin"
+add_to_manp "/opt/homebrew/opt/coreutils/libexec/gnuman"
 
 add_to_path "/usr/local/opt/findutils/libexec/gnubin"
 add_to_manp "/usr/local/opt/findutils/libexec/gnuman"
+add_to_path "/opt/homebrew/opt/findutils/libexec/gnubin"
+add_to_manp "/opt/homebrew/opt/findutils/libexec/gnuman"
 
 add_to_path "/usr/local/opt/gnu-sed/libexec/gnubin"
 add_to_manp "/usr/local/opt/gnu-sed/libexec/gnuman"
-
-add_to_path "$HOME/.fzf/bin"
+add_to_path "/opt/homebrew/opt/gnu-sed/libexec/gnubin"
+add_to_manp "/opt/homebrew/opt/gnu-sed/libexec/gnuman"
 
 export N_PREFIX="$HOME/.n"
 add_to_path "$N_PREFIX/bin"
