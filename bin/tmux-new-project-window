@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-
-proj=$(choose-project)
-
-if [ -z "$proj" ]; then
-  tmux new-window -c "$HOME"
-else
-  tmux new-window -c "$proj"
-fi
