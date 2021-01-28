@@ -2,24 +2,29 @@
 
 defaults write com.apple.screencapture location "$HOME/Downloads"
 
+cd "$HOME"
+
 for dir in t p .vim-swap .config; do
-  mkdir -pv "$HOME/$dir"
+  mkdir -pv "$dir"
 done
 
-SOURCE_DIR=$HOME/p/dotfiles/dotfiles
-TARGET_DIR=$HOME
+SOURCE_DIR=p/dotfiles/dotfiles
 
 for source_file in $(find "$SOURCE_DIR" -type f); do
   if [[ "$source_file" =~ \.copy$ ]]; then
     without_suffix=${source_file%\.copy}
-    target_file=$TARGET_DIR/.${without_suffix#$SOURCE_DIR/}
+    target_file=.${without_suffix#$SOURCE_DIR/}
     [[ -f "$target_file" ]] && continue
     mkdir -pv "$(dirname "$target_file")"
     cp -v "$source_file" "$target_file"
   else
-    target_file=$TARGET_DIR/.${source_file#$SOURCE_DIR/}
-    [[ "$(readlink "$target_file")" == "$source_file" ]] && continue
+    target_file=.${source_file#$SOURCE_DIR/}
+    [[ "$(readlink "$target_file")" == "$HOME/$source_file" ]] && continue
     mkdir -pv "$(dirname "$target_file")"
     ln -isv "$source_file" "$target_file"
   fi
+done
+
+for broken_symlink in $(find . -maxdepth 1 -type l -exec test ! -e {} \; -print); do
+  rm -i "${broken_symlink#\./}"
 done
