@@ -15,12 +15,12 @@ echo_bad() {
 check_installed() {
   local command=$1
   local find_version=$2
-  local package=$3
+  local how_to_install=$3
 
   if type "$command" > /dev/null 2> /dev/null; then
     echo_good "$command" "$(bash -c "$find_version" | sed 's/^v//')"
   else
-    echo_bad "$command" "$package"
+    echo_bad "$command" "$how_to_install"
   fi
 }
 
@@ -50,8 +50,8 @@ echo
 
 echo "# node"
 check_installed node "node --version 2> /dev/null" "(brew install node)"
-check_installed npm "npm --version 2> /dev/null"
-check_installed diff-so-fancy "(npm install -g diff-so-fancy)"
-check_installed http-server "(npm install -g http-server)"
+check_installed npm "npm --version 2> /dev/null" "(brew install node)"
+check_installed diff-so-fancy "" "(npm install -g diff-so-fancy)"
+check_installed http-server "" "(npm install -g http-server)"
 check_installed ramda "" "(npm install -g ramda-cli)"
 echo
