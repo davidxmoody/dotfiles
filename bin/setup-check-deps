@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-color_reset="\e[0m"
-color_bad="\e[31m"
-color_good="\e[32m"
+color_reset="\x1B[0m"
+color_bad="\x1B[31m"
+color_good="\x1B[32m"
 
 echo_good() {
   echo -e "${color_good}☑ ${@}${color_reset}"
@@ -32,7 +32,6 @@ check_installed nvim "$(nvim --version | head -n1 | grep -o 'v[0-9.]\+')"
 check_installed rg
 check_installed fzf
 check_installed tmux
-check_installed vifm
 check_installed sed "$(sed --version 2>&1 | head -n1 | grep -o '(GNU sed)')"
 echo
 
@@ -40,10 +39,8 @@ echo "# tools"
 check_installed xargs
 check_installed watch
 check_installed jq
-check_installed sqlite3
 check_installed tree
 check_installed http
-check_installed dot # graphviz
 echo
 
 echo "# node"
@@ -57,5 +54,4 @@ check_installed jsonlint
 check_installed ramda
 check_installed tsc
 check_installed tslint
-check_installed markdownlint
 echo
