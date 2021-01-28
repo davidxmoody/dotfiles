@@ -13,26 +13,30 @@ echo_bad() {
 }
 
 check_installed() {
-  if type "$1" > /dev/null 2> /dev/null; then
-    echo_good "$1" "${2#v}"
+  local command=$1
+  local find_version=$2
+  local package=$3
+
+  if type "$command" > /dev/null 2> /dev/null; then
+    echo_good "$command" "$(bash -c "$find_version" | sed 's/^v//')"
   else
-    echo_bad "$1"
+    echo_bad "$command" "$package"
   fi
 }
 
-echo "# core"
-check_installed bash "${BASH_VERSION%%\(*}"
-check_installed git "$(git --version 2> /dev/null | sed 's/git version //')"
-check_installed python "$(python --version 2>&1 | grep -o '[0-9.]\+')"
-check_installed python3 "$(python3 --version | grep -o '[0-9.]\+')"
+echo "# homebrew"
+check_installed bash "echo ${BASH_VERSION%%\(*}"
+check_installed git "git --version 2> /dev/null | sed 's/git version //'"
+check_installed python "python --version 2>&1 | grep -o '[0-9.]\+'"
+check_installed python3 "python3 --version | grep -o '[0-9.]\+'"
 echo
 
 echo "# editing"
-check_installed nvim "$(nvim --version | head -n1 | grep -o 'v[0-9.]\+')"
-check_installed rg
-check_installed fzf
-check_installed tmux
-check_installed sed "$(sed --version 2>&1 | head -n1 | grep -o '(GNU sed)')"
+check_installed nvim "nvim --version | head -n1 | grep -o 'v[0-9.]\+'"
+check_installed rg "" "(brew install ripgrep)"
+check_installed fzf "" "(brew install fzf)"
+check_installed tmux "" "(brew install tmux)"
+check_installed sed "sed --version 2>&1 | head -n1 | grep -o '(GNU sed)'"
 echo
 
 echo "# tools"
@@ -45,8 +49,8 @@ echo
 
 echo "# node"
 check_installed n
-check_installed node "$(node --version 2> /dev/null)"
-check_installed npm "$(npm --version 2> /dev/null)"
+check_installed node "node --version 2> /dev/null"
+check_installed npm "npm --version 2> /dev/null"
 check_installed diff-so-fancy
 check_installed eslint_d
 check_installed http-server
