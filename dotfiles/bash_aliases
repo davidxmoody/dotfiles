@@ -170,8 +170,7 @@ gclone() {
 
 fetch_repo_list() {
   curl https://api.github.com/users/davidxmoody/repos 2> /dev/null |
-    ramda --unslurp "pluck('name')" |
-    sed 's/"//g' > ~/.github-repos
+    jq -r '.[].name' > ~/.github-repos
 }
 
 clone() {
@@ -259,7 +258,6 @@ alias rgg='rg --files'
 alias rgz='rgg --files | fzf | copywithoutnewline'
 alias rgm='rg --multiline --multiline-dotall'
 alias r='find-and-replace'
-alias ramdam='ramda --import m=moment'
 alias noheader='tail -n+2'
 alias wcl='wc -l'
 alias alsowc='tee >(wc -l)'

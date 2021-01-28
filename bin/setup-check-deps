@@ -53,5 +53,7 @@ check_installed node "node --version 2> /dev/null" "(brew install node)"
 check_installed npm "npm --version 2> /dev/null" "(brew install node)"
 check_installed diff-so-fancy "" "(npm install -g diff-so-fancy)"
 check_installed http-server "" "(npm install -g http-server)"
-check_installed ramda "" "(npm install -g ramda-cli)"
+check_installed prettier "" "(npm install -g prettier)"
+check_installed tsc "" "(npm install -g typescript)"
+check_installed ts-node "" "(npm install -g ts-node)"
 echo
