@@ -152,7 +152,7 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'bluz71/vim-nightfly-guicolors'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
-" Plug 'jparise/vim-graphql'
+Plug 'jparise/vim-graphql'
 
 " Completion and linting ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
