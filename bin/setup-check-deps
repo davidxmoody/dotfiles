@@ -56,4 +56,5 @@ check_installed http-server "" "(npm install -g http-server)"
 check_installed prettier "" "(npm install -g prettier)"
 check_installed tsc "" "(npm install -g typescript)"
 check_installed ts-node "" "(npm install -g ts-node)"
+check_installed typescript-language-server "" "(npm install -g typescript-language-server)"
 echo
