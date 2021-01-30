@@ -261,7 +261,11 @@ au CursorHold * checktime
 set formatoptions=rqn1j
 set textwidth=79
 
+" Allow lua syntax highlighting in vim files
 let g:vimsyn_embed = 'l'
+
+" Highlight on yank
+au TextYankPost * lua vim.highlight.on_yank {}
 
 " Colorscheme and highlighting ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
