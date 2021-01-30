@@ -12,11 +12,10 @@ call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-speeddating'
-" Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
-" Plug 'lifepillar/vim-solarized8'
 Plug 'lambdalisue/suda.vim'
+Plug 'bluz71/vim-nightfly-guicolors'
 
 " Navigation plugins ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -138,19 +137,6 @@ Plug 'nvim-telescope/telescope.nvim'
 
 " Language specific plugins ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-" Plug 'pangloss/vim-javascript'
-" let g:javascript_plugin_flow = 1
-
-" Plug 'mxw/vim-jsx'
-" let g:jsx_ext_required = 0
-
-" Plug 'moll/vim-node'
-" Plug 'elzr/vim-json', {'for': 'json'}
-" let g:vim_json_syntax_conceal = 0
-
-" Plug 'leafgarland/typescript-vim'
-
-Plug 'bluz71/vim-nightfly-guicolors'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 Plug 'jparise/vim-graphql'
@@ -161,12 +147,7 @@ Plug 'jparise/vim-graphql'
 " - Show messages and/or error counts in status line
 " - Try out other lsp go to commands (implementation maybe?)
 " - Try out better quickfix list navigation and maybe use that instead of telescope
-" - Improve codeaction suggestions interface
-" - Maybe add mapping to do first suggestion or import
-" - Better mappings to jump between errors
-" - See if there's better ways to show docs/type defs in a hover window
 " - Get eslint/tslint working (also shellcheck and maybe markdownlint)
-" - Set up trailing space fixer for all filetypes
 
 Plug 'neovim/nvim-lspconfig'
 
