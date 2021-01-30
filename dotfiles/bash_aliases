@@ -42,7 +42,6 @@ gl() {
     git lg "$@"
   fi
 }
-pgl() { (p "$@" && gl); }
 alias glp='gl HEAD~20.. -p'
 alias gls='gl HEAD~20.. --stat'
 gS() { GIT_PAGER="less '+/$1'" git log -p -S "$1"; }
@@ -50,8 +49,6 @@ gG() { GIT_PAGER="less '+/$1'" git log -p -G "$1"; }
 alias gd='git diff'
 alias gdc='git diff --cached'
 alias gdt='git diff --text'
-alias gds='gd src'
-alias gas='git add src'
 ga() {
   if [[ $# == 0 ]]; then
     (
@@ -66,22 +63,22 @@ ga() {
   fi
 }
 alias gaa='git add -A :/'
-alias gaac='git add -A :/ && git commit'
-gaacm() {
+alias gaac='gaa && git commit'
+gcm() {
   local message="$*"
   local message_length="${#message}"
   if [[ "$message_length" -gt 50 ]]; then
     echo "Error: Message is $((message_length - 50)) characters too long" >&2
     return 1
   else
-    git add -A :/ && git commit -m "$message"
+    git commit -m "$message"
   fi
 }
+alias gaacm='gaa && gcm'
 alias gaaca='git add -A :/ && git commit --amend'
 alias gaacane='git add -A :/ && git commit --amend --no-edit'
 alias gco='git checkout'
 alias gcop='git checkout -- package-lock.json'
-alias gcm='git checkout master'
 alias gm='git merge'
 alias gff='git merge --ff-only'
 alias gf='git fetch origin --prune && git --no-pager lg @{upstream} ^HEAD'
@@ -117,7 +114,6 @@ alias gwt='git show --text'
 alias gy='git-show-yesterday'
 alias gyy='git-projects-recent-commits'
 alias gg='git-fetch-all-projects'
-alias ggh='cat "$HOME/.fetch-all-projects-history/$(ls $HOME/.fetch-all-projects-history | tail -n1)"'
 alias gunl='git ls-files -v | grep ^h | col2'
 alias guna='git update-index --assume-unchanged'
 alias gunr='git update-index --no-assume-unchanged'
