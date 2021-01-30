@@ -27,32 +27,8 @@ mkp() {
   local new_project_path=$(mkproject "$@")
   [[ ! -z "$new_project_path" ]] && cd "$new_project_path"
 }
+
 alias mkt='mkp -t'
-
-# Ad-hoc script management ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-export SCRIPTS_DIR=$HOME/.ad-hoc-scripts
-
-mkscript() {
-  mkdir -p "$SCRIPTS_DIR"
-  mkbash "$SCRIPTS_DIR/$(date +%F-%H-%M-%S)-${1-unnamed}"
-}
-
-editscript() {
-  local script_file=$(ls -r1 "$SCRIPTS_DIR" | fzf --select-1 --query "$1" --preview "cat $SCRIPTS_DIR/{}")
-  [ -n "$script_file" ] && nvim "$SCRIPTS_DIR/$script_file"
-}
-
-runscript() {
-  local script_file=$(ls -r1 "$SCRIPTS_DIR" | fzf --select-1 --query "$1")
-  shift
-  [ -n "$script_file" ] && "$SCRIPTS_DIR/$script_file" "$@"
-}
-
-watchscript() {
-  local script_file=$(ls -r1 "$SCRIPTS_DIR" | fzf --select-1 --query "$1")
-  [ -n "$script_file" ] && entr -c "$SCRIPTS_DIR/$script_file" <<< "$SCRIPTS_DIR/$script_file"
-}
 
 # Git ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -281,7 +257,6 @@ alias u='ls -FCBH --group-directories-first --color=auto --hide node_modules'
 alias uu='u -A'
 alias dus='du -Dhs'
 alias dud='du -s * | sort -nr'
-alias df='df -hT'
 alias op='open'
 alias mkdir='mkdir -p'
 alias echopath='echo $PATH | sed "s/:/\n/g"'
@@ -294,8 +269,5 @@ alias watchtsize='while true; do tsize; sleep 0.1; done | uniq'
 alias copywithoutnewline='tr -d \\n | copy'
 alias copypostgresport='navy port postgres 5432 | tee >(copywithoutnewline)'
 alias copyuuid='uuidgen | tr "[:upper:]" "[:lower:]" | copywithoutnewline'
-alias shfmt='shfmt -i 2 -sr -ci'
-alias ipy='ipython3'
 alias py='python3'
-alias ts="gawk '{ print strftime(\"[%Y-%m-%d %H:%M:%S]\"), \$0 }'"
-alias startlifecalendar='cd ~/p/life-calendar && tmux send-keys -t "$(tmux split-window -hP)" "(cd pwa; nr start)" "Enter" && (cd server; nr start)'
+alias timestamps="gawk '{ print strftime(\"[%Y-%m-%d %H:%M:%S]\"), \$0 }'"
