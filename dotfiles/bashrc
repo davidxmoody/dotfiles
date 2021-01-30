@@ -20,28 +20,49 @@ export EDITOR=nvim
 
 # Bash prompt ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-__prompt_set_tmux_pane_title() {
+arrow_char=$'\uE0B0'
+
+__prompt_command() {
+  local last_exit_status="$?"
+  local last_job_num="$(jobs | tail -n1 | cut -f1 -d'+')"
+
   if [ -n "$TMUX" ]; then
     tmux select-pane -T "$(tmux-get-pane-title)"
   fi
+
+  local git_status="$(git-short-status)"
+  if [ ! -z "$last_job_num" ]; then
+    git_status+=" $last_job_num"
+  fi
+
+  local color_bg_1="0"
+  local color_fg_1="7"
+
+  local color_bg_2="4"
+  local color_fg_2="0"
+
+  if [ "$last_exit_status" -ne "0" -a "$last_exit_status" -ne "130" ]; then
+    color_bg_2="1"
+  fi
+
+  local new_ps1=
+  new_ps1+="\[\e[4${color_bg_1}m\e[3${color_fg_1}m\]"
+  new_ps1+=" \w "
+  new_ps1+="\[\e[0m\e[4${color_bg_2}m\e[3${color_bg_1}m\]"
+  new_ps1+="$arrow_char"
+  new_ps1+="\[\e[3${color_fg_2}m\]"
+  new_ps1+=" $git_status "
+  new_ps1+="\[\e[0m\e[3${color_bg_2}m\]"
+  new_ps1+="$arrow_char"
+  new_ps1+="\[\e[0m\]"
+  new_ps1+=" "
+
+  PS1="$new_ps1"
 }
 
-__prompt_jobs_status() {
-  local last_job_num=$(jobs | tail -n1 | cut -f1 -d'+')
-  [[ -n "$last_job_num" ]] && echo "$last_job_num "
-}
+PROMPT_COMMAND=__prompt_command
 
-__prompt_git_status() {
-  local git_status=$(git-short-status)
-  [[ -n "$git_status" ]] && echo "($git_status) "
-}
-
-PS1='\[\e[$(( $? == 0 ? 0 : 7 ));31m\]\w'
-PS1+='$(__prompt_set_tmux_pane_title)'
-PS1+='\[\e[0;33m\] $(__prompt_git_status)'
-PS1+='\[\e[0;92m\]$(__prompt_jobs_status)\[\e[0m\]'
-
-PS2='\[\e[0;31m\]>\[\e[0m\] '
+PS2="\[\e[30m\]$arrow_char\[\e[0m\] "
 
 # Common dirs/files ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
