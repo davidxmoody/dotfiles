@@ -31,6 +31,9 @@ let g:EasyMotion_space_jump_first = 1
 let g:EasyMotion_use_upper = 1
 let g:EasyMotion_keys = 'TNSRHLDMGYCWFPBVUOAIE'
 
+Plug 'wfxr/minimap.vim'
+let g:minimap_auto_start = 1
+
 " Editing plugins ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Plug 'Raimondi/delimitMate'
