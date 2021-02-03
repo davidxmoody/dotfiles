@@ -138,6 +138,10 @@ Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 
+Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --bin'}
+Plug 'junegunn/fzf.vim'
+" let g:fzf_layout = {'window': 'enew'}
+
 " Language specific plugins ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -325,14 +329,30 @@ autocmd QuickFixCmdPost l*    vertical belowright lwindow 120
 
 " Keybindings ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+" noremap <leader>e :Files!<CR>
+" noremap <leader>E :Buffers!<CR>
+" noremap <leader>o :GFiles!?<CR>
+" noremap <leader>a :Rg!<space>
+" noremap <leader>A :Rg!<space><Up><CR>
+" noremap <leader>i :Rg!<space>/<C-R>=fnameescape(expand('%:t:r'))<CR><CR>
+" noremap <leader>B :History!<CR>
+
+noremap <leader>e :Files<CR>
+noremap <leader>E :Buffers<CR>
+noremap <leader>o :GFiles?<CR>
+noremap <leader>a :Rg<space>
+noremap <leader>A :Rg<space><Up><CR>
+noremap <leader>i :Rg<space>/<C-R>=fnameescape(expand('%:t:r'))<CR><CR>
+noremap <leader>B :History<CR>
+
 noremap <leader>u ZZ
-noremap <leader>e <cmd>lua require('telescope.builtin').find_files()<cr>
-noremap <leader>E <cmd>lua require('telescope.builtin').buffers()<cr>
-noremap <leader>o <cmd>lua require('telescope.builtin').git_status()<cr>
-noremap <leader>a <cmd>lua require('telescope.builtin').live_grep()<cr>
+" noremap <leader>e <cmd>lua require('telescope.builtin').find_files()<cr>
+" noremap <leader>E <cmd>lua require('telescope.builtin').buffers()<cr>
+" noremap <leader>o <cmd>lua require('telescope.builtin').git_status()<cr>
+" noremap <leader>a <cmd>lua require('telescope.builtin').live_grep()<cr>
 " noremap <leader>i :Rg!<space>/<C-R>=fnameescape(expand('%:t:r'))<CR><CR>
 noremap <leader>b <C-^>
-noremap <leader>B <cmd>lua require('telescope.builtin').oldfiles()<cr>
+" noremap <leader>B <cmd>lua require('telescope.builtin').oldfiles()<cr>
 noremap <C-d> :q<CR>
 
 noremap <leader>h :aboveleft vsplit<CR>
@@ -349,13 +369,14 @@ noremap <leader>W :set colorcolumn=80<CR>
 
 nnoremap         *  /\C\<<C-R><C-W>\><CR>
 nnoremap         g* /<C-R><C-W>
-nnoremap <leader>* <cmd>lua require('telescope.builtin').grep_string()<cr>
+" nnoremap <leader>* <cmd>lua require('telescope.builtin').grep_string()<cr>
+nnoremap <leader>*  :Rg <C-R><C-W><CR>
+nnoremap <leader>g* :Rg <C-R><C-W>
 
 xnoremap         *  "zy/<C-R><C-R>z<CR>
 xnoremap         g* "zy/<C-R><C-R>z
-" TODO
-" xnoremap <leader>*  "zy:Rg! <C-R><C-R>z<CR>
-" xnoremap <leader>g* "zy:Rg! <C-R><C-R>z
+xnoremap <leader>*  "zy:Rg <C-R><C-R>z<CR>
+xnoremap <leader>g* "zy:Rg <C-R><C-R>z
 
 nnoremap <leader>r :%s/\<<C-R><C-W>\>/<C-R><C-W>/g<Left><Left>
 xnoremap <leader>r "zy:%s/\<<C-R><C-R>z\>/<C-R><C-R>z/g<Left><Left>
