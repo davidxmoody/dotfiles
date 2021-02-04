@@ -62,20 +62,6 @@ Abolish -buffer {he,she,there,here,mum,dad,children}s {}'s
 Abolish -buffer {you,they}ve {}'ve
 Abolish -buffer {do,did,ca,is,wo,have,has,was,does,could,would,are,were,had,should}nt {}n't
 
-Abolish -buffer {al,}tho{,u} {}though
-Abolish -buffer thro{,u} through
-Abolish -buffer mb maybe
-Abolish -buffer ab about
-
-Abolish -buffer co could
-Abolish -buffer sho should
-Abolish -buffer wo would
-Abolish -buffer viment environment
-Abolish -buffer wout without
-
-Abolish -buffer praps perhaps
-Abolish -buffer rn{,s} reason{,s}
-
 Abolish -buffer monday{,s} Monday{,s}
 Abolish -buffer tuesday{,s} Tuesday{,s}
 Abolish -buffer wednesday{,s} Wednesday{,s}
@@ -95,20 +81,11 @@ Abolish -buffer october October
 Abolish -buffer november November
 Abolish -buffer december December
 
-Abolish -buffer def definitely
-Abolish -buffer prob probably
-Abolish -buffer bc because
-Abolish -buffer mins minutes
+Abolish -buffer christmas Christmas
 Abolish -buffer hev however
-Abolish -buffer prog programming
-Abolish -buffer bf before
-Abolish -buffer prev previous
-Abolish -buffer dif different
 Abolish -buffer td today
 Abolish -buffer tm tomorrow
 Abolish -buffer y{,e}d yesterday
-Abolish -buffer obv obviously
 Abolish -buffer speach speech
 Abolish -buffer {yt,youtube} YouTube
-Abolish -buffer lt although
 Abolish -buffer atracker ATracker
