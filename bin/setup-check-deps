@@ -46,6 +46,7 @@ check_installed tree "" "(brew install tree)"
 check_installed http "" "(brew install httpie)"
 check_installed wc "" "(brew install coreutils)"
 check_installed xargs "" "(brew install findutils)"
+check_installed shfmt "" "(brew install shfmt)"
 echo
 
 echo "# node"
