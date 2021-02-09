@@ -164,6 +164,8 @@ imap <silent> <C-Space> <Plug>(completion_trigger)
 
 Plug 'sbdchd/neoformat'
 let g:shfmt_opt='-i 2 -sr -ci'
+let g:neoformat_typescript_prettier = {'exe': './node_modules/.bin/prettier', 'args': ['--write', '--config .prettierrc'], 'replace': 1}
+let g:neoformat_typescriptreact_prettier = {'exe': './node_modules/.bin/prettier', 'args': ['--write', '--config .prettierrc'], 'replace': 1}
 
 " End of plugin manager setup ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
