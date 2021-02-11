@@ -1,7 +1,12 @@
--- TODO find a way to trigger these when external monitors are changed (or
--- on some other event)
--- hs.keycodes.setLayout("Programmer Dvorak")
--- hs.keycodes.setLayout("U.S.")
+-- Constants ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+bundleIDs = {
+  chrome = "com.google.Chrome",
+  iterm = "com.googlecode.iterm2",
+  slack = "com.tinyspeck.slackmacgap",
+  simulator = "com.apple.iphonesimulator",
+  hammerspoon = "org.hammerspoon.Hammerspoon",
+}
 
 -- Helpers ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -33,36 +38,24 @@ end
 
 -- Functions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
--- function openChromeThenSlack()
---   local win = getMainWindow("com.google.Chrome")
-
---   if win ~= hs.window.focusedWindow() then
---     win:focus()
---   elseif not string.match(win:title(), "^Slack | .* %- Google Chrome$") then
---     hs.eventtap.keyStroke({"cmd"}, "1") -- Focus first tab (Slack)
---   else
---     hs.eventtap.keyStroke({"cmd"}, "K") -- Open Slack channel chooser
---   end
--- end
-
 function focusChrome()
-  local win = getMainWindow("com.google.Chrome")
+  local win = getMainWindow(bundleIDs.chrome)
   win:focus()
 end
 
 function focusIterm()
-  local win = getMainWindow("com.googlecode.iterm2")
+  local win = getMainWindow(bundleIDs.iterm)
   win:focus()
 end
 
 function focusSlack()
-  local win = getMainWindow("com.tinyspeck.slackmacgap")
+  local win = getMainWindow(bundleIDs.slack)
   win:focus()
 end
 
 -- function focusSimulatorAndChrome()
---   local simulatorWin = getMainWindow("com.apple.iphonesimulator", true)
---   local chromeWin = getMainWindow("com.google.Chrome", true)
+--   local simulatorWin = getMainWindow(bundleIDs.simulator, true)
+--   local chromeWin = getMainWindow(bundleIDs.chrome, true)
 --   if simulatorWin ~= nil then simulatorWin:focus() end
 --   if chromeWin ~= nil then chromeWin:focus() end
 -- end
@@ -73,10 +66,10 @@ function focusNextOtherWindow()
 
     if
       k ~= 1 and
-      bundleID ~= "com.google.Chrome" and
-      bundleID ~= "com.googlecode.iterm2" and
-      bundleID ~= "org.hammerspoon.Hammerspoon" and
-      bundleID ~= "com.tinyspeck.slackmacgap"
+      bundleID ~= bundleIDs.chrome and
+      bundleID ~= bundleIDs.iterm and
+      bundleID ~= bundleIDs.hammerspoon and
+      bundleID ~= bundleIDs.slack
     then
       win:focus()
       return
@@ -88,14 +81,6 @@ end
 
 mod = {"option"}
 shiftedMod = {"option", "shift"}
-
--- hs.hotkey.bind(mod, "X", focusSimulatorAndChrome) -- Mouse
-
--- hs.hotkey.bind(mod, "T", focusIterm) -- Left bottom
-
--- hs.hotkey.bind(mod, "N", openChromeThenSlack) -- Right bottom
--- hs.hotkey.bind(mod, "H", focusNextNonChromeOrItermWindow) -- Right middle
--- hs.hotkey.bind(mod, "W", focusIterm) -- Right top-right
 
 hs.hotkey.bind(mod, "g", focusNextOtherWindow)
 hs.hotkey.bind(mod, "c", focusChrome)
