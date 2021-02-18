@@ -268,3 +268,4 @@ alias copyuuid='uuidgen | tr "[:upper:]" "[:lower:]" | copywithoutnewline'
 alias py='python3'
 alias timestamps="gawk '{ print strftime(\"[%Y-%m-%d %H:%M:%S]\"), \$0 }'"
 alias gwo='git show origin/master'
+alias x86='arch -x86_64'

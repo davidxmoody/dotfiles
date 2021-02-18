@@ -7,10 +7,4 @@ SERVICE=${2-knowledge-base}
 LOCAL_PORT=${3-6666}
 REMOTE_PORT=${4-80}
 
-POD=$(kubectl -n "$NAMESPACE" get pods | grep "Running" | grep "$SERVICE" | awk '{print $1}' | head -n1)
-
-[[ -z "$POD" ]] && echo "No pod found for namespace: '$NAMESPACE' and service: '$SERVICE'" >&2 && exit 1
-
-echo "Using pod: '$POD'"
-
-kubectl port-forward -n "$NAMESPACE" "$POD" "$LOCAL_PORT:$REMOTE_PORT"
+kubectl port-forward -n "$NAMESPACE" "svc/$SERVICE" "$LOCAL_PORT:$REMOTE_PORT"
