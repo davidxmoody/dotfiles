@@ -87,6 +87,11 @@ hs.hotkey.bind(mod, "c", focusChrome)
 hs.hotkey.bind(mod, "r", focusIterm)
 hs.hotkey.bind(mod, "l", focusSlack)
 
+hs.hotkey.bind(mod, "h", function() hs.eventtap.keyStroke({}, "left") end)
+hs.hotkey.bind(mod, "t", function() hs.eventtap.keyStroke({}, "down") end)
+hs.hotkey.bind(mod, "n", function() hs.eventtap.keyStroke({}, "up") end)
+hs.hotkey.bind(mod, "s", function() hs.eventtap.keyStroke({}, "right") end)
+
 hs.hotkey.bind(shiftedMod, "r", hs.reload)
 
-hs.alert.show("Config loaded")
+hs.alert.show("Hammerspoon loaded")
