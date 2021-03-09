@@ -111,6 +111,15 @@ alias gitcopydiff='git --no-pager diff --color=never | tee >(copy) && echo -e "\
 alias gitcopyhead='git --no-pager show --color=never | tee >(copy) && echo -e "\nCopied!"'
 alias gw='git show'
 alias gwt='git show --text'
+gwm() {
+  local last_commit_hash=$(git log --max-count=1 --author="$(git config user.name)" --pretty=format:'%H')
+  if [ -n "$last_commit_hash" ]; then
+    git show "$last_commit_hash" "$@"
+  else
+    echo "Could not find any commits by author: $(git config user.name)" >&2
+    return 1
+  fi
+}
 alias gy='git-show-yesterday'
 alias gyy='git-projects-recent-commits'
 alias gg='git-fetch-all-projects'
