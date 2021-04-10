@@ -68,7 +68,7 @@
           "conditions": [
             {"name": "superduper-mode", "type": "variable_if", "value": 1}
           ],
-          "from": {"key_code": ";", "modifiers": {"optional": ["any"]}},
+          "from": {"key_code": "semicolon", "modifiers": {"optional": ["any"]}},
           "to": [{"key_code": "right_arrow"}],
           "type": "basic"
         }
