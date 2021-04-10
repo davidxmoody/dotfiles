@@ -104,10 +104,17 @@ endif
 
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'kyazdani42/nvim-tree.lua'
+
 let g:nvim_tree_width = 32
-let g:nvim_tree_hide_dotfiles = 1
 let g:nvim_tree_follow = 1
+let g:nvim_tree_indent_markers = 1
+let g:nvim_tree_add_trailing = 1
+
+let g:nvim_tree_hide_dotfiles = 1
+let g:nvim_tree_gitignore = 1
 let g:nvim_tree_ignore = [ '.git', 'node_modules', '.DS_Store' ]
+
+" let g:nvim_tree_lsp_diagnostics = 1
 " let nvim_tree_disable_keybindings = 1
 
 noremap - :NvimTreeFindFile<CR>
@@ -159,6 +166,9 @@ filetype plugin indent on
 syntax on
 
 lua <<EOF
+
+-- Treesitter
+
 require'nvim-treesitter.configs'.setup {
   ensure_installed = {"typescript", "tsx", "javascript", "graphql", "python", "regex", "jsdoc", "html", "bash", "json", "yaml", "css", "lua"},
   highlight = {
@@ -168,9 +178,9 @@ require'nvim-treesitter.configs'.setup {
     enable = true,
   },
 }
-EOF
 
-lua <<EOF
+-- LSP
+
 local nvim_lsp = require('lspconfig')
 
 local on_attach = function(client, bufnr)
@@ -204,62 +214,9 @@ local servers = {"tsserver"}
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup { on_attach = on_attach }
 end
-EOF
 
-" let g:nvim_tree_bindings = {
-"     \ 'edit':            ['<CR>', 'i'],
-"     \ 'edit_vsplit':     ['<leader>h', '<leader>s'],
-"     \ 'edit_split':      ['<leader>t', '<leader>n'],
-"     \ 'edit_tab':        [],
-"     \ 'toggle_ignored':  ';',
-"     \ 'toggle_dotfiles': '.',
-"     \ 'refresh':         'R',
-"     \ 'preview':         ',',
-"     \ 'cd':              'I',
-"     \ 'create':          'a',
-"     \ 'remove':          'd',
-"     \ 'rename':          'r',
-"     \ 'cut':             'x',
-"     \ 'copy':            'c',
-"     \ 'paste':           'p',
-"     \ 'prev_git_item':   'h',
-"     \ 'next_git_item':   's',
-"     \ }
-lua <<EOF
-local function get_lua_cb(cb_name)
-  return string.format(":lua require'nvim-tree'.on_keypress('%s')<CR>", cb_name)
-end
+-- Completion
 
-vim.g.nvim_tree_bindings = {
-  ["<CR>"]           = get_lua_cb("edit"),
-  ["o"]              = get_lua_cb("edit"),
-  ["<2-LeftMouse>"]  = get_lua_cb("edit"),
-  ["<2-RightMouse>"] = get_lua_cb("cd"),
-  ["<C-]>"]          = get_lua_cb("cd"),
-  ["<C-v>"]          = get_lua_cb("vsplit"),
-  ["<C-x>"]          = get_lua_cb("split"),
-  ["<C-t>"]          = get_lua_cb("tabnew"),
-  ["<BS>"]           = get_lua_cb("close_node"),
-  ["<S-CR>"]         = get_lua_cb("close_node"),
-  ["<Tab>"]          = get_lua_cb("preview"),
-  ["I"]              = get_lua_cb("toggle_ignored"),
-  ["H"]              = get_lua_cb("toggle_dotfiles"),
-  ["R"]              = get_lua_cb("refresh"),
-  ["a"]              = get_lua_cb("create"),
-  ["d"]              = get_lua_cb("remove"),
-  ["r"]              = get_lua_cb("rename"),
-  ["<C-r>"]          = get_lua_cb("full_rename"),
-  ["x"]              = get_lua_cb("cut"),
-  ["c"]              = get_lua_cb("copy"),
-  ["p"]              = get_lua_cb("paste"),
-  ["[c"]             = get_lua_cb("prev_git_item"),
-  ["]c"]             = get_lua_cb("next_git_item"),
-  ["-"]              = get_lua_cb("dir_up"),
-  ["q"]              = get_lua_cb("close"),
-}
-EOF
-
-lua <<EOF
 require'compe'.setup {
   enabled = true;
   autocomplete = true;
@@ -324,6 +281,41 @@ vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
+
+-- Nvim Tree
+
+local tree_cb = require'nvim-tree.config'.nvim_tree_callback
+vim.g.nvim_tree_bindings = {
+  ["<CR>"]           = tree_cb("edit"),
+  ["i"]              = tree_cb("edit"),
+  ["o"]              = "",
+  ["<2-LeftMouse>"]  = tree_cb("edit"),
+  -- ["<2-RightMouse>"] = tree_cb("cd"),
+  -- ["<C-]>"]          = tree_cb("cd"),
+  ["<C-v>"]          = tree_cb("vsplit"),
+  ["<C-x>"]          = tree_cb("split"),
+  ["<C-t>"]          = tree_cb("tabnew"),
+  ["<"]              = tree_cb("prev_sibling"),
+  [">"]              = tree_cb("next_sibling"),
+  ["<BS>"]           = tree_cb("close_node"),
+  ["<S-CR>"]         = tree_cb("close_node"),
+  ["<Tab>"]          = tree_cb("preview"),
+  ["I"]              = tree_cb("toggle_ignored"),
+  ["H"]              = tree_cb("toggle_dotfiles"),
+  ["R"]              = tree_cb("refresh"),
+  ["a"]              = tree_cb("create"),
+  ["d"]              = tree_cb("remove"),
+  ["x"]              = tree_cb("cut"),
+  ["y"]              = tree_cb("copy"),
+  ["p"]              = tree_cb("paste"),
+  ["r"]              = tree_cb("rename"),
+  -- ["<C-r>"]          = tree_cb("full_rename"),
+  ["[c"]             = tree_cb("prev_git_item"),
+  ["]c"]             = tree_cb("next_git_item"),
+  ["-"]              = tree_cb("dir_up"),
+  ["q"]              = tree_cb("close"),
+}
+
 EOF
 
 inoremap <silent><expr> <C-Space> compe#complete()
