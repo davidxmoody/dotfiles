@@ -15,6 +15,9 @@ set convert-meta off
 "\C-f": vi-fWord
 "\C-b": vi-bWord
 
+"\e\e[C": forward-word
+"\e\e[D": backward-word
+
 "\e[A": history-search-backward
 "\e[B": history-search-forward
 
