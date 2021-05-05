@@ -1,38 +1,27 @@
 #!/usr/bin/env bash
 
 set -e
+shopt -s nullglob
 
-output_script=script
+file="${1}"
+date="${2//-/\/}"
 
-imgcat=$HOME/.iterm2/imgcat
+if [[ -z "$file" || -z "$date" || -z "$DIARY_DIR" ]]; then
+  echo "usage: diary-import-scanned FILE DATE" >&2
+  exit 1
+fi
 
-for f in "$@"; do
-  $imgcat "$f"
+dir="$DIARY_DIR/scanned/$date"
+mkdir -pv "$dir"
 
-  if [[ -z "$last_date" ]]; then
-    echo -n "Enter start date (YYYY-MM-DD): "
-    read -r last_date
-    filenum=1
-  else
-    num_days_to_add=
-    echo -n "(Optional) Enter number of days to add: "
-    read -r num_days_to_add
-    if [[ "$num_days_to_add" -gt 0 ]]; then
-      last_date=$(date -d "$last_date + ${num_days_to_add} days" +%F)
-      filenum=1
-    else
-      filenum=$((filenum + 1))
-    fi
-  fi
-
-  echo "$(date -d "$last_date") -- $last_date -- #$filenum"
-
-  dir=$DIARY_DIR/scanned/${last_date//-/\/}
-  filename=scanned-$(printf "%02d" "$filenum").jpg
-
-  if [[ "$filenum" == 1 ]]; then
-    echo "mkdir -p '$dir'" >> "$output_script"
-  fi
-
-  echo "cp -n '$f' '$dir/$filename'" >> "$output_script"
+start_index=1
+for f in $dir/scanned-??.*; do
+  start_index=$((start_index+1))
 done
+
+extension="${file##*\.}"
+if [[ "$extension" == "jpeg" ]]; then
+  extension="jpg"
+fi
+
+mv -nv "$file" "$dir/scanned-$(printf "%02d" "$start_index").$extension"
