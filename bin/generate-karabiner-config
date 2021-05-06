@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+set -e
+
+json=$(deno run "$HOME/p/dotfiles/karabiner/generate-karabiner-conig.ts")
+
+output_file="$HOME/.config/karabiner/assets/complex_modifications/deno.json"
+
+mkdir -p "$(dirname "$output_file")"
+
+cat <<< "$json" > "$output_file"
