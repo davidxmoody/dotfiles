@@ -4,6 +4,41 @@ import {
   Manipulator,
 } from "https://deno.land/x/karabiner@v0.2.0/karabiner.ts";
 
+const dv = {
+  semicolon: "q",
+  comma: "w",
+  period: "e",
+  p: "r",
+  y: "t",
+  f: "y",
+  g: "u",
+  c: "i",
+  r: "o",
+  l: "p",
+
+  a: "a",
+  o: "s",
+  e: "d",
+  u: "f",
+  i: "g",
+  d: "h",
+  h: "j",
+  t: "k",
+  n: "l",
+  s: "semicolon",
+
+  quote: "z",
+  q: "x",
+  j: "c",
+  k: "v",
+  x: "b",
+  b: "n",
+  m: "m",
+  w: "comma",
+  v: "period",
+  z: "slash",
+} as const;
+
 const mods = new KarabinerComplexModifications();
 
 const sdName = "superduper-mode";
@@ -25,7 +60,7 @@ mods.addRule({
     {
       type: "basic",
       from: {
-        simultaneous: [{ key_code: "s" }, { key_code: "d" }],
+        simultaneous: [{ key_code: dv.o }, { key_code: dv.e }],
         simultaneous_options: {
           detect_key_down_uninterruptedly: true,
           key_down_order: "insensitive",
@@ -38,15 +73,16 @@ mods.addRule({
       } as any,
       to: [{ set_variable: { name: sdName, value: 1 } }],
     },
-    sd("j", "left_arrow"),
-    sd("k", "down_arrow"),
-    sd("l", "up_arrow"),
-    sd("semicolon", "right_arrow"),
-    sd("a", "left_option"),
-    sd("f", "right_command"),
+    sd(dv.h, "left_arrow"),
+    sd(dv.t, "down_arrow"),
+    sd(dv.n, "up_arrow"),
+    sd(dv.s, "right_arrow"),
+    sd(dv.a, "left_option"),
+    sd(dv.u, "right_command"),
     sd("spacebar", "right_shift"),
-    sd("u", "left_arrow", ["left_option"]),
-    sd("p", "right_arrow", ["left_option"]),
+    sd(dv.g, "left_arrow", ["left_option"]),
+    sd(dv.l, "right_arrow", ["left_option"]),
+    sd(dv.w, "delete_or_backspace", ["left_option"])
   ],
 });
 

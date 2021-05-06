@@ -2,7 +2,7 @@
 
 set -e
 
-json=$(deno run "$HOME/p/dotfiles/karabiner/generate-karabiner-conig.ts")
+json=$(deno run "$HOME/p/dotfiles/karabiner/generate-karabiner-config.ts")
 
 output_file="$HOME/.config/karabiner/assets/complex_modifications/deno.json"
 
