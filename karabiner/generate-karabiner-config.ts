@@ -82,7 +82,8 @@ mods.addRule({
     sd("spacebar", "right_shift"),
     sd(dv.g, "left_arrow", ["left_option"]),
     sd(dv.l, "right_arrow", ["left_option"]),
-    sd(dv.w, "delete_or_backspace", ["left_option"])
+    sd(dv.w, "delete_or_backspace", ["left_option"]),
+    sd(dv.m, "return_or_enter"),
   ],
 });
 
