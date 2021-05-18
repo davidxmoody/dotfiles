@@ -548,7 +548,9 @@ nnoremap <leader>~ :call FillLine('~')<CR>
 
 command Remove call delete(expand('%')) | bdelete!
 
-noremap <C-K> cl<CR><Esc>lf<Space>
+nnoremap <C-K> cl<CR><Esc>lf<Space>
+
+vnoremap <C-K> :s/^\( *\)\([^:]\+\):.*$/\1"\2",/<CR>
 
 xnoremap gp "0p
 xnoremap gP "0P
