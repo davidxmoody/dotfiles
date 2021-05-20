@@ -84,8 +84,6 @@ alias gff='git merge --ff-only'
 alias gf='git fetch origin --prune && git --no-pager lg @{upstream} ^HEAD'
 alias gpl='git pull && git --no-pager lg HEAD@{1}..'
 alias gps='git push'
-alias gpsa='git push --all'
-alias gpsat='git push --all --follow-tags'
 alias gr='git rebase'
 alias gri='git rebase -i @{u}'
 alias gst='git stash'
@@ -110,6 +108,7 @@ alias gitcountdiff='git --no-pager diff --color=never | grep -v -E "^(\+\+\+|---
 alias gitcopydiff='git --no-pager diff --color=never | tee >(copy) && echo -e "\nCopied!"'
 alias gitcopyhead='git --no-pager show --color=never | tee >(copy) && echo -e "\nCopied!"'
 alias gw='git show'
+alias gwo='git show origin/master'
 alias gwt='git show --text'
 gwm() {
   local last_commit_hash=$(git log --max-count=1 --author="$(git config user.name)" --pretty=format:'%H')
@@ -219,6 +218,7 @@ alias vv='(cd "$RC_DIR" && nvim "dotfiles/config/nvim/init.vim")'
 alias vb='(cd "$RC_DIR" && nvim "dotfiles/bash_aliases")'
 alias vbl='(cd "$HOME" && nvim ".bashrc-local")'
 alias vp='v package.json'
+alias v-='v -'
 
 # cd shortcuts ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -228,13 +228,12 @@ alias uppp='cd ../../..'
 alias b='cd - >/dev/null'
 alias cdp='cd "$P_DIR"'
 alias cdt='cd "$TMP_DIR"'
-alias cdd='cd $DIARY_DIR'
+alias cdd='cd "$DIARY_DIR"'
 alias cdl='cd ~/Downloads'
 alias pd='p dotfiles'
 
 # Data hacks ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-alias ag='echo "Use rg instead"'
 alias rgg='rg --files'
 alias rgz='rgg --files | fzf | copywithoutnewline'
 alias rgm='rg --multiline --multiline-dotall'
@@ -253,8 +252,6 @@ alias ff='prettier-changed'
 alias brewi='brew-install-fzf'
 alias brewu='brew-upgrade-fzf'
 alias ta='tmux-attach-fzf'
-alias kpdb-prod='kproxy prod postgres-proxy 6644 5432'
-alias kpdb-dev='kproxy dev postgres-proxy 6645 5432'
 
 # Misc ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -266,8 +263,6 @@ alias op='open'
 alias mkdir='mkdir -p'
 alias echopath='echo $PATH | sed "s/:/\n/g"'
 alias echomanpath='echo $MANPATH | sed "s/:/\n/g"'
-alias android-proxy='adb reverse tcp:8097 tcp:8097; adb reverse tcp:8081 tcp:8081'
-alias launchemulator='( cd ~/Library/Android/sdk/tools && ./emulator @Nexus_5X_API_26 )'
 alias bashal='source ~/.bash_aliases'
 alias tsize='echo "$(tput cols)x$(tput lines)"'
 alias watchtsize='while true; do tsize; sleep 0.1; done | uniq'
@@ -276,8 +271,6 @@ alias copypostgresport='navy port postgres 5432 | tee >(copywithoutnewline)'
 alias copyuuid='uuidgen | tr "[:upper:]" "[:lower:]" | copywithoutnewline'
 alias py='python3'
 alias timestamps="gawk '{ print strftime(\"[%Y-%m-%d %H:%M:%S]\"), \$0 }'"
-alias gwo='git show origin/master'
 alias x86='arch -x86_64'
-alias https-proxy='http-server /dev/null -p 443 --ssl --cert "$LOCAL_SSL_CERT" --key "$LOCAL_SSL_KEY" -P http://localhost:4000'
-alias v-='v -'
 alias tree='tree -I "node_modules|package-lock.json"'
+https-proxy() { http-server /dev/null -p 443 --ssl --cert "$LOCAL_SSL_CERT" --key "$LOCAL_SSL_KEY" -P http://localhost:${1-4000}; }
