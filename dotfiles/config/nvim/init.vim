@@ -115,7 +115,7 @@ let g:nvim_tree_gitignore = 1
 let g:nvim_tree_ignore = [ '.git', 'node_modules', '.DS_Store' ]
 
 " let g:nvim_tree_lsp_diagnostics = 1
-" let nvim_tree_disable_keybindings = 1
+let nvim_tree_disable_keybindings = 1
 
 noremap - :NvimTreeFindFile<CR>
 noremap g- :NvimTreeToggle<CR>
@@ -284,39 +284,46 @@ vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 
 -- Nvim Tree
 
-local tree_cb = require'nvim-tree.config'.nvim_tree_callback
-vim.g.nvim_tree_bindings = {
-  ["<CR>"]           = tree_cb("edit"),
-  ["i"]              = tree_cb("edit"),
-  ["o"]              = "",
-  ["<2-LeftMouse>"]  = tree_cb("edit"),
-  -- ["<2-RightMouse>"] = tree_cb("cd"),
-  -- ["<C-]>"]          = tree_cb("cd"),
-  ["<C-v>"]          = tree_cb("vsplit"),
-  ["<C-x>"]          = tree_cb("split"),
-  ["<C-t>"]          = tree_cb("tabnew"),
-  ["<"]              = tree_cb("prev_sibling"),
-  [">"]              = tree_cb("next_sibling"),
-  ["<BS>"]           = tree_cb("close_node"),
-  ["<S-CR>"]         = tree_cb("close_node"),
-  ["<Tab>"]          = tree_cb("preview"),
-  ["I"]              = tree_cb("toggle_ignored"),
-  ["H"]              = tree_cb("toggle_dotfiles"),
-  ["R"]              = tree_cb("refresh"),
-  ["a"]              = tree_cb("create"),
-  ["d"]              = tree_cb("remove"),
-  ["x"]              = tree_cb("cut"),
-  ["y"]              = tree_cb("copy"),
-  ["p"]              = tree_cb("paste"),
-  ["r"]              = tree_cb("rename"),
-  -- ["<C-r>"]          = tree_cb("full_rename"),
-  ["[c"]             = tree_cb("prev_git_item"),
-  ["]c"]             = tree_cb("next_git_item"),
-  ["-"]              = tree_cb("dir_up"),
-  ["q"]              = tree_cb("close"),
-}
+function create_nvim_tree_bindings()
+  local function bind(key, cb_name)
+    vim.api.nvim_buf_set_keymap(0, 'n', key,
+      require('nvim-tree.config').nvim_tree_callback(cb_name),
+      { noremap = true, silent = true, nowait = true })
+  end
+
+  bind("<CR>", "edit")
+  bind("i", "edit")
+  bind("<2-LeftMouse>", "edit")
+  bind("g<CR>", "cd")
+  bind("gi", "cd")
+  bind("[h", "prev_git_item")
+  bind("]h", "next_git_item")
+  bind("-", "dir_up")
+  bind("a", "create")
+  bind("a", "create")
+  bind("d", "remove")
+  bind("x", "cut")
+  bind("y", "copy")
+  bind("Y", "copy_path")
+  bind("gy", "copy_absolute_path")
+  bind("p", "paste")
+  bind("r", "rename")
+  bind("R", "refresh")
+  bind(".", "toggle_dotfiles")
+  bind(",", "toggle_ignored")
+  bind("<", "prev_sibling")
+  bind(">", "next_sibling")
+  bind("<BS>", "close_node")
+  bind(";", "preview")
+  bind("<leader>s", "vsplit")
+  bind("<leader>h", "vsplit")
+  bind("<leader>t", "split")
+  bind("<leader>n", "split")
+end
 
 EOF
+
+au Filetype NvimTree :lua create_nvim_tree_bindings()
 
 inoremap <silent><expr> <C-Space> compe#complete()
 inoremap <silent><expr> <CR>      compe#confirm({ 'keys': "\<Plug>delimitMateCR", 'mode': '' })
@@ -586,6 +593,9 @@ noremap gJ gN
 
 noremap k J
 noremap K gJ
+
+noremap U <C-R>
+noremap <C-R> <Nop>
 
 " Exit terminal
 tnoremap <Esc> <C-\><C-n>

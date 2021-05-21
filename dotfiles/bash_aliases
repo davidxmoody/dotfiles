@@ -274,3 +274,4 @@ alias timestamps="gawk '{ print strftime(\"[%Y-%m-%d %H:%M:%S]\"), \$0 }'"
 alias x86='arch -x86_64'
 alias tree='tree -I "node_modules|package-lock.json"'
 https-proxy() { http-server /dev/null -p 443 --ssl --cert "$LOCAL_SSL_CERT" --key "$LOCAL_SSL_KEY" -P http://localhost:${1-4000}; }
+remarkablechop() { convert "$1" -chop 110x0 "$2"; }
