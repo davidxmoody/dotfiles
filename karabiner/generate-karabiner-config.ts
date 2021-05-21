@@ -97,4 +97,25 @@ mods.addRule({
   })),
 });
 
+mods.addRule({
+  description: "Swap semicolon and double quote",
+  manipulators: [
+    {
+      type: "basic",
+      from: { key_code: dv.semicolon },
+      to: [{ key_code: dv.quote, modifiers: ["left_shift"] }],
+    },
+    {
+      type: "basic",
+      from: { key_code: dv.quote, modifiers: { mandatory: ["right_shift"] } },
+      to: [{ key_code: dv.semicolon }],
+    },
+    {
+      type: "basic",
+      from: { key_code: dv.quote, modifiers: { mandatory: ["left_shift"] } },
+      to: [{ key_code: dv.semicolon }],
+    },
+  ],
+});
+
 mods.print();
