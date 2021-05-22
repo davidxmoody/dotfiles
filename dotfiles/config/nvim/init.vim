@@ -247,6 +247,9 @@ vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 
+vim.api.nvim_set_keymap('i', '<C-Space>', 'compe#complete()', {silent = true, expr = true})
+vim.api.nvim_set_keymap('i', '<CR>', [[compe#confirm({ 'keys': "\<Plug>delimitMateCR", 'mode': '' })]], {silent = true, expr = true})
+
 -- Nvim Tree
 
 function create_nvim_tree_bindings()
@@ -289,9 +292,6 @@ end
 EOF
 
 au Filetype NvimTree :lua create_nvim_tree_bindings()
-
-inoremap <silent><expr> <C-Space> compe#complete()
-inoremap <silent><expr> <CR>      compe#confirm({ 'keys': "\<Plug>delimitMateCR", 'mode': '' })
 
 " Miscellaneous config ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -378,27 +378,15 @@ set statusline+=%(\ %y%)
 command Cppath let @+ = expand("%:p")
 command Opdir :silent exec "!open " . fnameescape(expand("%:p:h"))
 command Opfile :silent exec "!open " . fnameescape(expand("%:p"))
+command Remove call delete(expand('%')) | bdelete!
 
-" Keybindings ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-nnoremap <leader>r :%s/\<<C-R><C-W>\>/<C-R><C-W>/g<Left><Left>
-xnoremap <leader>r "zy:%s/\<<C-R><C-R>z\>/<C-R><C-R>z/g<Left><Left>
-
-inoremap <C-K> <C-R>=strftime("%F")<CR>
+" Text editing helper functions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 function! ExecuteMacroOverVisualRange()
   echo "@".getcmdline()
   execute ":'<,'>normal @".nr2char(getchar())
 endfunction
 xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
-
-noremap ga :.Subvert/{true,false}/{false,true}/g<CR>:nohlsearch<CR>
-
-noremap <leader>f :Neoformat<CR>
-
-nnoremap gx /export<CR>
-
-xmap <leader>x "lc<C-R>=substitute(system('node -p', @l), '\n\+$', '', '')<CR><ESC>
 
 function! FillLine(str)
   .s/\s*$//
@@ -407,14 +395,7 @@ function! FillLine(str)
     .s/$/\=(' '.repeat(a:str, reps))/
   endif
 endfunction
-
 nnoremap <leader>~ :call FillLine('~')<CR>
-
-command Remove call delete(expand('%')) | bdelete!
-
-nnoremap <C-K> cl<CR><Esc>lf<Space>
-
-vnoremap <C-K> :s/^\( *\)\([^:]\+\):.*$/\1"\2",/<CR>
 
 lua <<EOF
 
@@ -511,6 +492,8 @@ map('n', '<leader>*', ' :Rg <C-R><C-W><CR>')
 map('x', '*', ' "zy/<C-R><C-R>z<CR>')
 map('x', '<leader>*', ' "zy:Rg <C-R><C-R>z<CR>')
 
+map('n', 'gx', [[/export<CR>]])
+
 -- Entering insertion
 
 map('', ',', 'A')
@@ -539,30 +522,30 @@ map('', '<leader>s', ':belowright vsplit<CR>')
 
 -- Tmux window navigation
 
-map('n', '<silent>', '<C-H> :TmuxNavigateLeft<CR>')
-map('n', '<silent>', '<C-T> :TmuxNavigateDown<CR>')
-map('n', '<silent>', '<C-N> :TmuxNavigateUp<CR>')
-map('n', '<silent>', '<C-S> :TmuxNavigateRight<CR>')
+map('n', '<C-H>', ':TmuxNavigateLeft<CR>', {silent = true})
+map('n', '<C-T>', ':TmuxNavigateDown<CR>', {silent = true})
+map('n', '<C-N>', ':TmuxNavigateUp<CR>', {silent = true})
+map('n', '<C-S>', ':TmuxNavigateRight<CR>', {silent = true})
 
-map('v', '<silent>', '<C-H> <Esc><Esc>:TmuxNavigateLeft<CR>')
-map('v', '<silent>', '<C-T> <Esc><Esc>:TmuxNavigateDown<CR>')
-map('v', '<silent>', '<C-N> <Esc><Esc>:TmuxNavigateUp<CR>')
-map('v', '<silent>', '<C-S> <Esc><Esc>:TmuxNavigateRight<CR>')
+map('v', '<C-H>', '<Esc><Esc>:TmuxNavigateLeft<CR>', {silent = true})
+map('v', '<C-T>', '<Esc><Esc>:TmuxNavigateDown<CR>', {silent = true})
+map('v', '<C-N>', '<Esc><Esc>:TmuxNavigateUp<CR>', {silent = true})
+map('v', '<C-S>', '<Esc><Esc>:TmuxNavigateRight<CR>', {silent = true})
 
-map('i', '<silent>', '<C-H> <Right><Esc>:TmuxNavigateLeft<CR>')
-map('i', '<silent>', '<C-T> <Right><Esc>:TmuxNavigateDown<CR>')
-map('i', '<silent>', '<C-N> <Right><Esc>:TmuxNavigateUp<CR>')
-map('i', '<silent>', '<C-S> <Right><Esc>:TmuxNavigateRight<CR>')
+map('i', '<C-H>', '<Right><Esc>:TmuxNavigateLeft<CR>', {silent = true})
+map('i', '<C-T>', '<Right><Esc>:TmuxNavigateDown<CR>', {silent = true})
+map('i', '<C-N>', '<Right><Esc>:TmuxNavigateUp<CR>', {silent = true})
+map('i', '<C-S>', '<Right><Esc>:TmuxNavigateRight<CR>', {silent = true})
 
-map('t', '<silent>', '<C-H> <C-\\><C-N>:TmuxNavigateLeft<CR>')
-map('t', '<silent>', '<C-T> <C-\\><C-N>:TmuxNavigateDown<CR>')
-map('t', '<silent>', '<C-N> <C-\\><C-N>:TmuxNavigateUp<CR>')
-map('t', '<silent>', '<C-S> <C-\\><C-N>:TmuxNavigateRight<CR>')
+map('t', '<C-H>', '<C-\\><C-N>:TmuxNavigateLeft<CR>', {silent = true})
+map('t', '<C-T>', '<C-\\><C-N>:TmuxNavigateDown<CR>', {silent = true})
+map('t', '<C-N>', '<C-\\><C-N>:TmuxNavigateUp<CR>', {silent = true})
+map('t', '<C-S>', '<C-\\><C-N>:TmuxNavigateRight<CR>', {silent = true})
 
-map('c', '<silent>', '<C-H> <Nop>')
-map('c', '<silent>', '<C-T> <Nop>')
-map('c', '<silent>', '<C-N> <Nop>')
-map('c', '<silent>', '<C-S> <Nop>')
+map('c', '<C-H>', '<Nop>')
+map('c', '<C-T>', '<Nop>')
+map('c', '<C-N>', '<Nop>')
+map('c', '<C-S>', '<Nop>')
 
 -- Git
 
@@ -590,6 +573,23 @@ map('', '<leader>/', ':nohlsearch<CR>')
 map_plug('x', '<leader>p', '<Plug>SlimeRegionSend')
 map_plug('n', '<leader>p', '<Plug>SlimeParagraphSend')
 map_plug('n', '<leader>P', '<Plug>SlimeConfig')
+
+-- Refactoring
+
+map('v', '<C-K>', [[:s/^\( *\)\([^:]\+\):.*$/\1"\2",/<CR>]])
+
+map('n', '<C-K>', 'cl<CR><Esc>lf<Space>')
+
+map('', 'ga', ':.Subvert/{true,false}/{false,true}/g<CR>:nohlsearch<CR>')
+
+map('n', '<leader>r', [[:%s/\<<C-R><C-W>\>/<C-R><C-W>/g<Left><Left>]])
+map('x', '<leader>r', [["zy:%s/\<<C-R><C-R>z\>/<C-R><C-R>z/g<Left><Left>]])
+
+map('', '<leader>f', ':Neoformat<CR>')
+
+map_plug('x', '<leader>x', [["lc<C-R>=substitute(system('node -p', @l), '\n\+$', '', '')<CR><ESC>]])
+
+map('i', '<C-K>', '<C-R>=strftime("%F")<CR>')
 
 EOF
 
