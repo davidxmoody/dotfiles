@@ -426,14 +426,6 @@ autocmd QuickFixCmdPost l*    vertical belowright lwindow 120
 
 " Keybindings ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-noremap <leader>e :Files<CR>
-noremap <leader>E :Buffers<CR>
-noremap <leader>o :GFiles?<CR>
-noremap <leader>a :Rg<space>
-noremap <leader>A :Rg<space><Up><CR>
-noremap <leader>i :Rg<space>/<C-R>=fnameescape(expand('%:t:r'))<CR><CR>
-noremap <leader>B :History<CR>
-
 noremap <leader>u ZZ
 noremap <leader>b <C-^>
 noremap <C-d> :q<CR>
@@ -443,12 +435,8 @@ noremap <leader>t :belowright split<CR>
 noremap <leader>n :aboveleft split<CR>
 noremap <leader>s :belowright vsplit<CR>
 
-map <leader>v Vii
-noremap <leader>V ggVG
 noremap <leader>w :set wrap!<CR>
 noremap <leader>W :set colorcolumn=80<CR>
-
-" TODO add an alias to search for the selected text with bash gS alias
 
 nnoremap         *  /\C\<<C-R><C-W>\><CR>
 nnoremap         g* /<C-R><C-W>
@@ -474,8 +462,6 @@ xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
 
 xnoremap . :norm.<CR>
 map <leader>. /\C\<"\><CR>.
-
-noremap <leader>, GA
 
 noremap <leader>/ :nohlsearch<CR>
 
@@ -506,15 +492,6 @@ nmap <leader>P <Plug>SlimeConfig
 
 xmap <leader>x "lc<C-R>=substitute(system('node -p', @l), '\n\+$', '', '')<CR><ESC>
 
-map o <Plug>(easymotion-overwin-f2)
-map O <Plug>(easymotion-overwin-f2)
-map f <Plug>Sneak_f
-map F <Plug>Sneak_F
-map l <Plug>Sneak_t
-map L <Plug>Sneak_T
-map ( <Plug>Sneak_,
-map ) <Plug>Sneak_;
-
 inoremap + <Right><Esc>
 vnoremap + <Esc><Esc>
 noremap + :update<CR>
@@ -537,46 +514,91 @@ nnoremap <C-K> cl<CR><Esc>lf<Space>
 
 vnoremap <C-K> :s/^\( *\)\([^:]\+\):.*$/\1"\2",/<CR>
 
-xnoremap gp "0p
-xnoremap gP "0P
-nnoremap gp V"0p
-nnoremap gP V"0p
-
 xnoremap D "_d
 xnoremap C "_c
-
-noremap , A
-noremap <CR> o
-noremap g<CR> O
-
 nnoremap Y y$
 
-noremap t j
-noremap n k
-noremap s l
+lua <<EOF
 
-noremap T 
-noremap N 
-noremap H 0
-noremap S $
-onoremap H 0
+-- Mappings ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-noremap gt gj
-noremap gn gk
+local function map(mode, lhs, rhs, options)
+  vim.api.nvim_set_keymap(mode, lhs, rhs, vim.tbl_extend('force', {noremap = true, silent = true}, options or {}))
+end
 
-noremap j n
-noremap J N
-noremap gj gn
-noremap gJ gN
+-- Dvorak navigation
 
-noremap k J
-noremap K gJ
+map('', 't', 'j')
+map('', 'n', 'k')
+map('', 's', 'l')
 
-noremap U <C-R>
-noremap <C-R> <Nop>
+map('', 'T', '')
+map('', 'N', '')
+map('', 'H', '0')
+map('', 'S', '$')
 
-" Exit terminal
-tnoremap <Esc> <C-\><C-n>
+map('', 'gt', 'gj')
+map('', 'gn', 'gk')
+
+-- Joining
+
+map('', 'k', 'J')
+map('', 'K', 'gJ')
+
+-- Undo/redo
+
+map('', 'U', '<C-R>')
+map('', '<C-R>', '<Nop>')
+
+-- Terminal
+
+map('t', '<Esc>', '<C-\\><C-n>')
+
+-- FZF
+
+map('', '<leader>e', ':Files<CR>')
+map('', '<leader>E', ':Buffers<CR>')
+map('', '<leader>o', ':GFiles?<CR>')
+map('', '<leader>a', ':Rg<space>')
+map('', '<leader>A', ':Rg<space><Up><CR>')
+map('', '<leader>i', ":Rg<space>/<C-R>=fnameescape(expand('%:t:r'))<CR><CR>")
+map('', '<leader>B', ':History<CR>')
+
+-- Selection
+
+map('', '<leader>v', 'Vii', {noremap = false})
+map('', '<leader>V', 'ggVG')
+
+-- Entering insertion
+
+map('', ',', 'A')
+map('', '<leader>,', 'GA')
+map('', '<CR>', 'o')
+map('', 'g<CR>', 'O')
+
+-- Jumping
+
+map('', 'o', '<Plug>(easymotion-overwin-f2)', {noremap = false})
+map('', 'O', '<Plug>(easymotion-overwin-f2)', {noremap = false})
+map('', 'f', '<Plug>Sneak_f', {noremap = false})
+map('', 'F', '<Plug>Sneak_F', {noremap = false})
+map('', 'l', '<Plug>Sneak_t', {noremap = false})
+map('', 'L', '<Plug>Sneak_T', {noremap = false})
+map('', '(', '<Plug>Sneak_,', {noremap = false})
+map('', ')', '<Plug>Sneak_;', {noremap = false})
+map('', 'j', 'n')
+map('', 'J', 'N')
+map('', 'gj', 'gn')
+map('', 'gJ', 'gN')
+
+-- Repeat pasting
+
+map('x', 'gp', '"0p')
+map('x', 'gP', '"0P')
+map('n', 'gp', 'V"0p')
+map('n', 'gP', 'V"0p')
+
+EOF
 
 " Quickfix window style ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
