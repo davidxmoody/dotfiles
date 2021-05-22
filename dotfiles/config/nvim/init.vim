@@ -65,31 +65,6 @@ Plug 'christoomey/vim-tmux-navigator'
 let g:tmux_navigator_no_mappings = 1
 let g:tmux_navigator_disable_when_zoomed = 1
 
-nnoremap <silent> <C-H> :TmuxNavigateLeft<CR>
-nnoremap <silent> <C-T> :TmuxNavigateDown<CR>
-nnoremap <silent> <C-N> :TmuxNavigateUp<CR>
-nnoremap <silent> <C-S> :TmuxNavigateRight<CR>
-
-vnoremap <silent> <C-H> <Esc><Esc>:TmuxNavigateLeft<CR>
-vnoremap <silent> <C-T> <Esc><Esc>:TmuxNavigateDown<CR>
-vnoremap <silent> <C-N> <Esc><Esc>:TmuxNavigateUp<CR>
-vnoremap <silent> <C-S> <Esc><Esc>:TmuxNavigateRight<CR>
-
-inoremap <silent> <C-H> <Right><Esc>:TmuxNavigateLeft<CR>
-inoremap <silent> <C-T> <Right><Esc>:TmuxNavigateDown<CR>
-inoremap <silent> <C-N> <Right><Esc>:TmuxNavigateUp<CR>
-inoremap <silent> <C-S> <Right><Esc>:TmuxNavigateRight<CR>
-
-tnoremap <silent> <C-H> <C-\><C-N>:TmuxNavigateLeft<CR>
-tnoremap <silent> <C-T> <C-\><C-N>:TmuxNavigateDown<CR>
-tnoremap <silent> <C-N> <C-\><C-N>:TmuxNavigateUp<CR>
-tnoremap <silent> <C-S> <C-\><C-N>:TmuxNavigateRight<CR>
-
-cnoremap <silent> <C-H> <Nop>
-cnoremap <silent> <C-T> <Nop>
-cnoremap <silent> <C-N> <Nop>
-cnoremap <silent> <C-S> <Nop>
-
 Plug 'jpalardy/vim-slime'
 let g:slime_target = "tmux"
 let g:slime_no_mappings = 1
@@ -116,9 +91,6 @@ let g:nvim_tree_ignore = [ '.git', 'node_modules', '.DS_Store' ]
 
 " let g:nvim_tree_lsp_diagnostics = 1
 let nvim_tree_disable_keybindings = 1
-
-noremap - :NvimTreeFindFile<CR>
-noremap g- :NvimTreeToggle<CR>
 
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
@@ -392,8 +364,6 @@ highlight NormalNC guibg=#000a13
 " Status line ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 highlight CustomModifiedFlag guibg=Red guifg=White
-" highlight StatusLine guifg=White gui=reverse
-" highlight StatusLineNC gui=reverse
 
 set statusline=
 set statusline+=%<%f
@@ -405,48 +375,11 @@ set statusline+=%(\ %y%)
 
 " Command line helpers ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-cnoremap cd. lcd %:p:h
-cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<cr>
 command Cppath let @+ = expand("%:p")
 command Opdir :silent exec "!open " . fnameescape(expand("%:p:h"))
 command Opfile :silent exec "!open " . fnameescape(expand("%:p"))
-command Vimrc e ~/.config/nvim/init.vim
-
-" Searching ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
-
-nnoremap <leader>j :silent grep!<Space>
-xnoremap <leader>j "zy:silent grep!<Space><C-R><C-R>z<CR>
-nnoremap <silent> [j :cprevious<CR>
-nnoremap <silent> ]j :cnext<CR>
-
-autocmd QuickFixCmdPost [^l]* vertical belowright cwindow 120
-autocmd QuickFixCmdPost l*    vertical belowright lwindow 120
 
 " Keybindings ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-noremap <leader>u ZZ
-noremap <leader>b <C-^>
-noremap <C-d> :q<CR>
-
-noremap <leader>h :aboveleft vsplit<CR>
-noremap <leader>t :belowright split<CR>
-noremap <leader>n :aboveleft split<CR>
-noremap <leader>s :belowright vsplit<CR>
-
-noremap <leader>w :set wrap!<CR>
-noremap <leader>W :set colorcolumn=80<CR>
-
-nnoremap         *  /\C\<<C-R><C-W>\><CR>
-nnoremap         g* /<C-R><C-W>
-nnoremap <leader>*  :Rg <C-R><C-W><CR>
-nnoremap <leader>g* :Rg <C-R><C-W>
-
-xnoremap         *  "zy/<C-R><C-R>z<CR>
-xnoremap         g* "zy/<C-R><C-R>z
-xnoremap <leader>*  "zy:Rg <C-R><C-R>z<CR>
-xnoremap <leader>g* "zy:Rg <C-R><C-R>z
 
 nnoremap <leader>r :%s/\<<C-R><C-W>\>/<C-R><C-W>/g<Left><Left>
 xnoremap <leader>r "zy:%s/\<<C-R><C-R>z\>/<C-R><C-R>z/g<Left><Left>
@@ -457,46 +390,15 @@ function! ExecuteMacroOverVisualRange()
   echo "@".getcmdline()
   execute ":'<,'>normal @".nr2char(getchar())
 endfunction
-
 xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
 
-xnoremap . :norm.<CR>
-map <leader>. /\C\<"\><CR>.
-
-noremap <leader>/ :nohlsearch<CR>
-
 noremap ga :.Subvert/{true,false}/{false,true}/g<CR>:nohlsearch<CR>
-noremap g, :.Subvert/[{ ,x}]/[{x, }]<CR>:nohlsearch<CR>
 
 noremap <leader>f :Neoformat<CR>
 
 nnoremap gx /export<CR>
 
-noremap <leader>gb :Gblame<CR>
-noremap <leader>gr :Gread<CR>
-noremap <leader>gw :Gwrite<CR>
-noremap <leader>gs :Gbrowse<CR>
-
-map <leader>ga <Plug>(GitGutterStageHunk)
-map <leader>gu <Plug>(GitGutterUndoHunk)
-nmap ]h <Plug>(GitGutterNextHunk)
-nmap [h <Plug>(GitGutterPrevHunk)
-omap ih <Plug>(GitGutterTextObjectInnerPending)
-omap ah <Plug>(GitGutterTextObjectOuterPending)
-xmap ih <Plug>(GitGutterTextObjectInnerVisual)
-xmap ah <Plug>(GitGutterTextObjectOuterVisual)
-
-xmap <leader>p <Plug>SlimeRegionSend
-nmap <leader>p <Plug>SlimeParagraphSend
-nmap <leader>P <Plug>SlimeConfig
-
 xmap <leader>x "lc<C-R>=substitute(system('node -p', @l), '\n\+$', '', '')<CR><ESC>
-
-inoremap + <Right><Esc>
-vnoremap + <Esc><Esc>
-noremap + :update<CR>
-inoremap ! 
-nnoremap ~ g~lw
 
 function! FillLine(str)
   .s/\s*$//
@@ -514,16 +416,16 @@ nnoremap <C-K> cl<CR><Esc>lf<Space>
 
 vnoremap <C-K> :s/^\( *\)\([^:]\+\):.*$/\1"\2",/<CR>
 
-xnoremap D "_d
-xnoremap C "_c
-nnoremap Y y$
-
 lua <<EOF
 
 -- Mappings ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 local function map(mode, lhs, rhs, options)
   vim.api.nvim_set_keymap(mode, lhs, rhs, vim.tbl_extend('force', {noremap = true, silent = true}, options or {}))
+end
+
+local function map_plug(mode, lhs, rhs)
+  map(mode, lhs, rhs, {noremap = false})
 end
 
 -- Dvorak navigation
@@ -539,6 +441,12 @@ map('', 'S', '$')
 
 map('', 'gt', 'gj')
 map('', 'gn', 'gk')
+
+map('i', '+', '<Right><Esc>')
+map('v', '+', '<Esc><Esc>')
+map('', '+', ':update<CR>')
+
+-- map('i', '!', '')
 
 -- Joining
 
@@ -564,10 +472,44 @@ map('', '<leader>A', ':Rg<space><Up><CR>')
 map('', '<leader>i', ":Rg<space>/<C-R>=fnameescape(expand('%:t:r'))<CR><CR>")
 map('', '<leader>B', ':History<CR>')
 
+-- File navigation
+
+map('', '<leader>u', 'ZZ')
+map('', '<leader>b', '<C-^>')
+map('', '<C-d>', ':q<CR>')
+
+-- Nvim tree
+
+map('', '-', ':NvimTreeFindFile<CR>')
+map('', 'g-', ':NvimTreeToggle<CR>')
+
 -- Selection
 
-map('', '<leader>v', 'Vii', {noremap = false})
+map_plug('', '<leader>v', 'Vii')
 map('', '<leader>V', 'ggVG')
+
+-- Jumping
+
+map_plug('', 'o', '<Plug>(easymotion-overwin-f2)')
+map_plug('', 'O', '<Plug>(easymotion-overwin-f2)')
+map_plug('', 'f', '<Plug>Sneak_f')
+map_plug('', 'F', '<Plug>Sneak_F')
+map_plug('', 'l', '<Plug>Sneak_t')
+map_plug('', 'L', '<Plug>Sneak_T')
+map_plug('', '(', '<Plug>Sneak_,')
+map_plug('', ')', '<Plug>Sneak_;')
+
+-- Search
+
+map('', 'j', 'n')
+map('', 'J', 'N')
+map('', 'gj', 'gn')
+map('', 'gJ', 'gN')
+
+map('n', '*', ' /\\C\\<<C-R><C-W>\\><CR>')
+map('n', '<leader>*', ' :Rg <C-R><C-W><CR>')
+map('x', '*', ' "zy/<C-R><C-R>z<CR>')
+map('x', '<leader>*', ' "zy:Rg <C-R><C-R>z<CR>')
 
 -- Entering insertion
 
@@ -576,27 +518,78 @@ map('', '<leader>,', 'GA')
 map('', '<CR>', 'o')
 map('', 'g<CR>', 'O')
 
--- Jumping
-
-map('', 'o', '<Plug>(easymotion-overwin-f2)', {noremap = false})
-map('', 'O', '<Plug>(easymotion-overwin-f2)', {noremap = false})
-map('', 'f', '<Plug>Sneak_f', {noremap = false})
-map('', 'F', '<Plug>Sneak_F', {noremap = false})
-map('', 'l', '<Plug>Sneak_t', {noremap = false})
-map('', 'L', '<Plug>Sneak_T', {noremap = false})
-map('', '(', '<Plug>Sneak_,', {noremap = false})
-map('', ')', '<Plug>Sneak_;', {noremap = false})
-map('', 'j', 'n')
-map('', 'J', 'N')
-map('', 'gj', 'gn')
-map('', 'gJ', 'gN')
-
 -- Repeat pasting
 
 map('x', 'gp', '"0p')
 map('x', 'gP', '"0P')
 map('n', 'gp', 'V"0p')
 map('n', 'gP', 'V"0p')
+
+-- Repeat operator
+
+map('x', '.', ':norm.<CR>')
+map_plug('', '<leader>.', '/\\C\\<"\\><CR>.')
+
+-- Window splitting
+
+map('', '<leader>h', ':aboveleft vsplit<CR>')
+map('', '<leader>t', ':belowright split<CR>')
+map('', '<leader>n', ':aboveleft split<CR>')
+map('', '<leader>s', ':belowright vsplit<CR>')
+
+-- Tmux window navigation
+
+map('n', '<silent>', '<C-H> :TmuxNavigateLeft<CR>')
+map('n', '<silent>', '<C-T> :TmuxNavigateDown<CR>')
+map('n', '<silent>', '<C-N> :TmuxNavigateUp<CR>')
+map('n', '<silent>', '<C-S> :TmuxNavigateRight<CR>')
+
+map('v', '<silent>', '<C-H> <Esc><Esc>:TmuxNavigateLeft<CR>')
+map('v', '<silent>', '<C-T> <Esc><Esc>:TmuxNavigateDown<CR>')
+map('v', '<silent>', '<C-N> <Esc><Esc>:TmuxNavigateUp<CR>')
+map('v', '<silent>', '<C-S> <Esc><Esc>:TmuxNavigateRight<CR>')
+
+map('i', '<silent>', '<C-H> <Right><Esc>:TmuxNavigateLeft<CR>')
+map('i', '<silent>', '<C-T> <Right><Esc>:TmuxNavigateDown<CR>')
+map('i', '<silent>', '<C-N> <Right><Esc>:TmuxNavigateUp<CR>')
+map('i', '<silent>', '<C-S> <Right><Esc>:TmuxNavigateRight<CR>')
+
+map('t', '<silent>', '<C-H> <C-\\><C-N>:TmuxNavigateLeft<CR>')
+map('t', '<silent>', '<C-T> <C-\\><C-N>:TmuxNavigateDown<CR>')
+map('t', '<silent>', '<C-N> <C-\\><C-N>:TmuxNavigateUp<CR>')
+map('t', '<silent>', '<C-S> <C-\\><C-N>:TmuxNavigateRight<CR>')
+
+map('c', '<silent>', '<C-H> <Nop>')
+map('c', '<silent>', '<C-T> <Nop>')
+map('c', '<silent>', '<C-N> <Nop>')
+map('c', '<silent>', '<C-S> <Nop>')
+
+-- Git
+
+map('', '<leader>gb', ':Git blame<CR>')
+map('', '<leader>gr', ':Gread<CR>')
+map('', '<leader>gw', ':Gwrite<CR>')
+
+map_plug('', '<leader>ga', '<Plug>(GitGutterStageHunk)')
+map_plug('', '<leader>gu', '<Plug>(GitGutterUndoHunk)')
+map_plug('', ']h', '<Plug>(GitGutterNextHunk)')
+map_plug('', '[h', '<Plug>(GitGutterPrevHunk)')
+map_plug('o', 'ih', '<Plug>(GitGutterTextObjectInnerPending)')
+map_plug('o', 'ah', '<Plug>(GitGutterTextObjectOuterPending)')
+map_plug('x', 'ih', '<Plug>(GitGutterTextObjectInnerVisual)')
+map_plug('x', 'ah', '<Plug>(GitGutterTextObjectOuterVisual)')
+
+-- Toggle settings
+
+map('', '<leader>w', ':set wrap!<CR>')
+map('', '<leader>W', ':set colorcolumn=80<CR>')
+map('', '<leader>/', ':nohlsearch<CR>')
+
+-- Slime
+
+map_plug('x', '<leader>p', '<Plug>SlimeRegionSend')
+map_plug('n', '<leader>p', '<Plug>SlimeParagraphSend')
+map_plug('n', '<leader>P', '<Plug>SlimeConfig')
 
 EOF
 
