@@ -129,100 +129,6 @@ call plug#end()
 filetype plugin indent on
 syntax on
 
-lua <<EOF
-
--- Treesitter
-
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = {"typescript", "tsx", "javascript", "graphql", "python", "regex", "jsdoc", "html", "bash", "json", "yaml", "css", "lua"},
-  highlight = {
-    enable = true,
-  },
-  indent = {
-    enable = true,
-  },
-}
-
--- LSP
-
-local nvim_lsp = require('lspconfig')
-
-local on_attach = function(client, bufnr)
-  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-
-  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-  local opts = { noremap=true, silent=true }
-  -- buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  buf_set_keymap('n', 'gl', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  -- buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  -- buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-  -- buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-  -- buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-  -- buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  -- buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  buf_set_keymap('n', 'gr', '<cmd>lua require("telescope.builtin").lsp_references()<CR>', opts)
-  buf_set_keymap('n', 'gR', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  buf_set_keymap('n', 'gS', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-  buf_set_keymap('n', 'gs', '<cmd>lua require("telescope.builtin").lsp_code_actions()<CR>', opts)
-  -- buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-  buf_set_keymap('n', '_', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-  -- buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-end
-
--- local servers = {"denols"}
-local servers = {"tsserver"}
-for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup { on_attach = on_attach }
-end
-
--- Nvim Tree
-
-function create_nvim_tree_bindings()
-  local function bind(key, cb_name)
-    vim.api.nvim_buf_set_keymap(0, 'n', key,
-      require('nvim-tree.config').nvim_tree_callback(cb_name),
-      { noremap = true, silent = true, nowait = true })
-  end
-
-  bind("<CR>", "edit")
-  bind("i", "edit")
-  bind("<2-LeftMouse>", "edit")
-  bind("g<CR>", "cd")
-  bind("gi", "cd")
-  bind("[h", "prev_git_item")
-  bind("]h", "next_git_item")
-  bind("-", "dir_up")
-  bind("a", "create")
-  bind("a", "create")
-  bind("d", "remove")
-  bind("x", "cut")
-  bind("y", "copy")
-  bind("Y", "copy_path")
-  bind("gy", "copy_absolute_path")
-  bind("p", "paste")
-  bind("r", "rename")
-  bind("R", "refresh")
-  bind(".", "toggle_dotfiles")
-  bind(",", "toggle_ignored")
-  bind("<", "prev_sibling")
-  bind(">", "next_sibling")
-  bind("<BS>", "close_node")
-  bind(";", "preview")
-  bind("<leader>s", "vsplit")
-  bind("<leader>h", "vsplit")
-  bind("<leader>t", "split")
-  bind("<leader>n", "split")
-end
-
-EOF
-
-au Filetype NvimTree :lua create_nvim_tree_bindings()
-
 " Miscellaneous config ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 map <space> <Nop>
@@ -329,6 +235,7 @@ nnoremap <leader>~ :call FillLine('~')<CR>
 
 " Lua requires ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+lua require('lsp')
 lua require('completion')
 lua require('keymapping')
 
