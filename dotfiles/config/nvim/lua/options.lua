@@ -16,6 +16,8 @@ opt('b', 'undofile', true)
 opt('b', 'backupcopy', 'yes')
 opt('o', 'clipboard', 'unnamedplus')
 opt('b', 'suffixesadd', '.ts,.tsx,.js,.jsx,.json,.coffee,.scss,.css')
+opt('o', 'termguicolors', true)
+opt('w', 'cursorline', true)
 vim.cmd('set mouse=nv')
 
 -- Indenting
@@ -46,11 +48,3 @@ vim.cmd('autocmd VimResized * wincmd =')
 
 opt('b', 'formatoptions', 'rqn1j')
 opt('b', 'textwidth', 79)
-
--- opt('o', 'completeopt', 'menuone,noinsert,noselect')  -- Completion options (for deoplete)
--- opt('o', 'splitbelow', true)                          -- Put new windows below current
--- opt('o', 'splitright', true)                          -- Put new windows right of current
--- opt('o', 'termguicolors', true)                       -- True color support
--- opt('o', 'wildmode', 'list:longest')                  -- Command-line completion mode
--- opt('w', 'relativenumber', true)                      -- Relative line numbers
--- vim.cmd 'colorscheme desert'                              -- Put your favorite colorscheme here
