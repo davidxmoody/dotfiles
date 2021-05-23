@@ -6,6 +6,11 @@ local function map_plug(mode, lhs, rhs)
   map(mode, lhs, rhs, {noremap = false})
 end
 
+-- Leader key
+
+map('', '<Space>', '<Nop>')
+vim.g.mapleader = ' '
+
 -- Dvorak navigation
 
 map('', 't', 'j')

@@ -54,6 +54,7 @@ let g:UltiSnipsJumpBackwardTrigger = '<C-F><C-B>'
 
 Plug 'airblade/vim-gitgutter'
 set updatetime=100
+au CursorHold * checktime
 set signcolumn=yes
 let g:gitgutter_map_keys = 0
 
@@ -129,50 +130,6 @@ call plug#end()
 filetype plugin indent on
 syntax on
 
-" Miscellaneous config ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-map <space> <Nop>
-let mapleader=' '
-
-set ignorecase
-set smartcase
-set scrolloff=2
-set sidescrolloff=1
-set list
-set listchars=tab:→\ ,nbsp:␣,trail:•,extends:⟩,precedes:⟨
-set showbreak=↪\ 
-set directory=~/.vim-swap,~/t,/var/tmp,/tmp,.
-set clipboard=unnamedplus
-set nojoinspaces
-set nonumber
-set showcmd
-set backupcopy=yes
-set mouse=nv
-set nowrap
-set undofile
-set lazyredraw
-set hidden
-
-" Auto window resizing
-set equalalways
-autocmd VimResized * wincmd =
-
-" Indenting
-set tabstop=2
-set softtabstop=2
-set shiftwidth=0 " Use value of tabstop
-set expandtab
-
-" gf filename options
-set suffixesadd=.ts,.tsx,.js,.jsx,.json,.coffee,.scss,.css
-
-" Check for changes to file
-au CursorHold * checktime
-
-" Auto wrap comments
-set formatoptions=rqn1j
-set textwidth=79
-
 " Allow lua syntax highlighting in vim files
 let g:vimsyn_embed = 'l'
 
@@ -235,6 +192,7 @@ nnoremap <leader>~ :call FillLine('~')<CR>
 
 " Lua requires ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+lua require('options')
 lua require('lsp')
 lua require('completion')
 lua require('keymapping')
