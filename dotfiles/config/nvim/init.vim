@@ -129,31 +129,6 @@ call plug#end()
 filetype plugin indent on
 syntax on
 
-" Allow lua syntax highlighting in vim files
-let g:vimsyn_embed = 'l'
-
-" Highlight on yank
-au TextYankPost * lua vim.highlight.on_yank {}
-
-" Status line ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-highlight CustomModifiedFlag guibg=Red guifg=White
-
-set statusline=
-set statusline+=%<%f
-set statusline+=\ %h%q%r
-set statusline+=%#CustomModifiedFlag#%m%*
-set statusline+=%=\ 
-set statusline+=%03.(%c%)\ %07.(%l/%L%)
-set statusline+=%(\ %y%)
-
-" Command line helpers ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-command Cppath let @+ = expand("%:p")
-command Opdir :silent exec "!open " . fnameescape(expand("%:p:h"))
-command Opfile :silent exec "!open " . fnameescape(expand("%:p"))
-command Remove call delete(expand('%')) | bdelete!
-
 " Text editing helper functions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 function! ExecuteMacroOverVisualRange()
@@ -178,12 +153,8 @@ lua require('lsp')
 lua require('completion')
 lua require('keymapping')
 lua require('colorscheme')
-
-" Quickfix window style ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-autocmd FileType qf setl wrap
-autocmd FileType qf setl nonumber
-autocmd FileType qf nnoremap <buffer> <Enter> <Enter>
+lua require('commands')
+lua require('statusline')
 
 " English text editing ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
