@@ -1,17 +1,6 @@
 " Setup plugin manager ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-if empty(glob("~/.config/nvim/autoload/plug.vim"))
-  execute '!curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-endif
-
-filetype off
-call plug#begin('~/.vim/plugged')
-
 lua require('plugins')
-
-call plug#end()
-filetype plugin indent on
-syntax on
 
 " Text editing helper functions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
