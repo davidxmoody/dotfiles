@@ -48,7 +48,7 @@ map('t', '<Esc>', '<C-\\><C-n>')
 map('', '<leader>e', ':Files<CR>')
 map('', '<leader>E', ':Buffers<CR>')
 map('', '<leader>o', ':GFiles?<CR>')
-map('', '<leader>a', ':Rg<space>')
+map('', '<leader>a', ':Rg<space>', {silent = false})
 map('', '<leader>A', ':Rg<space><Up><CR>')
 map('', '<leader>i', ":Rg<space>/<C-R>=fnameescape(expand('%:t:r'))<CR><CR>")
 map('', '<leader>B', ':History<CR>')
@@ -87,7 +87,7 @@ map('n', '<leader>*', ' :Rg <C-R><C-W><CR>')
 map('x', '*', ' "zy/<C-R><C-R>z<CR>')
 map('x', '<leader>*', ' "zy:Rg <C-R><C-R>z<CR>')
 
-map('n', 'gx', [[/export<CR>]])
+map('n', 'gx', '/export<CR>')
 
 -- Entering insertion
 
@@ -117,25 +117,25 @@ map('', '<leader>s', ':belowright vsplit<CR>')
 
 -- Tmux window navigation
 
-map('n', '<C-H>', ':TmuxNavigateLeft<CR>', {silent = true})
-map('n', '<C-T>', ':TmuxNavigateDown<CR>', {silent = true})
-map('n', '<C-N>', ':TmuxNavigateUp<CR>', {silent = true})
-map('n', '<C-S>', ':TmuxNavigateRight<CR>', {silent = true})
+map('n', '<C-H>', ':TmuxNavigateLeft<CR>')
+map('n', '<C-T>', ':TmuxNavigateDown<CR>')
+map('n', '<C-N>', ':TmuxNavigateUp<CR>')
+map('n', '<C-S>', ':TmuxNavigateRight<CR>')
 
-map('v', '<C-H>', '<Esc><Esc>:TmuxNavigateLeft<CR>', {silent = true})
-map('v', '<C-T>', '<Esc><Esc>:TmuxNavigateDown<CR>', {silent = true})
-map('v', '<C-N>', '<Esc><Esc>:TmuxNavigateUp<CR>', {silent = true})
-map('v', '<C-S>', '<Esc><Esc>:TmuxNavigateRight<CR>', {silent = true})
+map('v', '<C-H>', '<Esc><Esc>:TmuxNavigateLeft<CR>')
+map('v', '<C-T>', '<Esc><Esc>:TmuxNavigateDown<CR>')
+map('v', '<C-N>', '<Esc><Esc>:TmuxNavigateUp<CR>')
+map('v', '<C-S>', '<Esc><Esc>:TmuxNavigateRight<CR>')
 
-map('i', '<C-H>', '<Right><Esc>:TmuxNavigateLeft<CR>', {silent = true})
-map('i', '<C-T>', '<Right><Esc>:TmuxNavigateDown<CR>', {silent = true})
-map('i', '<C-N>', '<Right><Esc>:TmuxNavigateUp<CR>', {silent = true})
-map('i', '<C-S>', '<Right><Esc>:TmuxNavigateRight<CR>', {silent = true})
+map('i', '<C-H>', '<Right><Esc>:TmuxNavigateLeft<CR>')
+map('i', '<C-T>', '<Right><Esc>:TmuxNavigateDown<CR>')
+map('i', '<C-N>', '<Right><Esc>:TmuxNavigateUp<CR>')
+map('i', '<C-S>', '<Right><Esc>:TmuxNavigateRight<CR>')
 
-map('t', '<C-H>', '<C-\\><C-N>:TmuxNavigateLeft<CR>', {silent = true})
-map('t', '<C-T>', '<C-\\><C-N>:TmuxNavigateDown<CR>', {silent = true})
-map('t', '<C-N>', '<C-\\><C-N>:TmuxNavigateUp<CR>', {silent = true})
-map('t', '<C-S>', '<C-\\><C-N>:TmuxNavigateRight<CR>', {silent = true})
+map('t', '<C-H>', '<C-\\><C-N>:TmuxNavigateLeft<CR>')
+map('t', '<C-T>', '<C-\\><C-N>:TmuxNavigateDown<CR>')
+map('t', '<C-N>', '<C-\\><C-N>:TmuxNavigateUp<CR>')
+map('t', '<C-S>', '<C-\\><C-N>:TmuxNavigateRight<CR>')
 
 map('c', '<C-H>', '<Nop>')
 map('c', '<C-T>', '<Nop>')
@@ -228,6 +228,4 @@ function create_nvim_tree_bindings()
   tree_map("<leader>n", "split")
 end
 
-vim.cmd([[
-  au Filetype NvimTree :lua create_nvim_tree_bindings()
-]])
+vim.cmd('au Filetype NvimTree :lua create_nvim_tree_bindings()')
