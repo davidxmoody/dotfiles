@@ -186,6 +186,27 @@ map_plug('x', '<leader>x', [["lc<C-R>=substitute(system('node -p', @l), '\n\+$',
 
 map('i', '<C-K>', '<C-R>=strftime("%F")<CR>')
 
+vim.cmd([[
+  function! ExecuteMacroOverVisualRange()
+    echo "@".getcmdline()
+    execute ":'<,'>normal @".nr2char(getchar())
+  endfunction
+]])
+map('x', '@', ':<C-u>call ExecuteMacroOverVisualRange()<CR>')
+
+vim.cmd([[
+  function! FillLine(str)
+    .s/\s*$//
+    let reps = (79 - col('$')) / len(a:str)
+    if reps > 0
+      .s/$/\=(' '.repeat(a:str, reps))/
+    endif
+  endfunction
+]])
+map('n', '<leader>~', ':call FillLine("~")<CR>')
+
+
+
 -- Nvim tree
 
 map('', '-', ':NvimTreeFindFile<CR>')

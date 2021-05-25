@@ -18,9 +18,14 @@ opt('o', 'clipboard', 'unnamedplus')
 opt('b', 'suffixesadd', '.ts,.tsx,.js,.jsx,.json,.coffee,.scss,.css')
 opt('o', 'termguicolors', true)
 opt('w', 'cursorline', true)
+
 vim.g.vimsyn_embed = 'l'
 vim.cmd('set mouse=nv')
 vim.cmd('au TextYankPost * lua vim.highlight.on_yank {}')
+
+if vim.fn.filereadable(vim.env.VIM_SPELLFILE) then
+  opt('b', 'spellfile', vim.env.VIM_SPELLFILE)
+end
 
 -- Indenting
 
