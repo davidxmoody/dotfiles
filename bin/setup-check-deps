@@ -47,6 +47,9 @@ check_installed http "" "(brew install httpie)"
 check_installed wc "" "(brew install coreutils)"
 check_installed xargs "" "(brew install findutils)"
 check_installed shfmt "" "(brew install shfmt)"
+check_installed lua "" "(brew install lua)"
+check_installed luarocks "" "(brew install luarocks)"
+check_installed lua-format "" "(luarocks install --server=https://luarocks.org/dev luaformatter)"
 echo
 
 echo "# node"
