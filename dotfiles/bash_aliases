@@ -194,6 +194,7 @@ alias nc='npx npm-check -u'
 alias rn='npx react-native'
 alias tsw='npx tsc -w --noEmit'
 alias generate-readme='npx readme-md-generator'
+nodei() { node -i -e "$(< "${1-/dev/null}")"; }
 
 # Navy ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -263,7 +264,6 @@ alias op='open'
 alias mkdir='mkdir -p'
 alias echopath='echo $PATH | sed "s/:/\n/g"'
 alias echomanpath='echo $MANPATH | sed "s/:/\n/g"'
-alias bashal='source ~/.bash_aliases'
 alias tsize='echo "$(tput cols)x$(tput lines)"'
 alias watchtsize='while true; do tsize; sleep 0.1; done | uniq'
 alias copywithoutnewline='tr -d \\n | copy'
@@ -271,7 +271,6 @@ alias copypostgresport='navy port postgres 5432 | tee >(copywithoutnewline)'
 alias copyuuid='uuidgen | tr "[:upper:]" "[:lower:]" | copywithoutnewline'
 alias py='python3'
 alias timestamps="gawk '{ print strftime(\"[%Y-%m-%d %H:%M:%S]\"), \$0 }'"
-alias x86='arch -x86_64'
 alias tree='tree -I "node_modules|package-lock.json"'
 https-proxy() { http-server /dev/null -p 443 --ssl --cert "$LOCAL_SSL_CERT" --key "$LOCAL_SSL_KEY" -P http://localhost:${1-4000}; }
 remarkablechop() { convert "$1" -chop 110x0 "$2"; }
