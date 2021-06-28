@@ -16,7 +16,7 @@ vim.g.vimsyn_embed = "l"
 
 vim.cmd("au TextYankPost * lua vim.highlight.on_yank {}")
 
-if vim.fn.filereadable(vim.env.VIM_SPELLFILE) then
+if vim.fn.filereadable(vim.env.VIM_SPELLFILE) == 1 then
   vim.opt.spellfile = vim.env.VIM_SPELLFILE
 end
 
