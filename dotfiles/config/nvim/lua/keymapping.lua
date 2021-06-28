@@ -180,8 +180,8 @@ map("n", "<C-K>", "cl<CR><Esc>lf<Space>")
 
 map("", "ga", ":.Subvert/{true,false}/{false,true}/g<CR>:nohlsearch<CR>")
 
-map("n", "<leader>r", [[:%s/\<<C-R><C-W>\>/<C-R><C-W>/g<Left><Left>]])
-map("x", "<leader>r", [["zy:%s/\<<C-R><C-R>z\>/<C-R><C-R>z/g<Left><Left>]])
+map("n", "<leader>r", [[:%s/\<<C-R><C-W>\>/<C-R><C-W>/g<Left><Left>]], { silent = false })
+map("x", "<leader>r", [["zy:%s/\<<C-R><C-R>z\>/<C-R><C-R>z/g<Left><Left>]], { silent = false })
 
 map("", "<leader>f", ":Neoformat<CR>")
 
