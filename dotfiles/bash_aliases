@@ -246,6 +246,7 @@ alias alsocount='tee >(sort | uniq -c | sort -nr)'
 alias tolower='tr "[:upper:]" "[:lower:]"'
 alias toupper='tr "[:lower:]" "[:upper:]"'
 for i in {1..9}; do alias col$i="awk '{print \$$i}'"; done
+alias sortlength="awk '{print length, \$0}' | sort -n | cut -d ' ' -f2-"
 
 # Shortcuts to custom-scripts ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
