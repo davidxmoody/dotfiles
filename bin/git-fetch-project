@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 [[ $# == 0 ]] && echo "Please specify a project dir" >&2 && exit 1
 
 color_reset="\e[0m"
