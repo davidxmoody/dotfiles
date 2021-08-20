@@ -85,10 +85,10 @@ map("", "J", "N")
 map("", "gj", "gn")
 map("", "gJ", "gN")
 
-map("n", "*", " /\\C\\<<C-R><C-W>\\><CR>")
-map("n", "<leader>*", " :Rg <C-R><C-W><CR>")
-map("x", "*", " \"zy/<C-R><C-R>z<CR>")
-map("x", "<leader>*", " \"zy:Rg <C-R><C-R>z<CR>")
+map("n", "*", "/\\C\\<<C-R><C-W>\\><CR>")
+map("n", "<leader>*", ":Rg <C-R><C-W><CR>")
+map("x", "*", "\"zy/<C-R><C-R>z<CR>")
+map("x", "<leader>*", "\"zy:Rg <C-R><C-R>z<CR>")
 
 map("n", "gx", "/export<CR>")
 
