@@ -84,6 +84,8 @@ mods.addRule({
     sd(dv.l, "right_arrow", ["left_option"]),
     sd(dv.w, "delete_or_backspace", ["left_option"]),
     sd(dv.m, "return_or_enter"),
+    sd(dv.c, "delete_or_backspace"),
+    sd(dv.r, "delete_forward"),
   ],
 });
 
