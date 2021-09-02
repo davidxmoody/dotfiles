@@ -2,10 +2,7 @@
 
 set -e
 
-json=$(deno run "$HOME/p/dotfiles/karabiner/generate-karabiner-config.ts")
+config_file="$RC_DIR/dotfiles/config/karabiner/karabiner.json"
+script_file="$RC_DIR/karabiner/generate-karabiner-config.ts"
 
-output_file="$HOME/.config/karabiner/assets/complex_modifications/deno.json"
-
-mkdir -p "$(dirname "$output_file")"
-
-cat <<< "$json" > "$output_file"
+deno run --allow-read="$config_file" --allow-write="$config_file" "$script_file" "$config_file"

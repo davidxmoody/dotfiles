@@ -110,4 +110,6 @@ mods.addRule({
   ],
 });
 
-mods.print();
+const configFile = Deno.args[0];
+
+mods.writeToProfile("Default profile", configFile);
