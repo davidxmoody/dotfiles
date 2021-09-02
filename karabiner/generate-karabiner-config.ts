@@ -90,16 +90,6 @@ mods.addRule({
 });
 
 mods.addRule({
-  description: "Esc on Ctrl tap",
-  manipulators: (["left_control", "caps_lock"] as const).map((key) => ({
-    type: "basic",
-    from: { key_code: key, modifiers: { optional: ["any"] } },
-    to: [{ key_code: "left_control", lazy: true }],
-    to_if_alone: [{ key_code: "escape" }],
-  })),
-});
-
-mods.addRule({
   description: "Swap semicolon and double quote",
   manipulators: [
     {
