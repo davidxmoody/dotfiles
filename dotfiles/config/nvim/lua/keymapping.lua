@@ -32,6 +32,22 @@ map("i", "+", "<Right><Esc>")
 map("v", "+", "<Esc><Esc>")
 map("", "+", ":update<CR>")
 
+-- Consistent text navigation
+
+map("", "<M-B>", "b")
+map("", "<M-F>", "w")
+
+map("i", "<M-B>", "<S-Left>")
+map("i", "<M-F>", "<S-Right>")
+map("i", "<M-BS>", "<C-w>")
+map("i", "<C-D>", "<Del>")
+
+map("c", "<C-A>", "<Home>", {silent = false})
+map("c", "<M-B>", "<S-Left>", {silent = false})
+map("c", "<M-F>", "<S-Right>", {silent = false})
+map("c", "<M-BS>", "<C-w>", {silent = false})
+map("c", "<C-D>", "<Del>", {silent = false})
+
 -- Joining
 
 map("", "k", "J")
