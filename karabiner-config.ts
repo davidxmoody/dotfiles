@@ -111,5 +111,4 @@ mods.addRule({
 });
 
 const configFile = Deno.args[0];
-
 mods.writeToProfile("Default profile", configFile);

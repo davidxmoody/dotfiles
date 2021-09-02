@@ -2,7 +2,7 @@
 
 set -e
 
-config_file="$RC_DIR/dotfiles/config/karabiner/karabiner.json"
-script_file="$RC_DIR/karabiner/generate-karabiner-config.ts"
+config_file="$HOME/.config/karabiner/karabiner.json"
+script_file="$RC_DIR/karabiner-config.ts"
 
 deno run --allow-read="$config_file" --allow-write="$config_file" "$script_file" "$config_file"
