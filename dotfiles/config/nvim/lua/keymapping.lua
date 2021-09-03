@@ -94,6 +94,8 @@ map_plug("", "L", "<Plug>Sneak_T")
 map_plug("", "(", "<Plug>Sneak_,")
 map_plug("", ")", "<Plug>Sneak_;")
 
+map("n", ";", "g;")
+
 -- Search
 
 map("", "j", "n")
