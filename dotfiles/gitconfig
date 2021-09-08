@@ -21,6 +21,3 @@
   rebase = true
 [color]
   ui = always
-[color "diff"]
-  meta = yellow bold
-  frag = magenta bold
