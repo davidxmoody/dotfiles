@@ -94,12 +94,9 @@ vim.g.nvim_tree_ignore = {".git", "node_modules", ".DS_Store"}
 
 vim.g.nvim_tree_disable_keybindings = 1
 
-paq("nvim-lua/popup.nvim")
-paq("nvim-lua/plenary.nvim")
-paq("nvim-telescope/telescope.nvim")
-
 paq({"junegunn/fzf", run = "./install --bin"})
 paq("junegunn/fzf.vim")
+paq('ojroques/nvim-lspfuzzy')
 
 -- Language specific
 

@@ -1,8 +1,7 @@
 -- TODO list for lsp/completion:
 -- - Show messages and/or error counts in status line
--- - Try out other lsp go to commands (implementation maybe?)
--- - Try out better quickfix list navigation and maybe use that instead of telescope
 -- - Get eslint/tslint working (also shellcheck and maybe markdownlint)
+
 vim.opt.completeopt = "menuone,noselect"
 
 require"compe".setup {
