@@ -83,16 +83,49 @@ end
 paq("kyazdani42/nvim-web-devicons")
 paq("kyazdani42/nvim-tree.lua")
 
-vim.g.nvim_tree_width = 32
-vim.g.nvim_tree_follow = 1
 vim.g.nvim_tree_indent_markers = 1
 vim.g.nvim_tree_add_trailing = 1
-
 vim.g.nvim_tree_hide_dotfiles = 1
 vim.g.nvim_tree_gitignore = 1
 vim.g.nvim_tree_ignore = {".git", "node_modules", ".DS_Store"}
 
-vim.g.nvim_tree_disable_keybindings = 1
+local tree_cb = require("nvim-tree.config").nvim_tree_callback
+
+require("nvim-tree").setup({
+  update_focused_file = {
+    enable = true,
+  },
+  view = {
+    width = 32,
+    mappings = {
+      custom_only = true,
+      list = {
+        { key = {"<CR>", "i", "<2-LeftMouse>"}, cb = tree_cb("edit") },
+        { key = {"g<CR>", "gi"}, cb = tree_cb("cd") },
+        { key = {"[h"}, cb = tree_cb("prev_git_item") },
+        { key = {"]h"}, cb = tree_cb("next_git_item") },
+        { key = {"-"}, cb = tree_cb("dir_up") },
+        { key = {"a"}, cb = tree_cb("create") },
+        { key = {"d"}, cb = tree_cb("remove") },
+        { key = {"x"}, cb = tree_cb("cut") },
+        { key = {"y"}, cb = tree_cb("copy") },
+        { key = {"Y"}, cb = tree_cb("copy_path") },
+        { key = {"gy"}, cb = tree_cb("copy_absolute_path") },
+        { key = {"p"}, cb = tree_cb("paste") },
+        { key = {"r"}, cb = tree_cb("rename") },
+        { key = {"R"}, cb = tree_cb("refresh") },
+        { key = {"."}, cb = tree_cb("toggle_dotfiles") },
+        { key = {","}, cb = tree_cb("toggle_ignored") },
+        { key = {"<"}, cb = tree_cb("prev_sibling") },
+        { key = {">"}, cb = tree_cb("next_sibling") },
+        { key = {"<BS>"}, cb = tree_cb("close_node") },
+        { key = {"<Tab>"}, cb = tree_cb("preview") },
+        { key = {"<leader>s", "<leader>h"}, cb = tree_cb("vsplit") },
+        { key = {"<leader>t", "<leader>n"}, cb = tree_cb("split") },
+      },
+    },
+  },
+})
 
 paq({"junegunn/fzf", run = "./install --bin"})
 paq("junegunn/fzf.vim")

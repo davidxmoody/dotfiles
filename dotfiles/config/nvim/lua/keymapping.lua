@@ -78,6 +78,9 @@ map("", "<leader>u", "ZZ")
 map("", "<leader>b", "<C-^>")
 map("", "<C-d>", ":q<CR>")
 
+map("", "-", ":NvimTreeFindFile<CR>")
+map("", "g-", ":NvimTreeToggle<CR>")
+
 -- Selection
 
 map_plug("", "<leader>v", "Vii")
@@ -226,50 +229,3 @@ vim.cmd([[
   endfunction
 ]])
 map("n", "<leader>~", ":call FillLine(\"~\")<CR>")
-
--- Nvim tree
-
-map("", "-", ":NvimTreeFindFile<CR>")
-map("", "g-", ":NvimTreeToggle<CR>")
-
-function create_nvim_tree_bindings()
-  local function tree_map(key, cb_name)
-    vim.api.nvim_buf_set_keymap(0, "n", key,
-      require("nvim-tree.config").nvim_tree_callback(cb_name), {
-        noremap = true,
-        silent = true,
-        nowait = true,
-      })
-  end
-
-  tree_map("<CR>", "edit")
-  tree_map("i", "edit")
-  tree_map("<2-LeftMouse>", "edit")
-  tree_map("g<CR>", "cd")
-  tree_map("gi", "cd")
-  tree_map("[h", "prev_git_item")
-  tree_map("]h", "next_git_item")
-  tree_map("-", "dir_up")
-  tree_map("a", "create")
-  tree_map("a", "create")
-  tree_map("d", "remove")
-  tree_map("x", "cut")
-  tree_map("y", "copy")
-  tree_map("Y", "copy_path")
-  tree_map("gy", "copy_absolute_path")
-  tree_map("p", "paste")
-  tree_map("r", "rename")
-  tree_map("R", "refresh")
-  tree_map(".", "toggle_dotfiles")
-  tree_map(",", "toggle_ignored")
-  tree_map("<", "prev_sibling")
-  tree_map(">", "next_sibling")
-  tree_map("<BS>", "close_node")
-  tree_map("<Tab>", "preview")
-  tree_map("<leader>s", "vsplit")
-  tree_map("<leader>h", "vsplit")
-  tree_map("<leader>t", "split")
-  tree_map("<leader>n", "split")
-end
-
-vim.cmd("au Filetype NvimTree :lua create_nvim_tree_bindings()")
