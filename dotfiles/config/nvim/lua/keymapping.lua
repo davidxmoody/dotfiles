@@ -209,8 +209,6 @@ map("", "<leader>f", ":Neoformat<CR>")
 map_plug("x", "<leader>x",
   [["lc<C-R>=substitute(system('node -p', @l), '\n\+$', '', '')<CR><ESC>]])
 
-map("i", "<C-K>", "<C-R>=strftime(\"%F\")<CR>")
-
 vim.cmd([[
   function! ExecuteMacroOverVisualRange()
     echo "@".getcmdline()
