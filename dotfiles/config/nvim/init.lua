@@ -1,5 +1,6 @@
 require("plugins")
 require("options")
+require("tree")
 require("lsp")
 require("completion")
 require("keymapping")
