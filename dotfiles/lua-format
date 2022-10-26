@@ -5,3 +5,6 @@ extra_sep_at_table_end: true
 single_quote_to_double_quote: true
 keep_simple_function_one_line: false
 keep_simple_control_block_one_line: false
+column_table_limit: 0
+chop_down_table: true
+chop_down_kv_table: true

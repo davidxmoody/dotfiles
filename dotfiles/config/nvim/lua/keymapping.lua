@@ -1,5 +1,3 @@
--- Leader key
-
 vim.g.mapleader = " "
 vim.keymap.set("", "<Space>", "<Nop>")
 
@@ -58,7 +56,8 @@ vim.keymap.set("", "<leader>E", ":Buffers<CR>")
 vim.keymap.set("", "<leader>o", ":GFiles?<CR>")
 vim.keymap.set("", "<leader>a", ":Rg<space>")
 vim.keymap.set("", "<leader>A", ":Rg<space><Up><CR>")
-vim.keymap.set("", "<leader>i", ":Rg<space>/<C-R>=fnameescape(expand('%:t:r'))<CR><CR>")
+vim.keymap.set("", "<leader>i",
+  ":Rg<space>/<C-R>=fnameescape(expand('%:t:r'))<CR><CR>")
 vim.keymap.set("", "<leader>B", ":History<CR>")
 
 -- File navigation
@@ -72,7 +71,7 @@ vim.keymap.set("", "g-", ":NvimTreeToggle<CR>")
 
 -- Selection
 
-vim.keymap.set("", "<leader>v", "Vii", {remap=true})
+vim.keymap.set("", "<leader>v", "Vii", {remap = true})
 vim.keymap.set("", "<leader>V", "ggVG")
 
 -- Jumping
@@ -187,10 +186,14 @@ vim.keymap.set("v", "<C-K>", [[:s/^\( *\)\([^:]\+\):.*$/\1"\2",/<CR>]])
 
 vim.keymap.set("n", "<C-K>", "cl<CR><Esc>lf<Space>")
 
-vim.keymap.set("", "ga", ":.Subvert/{true,false}/{false,true}/g<CR>:nohlsearch<CR>")
+vim.keymap.set("", "ga",
+  ":.Subvert/{true,false}/{false,true}/g<CR>:nohlsearch<CR>")
 
-vim.keymap.set("n", "<leader>r", [[:%s/\<<C-R><C-W>\>/<C-R><C-W>/g<Left><Left>]])
-vim.keymap.set("x", "<leader>r", [["zy:%s/\<<C-R><C-R>z\>/<C-R><C-R>z/g<Left><Left>]])
+vim.keymap
+  .set("n", "<leader>r", [[:%s/\<<C-R><C-W>\>/<C-R><C-W>/g<Left><Left>]])
+
+vim.keymap.set("x", "<leader>r",
+  [["zy:%s/\<<C-R><C-R>z\>/<C-R><C-R>z/g<Left><Left>]])
 
 vim.keymap.set("", "<leader>f", ":Neoformat<CR>")
 

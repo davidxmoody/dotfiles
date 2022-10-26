@@ -1,55 +1,51 @@
 require "paq" {
-  "savq/paq-nvim";
+  "savq/paq-nvim",
 
   -- General
-  "tpope/vim-repeat";
-  "tpope/vim-abolish";
-  "tpope/vim-speeddating";
-  "tpope/vim-surround";
-  "tpope/vim-commentary";
-  "lambdalisue/suda.vim";
-  "bluz71/vim-nightfly-guicolors";
+  "tpope/vim-repeat",
+  "tpope/vim-abolish",
+  "tpope/vim-speeddating",
+  "tpope/vim-surround",
+  "tpope/vim-commentary",
+  "lambdalisue/suda.vim",
+  "bluz71/vim-nightfly-guicolors",
 
   -- Navigation
-  "justinmk/vim-sneak";
-  "easymotion/vim-easymotion";
-  "Raimondi/delimitMate";
-  "mattn/emmet-vim";
-  "davidxmoody/vim-indent-object";
-  "SirVer/ultisnips";
+  "justinmk/vim-sneak",
+  "easymotion/vim-easymotion",
+  "Raimondi/delimitMate",
+  "mattn/emmet-vim",
+  "davidxmoody/vim-indent-object",
+  "SirVer/ultisnips",
 
   -- Git
-  "tpope/vim-fugitive";
-  "airblade/vim-gitgutter";
+  "tpope/vim-fugitive",
+  "airblade/vim-gitgutter",
 
   -- Tmux
-  "christoomey/vim-tmux-navigator";
-  "jpalardy/vim-slime";
+  "christoomey/vim-tmux-navigator",
+  "jpalardy/vim-slime",
 
   -- File explorers
-  "kyazdani42/nvim-web-devicons";
-  "kyazdani42/nvim-tree.lua";
-  {"junegunn/fzf", run = "./install --bin"};
-  "junegunn/fzf.vim";
-  'ojroques/nvim-lspfuzzy';
+  "kyazdani42/nvim-web-devicons",
+  "kyazdani42/nvim-tree.lua",
+  {"junegunn/fzf", run = "./install --bin"},
+  "junegunn/fzf.vim",
+  "ojroques/nvim-lspfuzzy",
 
   -- Language specific
-  "nvim-treesitter/nvim-treesitter";
-  "jparise/vim-graphql";
+  "nvim-treesitter/nvim-treesitter",
+  "jparise/vim-graphql",
 
   -- Completion and linting
-  "neovim/nvim-lspconfig";
-  "hrsh7th/nvim-compe";
-  "sbdchd/neoformat";
+  "neovim/nvim-lspconfig",
+  "hrsh7th/nvim-compe",
+  "sbdchd/neoformat",
 }
 
--- Navigation
-
---paq("justinmk/vim-sneak")
 vim.g["sneak#absolute_dir"] = 1
 vim.g["sneak#use_ic_scs"] = 1
 
---paq("easymotion/vim-easymotion")
 vim.g["EasyMotion_smartcase"] = 1
 vim.g["EasyMotion_do_mapping"] = 0
 vim.g["EasyMotion_enter_jump_first"] = 1
@@ -57,13 +53,9 @@ vim.g["EasyMotion_space_jump_first"] = 1
 vim.g["EasyMotion_use_upper"] = 1
 vim.g["EasyMotion_keys"] = "TNSRHLDMGYCWFPBVUOAIE"
 
--- Editing
-
---paq("Raimondi/delimitMate")
 vim.g.delimitMate_expand_cr = 1
 vim.g.delimitMate_nesting_quotes = {"\"", "'", "`"}
 
---paq("mattn/emmet-vim")
 vim.cmd([[
   nnoremap <C-F> <Nop>
   inoremap <C-F> <Nop>
@@ -71,18 +63,10 @@ vim.cmd([[
 ]])
 vim.g.user_emmet_leader_key = "<C-F>"
 
---paq("davidxmoody/vim-indent-object")
-
---paq("SirVer/ultisnips")
 vim.g.UltiSnipsExpandTrigger = "<C-F><C-F>"
 vim.g.UltiSnipsJumpForwardTrigger = "<C-F><C-F>"
 vim.g.UltiSnipsJumpBackwardTrigger = "<C-F><C-B>"
 
--- Git
-
---paq("tpope/vim-fugitive")
-
---paq("airblade/vim-gitgutter")
 vim.g.gitgutter_map_keys = 0
 vim.cmd([[
   au CursorHold * checktime
@@ -90,13 +74,9 @@ vim.cmd([[
   set signcolumn=yes
 ]])
 
--- Tmux
-
---paq("christoomey/vim-tmux-navigator")
 vim.g.tmux_navigator_no_mappings = 1
 vim.g.tmux_navigator_disable_when_zoomed = 1
 
---paq("jpalardy/vim-slime")
 vim.g.slime_target = "tmux"
 vim.g.slime_no_mappings = 1
 vim.g.slime_dont_ask_default = 1
@@ -108,28 +88,6 @@ if (vim.env.TMUX) then
   }
 end
 
--- File explorers
-
---paq("kyazdani42/nvim-web-devicons")
---paq("kyazdani42/nvim-tree.lua")
-
---paq({"junegunn/fzf", run = "./install --bin"})
---paq("junegunn/fzf.vim")
---paq('ojroques/nvim-lspfuzzy')
-
--- Language specific
-
---paq("nvim-treesitter/nvim-treesitter")
-
---paq("jparise/vim-graphql")
-
--- Completion and linting
-
---paq("neovim/nvim-lspconfig")
-
---paq("hrsh7th/nvim-compe")
-
---paq("sbdchd/neoformat")
 vim.g.shfmt_opt = "-i 2 -sr -ci"
 vim.g.neoformat_typescript_prettier = {
   exe = "./node_modules/.bin/prettier",
