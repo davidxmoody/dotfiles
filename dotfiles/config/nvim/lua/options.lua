@@ -16,16 +16,15 @@ vim.g.vimsyn_embed = "l"
 
 vim.cmd("au TextYankPost * lua vim.highlight.on_yank {}")
 
+vim.opt_local.spelllang = "en_gb"
 if vim.fn.filereadable(vim.env.VIM_SPELLFILE) == 1 then
   vim.opt.spellfile = vim.env.VIM_SPELLFILE
 end
 
 -- Indenting
 
-local indent = 2
-vim.opt.tabstop = indent
-vim.opt.shiftwidth = indent
-vim.opt.softtabstop = indent
+vim.opt.tabstop = 2
+vim.opt.shiftwidth = 0
 vim.opt.expandtab = true
 vim.opt.smartindent = true
 vim.opt.shiftround = true
