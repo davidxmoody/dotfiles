@@ -1,25 +1,55 @@
--- Setup
-vim.cmd("packadd paq-nvim")
-local paq = require("paq-nvim").paq
-paq({"savq/paq-nvim", opt = true})
+require "paq" {
+  "savq/paq-nvim";
 
--- General
+  -- General
+  "tpope/vim-repeat";
+  "tpope/vim-abolish";
+  "tpope/vim-speeddating";
+  "tpope/vim-surround";
+  "tpope/vim-commentary";
+  "lambdalisue/suda.vim";
+  "bluz71/vim-nightfly-guicolors";
 
-paq("tpope/vim-repeat")
-paq("tpope/vim-abolish")
-paq("tpope/vim-speeddating")
-paq("tpope/vim-surround")
-paq("tpope/vim-commentary")
-paq("lambdalisue/suda.vim")
-paq("bluz71/vim-nightfly-guicolors")
+  -- Navigation
+  "justinmk/vim-sneak";
+  "easymotion/vim-easymotion";
+  "Raimondi/delimitMate";
+  "mattn/emmet-vim";
+  "davidxmoody/vim-indent-object";
+  "SirVer/ultisnips";
+
+  -- Git
+  "tpope/vim-fugitive";
+  "airblade/vim-gitgutter";
+
+  -- Tmux
+  "christoomey/vim-tmux-navigator";
+  "jpalardy/vim-slime";
+
+  -- File explorers
+  "kyazdani42/nvim-web-devicons";
+  "kyazdani42/nvim-tree.lua";
+  {"junegunn/fzf", run = "./install --bin"};
+  "junegunn/fzf.vim";
+  'ojroques/nvim-lspfuzzy';
+
+  -- Language specific
+  "nvim-treesitter/nvim-treesitter";
+  "jparise/vim-graphql";
+
+  -- Completion and linting
+  "neovim/nvim-lspconfig";
+  "hrsh7th/nvim-compe";
+  "sbdchd/neoformat";
+}
 
 -- Navigation
 
-paq("justinmk/vim-sneak")
+--paq("justinmk/vim-sneak")
 vim.g["sneak#absolute_dir"] = 1
 vim.g["sneak#use_ic_scs"] = 1
 
-paq("easymotion/vim-easymotion")
+--paq("easymotion/vim-easymotion")
 vim.g["EasyMotion_smartcase"] = 1
 vim.g["EasyMotion_do_mapping"] = 0
 vim.g["EasyMotion_enter_jump_first"] = 1
@@ -29,11 +59,11 @@ vim.g["EasyMotion_keys"] = "TNSRHLDMGYCWFPBVUOAIE"
 
 -- Editing
 
-paq("Raimondi/delimitMate")
+--paq("Raimondi/delimitMate")
 vim.g.delimitMate_expand_cr = 1
 vim.g.delimitMate_nesting_quotes = {"\"", "'", "`"}
 
-paq("mattn/emmet-vim")
+--paq("mattn/emmet-vim")
 vim.cmd([[
   nnoremap <C-F> <Nop>
   inoremap <C-F> <Nop>
@@ -41,18 +71,18 @@ vim.cmd([[
 ]])
 vim.g.user_emmet_leader_key = "<C-F>"
 
-paq("davidxmoody/vim-indent-object")
+--paq("davidxmoody/vim-indent-object")
 
-paq("SirVer/ultisnips")
+--paq("SirVer/ultisnips")
 vim.g.UltiSnipsExpandTrigger = "<C-F><C-F>"
 vim.g.UltiSnipsJumpForwardTrigger = "<C-F><C-F>"
 vim.g.UltiSnipsJumpBackwardTrigger = "<C-F><C-B>"
 
 -- Git
 
-paq("tpope/vim-fugitive")
+--paq("tpope/vim-fugitive")
 
-paq("airblade/vim-gitgutter")
+--paq("airblade/vim-gitgutter")
 vim.g.gitgutter_map_keys = 0
 vim.cmd([[
   au CursorHold * checktime
@@ -62,11 +92,11 @@ vim.cmd([[
 
 -- Tmux
 
-paq("christoomey/vim-tmux-navigator")
+--paq("christoomey/vim-tmux-navigator")
 vim.g.tmux_navigator_no_mappings = 1
 vim.g.tmux_navigator_disable_when_zoomed = 1
 
-paq("jpalardy/vim-slime")
+--paq("jpalardy/vim-slime")
 vim.g.slime_target = "tmux"
 vim.g.slime_no_mappings = 1
 vim.g.slime_dont_ask_default = 1
@@ -80,20 +110,29 @@ end
 
 -- File explorers
 
-paq("kyazdani42/nvim-web-devicons")
-paq("kyazdani42/nvim-tree.lua")
+--paq("kyazdani42/nvim-web-devicons")
+--paq("kyazdani42/nvim-tree.lua")
 
-vim.g.nvim_tree_indent_markers = 1
-vim.g.nvim_tree_add_trailing = 1
-vim.g.nvim_tree_hide_dotfiles = 1
-vim.g.nvim_tree_gitignore = 1
-vim.g.nvim_tree_ignore = {".git", "node_modules", ".DS_Store"}
+-- vim.g.nvim_tree_indent_markers = 1
+-- vim.g.nvim_tree_add_trailing = 1
+-- vim.g.nvim_tree_hide_dotfiles = 1
+-- vim.g.nvim_tree_gitignore = 1
+-- vim.g.nvim_tree_ignore = {".git", "node_modules", ".DS_Store"}
 
 local tree_cb = require("nvim-tree.config").nvim_tree_callback
 
 require("nvim-tree").setup({
+  renderer = {
+    add_trailing = true,
+    indent_markers = {
+      enable = true,
+    },
+  },
   update_focused_file = {
     enable = true,
+  },
+  filters = {
+    dotfiles = true,
   },
   view = {
     width = 32,
@@ -127,23 +166,23 @@ require("nvim-tree").setup({
   },
 })
 
-paq({"junegunn/fzf", run = "./install --bin"})
-paq("junegunn/fzf.vim")
-paq('ojroques/nvim-lspfuzzy')
+--paq({"junegunn/fzf", run = "./install --bin"})
+--paq("junegunn/fzf.vim")
+--paq('ojroques/nvim-lspfuzzy')
 
 -- Language specific
 
-paq("nvim-treesitter/nvim-treesitter")
+--paq("nvim-treesitter/nvim-treesitter")
 
-paq("jparise/vim-graphql")
+--paq("jparise/vim-graphql")
 
 -- Completion and linting
 
-paq("neovim/nvim-lspconfig")
+--paq("neovim/nvim-lspconfig")
 
-paq("hrsh7th/nvim-compe")
+--paq("hrsh7th/nvim-compe")
 
-paq("sbdchd/neoformat")
+--paq("sbdchd/neoformat")
 vim.g.shfmt_opt = "-i 2 -sr -ci"
 vim.g.neoformat_typescript_prettier = {
   exe = "./node_modules/.bin/prettier",
