@@ -69,8 +69,6 @@ PS2="\[\e[30m\]$arrow_char\[\e[0m\] "
 export P_DIR="$HOME/p"
 export RC_DIR="$P_DIR/dotfiles"
 export TMP_DIR="$HOME/t"
-export DIARY_DIR="$HOME/Dropbox/diary-data"
-export VIM_SPELLFILE="$HOME/Dropbox/diary-data/vim/en.utf-8.add"
 
 # Path stuff ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
