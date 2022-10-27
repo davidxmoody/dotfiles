@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-
-copy_cmd='xclip -selection clipboard'
-type pbcopy > /dev/null 2> /dev/null && copy_cmd='pbcopy'
-
-$copy_cmd
