@@ -24,7 +24,6 @@ require "paq" {
 
   -- Tmux
   "christoomey/vim-tmux-navigator",
-  "jpalardy/vim-slime",
 
   -- File explorers
   "kyazdani42/nvim-web-devicons",
@@ -76,17 +75,6 @@ vim.cmd([[
 
 vim.g.tmux_navigator_no_mappings = 1
 vim.g.tmux_navigator_disable_when_zoomed = 1
-
-vim.g.slime_target = "tmux"
-vim.g.slime_no_mappings = 1
-vim.g.slime_dont_ask_default = 1
-vim.g.slime_python_ipython = 1
-if (vim.env.TMUX) then
-  vim.g.slime_default_config = {
-    socket_name = vim.env.TMUX:gsub(",.*", ""),
-    target_pane = ":.2",
-  }
-end
 
 vim.g.shfmt_opt = "-i 2 -sr -ci"
 vim.g.neoformat_typescript_prettier = {

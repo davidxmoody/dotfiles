@@ -174,12 +174,6 @@ vim.keymap.set("", "<leader>w", ":set wrap!<CR>")
 vim.keymap.set("", "<leader>W", ":set colorcolumn=80<CR>")
 vim.keymap.set("", "<leader>/", ":nohlsearch<CR>")
 
--- Slime
-
-vim.keymap.set("x", "<leader>p", "<Plug>SlimeRegionSend")
-vim.keymap.set("n", "<leader>p", "<Plug>SlimeParagraphSend")
-vim.keymap.set("n", "<leader>P", "<Plug>SlimeConfig")
-
 -- Refactoring
 
 vim.keymap.set("v", "<C-K>", [[:s/^\( *\)\([^:]\+\):.*$/\1"\2",/<CR>]])
