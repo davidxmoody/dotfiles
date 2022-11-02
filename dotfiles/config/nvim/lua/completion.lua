@@ -1,77 +1,58 @@
--- TODO list for lsp/completion:
--- - Show messages and/or error counts in status line
--- - Get eslint/tslint working (also shellcheck and maybe markdownlint)
-
 vim.opt.completeopt = "menuone,noselect"
 
-require"compe".setup {
-  enabled = true,
-  autocomplete = true,
-  debug = false,
-  min_length = 1,
-  preselect = "enable",
-  throttle_time = 80,
-  source_timeout = 200,
-  incomplete_delay = 400,
-  max_abbr_width = 100,
-  max_kind_width = 100,
-  max_menu_width = 100,
-  documentation = true,
+local cmp = require("cmp")
 
-  source = {
-    path = true,
-    nvim_lsp = true,
-    nvim_lua = true,
-    buffer = false,
-    calc = false,
-    vsnip = false,
-    spell = false,
-    tags = false,
-    omni = false,
-    snippets_nvim = false,
-    treesitter = false,
+cmp.setup({
+  snippet = {
+    expand = function(args)
+      vim.fn["UltiSnips#Anon"](args.body)
+    end,
   },
-}
+  window = {
+    completion = cmp.config.window.bordered(),
+    documentation = cmp.config.window.bordered(),
+  },
+  mapping = cmp.mapping.preset.insert({
+    -- ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+    -- ["<C-f>"] = cmp.mapping.scroll_docs(4),
+    ["<C-Space>"] = cmp.mapping.complete(),
+    ["<CR>"] = function(fallback)
+      if cmp.visible() then
+        cmp.confirm({select = true})
+      else
+        fallback()
+      end
+    end,
+    ["<Tab>"] = function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      else
+        fallback()
+      end
+    end,
+    ["<S-Tab>"] = function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item()
+      else
+        fallback()
+      end
+    end,
+  }),
+  sources = cmp.config.sources({
+    {name = "nvim_lsp"},
+    {name = "ultisnips"},
+    {name = "path"},
+  }, {{name = "buffer"}}),
+})
 
-local t = function(str)
-  return vim.api.nvim_replace_termcodes(str, true, true, true)
-end
+cmp.setup.cmdline({"/", "?"}, {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = {{name = "buffer"}},
+})
 
-local check_back_space = function()
-  local col = vim.fn.col(".") - 1
-  if col == 0 or vim.fn.getline("."):sub(col, col):match("%s") then
-    return true
-  else
-    return false
-  end
-end
+cmp.setup.cmdline(":", {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = cmp.config.sources({{name = "path"}}, {{name = "cmdline"}}),
+})
 
-_G.tab_complete = function()
-  if vim.fn.pumvisible() == 1 then
-    return t "<C-n>"
-  elseif check_back_space() then
-    return t "<Tab>"
-  else
-    return vim.fn["compe#complete"]()
-  end
-end
-
-_G.s_tab_complete = function()
-  if vim.fn.pumvisible() == 1 then
-    return t "<C-p>"
-  else
-    return t "<S-Tab>"
-  end
-end
-
-vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
-vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
-vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
-vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
-
-vim.api.nvim_set_keymap("i", "<C-Space>", "compe#complete()",
-  {silent = true, expr = true})
-
-vim.api.nvim_set_keymap("i", "<CR>",
-  [[compe#confirm({ 'keys': "\<Plug>delimitMateCR", 'mode': '' })]],
-  {silent = true, expr = true})
+cmp.setup.filetype({"markdown", "help"}, {completion = {autocomplete = false}})

@@ -25,8 +25,10 @@ local on_attach = function(client, bufnr)
   buf_set_keymap("n", "_", "<Cmd>lua vim.diagnostic.goto_next()<CR>", opts)
 end
 
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
 -- local servers = {"denols"}
 local servers = {"tsserver"}
 for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup {on_attach = on_attach}
+  nvim_lsp[lsp].setup({on_attach = on_attach, capabilities = capabilities})
 end
