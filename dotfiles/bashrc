@@ -107,18 +107,7 @@ add_to_path "$N_PREFIX/bin"
 
 add_to_path "$RC_DIR/bin"
 add_to_path "$HOME/.bin"
-add_to_path "$DIARY_DIR/bin"
 add_to_path "$HOME/.local/bin"
-add_to_path "$HOME/.cargo/bin"
-add_to_path "$HOME/go/bin"
-add_to_path "$HOME/.linkerd2/bin"
-add_to_path "/usr/local/opt/ruby/bin"
-add_to_path "$HOME/.composer/vendor/bin"
-
-export ANDROID_HOME=$HOME/Library/Android/sdk
-add_to_path "$ANDROID_HOME/platform-tools"
-add_to_path "$ANDROID_HOME/tools"
-export GRADLE_OPTS="-Dorg.gradle.daemon=true"
 
 export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 

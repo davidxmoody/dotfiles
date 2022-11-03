@@ -55,8 +55,8 @@ ga() {
       cd "$(git rev-parse --show-toplevel)" &&
         git status -sb -uall |
         fzf --ansi --header-lines=1 --multi --preview='git diff {2}' |
-        sed 's/^.. //' |
-        xargs -d '\n' git add
+          sed 's/^.. //' |
+          xargs -d '\n' git add
     )
   else
     git add "$@"
@@ -97,8 +97,8 @@ gsti() {
     cd "$(git rev-parse --show-toplevel)" &&
       git status -sb -uall |
       fzf --ansi --header-lines=1 --multi --preview='git diff {2}' |
-      sed 's/^.. //' |
-      xargs -d '\n' git stash push --include-untracked --
+        sed 's/^.. //' |
+        xargs -d '\n' git stash push --include-untracked --
   )
 }
 alias glm='git lg --author="$(git config user.name)"'
@@ -193,16 +193,7 @@ alias ngd='npm run generate-db-types'
 alias nc='npx npm-check -u'
 alias rn='npx react-native'
 alias tsw='npx tsc -w --noEmit'
-alias generate-readme='npx readme-md-generator'
 nodei() { node -i -e "$(< "${1-/dev/null}")"; }
-
-# Navy ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-alias nvd='[ -x ./develop.sh ] && ./develop.sh || navy develop'
-alias nvu='navy update'
-alias nvl='navy live'
-alias nvp='navy ps'
-alias nv='navy'
 
 # Diary ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -215,17 +206,15 @@ alias ds='diary search'
 
 alias vim='nvim'
 alias v='nvim'
-alias vv='(cd "$RC_DIR" && nvim "dotfiles/config/nvim/init.lua")'
-alias vb='(cd "$RC_DIR" && nvim "dotfiles/bash_aliases")'
-alias vbl='(cd "$HOME" && nvim ".bashrc-local")'
+alias vv='(cd "$RC_DIR" && nvim dotfiles/config/nvim/init.lua)'
+alias vb='(cd "$RC_DIR" && nvim dotfiles/bash_aliases)'
+alias vbl='nvim ~/.bashrc-local'
 alias vp='v package.json'
 alias v-='v -'
 
 # cd shortcuts ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 alias up='cd ..'
-alias upp='cd ../..'
-alias uppp='cd ../../..'
 alias b='cd - >/dev/null'
 alias cdp='cd "$P_DIR"'
 alias cdt='cd "$TMP_DIR"'
@@ -268,10 +257,8 @@ alias echomanpath='echo $MANPATH | sed "s/:/\n/g"'
 alias tsize='echo "$(tput cols)x$(tput lines)"'
 alias watchtsize='while true; do tsize; sleep 0.1; done | uniq'
 alias copywithoutnewline='tr -d \\n | pbcopy'
-alias copypostgresport='navy port postgres 5432 | tee >(copywithoutnewline)'
 alias copyuuid='uuidgen | tr "[:upper:]" "[:lower:]" | copywithoutnewline'
 alias py='python3'
 alias timestamps="gawk '{ print strftime(\"[%Y-%m-%d %H:%M:%S]\"), \$0 }'"
 alias tree='tree -I "node_modules|package-lock.json"'
 https-proxy() { http-server /dev/null -p 443 --ssl --cert "$LOCAL_SSL_CERT" --key "$LOCAL_SSL_KEY" -P http://localhost:${1-4000}; }
-remarkablechop() { convert "$1" -chop 110x0 "$2"; }
