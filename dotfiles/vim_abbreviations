@@ -9,54 +9,12 @@ let g:abolish_save_file = expand('<sfile>:p')
 iab <buffer> i I
 iab <buffer> (i (I
 
-iab <buffer> h the
-iab <buffer> H The
-iab <buffer> (h (the
-
-iab <buffer> t to
-iab <buffer> T To
-iab <buffer> (t (to
-
-iab <buffer> d and
-iab <buffer> D And
-iab <buffer> (d (and
-
-iab <buffer> j just
-iab <buffer> J Just
-iab <buffer> (j (just
-
-iab <buffer> q quick
-iab <buffer> Q Quick
-iab <buffer> (q (quick
-
-iab <buffer> w with
-iab <buffer> W With
-iab <buffer> (w (with
-
-iab <buffer> v very
-iab <buffer> V Very
-iab <buffer> (v (very
-
-iab <buffer> b be
-iab <buffer> B Be
-iab <buffer> (b (be
-
-iab <buffer> f of
-iab <buffer> F Of
-iab <buffer> (f (of
-
 iab <buffer> id I'd
 iab <buffer> Id I'd
-
-Abolish -buffer wh{,s} what{,'s}
-Abolish -buffer th{,s} that{,'s}
 
 Abolish -buffer im I'm
 Abolish -buffer iv{,e} I've
 Abolish -buffer il I'll
-
-Abolish -buffer ie i.e.
-Abolish -buffer eg e.g.
 
 Abolish -buffer {he,she,there,here,mum,dad,children}s {}'s
 Abolish -buffer {you,they}ve {}'ve
@@ -83,9 +41,5 @@ Abolish -buffer december December
 
 Abolish -buffer christmas Christmas
 Abolish -buffer hev however
-Abolish -buffer td today
-Abolish -buffer tm tomorrow
-Abolish -buffer y{,e}d yesterday
-Abolish -buffer speach speech
 Abolish -buffer {yt,youtube} YouTube
 Abolish -buffer atracker ATracker
