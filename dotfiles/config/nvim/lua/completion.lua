@@ -56,3 +56,7 @@ cmp.setup.cmdline(":", {
 })
 
 cmp.setup.filetype({"markdown", "help"}, {completion = {autocomplete = false}})
+
+require("nvim-autopairs").setup()
+local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())

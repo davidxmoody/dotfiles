@@ -13,7 +13,7 @@ require "paq" {
   -- Navigation
   "justinmk/vim-sneak",
   "easymotion/vim-easymotion",
-  "Raimondi/delimitMate",
+  "windwp/nvim-autopairs",
   "mattn/emmet-vim",
   "davidxmoody/vim-indent-object",
   "SirVer/ultisnips",
@@ -56,9 +56,6 @@ vim.g["EasyMotion_enter_jump_first"] = 1
 vim.g["EasyMotion_space_jump_first"] = 1
 vim.g["EasyMotion_use_upper"] = 1
 vim.g["EasyMotion_keys"] = "TNSRHLDMGYCWFPBVUOAIE"
-
-vim.g.delimitMate_expand_cr = 1
-vim.g.delimitMate_nesting_quotes = {"\"", "'", "`"}
 
 vim.cmd([[
   nnoremap <C-F> <Nop>
