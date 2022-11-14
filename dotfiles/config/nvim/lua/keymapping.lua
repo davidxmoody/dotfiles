@@ -77,13 +77,13 @@ vim.keymap.set(nxo, "<leader>V", "ggVG")
 
 -- Jumping
 
-vim.keymap.set({"n", "x", "o"}, "o", "<Plug>(easymotion-overwin-f2)")
-vim.keymap.set({"n", "x", "o"}, "f", "<Plug>Sneak_f")
-vim.keymap.set({"n", "x", "o"}, "F", "<Plug>Sneak_F")
-vim.keymap.set({"n", "x", "o"}, "l", "<Plug>Sneak_t")
-vim.keymap.set({"n", "x", "o"}, "L", "<Plug>Sneak_T")
-vim.keymap.set({"n", "x", "o"}, "(", "<Plug>Sneak_,")
-vim.keymap.set({"n", "x", "o"}, ")", "<Plug>Sneak_;")
+vim.keymap.set(nxo, "o", "<Plug>(easymotion-overwin-f2)")
+vim.keymap.set(nxo, "f", "<Plug>Sneak_f")
+vim.keymap.set(nxo, "F", "<Plug>Sneak_F")
+vim.keymap.set(nxo, "l", "<Plug>Sneak_t")
+vim.keymap.set(nxo, "L", "<Plug>Sneak_T")
+vim.keymap.set(nxo, "(", "<Plug>Sneak_,")
+vim.keymap.set(nxo, ")", "<Plug>Sneak_;")
 
 -- Search
 
@@ -118,6 +118,14 @@ vim.keymap.set("n", "gP", "V\"0p")
 vim.keymap.set("x", ".", ":norm.<CR>")
 vim.keymap.set(nxo, "<leader>.", "/\\C\\<\"\\><CR>.")
 
+-- Expansion
+
+vim.keymap.set(nxo, "<C-F>", "<Nop>")
+vim.keymap.set(nxo, "<C-B>", "<Nop>")
+vim.g.UltiSnipsExpandTrigger = "<C-F>"
+vim.g.UltiSnipsJumpForwardTrigger = "<C-F>"
+vim.g.UltiSnipsJumpBackwardTrigger = "<C-B>"
+
 -- Window splitting
 
 vim.keymap.set(nxo, "<leader>h", ":aboveleft vsplit<CR>")
@@ -132,10 +140,13 @@ vim.keymap.set("n", "<C-T>", ":TmuxNavigateDown<CR>", {silent = true})
 vim.keymap.set("n", "<C-N>", ":TmuxNavigateUp<CR>", {silent = true})
 vim.keymap.set("n", "<C-S>", ":TmuxNavigateRight<CR>", {silent = true})
 
-vim.keymap.set({"x", "s"}, "<C-H>", "<Esc>:TmuxNavigateLeft<CR>", {silent = true})
-vim.keymap.set({"x", "s"}, "<C-T>", "<Esc>:TmuxNavigateDown<CR>", {silent = true})
+vim.keymap.set({"x", "s"}, "<C-H>", "<Esc>:TmuxNavigateLeft<CR>",
+  {silent = true})
+vim.keymap.set({"x", "s"}, "<C-T>", "<Esc>:TmuxNavigateDown<CR>",
+  {silent = true})
 vim.keymap.set({"x", "s"}, "<C-N>", "<Esc>:TmuxNavigateUp<CR>", {silent = true})
-vim.keymap.set({"x", "s"}, "<C-S>", "<Esc>:TmuxNavigateRight<CR>", {silent = true})
+vim.keymap.set({"x", "s"}, "<C-S>", "<Esc>:TmuxNavigateRight<CR>",
+  {silent = true})
 
 vim.keymap.set("i", "<C-H>", "<Right><Esc>:TmuxNavigateLeft<CR>",
   {silent = true})

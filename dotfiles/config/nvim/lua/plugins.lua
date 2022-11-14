@@ -57,17 +57,6 @@ vim.g["EasyMotion_space_jump_first"] = 1
 vim.g["EasyMotion_use_upper"] = 1
 vim.g["EasyMotion_keys"] = "TNSRHLDMGYCWFPBVUOAIE"
 
-vim.cmd([[
-  nnoremap <C-F> <Nop>
-  inoremap <C-F> <Nop>
-  xnoremap <C-F> <Nop>
-]])
-vim.g.user_emmet_leader_key = "<C-F>"
-
-vim.g.UltiSnipsExpandTrigger = "<C-F><C-F>"
-vim.g.UltiSnipsJumpForwardTrigger = "<C-F><C-F>"
-vim.g.UltiSnipsJumpBackwardTrigger = "<C-F><C-B>"
-
 vim.g.gitgutter_map_keys = 0
 vim.cmd([[
   au CursorHold * checktime

@@ -15,54 +15,40 @@ endsnippet
 # Console ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 snippet cl "console.log()"
-console.log(${1:"${2:message}"})
+console.log(${VISUAL}${1})
 endsnippet
 
 snippet cw "console.warn()"
-console.warn(${1:"${2:message}"})
+console.warn(${VISUAL}${1})
 endsnippet
 
 snippet ce "console.error()"
-console.error(${1:"${2:message}"})
+console.error(${VISUAL}${1})
 endsnippet
 
 # Misc ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 snippet int "Interface"
 interface ${1:InterfaceName} {
-	$2
+	${2}
 }
 endsnippet
 
 snippet describe "mocha describe"
-describe("$1", () => {
-	$2
+describe("${1}", () => {
+	${VISUAL}${2}
 })
 endsnippet
 
 snippet it "mocha it"
-it("$1", () => {
-	$2
+it("${1}", () => {
+	${VISUAL}${2}
 })
 endsnippet
 
 snippet ita "mocha async it"
-it("$1", async () => {
-	$2
-})
-endsnippet
-
-# Styled components ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-snippet stc "HTML styled component"
-const ${1:Container} = styled.${3:div}\`
-	${2}${4}
-\`
-endsnippet
-
-snippet stn "RN styled component"
-const ${1:Container} = styled.${3:View}({
-	${2}${4}
+it("${1}", async () => {
+	${VISUAL}${2}
 })
 endsnippet
 
@@ -87,8 +73,6 @@ const [${1:thing}, ${2:set${1/\w?/\u$0/}}] = useState${4}(${3:undefined})
 endsnippet
 
 snippet react "React functional component"
-import * as React from "react"
-
 interface Props {
 	${1:// TODO}
 }
