@@ -1,6 +1,4 @@
--- Constants ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-bundleIDs = {
+local bundleIDs = {
   chrome = "com.google.Chrome",
   iterm = "com.googlecode.iterm2",
   slack = "com.tinyspeck.slackmacgap",
@@ -8,15 +6,7 @@ bundleIDs = {
   hammerspoon = "org.hammerspoon.Hammerspoon",
 }
 
--- Helpers ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-function printTable(t)
-  for k, v in pairs(t) do
-    print(k, v)
-  end
-end
-
-function getMainWindow(bundleID, quiet)
+local function getMainWindow(bundleID, quiet)
   local app = hs.application.applicationsForBundleID(bundleID)[1]
   if app == nil then
     if not quiet then
@@ -36,56 +26,34 @@ function getMainWindow(bundleID, quiet)
   return win
 end
 
--- Functions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-function focusChrome()
-  local win = getMainWindow(bundleIDs.chrome)
-  win:focus()
+local function createFocusFunction(bundleID)
+  return function()
+    local win = getMainWindow(bundleID)
+    if win then
+      win:focus()
+    end
+  end
 end
 
-function focusIterm()
-  local win = getMainWindow(bundleIDs.iterm)
-  win:focus()
-end
-
-function focusSlack()
-  local win = getMainWindow(bundleIDs.slack)
-  win:focus()
-end
-
--- function focusSimulatorAndChrome()
---   local simulatorWin = getMainWindow(bundleIDs.simulator, true)
---   local chromeWin = getMainWindow(bundleIDs.chrome, true)
---   if simulatorWin ~= nil then simulatorWin:focus() end
---   if chromeWin ~= nil then chromeWin:focus() end
--- end
-
-function focusNextOtherWindow()
+local function focusNextOtherWindow()
   for k, win in pairs(hs.window.orderedWindows()) do
-    bundleID = win:application():bundleID()
+    local bundleID = win:application():bundleID()
 
-    if
-      k ~= 1 and
-      bundleID ~= bundleIDs.chrome and
-      bundleID ~= bundleIDs.iterm and
-      bundleID ~= bundleIDs.hammerspoon and
-      bundleID ~= bundleIDs.slack
-    then
+    if k ~= 1 and bundleID ~= bundleIDs.chrome and bundleID ~= bundleIDs.iterm and
+      bundleID ~= bundleIDs.hammerspoon and bundleID ~= bundleIDs.slack then
       win:focus()
       return
     end
   end
 end
 
--- Keybindings ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-mod = {"option"}
-shiftedMod = {"option", "shift"}
+local mod = {"option"}
+local shiftedMod = {"option", "shift"}
 
 hs.hotkey.bind(mod, "g", focusNextOtherWindow)
-hs.hotkey.bind(mod, "c", focusChrome)
-hs.hotkey.bind(mod, "r", focusIterm)
-hs.hotkey.bind(mod, "l", focusSlack)
+hs.hotkey.bind(mod, "c", createFocusFunction(bundleIDs.chrome))
+hs.hotkey.bind(mod, "r", createFocusFunction(bundleIDs.iterm))
+hs.hotkey.bind(mod, "l", createFocusFunction(bundleIDs.slack))
 
 hs.hotkey.bind(shiftedMod, "r", hs.reload)
 

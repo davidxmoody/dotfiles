@@ -2,7 +2,9 @@ require("lspfuzzy").setup({})
 
 local nvim_lsp = require("lspconfig")
 
-local on_attach = function(client, bufnr)
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+local on_attach = function(_, bufnr)
   local function buf_set_keymap(...)
     vim.api.nvim_buf_set_keymap(bufnr, ...)
   end
@@ -23,10 +25,27 @@ local on_attach = function(client, bufnr)
   buf_set_keymap("n", "_", "<Cmd>lua vim.diagnostic.goto_next()<CR>", opts)
 end
 
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
+local settings = {
+  Lua = {
+    runtime = {version = "LuaJIT"},
+    diagnostics = {globals = {"vim", "hs"}},
+    workspace = {
+      library = {
+        vim.fn.expand("$VIMRUNTIME/lua"),
+        vim.fn.expand("$VIMRUNTIME/lua/vim/lsp"),
+        "/Applications/Hammerspoon.app/Contents/Resources/extensions/hs/",
+      },
+    },
+    telemetry = {enable = false},
+  },
+}
 
 -- local servers = {"denols"}
-local servers = {"tsserver"}
+local servers = {"tsserver", "sumneko_lua"}
 for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup({on_attach = on_attach, capabilities = capabilities})
+  nvim_lsp[lsp].setup({
+    capabilities = capabilities,
+    on_attach = on_attach,
+    settings = settings,
+  })
 end
