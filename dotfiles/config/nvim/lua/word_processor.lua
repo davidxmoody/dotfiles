@@ -1,25 +1,43 @@
-vim.cmd([[
-  func! WordProcessorMode()
-    inoreabbrev <buffer> i I
-    inoreabbrev <buffer> (i (I
-    inoreabbrev <buffer> id I'd
-    inoreabbrev <buffer> Id I'd
-    inoreabbrev <buffer> im I'm
-    inoreabbrev <buffer> Im I'm
-    inoreabbrev <buffer> iv I've
-    inoreabbrev <buffer> Iv I've
-    inoreabbrev <buffer> il I'll
-    inoreabbrev <buffer> Il I'll
-    inoreabbrev <buffer> hev however
-    inoreabbrev <buffer> Hev however
+local function uppercaseFirstLetter(input)
+  return input:gsub("^%l", string.upper)
+end
 
-    augroup auto_capitalize_sentences
-      au!
-      au InsertCharPre <buffer> if search('\v^%#|^\s*-\s+%#|^#+\s+%#|[.!?]\s+%#', 'bcnW') != 0 | let v:char = toupper(v:char) | endif
-    augroup END
-  endfu
+local function abbrev(lhs, rhs)
+  vim.cmd({cmd = "inoreabbrev", args = {"<buffer>", lhs, rhs}})
+end
 
-  com! WP call WordProcessorMode()
+local function upperAbbrev(lhs, rhs)
+  abbrev(lhs, rhs)
+  abbrev(uppercaseFirstLetter(lhs), uppercaseFirstLetter(rhs))
+end
 
-  au BufNewFile,BufRead diary-*.md call WordProcessorMode()
-]])
+local function defineCustomAbbreviations()
+  upperAbbrev("i", "I")
+  upperAbbrev("id", "I'd")
+  upperAbbrev("im", "I'm")
+  upperAbbrev("iv", "I've")
+  upperAbbrev("il", "I'll")
+  upperAbbrev("hev", "however")
+end
+
+local function setupAutoCapitalization()
+  vim.api.nvim_create_augroup("auto_capitalize", {clear = true})
+  vim.api.nvim_create_autocmd("InsertCharPre", {
+    group = "auto_capitalize",
+    buffer = 0,
+    callback = function()
+      if vim.fn.search("\\v^%#|^\\s*-\\s+%#|^#+\\s+%#|[.!?]\\s+%#", "bcnW",
+        vim.fn.line(".")) ~= 0 then
+        vim.v.char = string.upper(vim.v.char)
+      end
+    end,
+  })
+end
+
+vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {
+  pattern = "diary-*.md",
+  callback = function()
+    defineCustomAbbreviations()
+    setupAutoCapitalization()
+  end,
+})
