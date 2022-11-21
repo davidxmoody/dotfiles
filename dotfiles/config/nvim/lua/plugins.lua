@@ -3,7 +3,6 @@ require "paq" {
 
   -- General
   "tpope/vim-repeat",
-  "tpope/vim-abolish",
   "tpope/vim-speeddating",
   "tpope/vim-surround",
   "tpope/vim-commentary",

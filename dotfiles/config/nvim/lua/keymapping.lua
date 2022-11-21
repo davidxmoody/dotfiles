@@ -208,7 +208,8 @@ vim.keymap.set("v", "<C-K>", [[:s/^\( *\)\([^:]\+\):.*$/\1"\2",/<CR>]])
 vim.keymap.set("n", "<C-K>", "cl<CR><Esc>lf<Space>")
 
 vim.keymap.set(nxo, "ga",
-  ":.Subvert/{true,false}/{false,true}/g<CR>:nohlsearch<CR>")
+  ":.s/true\\|false/\\=submatch(0)=='true'?'false':'true'/g<CR>:nohlsearch<CR>",
+  {silent = true})
 
 vim.keymap
   .set("n", "<leader>r", [[:%s/\<<C-R><C-W>\>/<C-R><C-W>/g<Left><Left>]])
