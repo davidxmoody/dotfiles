@@ -50,6 +50,17 @@ vim.keymap.set(nxo, "U", "<C-R>")
 
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
 
+-- LSP
+
+vim.keymap.set("n", "gd", vim.lsp.buf.definition)
+vim.keymap.set("n", "gD", vim.lsp.buf.type_definition)
+vim.keymap.set("n", "gl", vim.lsp.buf.hover)
+vim.keymap.set("n", "gr", vim.lsp.buf.references)
+vim.keymap.set("n", "gR", vim.lsp.buf.rename)
+vim.keymap.set("n", "gs", vim.lsp.buf.code_action)
+vim.keymap.set("n", "gS", vim.diagnostic.open_float)
+vim.keymap.set("n", "_", vim.diagnostic.goto_next)
+
 -- FZF
 
 vim.keymap.set(nxo, "<leader>e", ":Files<CR>")
