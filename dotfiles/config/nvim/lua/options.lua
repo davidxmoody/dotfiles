@@ -12,7 +12,11 @@ vim.opt.cursorline = true
 vim.opt.mouse = "nv"
 vim.g.vimsyn_embed = "l"
 
-vim.cmd("au TextYankPost * lua vim.highlight.on_yank {}")
+vim.api.nvim_create_autocmd("TextYankPost", {
+  callback = function()
+    vim.highlight.on_yank({})
+  end,
+})
 
 vim.opt_local.spelllang = "en_gb"
 if vim.fn.filereadable(vim.env.VIM_SPELLFILE) == 1 then
@@ -39,7 +43,7 @@ vim.opt.scrolloff = 2
 vim.opt.sidescrolloff = 2
 
 vim.opt.equalalways = true
-vim.cmd("autocmd VimResized * wincmd =")
+vim.api.nvim_create_autocmd("VimResized", {command = "wincmd ="})
 
 vim.opt.formatoptions = "rqn1j"
 vim.opt.textwidth = 79

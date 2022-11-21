@@ -57,11 +57,9 @@ vim.g["EasyMotion_use_upper"] = 1
 vim.g["EasyMotion_keys"] = "TNSRHLDMGYCWFPBVUOAIE"
 
 vim.g.gitgutter_map_keys = 0
-vim.cmd([[
-  au CursorHold * checktime
-  set updatetime=100
-  set signcolumn=yes
-]])
+vim.opt.signcolumn = "yes"
+vim.opt.updatetime = 100
+vim.api.nvim_create_autocmd("CursorHold", {command = "checktime"})
 
 vim.g.tmux_navigator_no_mappings = 1
 vim.g.tmux_navigator_disable_when_zoomed = 1
