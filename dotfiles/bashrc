@@ -4,7 +4,7 @@ HISTSIZE=1000000
 HISTFILESIZE=1000000
 HISTCONTROL="erasedups:ignoreboth"
 HISTIGNORE="&:[ ]*:exit:ls:bg:fg:clear:u:b"
-HISTTIMEFORMAT='%F %T '
+HISTTIMEFORMAT="%F %T "
 shopt -s histappend
 shopt -s cmdhist
 
@@ -24,7 +24,7 @@ arrow_char=$'\uE0B0'
 
 __prompt_command() {
   local last_exit_status="$?"
-  local last_job_num="$(jobs | tail -n1 | cut -f1 -d'+')"
+  local last_job_num="$(jobs | tail -n1 | cut -f1 -d"+")"
 
   if [ -n "$TMUX" ]; then
     tmux select-pane -T "$(tmux-get-pane-title)"
@@ -109,7 +109,7 @@ add_to_path "$RC_DIR/bin"
 add_to_path "$HOME/.bin"
 add_to_path "$HOME/.local/bin"
 
-export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
+export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 
 # Source other files ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -119,8 +119,8 @@ source_if_exists() {
 
 source_if_exists "$HOME/.bash_aliases"
 
-source_if_exists "$HOME/.fzf/shell/key-bindings.bash"
-export FZF_DEFAULT_COMMAND='rg --files --sortr=modified'
+source_if_exists "/opt/homebrew/opt/fzf/shell/key-bindings.bash"
+export FZF_DEFAULT_COMMAND="rg --files --sortr=modified"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 source_if_exists "$HOME/.bashrc-local"
