@@ -12,6 +12,10 @@ vim.opt.cursorline = true
 vim.opt.mouse = "nv"
 vim.g.vimsyn_embed = "l"
 
+vim.opt.signcolumn = "yes"
+vim.opt.updatetime = 100
+vim.api.nvim_create_autocmd("CursorHold", {command = "checktime"})
+
 vim.api.nvim_create_autocmd("TextYankPost", {
   callback = function()
     vim.highlight.on_yank({})
@@ -47,3 +51,12 @@ vim.api.nvim_create_autocmd("VimResized", {command = "wincmd ="})
 
 vim.opt.formatoptions = "rqn1j"
 vim.opt.textwidth = 79
+
+vim.opt.statusline = table.concat({
+  "%<%f",
+  " %h%q%r",
+  "%#CustomModifiedFlag#%m%*",
+  "%= ",
+  "%03.(%c%) %07.(%l/%L%)",
+  "%( %y%)",
+})
