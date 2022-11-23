@@ -1,12 +1,15 @@
 require("packer").startup(function(use)
   use "wbthomason/packer.nvim"
 
-  -- General
   use "tpope/vim-repeat"
   use "tpope/vim-speeddating"
   use "tpope/vim-surround"
   use "tpope/vim-commentary"
   use "lambdalisue/suda.vim"
+  use "mattn/emmet-vim"
+  use "davidxmoody/vim-indent-object"
+  use "SirVer/ultisnips"
+
   use {
     "bluz71/vim-nightfly-guicolors",
     setup = function()
@@ -28,7 +31,6 @@ require("packer").startup(function(use)
     end,
   }
 
-  -- Navigation
   use {
     "justinmk/vim-sneak",
     setup = function()
@@ -47,12 +49,7 @@ require("packer").startup(function(use)
       vim.g["EasyMotion_keys"] = "TNSRHLDMGYCWFPBVUOAIE"
     end,
   }
-  use "windwp/nvim-autopairs"
-  use "mattn/emmet-vim"
-  use "davidxmoody/vim-indent-object"
-  use "SirVer/ultisnips"
 
-  -- Git
   use "tpope/vim-fugitive"
   use {
     "airblade/vim-gitgutter",
@@ -61,7 +58,6 @@ require("packer").startup(function(use)
     end,
   }
 
-  -- Tmux
   use {
     "christoomey/vim-tmux-navigator",
     setup = function()
@@ -70,10 +66,9 @@ require("packer").startup(function(use)
     end,
   }
 
-  -- File explorers
-  use "kyazdani42/nvim-web-devicons"
   use {
     "kyazdani42/nvim-tree.lua",
+    requires = "kyazdani42/nvim-web-devicons",
     config = function()
       require("nvim-tree").setup({
         renderer = {
@@ -115,11 +110,7 @@ require("packer").startup(function(use)
       })
     end,
   }
-  use {"junegunn/fzf", run = "./install --bin"}
-  use "junegunn/fzf.vim"
-  use "ojroques/nvim-lspfuzzy"
 
-  -- Language specific
   use {
     "nvim-treesitter/nvim-treesitter",
     run = ":TSUpdate",
@@ -145,16 +136,127 @@ require("packer").startup(function(use)
       })
     end,
   }
+
   use "jparise/vim-graphql"
 
-  -- Completion and linting
-  use "neovim/nvim-lspconfig"
-  use "hrsh7th/nvim-cmp"
-  use "quangnguyen30192/cmp-nvim-ultisnips"
-  use "hrsh7th/cmp-nvim-lsp"
-  use "hrsh7th/cmp-path"
-  use "hrsh7th/cmp-cmdline"
-  use "hrsh7th/cmp-buffer"
+  use {
+    "neovim/nvim-lspconfig",
+    requires = "hrsh7th/cmp-nvim-lsp",
+    config = function()
+      local nvim_lsp = require("lspconfig")
+
+      local servers = {"tsserver", "sumneko_lua"}
+
+      for _, lsp in ipairs(servers) do
+        nvim_lsp[lsp].setup({
+          capabilities = require("cmp_nvim_lsp").default_capabilities(),
+          settings = {
+            Lua = {
+              runtime = {version = "LuaJIT"},
+              diagnostics = {globals = {"vim", "hs"}},
+              workspace = {
+                library = {
+                  vim.fn.expand("$VIMRUNTIME/lua"),
+                  vim.fn.expand("$VIMRUNTIME/lua/vim/lsp"),
+                  "/Applications/Hammerspoon.app/Contents/Resources/extensions/hs/",
+                },
+              },
+              telemetry = {enable = false},
+            },
+          },
+        })
+      end
+    end,
+  }
+
+  use {
+    "junegunn/fzf.vim",
+    requires = {{"junegunn/fzf", run = "./install --bin"}},
+  }
+  use {
+    "ojroques/nvim-lspfuzzy",
+    config = function()
+      require("lspfuzzy").setup({})
+    end,
+  }
+
+  use {
+    "hrsh7th/nvim-cmp",
+    requires = {
+      "quangnguyen30192/cmp-nvim-ultisnips",
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-path",
+      "hrsh7th/cmp-cmdline",
+      "hrsh7th/cmp-buffer",
+      "windwp/nvim-autopairs",
+    },
+    config = function()
+      vim.opt.completeopt = "menuone,noselect"
+
+      local cmp = require("cmp")
+
+      cmp.setup({
+        snippet = {
+          expand = function(args)
+            vim.fn["UltiSnips#Anon"](args.body)
+          end,
+        },
+        window = {
+          completion = cmp.config.window.bordered(),
+          documentation = cmp.config.window.bordered(),
+        },
+        mapping = cmp.mapping.preset.insert({
+          -- ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+          -- ["<C-f>"] = cmp.mapping.scroll_docs(4),
+          ["<C-Space>"] = cmp.mapping.complete(),
+          ["<CR>"] = function(fallback)
+            if cmp.visible() then
+              cmp.confirm({select = true})
+            else
+              fallback()
+            end
+          end,
+          ["<Tab>"] = function(fallback)
+            if cmp.visible() then
+              cmp.select_next_item()
+            else
+              fallback()
+            end
+          end,
+          ["<S-Tab>"] = function(fallback)
+            if cmp.visible() then
+              cmp.select_prev_item()
+            else
+              fallback()
+            end
+          end,
+        }),
+        sources = cmp.config.sources({
+          {name = "nvim_lsp"},
+          {name = "ultisnips"},
+          {name = "path"},
+        }, {{name = "buffer"}}),
+      })
+
+      cmp.setup.cmdline({"/", "?"}, {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = {{name = "buffer"}},
+      })
+
+      cmp.setup.cmdline(":", {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = cmp.config.sources({{name = "path"}}, {{name = "cmdline"}}),
+      })
+
+      cmp.setup.filetype({"markdown", "help"},
+        {completion = {autocomplete = false}})
+
+      require("nvim-autopairs").setup()
+      local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+      cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+    end,
+  }
+
   use {
     "sbdchd/neoformat",
     setup = function()
