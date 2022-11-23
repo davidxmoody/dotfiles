@@ -1,50 +1,50 @@
-require "paq" {
-  "savq/paq-nvim",
+require("packer").startup(function(use)
+  use "wbthomason/packer.nvim"
 
   -- General
-  "tpope/vim-repeat",
-  "tpope/vim-speeddating",
-  "tpope/vim-surround",
-  "tpope/vim-commentary",
-  "lambdalisue/suda.vim",
-  "bluz71/vim-nightfly-guicolors",
+  use "tpope/vim-repeat"
+  use "tpope/vim-speeddating"
+  use "tpope/vim-surround"
+  use "tpope/vim-commentary"
+  use "lambdalisue/suda.vim"
+  use "bluz71/vim-nightfly-guicolors"
 
   -- Navigation
-  "justinmk/vim-sneak",
-  "easymotion/vim-easymotion",
-  "windwp/nvim-autopairs",
-  "mattn/emmet-vim",
-  "davidxmoody/vim-indent-object",
-  "SirVer/ultisnips",
+  use "justinmk/vim-sneak"
+  use "easymotion/vim-easymotion"
+  use "windwp/nvim-autopairs"
+  use "mattn/emmet-vim"
+  use "davidxmoody/vim-indent-object"
+  use "SirVer/ultisnips"
 
   -- Git
-  "tpope/vim-fugitive",
-  "airblade/vim-gitgutter",
+  use "tpope/vim-fugitive"
+  use "airblade/vim-gitgutter"
 
   -- Tmux
-  "christoomey/vim-tmux-navigator",
+  use "christoomey/vim-tmux-navigator"
 
   -- File explorers
-  "kyazdani42/nvim-web-devicons",
-  "kyazdani42/nvim-tree.lua",
-  {"junegunn/fzf", run = "./install --bin"},
-  "junegunn/fzf.vim",
-  "ojroques/nvim-lspfuzzy",
+  use "kyazdani42/nvim-web-devicons"
+  use "kyazdani42/nvim-tree.lua"
+  use {"junegunn/fzf", run = "./install --bin"}
+  use "junegunn/fzf.vim"
+  use "ojroques/nvim-lspfuzzy"
 
   -- Language specific
-  "nvim-treesitter/nvim-treesitter",
-  "jparise/vim-graphql",
+  use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}
+  use "jparise/vim-graphql"
 
   -- Completion and linting
-  "neovim/nvim-lspconfig",
-  "hrsh7th/nvim-cmp",
-  "quangnguyen30192/cmp-nvim-ultisnips",
-  "hrsh7th/cmp-nvim-lsp",
-  "hrsh7th/cmp-path",
-  "hrsh7th/cmp-cmdline",
-  "hrsh7th/cmp-buffer",
-  "sbdchd/neoformat",
-}
+  use "neovim/nvim-lspconfig"
+  use "hrsh7th/nvim-cmp"
+  use "quangnguyen30192/cmp-nvim-ultisnips"
+  use "hrsh7th/cmp-nvim-lsp"
+  use "hrsh7th/cmp-path"
+  use "hrsh7th/cmp-cmdline"
+  use "hrsh7th/cmp-buffer"
+  use "sbdchd/neoformat"
+end)
 
 vim.g["sneak#absolute_dir"] = 1
 vim.g["sneak#use_ic_scs"] = 1
