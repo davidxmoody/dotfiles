@@ -115,7 +115,7 @@ require("packer").startup(function(use)
     "nvim-treesitter/nvim-treesitter",
     run = ":TSUpdate",
     config = function()
-      require"nvim-treesitter.configs".setup({
+      require("nvim-treesitter.configs").setup({
         ensure_installed = {
           "typescript",
           "tsx",
