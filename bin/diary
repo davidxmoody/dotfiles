@@ -67,6 +67,23 @@ diary_words() {
     head -n "$limit"
 }
 
+diary_backup() {
+  local commit="$(git rev-parse --short HEAD)"
+  local backup_file="$HOME/Downloads/diary-backup-$(date +%F)-$commit.zip"
+
+  if [[ -f "$backup_file" ]]; then
+    echo "Backup file already exists: '$backup_file'" >&2
+    exit 1
+  fi
+
+  cd "$(dirname "$DIARY_DIR")"
+  zip -re "$backup_file" "$(basename "$DIARY_DIR")/.git"
+
+  echo
+  echo "Created backup file: '$backup_file'"
+  echo "Total size: $(du -h "$backup_file" | cut -f1)"
+}
+
 command=$1
 shift
 
@@ -89,8 +106,11 @@ case "$command" in
   words)
     diary_words "$@"
     ;;
+  backup)
+    diary_backup "$@"
+    ;;
   *)
-    echo "commands: new|edit|list|random|words" >&2
+    echo "commands: new|edit|list|random|words|backup" >&2
     exit 1
     ;;
 esac
