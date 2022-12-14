@@ -57,4 +57,16 @@ hs.hotkey.bind(mod, "l", createFocusFunction(bundleIDs.slack))
 
 hs.hotkey.bind(shiftedMod, "r", hs.reload)
 
+local usbWatcher = hs.usb.watcher.new(function (data)
+  if data.productName == "Moonlander Mark I" then
+    if data.eventType == "added" then
+      hs.keycodes.setLayout("U.S.")
+    else
+      hs.keycodes.setLayout("Programmer Dvorak")
+    end
+  end
+end)
+
+usbWatcher:start()
+
 hs.alert.show("Hammerspoon loaded")
