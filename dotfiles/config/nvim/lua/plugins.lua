@@ -145,7 +145,7 @@ require("packer").startup(function(use)
     config = function()
       local nvim_lsp = require("lspconfig")
 
-      local servers = {"tsserver", "sumneko_lua"}
+      local servers = {"tsserver", "lua_ls"}
 
       for _, lsp in ipairs(servers) do
         nvim_lsp[lsp].setup({
