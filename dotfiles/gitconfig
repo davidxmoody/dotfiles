@@ -21,3 +21,5 @@
   rebase = true
 [color]
   ui = always
+[init]
+	defaultBranch = main

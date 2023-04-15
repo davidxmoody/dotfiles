@@ -108,7 +108,6 @@ alias gitcountdiff='git --no-pager diff --color=never | grep -v -E "^(\+\+\+|---
 alias gitcopydiff='git --no-pager diff --color=never | tee >(pbcopy) && echo -e "\nCopied!"'
 alias gitcopyhead='git --no-pager show --color=never | tee >(pbcopy) && echo -e "\nCopied!"'
 alias gw='git show'
-alias gwo='git show origin/master'
 alias gwt='git show --text'
 gwm() {
   local last_commit_hash=$(git log --max-count=1 --author="$(git config user.name)" --pretty=format:'%H')

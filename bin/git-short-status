@@ -10,7 +10,7 @@ if branch=$(git rev-parse --abbrev-ref HEAD 2> /dev/null); then
     exit
   fi
 
-  [[ "$branch" == "master" ]] && branch="m"
+  [[ "$branch" == "main" ]] && branch="m"
 
   status=$(git status --porcelain -uall 2> /dev/null | wc -l)
   status_indicator=''
