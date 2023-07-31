@@ -78,35 +78,60 @@ require("packer").startup(function(use)
         },
         update_focused_file = {enable = true},
         filters = {dotfiles = true},
-        view = {
-          width = 32,
-          mappings = {
-            custom_only = true,
-            list = {
-              {key = {"<CR>", "i", "<2-LeftMouse>"}, action = "edit"},
-              {key = {"<Tab>"}, action = "preview"},
-              {key = {"g<CR>", "gi"}, action = "cd"},
-              {key = {"[h"}, action = "prev_git_item"},
-              {key = {"]h"}, action = "next_git_item"},
-              {key = {"a"}, action = "create"},
-              {key = {"d"}, action = "remove"},
-              {key = {"x"}, action = "cut"},
-              {key = {"y"}, action = "copy"},
-              {key = {"Y"}, action = "copy_path"},
-              {key = {"gy"}, action = "copy_absolute_path"},
-              {key = {"p"}, action = "paste"},
-              {key = {"r"}, action = "rename"},
-              {key = {"R"}, action = "refresh"},
-              {key = {"."}, action = "toggle_dotfiles"},
-              {key = {","}, action = "toggle_git_ignored"},
-              {key = {"gl"}, action = "toggle_file_info"},
-              {key = {"{"}, action = "first_sibling"},
-              {key = {"}"}, action = "last_sibling"},
-              {key = {"<leader>s", "<leader>h"}, action = "vsplit"},
-              {key = {"<leader>t", "<leader>n"}, action = "split"},
-            },
-          },
-        },
+        view = {width = 32},
+        on_attach = function(bufnr)
+          local api = require("nvim-tree.api")
+
+          local function opts(desc)
+            return {
+              desc = "nvim-tree: " .. desc,
+              buffer = bufnr,
+              noremap = true,
+              silent = true,
+              nowait = true,
+            }
+          end
+
+          vim.keymap.set("n", "<CR>", api.node.open.edit, opts("Open"))
+          vim.keymap.set("n", "i", api.node.open.edit, opts("Open"))
+          vim.keymap.set("n", "<2-LeftMouse>", api.node.open.edit, opts("Open"))
+          vim.keymap.set("n", "<Tab>", api.node.open.preview,
+            opts("Open Preview"))
+          vim.keymap.set("n", "g<CR>", api.tree.change_root_to_node, opts("CD"))
+          vim.keymap.set("n", "gi", api.tree.change_root_to_node, opts("CD"))
+          vim.keymap
+            .set("n", "[h", api.node.navigate.git.prev, opts("Prev Git"))
+          vim.keymap
+            .set("n", "]h", api.node.navigate.git.next, opts("Next Git"))
+          vim.keymap.set("n", "a", api.fs.create, opts("Create"))
+          vim.keymap.set("n", "d", api.fs.remove, opts("Delete"))
+          vim.keymap.set("n", "x", api.fs.cut, opts("Cut"))
+          vim.keymap.set("n", "y", api.fs.copy.node, opts("Copy"))
+          vim.keymap.set("n", "Y", api.fs.copy.relative_path,
+            opts("Copy Relative Path"))
+          vim.keymap.set("n", "gy", api.fs.copy.absolute_path,
+            opts("Copy Absolute Path"))
+          vim.keymap.set("n", "p", api.fs.paste, opts("Paste"))
+          vim.keymap.set("n", "r", api.fs.rename, opts("Rename"))
+          vim.keymap.set("n", "R", api.tree.reload, opts("Refresh"))
+          vim.keymap.set("n", ".", api.tree.toggle_hidden_filter,
+            opts("Toggle Dotfiles"))
+          vim.keymap.set("n", ",", api.tree.toggle_gitignore_filter,
+            opts("Toggle Git Ignore"))
+          vim.keymap.set("n", "gl", api.node.show_info_popup, opts("Info"))
+          vim.keymap.set("n", "{", api.node.navigate.sibling.first,
+            opts("First Sibling"))
+          vim.keymap.set("n", "}", api.node.navigate.sibling.last,
+            opts("Last Sibling"))
+          vim.keymap.set("n", "<leader>s", api.node.open.vertical,
+            opts("Open: Vertical Split"))
+          vim.keymap.set("n", "<leader>h", api.node.open.vertical,
+            opts("Open: Vertical Split"))
+          vim.keymap.set("n", "<leader>t", api.node.open.horizontal,
+            opts("Open: Horizontal Split"))
+          vim.keymap.set("n", "<leader>n", api.node.open.horizontal,
+            opts("Open: Horizontal Split"))
+        end,
       })
     end,
   }
