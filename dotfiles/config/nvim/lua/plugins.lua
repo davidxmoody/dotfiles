@@ -145,6 +145,7 @@ require("packer").startup(function(use)
           "typescript",
           "tsx",
           "javascript",
+          "svelte",
           "graphql",
           "python",
           "regex",
@@ -170,7 +171,7 @@ require("packer").startup(function(use)
     config = function()
       local nvim_lsp = require("lspconfig")
 
-      local servers = {"tsserver", "lua_ls"}
+      local servers = {"tsserver", "lua_ls", "svelte"}
 
       for _, lsp in ipairs(servers) do
         nvim_lsp[lsp].setup({
