@@ -1,6 +1,5 @@
 local nxo = {"n", "x", "o"}
 
-vim.g.mapleader = " "
 vim.keymap.set(nxo, "<Space>", "<Nop>")
 
 -- Dvorak navigation

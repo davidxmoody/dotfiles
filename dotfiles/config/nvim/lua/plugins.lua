@@ -1,20 +1,30 @@
-require("packer").startup(function(use)
-  use "wbthomason/packer.nvim"
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable",
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
 
-  use "tpope/vim-repeat"
-  use "tpope/vim-speeddating"
-  use "tpope/vim-surround"
-  use "tpope/vim-commentary"
-  use "lambdalisue/suda.vim"
-  use "mattn/emmet-vim"
-  use "davidxmoody/vim-indent-object"
-  use "SirVer/ultisnips"
+vim.g.mapleader = " "
 
-  use {
+require("lazy").setup({
+  "tpope/vim-repeat",
+  "tpope/vim-speeddating",
+  "tpope/vim-surround",
+  "tpope/vim-commentary",
+  "lambdalisue/suda.vim",
+  "mattn/emmet-vim",
+  "davidxmoody/vim-indent-object",
+  "SirVer/ultisnips",
+
+  {
     "bluz71/vim-nightfly-guicolors",
-    setup = function()
-      vim.g["nightflyUnderlineMatchParen"] = 1
-    end,
     config = function()
       vim.cmd("colorscheme nightfly")
 
@@ -29,18 +39,18 @@ require("packer").startup(function(use)
       -- Unfocused background color duplicated in tmux config
       vim.api.nvim_set_hl(0, "NormalNC", {bg = "#000a13"})
     end,
-  }
+  },
 
-  use {
+  {
     "justinmk/vim-sneak",
-    setup = function()
+    config = function()
       vim.g["sneak#absolute_dir"] = 1
       vim.g["sneak#use_ic_scs"] = 1
     end,
-  }
-  use {
+  },
+  {
     "easymotion/vim-easymotion",
-    setup = function()
+    config = function()
       vim.g["EasyMotion_smartcase"] = 1
       vim.g["EasyMotion_do_mapping"] = 0
       vim.g["EasyMotion_enter_jump_first"] = 1
@@ -48,126 +58,120 @@ require("packer").startup(function(use)
       vim.g["EasyMotion_use_upper"] = 1
       vim.g["EasyMotion_keys"] = "TNSRHLDMGYCWFPBVUOAIE"
     end,
-  }
+  },
 
-  use "tpope/vim-fugitive"
-  use {
+  "tpope/vim-fugitive",
+  {
     "airblade/vim-gitgutter",
-    setup = function()
+    config = function()
       vim.g.gitgutter_map_keys = 0
     end,
-  }
+  },
 
-  use {
+  {
     "christoomey/vim-tmux-navigator",
-    setup = function()
+    config = function()
       vim.g.tmux_navigator_no_mappings = 1
       vim.g.tmux_navigator_disable_when_zoomed = 1
     end,
-  }
+  },
 
-  use {
+  {
     "kyazdani42/nvim-tree.lua",
-    requires = "kyazdani42/nvim-web-devicons",
-    config = function()
-      require("nvim-tree").setup({
-        renderer = {
-          add_trailing = true,
-          highlight_opened_files = "icon",
-          indent_markers = {enable = true},
-        },
-        update_focused_file = {enable = true},
-        filters = {dotfiles = true},
-        view = {width = 32},
-        on_attach = function(bufnr)
-          local api = require("nvim-tree.api")
+    dependencies = "kyazdani42/nvim-web-devicons",
+    opts = {
+      renderer = {
+        add_trailing = true,
+        highlight_opened_files = "icon",
+        indent_markers = {enable = true},
+      },
+      update_focused_file = {enable = true},
+      filters = {dotfiles = true},
+      view = {width = 32},
+      on_attach = function(bufnr)
+        local api = require("nvim-tree.api")
 
-          local function opts(desc)
-            return {
-              desc = "nvim-tree: " .. desc,
-              buffer = bufnr,
-              noremap = true,
-              silent = true,
-              nowait = true,
-            }
-          end
+        local function opts(desc)
+          return {
+            desc = "nvim-tree: " .. desc,
+            buffer = bufnr,
+            noremap = true,
+            silent = true,
+            nowait = true,
+          }
+        end
 
-          vim.keymap.set("n", "<CR>", api.node.open.edit, opts("Open"))
-          vim.keymap.set("n", "i", api.node.open.edit, opts("Open"))
-          vim.keymap.set("n", "<2-LeftMouse>", api.node.open.edit, opts("Open"))
-          vim.keymap.set("n", "<Tab>", api.node.open.preview,
-            opts("Open Preview"))
-          vim.keymap.set("n", "g<CR>", api.tree.change_root_to_node, opts("CD"))
-          vim.keymap.set("n", "gi", api.tree.change_root_to_node, opts("CD"))
-          vim.keymap
-            .set("n", "[h", api.node.navigate.git.prev, opts("Prev Git"))
-          vim.keymap
-            .set("n", "]h", api.node.navigate.git.next, opts("Next Git"))
-          vim.keymap.set("n", "a", api.fs.create, opts("Create"))
-          vim.keymap.set("n", "d", api.fs.remove, opts("Delete"))
-          vim.keymap.set("n", "x", api.fs.cut, opts("Cut"))
-          vim.keymap.set("n", "y", api.fs.copy.node, opts("Copy"))
-          vim.keymap.set("n", "Y", api.fs.copy.relative_path,
-            opts("Copy Relative Path"))
-          vim.keymap.set("n", "gy", api.fs.copy.absolute_path,
-            opts("Copy Absolute Path"))
-          vim.keymap.set("n", "p", api.fs.paste, opts("Paste"))
-          vim.keymap.set("n", "r", api.fs.rename, opts("Rename"))
-          vim.keymap.set("n", "R", api.tree.reload, opts("Refresh"))
-          vim.keymap.set("n", ".", api.tree.toggle_hidden_filter,
-            opts("Toggle Dotfiles"))
-          vim.keymap.set("n", ",", api.tree.toggle_gitignore_filter,
-            opts("Toggle Git Ignore"))
-          vim.keymap.set("n", "gl", api.node.show_info_popup, opts("Info"))
-          vim.keymap.set("n", "{", api.node.navigate.sibling.first,
-            opts("First Sibling"))
-          vim.keymap.set("n", "}", api.node.navigate.sibling.last,
-            opts("Last Sibling"))
-          vim.keymap.set("n", "<leader>s", api.node.open.vertical,
-            opts("Open: Vertical Split"))
-          vim.keymap.set("n", "<leader>h", api.node.open.vertical,
-            opts("Open: Vertical Split"))
-          vim.keymap.set("n", "<leader>t", api.node.open.horizontal,
-            opts("Open: Horizontal Split"))
-          vim.keymap.set("n", "<leader>n", api.node.open.horizontal,
-            opts("Open: Horizontal Split"))
-        end,
-      })
-    end,
-  }
+        vim.keymap.set("n", "<CR>", api.node.open.edit, opts("Open"))
+        vim.keymap.set("n", "i", api.node.open.edit, opts("Open"))
+        vim.keymap.set("n", "<2-LeftMouse>", api.node.open.edit, opts("Open"))
+        vim.keymap
+          .set("n", "<Tab>", api.node.open.preview, opts("Open Preview"))
+        vim.keymap.set("n", "g<CR>", api.tree.change_root_to_node, opts("CD"))
+        vim.keymap.set("n", "gi", api.tree.change_root_to_node, opts("CD"))
+        vim.keymap.set("n", "[h", api.node.navigate.git.prev, opts("Prev Git"))
+        vim.keymap.set("n", "]h", api.node.navigate.git.next, opts("Next Git"))
+        vim.keymap.set("n", "a", api.fs.create, opts("Create"))
+        vim.keymap.set("n", "d", api.fs.remove, opts("Delete"))
+        vim.keymap.set("n", "x", api.fs.cut, opts("Cut"))
+        vim.keymap.set("n", "y", api.fs.copy.node, opts("Copy"))
+        vim.keymap.set("n", "Y", api.fs.copy.relative_path,
+          opts("Copy Relative Path"))
+        vim.keymap.set("n", "gy", api.fs.copy.absolute_path,
+          opts("Copy Absolute Path"))
+        vim.keymap.set("n", "p", api.fs.paste, opts("Paste"))
+        vim.keymap.set("n", "r", api.fs.rename, opts("Rename"))
+        vim.keymap.set("n", "R", api.tree.reload, opts("Refresh"))
+        vim.keymap.set("n", ".", api.tree.toggle_hidden_filter,
+          opts("Toggle Dotfiles"))
+        vim.keymap.set("n", ",", api.tree.toggle_gitignore_filter,
+          opts("Toggle Git Ignore"))
+        vim.keymap.set("n", "gl", api.node.show_info_popup, opts("Info"))
+        vim.keymap.set("n", "{", api.node.navigate.sibling.first,
+          opts("First Sibling"))
+        vim.keymap.set("n", "}", api.node.navigate.sibling.last,
+          opts("Last Sibling"))
+        vim.keymap.set("n", "<leader>s", api.node.open.vertical,
+          opts("Open: Vertical Split"))
+        vim.keymap.set("n", "<leader>h", api.node.open.vertical,
+          opts("Open: Vertical Split"))
+        vim.keymap.set("n", "<leader>t", api.node.open.horizontal,
+          opts("Open: Horizontal Split"))
+        vim.keymap.set("n", "<leader>n", api.node.open.horizontal,
+          opts("Open: Horizontal Split"))
+      end,
+    },
+  },
 
-  use {
+  {
     "nvim-treesitter/nvim-treesitter",
-    run = ":TSUpdate",
-    config = function()
-      require("nvim-treesitter.configs").setup({
-        ensure_installed = {
-          "typescript",
-          "tsx",
-          "javascript",
-          "svelte",
-          "graphql",
-          "python",
-          "regex",
-          "jsdoc",
-          "html",
-          "bash",
-          "json",
-          "yaml",
-          "css",
-          "lua",
-        },
-        highlight = {enable = true},
-        indent = {enable = true},
-      })
-    end,
-  }
+    build = ":TSUpdate",
+    opts = {
+      ensure_installed = {
+        "typescript",
+        "tsx",
+        "javascript",
+        "svelte",
+        "graphql",
+        "python",
+        "regex",
+        "jsdoc",
+        "html",
+        "bash",
+        "json",
+        "yaml",
+        "css",
+        "lua",
+      },
+      highlight = {enable = true},
+      indent = {enable = true},
+    },
+  },
 
-  use "jparise/vim-graphql"
+  "jparise/vim-graphql",
 
-  use {
+  {
     "neovim/nvim-lspconfig",
-    requires = "hrsh7th/cmp-nvim-lsp",
+    dependencies = "hrsh7th/cmp-nvim-lsp",
     config = function()
       local nvim_lsp = require("lspconfig")
 
@@ -195,22 +199,17 @@ require("packer").startup(function(use)
 
       vim.diagnostic.config({float = {border = "single", source = true}})
     end,
-  }
+  },
 
-  use {
+  {
     "junegunn/fzf.vim",
-    requires = {{"junegunn/fzf", run = "./install --bin"}},
-  }
-  use {
-    "ojroques/nvim-lspfuzzy",
-    config = function()
-      require("lspfuzzy").setup({})
-    end,
-  }
+    dependencies = {{"junegunn/fzf", run = "./install --bin"}},
+  },
+  {"ojroques/nvim-lspfuzzy", opts = {}},
 
-  use {
+  {
     "hrsh7th/nvim-cmp",
-    requires = {
+    dependencies = {
       "quangnguyen30192/cmp-nvim-ultisnips",
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-path",
@@ -283,11 +282,11 @@ require("packer").startup(function(use)
       local cmp_autopairs = require("nvim-autopairs.completion.cmp")
       cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
     end,
-  }
+  },
 
-  use {
+  {
     "sbdchd/neoformat",
-    setup = function()
+    config = function()
       vim.g.shfmt_opt = "-i 2 -sr -ci"
       vim.g.neoformat_typescript_prettier = {
         exe = "./node_modules/.bin/prettier",
@@ -300,5 +299,5 @@ require("packer").startup(function(use)
         replace = 1,
       }
     end,
-  }
-end)
+  },
+})
