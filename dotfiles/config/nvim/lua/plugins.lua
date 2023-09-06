@@ -171,7 +171,7 @@ require("packer").startup(function(use)
     config = function()
       local nvim_lsp = require("lspconfig")
 
-      local servers = {"tsserver", "lua_ls", "svelte"}
+      local servers = {"tsserver", "svelte", "eslint", "lua_ls"}
 
       for _, lsp in ipairs(servers) do
         nvim_lsp[lsp].setup({
@@ -192,6 +192,8 @@ require("packer").startup(function(use)
           },
         })
       end
+
+      vim.diagnostic.config({float = {border = "single", source = true}})
     end,
   }
 
