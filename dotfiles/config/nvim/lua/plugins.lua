@@ -102,7 +102,7 @@ require("lazy").setup({
 
   {
     "christoomey/vim-tmux-navigator",
-    config = function()
+    init = function()
       vim.g.tmux_navigator_no_mappings = 1
       vim.g.tmux_navigator_disable_when_zoomed = 1
     end,
@@ -123,53 +123,41 @@ require("lazy").setup({
       on_attach = function(bufnr)
         local api = require("nvim-tree.api")
 
-        local function opts(desc)
-          return {
-            desc = "nvim-tree: " .. desc,
+        local function map(l, r)
+          vim.keymap.set("n", l, r, {
             buffer = bufnr,
             noremap = true,
             silent = true,
             nowait = true,
-          }
+          })
         end
 
-        vim.keymap.set("n", "<CR>", api.node.open.edit, opts("Open"))
-        vim.keymap.set("n", "i", api.node.open.edit, opts("Open"))
-        vim.keymap.set("n", "<2-LeftMouse>", api.node.open.edit, opts("Open"))
-        vim.keymap
-          .set("n", "<Tab>", api.node.open.preview, opts("Open Preview"))
-        vim.keymap.set("n", "g<CR>", api.tree.change_root_to_node, opts("CD"))
-        vim.keymap.set("n", "gi", api.tree.change_root_to_node, opts("CD"))
-        vim.keymap.set("n", "[h", api.node.navigate.git.prev, opts("Prev Git"))
-        vim.keymap.set("n", "]h", api.node.navigate.git.next, opts("Next Git"))
-        vim.keymap.set("n", "a", api.fs.create, opts("Create"))
-        vim.keymap.set("n", "d", api.fs.remove, opts("Delete"))
-        vim.keymap.set("n", "x", api.fs.cut, opts("Cut"))
-        vim.keymap.set("n", "y", api.fs.copy.node, opts("Copy"))
-        vim.keymap.set("n", "Y", api.fs.copy.relative_path,
-          opts("Copy Relative Path"))
-        vim.keymap.set("n", "gy", api.fs.copy.absolute_path,
-          opts("Copy Absolute Path"))
-        vim.keymap.set("n", "p", api.fs.paste, opts("Paste"))
-        vim.keymap.set("n", "r", api.fs.rename, opts("Rename"))
-        vim.keymap.set("n", "R", api.tree.reload, opts("Refresh"))
-        vim.keymap.set("n", ".", api.tree.toggle_hidden_filter,
-          opts("Toggle Dotfiles"))
-        vim.keymap.set("n", ",", api.tree.toggle_gitignore_filter,
-          opts("Toggle Git Ignore"))
-        vim.keymap.set("n", "gl", api.node.show_info_popup, opts("Info"))
-        vim.keymap.set("n", "{", api.node.navigate.sibling.first,
-          opts("First Sibling"))
-        vim.keymap.set("n", "}", api.node.navigate.sibling.last,
-          opts("Last Sibling"))
-        vim.keymap.set("n", "<leader>s", api.node.open.vertical,
-          opts("Open: Vertical Split"))
-        vim.keymap.set("n", "<leader>h", api.node.open.vertical,
-          opts("Open: Vertical Split"))
-        vim.keymap.set("n", "<leader>t", api.node.open.horizontal,
-          opts("Open: Horizontal Split"))
-        vim.keymap.set("n", "<leader>n", api.node.open.horizontal,
-          opts("Open: Horizontal Split"))
+        map("<CR>", api.node.open.edit)
+        map("i", api.node.open.edit)
+        map("<2-LeftMouse>", api.node.open.edit)
+        map("<Tab>", api.node.open.preview)
+        map("g<CR>", api.tree.change_root_to_node)
+        map("gi", api.tree.change_root_to_node)
+        map("[h", api.node.navigate.git.prev)
+        map("]h", api.node.navigate.git.next)
+        map("a", api.fs.create)
+        map("d", api.fs.remove)
+        map("x", api.fs.cut)
+        map("y", api.fs.copy.node)
+        map("Y", api.fs.copy.relative_path)
+        map("gy", api.fs.copy.absolute_path)
+        map("p", api.fs.paste)
+        map("r", api.fs.rename)
+        map("R", api.tree.reload)
+        map(".", api.tree.toggle_hidden_filter)
+        map(",", api.tree.toggle_gitignore_filter)
+        map("gl", api.node.show_info_popup)
+        map("{", api.node.navigate.sibling.first)
+        map("}", api.node.navigate.sibling.last)
+        map("<leader>s", api.node.open.vertical)
+        map("<leader>h", api.node.open.vertical)
+        map("<leader>t", api.node.open.horizontal)
+        map("<leader>n", api.node.open.horizontal)
       end,
     },
   },
