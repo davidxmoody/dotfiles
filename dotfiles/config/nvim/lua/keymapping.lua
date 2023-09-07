@@ -179,21 +179,6 @@ vim.keymap.set("c", "<C-T>", "<Nop>")
 vim.keymap.set("c", "<C-N>", "<Nop>")
 vim.keymap.set("c", "<C-S>", "<Nop>")
 
--- Git
-
-vim.keymap.set(nxo, "<leader>gb", ":Git blame<CR>")
-vim.keymap.set(nxo, "<leader>gr", ":Gread<CR>")
-vim.keymap.set(nxo, "<leader>gw", ":Gwrite<CR>")
-
-vim.keymap.set(nxo, "<leader>ga", "<Plug>(GitGutterStageHunk)")
-vim.keymap.set(nxo, "<leader>gu", "<Plug>(GitGutterUndoHunk)")
-vim.keymap.set(nxo, "]h", "<Plug>(GitGutterNextHunk)")
-vim.keymap.set(nxo, "[h", "<Plug>(GitGutterPrevHunk)")
-vim.keymap.set("o", "ih", "<Plug>(GitGutterTextObjectInnerPending)")
-vim.keymap.set("o", "ah", "<Plug>(GitGutterTextObjectOuterPending)")
-vim.keymap.set("x", "ih", "<Plug>(GitGutterTextObjectInnerVisual)")
-vim.keymap.set("x", "ah", "<Plug>(GitGutterTextObjectOuterVisual)")
-
 -- Toggle settings
 
 vim.keymap.set(nxo, "<leader>w", ":set wrap!<CR>")

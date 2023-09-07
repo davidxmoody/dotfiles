@@ -62,10 +62,42 @@ require("lazy").setup({
 
   "tpope/vim-fugitive",
   {
-    "airblade/vim-gitgutter",
-    config = function()
-      vim.g.gitgutter_map_keys = 0
-    end,
+    "lewis6991/gitsigns.nvim",
+    opts = {
+      on_attach = function(bufnr)
+        local gs = package.loaded.gitsigns
+
+        local function map(mode, l, r)
+          vim.keymap.set(mode, l, r, {buffer = bufnr})
+        end
+
+        map("n", "<leader>ga", gs.stage_hunk)
+        map("v", "<leader>ga", function()
+          gs.stage_hunk {vim.fn.line("."), vim.fn.line("v")}
+        end)
+        map("n", "<leader>gA", gs.undo_stage_hunk)
+
+        map("n", "<leader>gu", gs.reset_hunk)
+        map("v", "<leader>gu", function()
+          gs.reset_hunk {vim.fn.line("."), vim.fn.line("v")}
+        end)
+
+        map("n", "<leader>gw", gs.stage_buffer)
+        map("n", "<leader>gr", gs.reset_buffer)
+
+        map("n", "<leader>gl", gs.preview_hunk)
+
+        map("n", "<leader>gb", gs.blame_line)
+        map("n", "<leader>gB", gs.toggle_current_line_blame)
+
+        map("n", "<leader>gd", gs.diffthis)
+
+        map("n", "]h", gs.next_hunk)
+        map("n", "[h", gs.prev_hunk)
+
+        map({"o", "x"}, "ih", ":<C-U>Gitsigns select_hunk<CR>")
+      end,
+    },
   },
 
   {

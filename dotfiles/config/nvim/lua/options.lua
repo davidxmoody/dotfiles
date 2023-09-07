@@ -13,8 +13,6 @@ vim.opt.mouse = "nv"
 vim.g.vimsyn_embed = "l"
 
 vim.opt.signcolumn = "yes"
-vim.opt.updatetime = 100
-vim.api.nvim_create_autocmd("CursorHold", {command = "checktime"})
 
 vim.api.nvim_create_autocmd("TextYankPost", {
   callback = function()
