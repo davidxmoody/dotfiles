@@ -1,18 +1,11 @@
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
-vim.opt.hidden = true
-vim.opt.joinspaces = false
-vim.opt.showcmd = false
 vim.opt.undofile = true
-vim.opt.backupcopy = "yes"
 vim.opt.clipboard = "unnamedplus"
-vim.opt.suffixesadd = ".ts,.tsx,.js,.jsx,.json,.coffee,.scss,.css"
 vim.opt.termguicolors = true
 vim.opt.cursorline = true
-vim.opt.mouse = "nv"
-vim.g.vimsyn_embed = "l"
-
 vim.opt.signcolumn = "yes"
+vim.opt.mouse = "nv"
 
 vim.api.nvim_create_autocmd("TextYankPost", {
   callback = function()
