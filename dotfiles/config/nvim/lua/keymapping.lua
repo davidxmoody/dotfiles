@@ -11,7 +11,7 @@ vim.keymap.set(nxo, "s", "l")
 vim.keymap.set(nxo, "T", "")
 vim.keymap.set(nxo, "N", "")
 vim.keymap.set(nxo, "H", "0")
-vim.keymap.set(nxo, "S", "$")
+vim.keymap.set({"n", "o"}, "S", "$")
 
 vim.keymap.set(nxo, "gt", "gj")
 vim.keymap.set(nxo, "gn", "gk")
