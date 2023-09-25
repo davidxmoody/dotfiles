@@ -21,7 +21,17 @@ require("lazy").setup({
   "lambdalisue/suda.vim",
   "mattn/emmet-vim",
   "davidxmoody/vim-indent-object",
-  "SirVer/ultisnips",
+
+  {
+    "SirVer/ultisnips",
+    init = function()
+      vim.keymap.set({"n", "x", "o"}, "<C-F>", "<Nop>")
+      vim.keymap.set({"n", "x", "o"}, "<C-B>", "<Nop>")
+      vim.g.UltiSnipsExpandTrigger = "<C-F>"
+      vim.g.UltiSnipsJumpForwardTrigger = "<C-F>"
+      vim.g.UltiSnipsJumpBackwardTrigger = "<C-B>"
+    end,
+  },
 
   {
     "bluz71/vim-nightfly-guicolors",
@@ -184,6 +194,7 @@ require("lazy").setup({
         "lua",
       },
       sync_install = false,
+      auto_install = false,
       highlight = {enable = true},
       indent = {enable = true},
     },
@@ -228,6 +239,8 @@ require("lazy").setup({
     dependencies = {{"junegunn/fzf", run = "./install --bin"}},
   },
   {"ojroques/nvim-lspfuzzy", opts = {}},
+
+  {"windwp/nvim-autopairs", opts = {}},
 
   {
     "hrsh7th/nvim-cmp",
@@ -300,7 +313,6 @@ require("lazy").setup({
       cmp.setup.filetype({"markdown", "help"},
         {completion = {autocomplete = false}})
 
-      require("nvim-autopairs").setup()
       local cmp_autopairs = require("nvim-autopairs.completion.cmp")
       cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
     end,

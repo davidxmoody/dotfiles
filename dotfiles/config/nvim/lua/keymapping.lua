@@ -11,7 +11,7 @@ vim.keymap.set(nxo, "s", "l")
 vim.keymap.set(nxo, "T", "")
 vim.keymap.set(nxo, "N", "")
 vim.keymap.set(nxo, "H", "0")
-vim.keymap.set({"n", "o"}, "S", "$")
+vim.keymap.set(nxo, "S", "$")
 
 vim.keymap.set(nxo, "gt", "gj")
 vim.keymap.set(nxo, "gn", "gk")
@@ -77,10 +77,12 @@ vim.keymap.set(nxo, "<leader>u", "ZZ")
 vim.keymap.set(nxo, "<leader>b", "<C-^>")
 vim.keymap.set(nxo, "<C-d>", ":q<CR>")
 
-vim.keymap.set(nxo, "-", ":NvimTreeFindFile<CR>")
-vim.keymap.set(nxo, "g-", ":NvimTreeToggle<CR>")
+vim.keymap.set("n", "-", ":NvimTreeFindFile<CR>")
+vim.keymap.set("n", "g-", ":NvimTreeToggle<CR>")
 
 -- Selection
+
+vim.keymap.set("x", "-", "<Plug>VSurround")
 
 vim.keymap.set(nxo, "<leader>v", "Vii", {remap = true})
 vim.keymap.set(nxo, "<leader>V", "ggVG")
@@ -127,14 +129,6 @@ vim.keymap.set("n", "gP", "V\"0p")
 
 vim.keymap.set("x", ".", ":norm.<CR>")
 vim.keymap.set(nxo, "<leader>.", "/\\C\\<\"\\><CR>.")
-
--- Expansion
-
-vim.keymap.set(nxo, "<C-F>", "<Nop>")
-vim.keymap.set(nxo, "<C-B>", "<Nop>")
-vim.g.UltiSnipsExpandTrigger = "<C-F>"
-vim.g.UltiSnipsJumpForwardTrigger = "<C-F>"
-vim.g.UltiSnipsJumpBackwardTrigger = "<C-B>"
 
 -- Window splitting
 
