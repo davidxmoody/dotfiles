@@ -212,6 +212,16 @@ require("lazy").setup({
 
       for _, lsp in ipairs(servers) do
         nvim_lsp[lsp].setup({
+          on_attach = function(client)
+            if client.name == "svelte" then
+              vim.api.nvim_create_autocmd("BufWritePost", {
+                pattern = {"*.js", "*.ts"},
+                callback = function(ctx)
+                  client.notify("$/onDidChangeTsOrJsFile", {uri = ctx.file})
+                end,
+              })
+            end
+          end,
           capabilities = require("cmp_nvim_lsp").default_capabilities(),
           settings = {
             Lua = {
