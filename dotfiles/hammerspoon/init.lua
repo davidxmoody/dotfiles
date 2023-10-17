@@ -1,8 +1,6 @@
 local bundleIDs = {
-  chrome = "com.google.Chrome",
-  iterm = "com.googlecode.iterm2",
-  slack = "com.tinyspeck.slackmacgap",
-  simulator = "com.apple.iphonesimulator",
+  browser = "com.google.Chrome",
+  terminal = "com.googlecode.iterm2",
   hammerspoon = "org.hammerspoon.Hammerspoon",
 }
 
@@ -39,25 +37,24 @@ local function focusNextOtherWindow()
   for k, win in pairs(hs.window.orderedWindows()) do
     local bundleID = win:application():bundleID()
 
-    if k ~= 1 and bundleID ~= bundleIDs.chrome and bundleID ~= bundleIDs.iterm and
-      bundleID ~= bundleIDs.hammerspoon and bundleID ~= bundleIDs.slack then
+    if k ~= 1 and bundleID ~= bundleIDs.browser and bundleID ~=
+      bundleIDs.terminal and bundleID ~= bundleIDs.hammerspoon then
       win:focus()
       return
     end
   end
 end
 
-local mod = {"option"}
-local shiftedMod = {"option", "shift"}
+local mod = {"command", "option", "shift"}
 
-hs.hotkey.bind(mod, "g", focusNextOtherWindow)
-hs.hotkey.bind(mod, "c", createFocusFunction(bundleIDs.chrome))
-hs.hotkey.bind(mod, "r", createFocusFunction(bundleIDs.iterm))
-hs.hotkey.bind(mod, "l", createFocusFunction(bundleIDs.slack))
+hs.hotkey.bind(mod, "1", focusNextOtherWindow)
+hs.hotkey.bind(mod, "2", createFocusFunction(bundleIDs.browser))
+hs.hotkey.bind(mod, "3", createFocusFunction(bundleIDs.browser))
+hs.hotkey.bind(mod, "4", createFocusFunction(bundleIDs.terminal))
 
-hs.hotkey.bind(shiftedMod, "r", hs.reload)
+hs.hotkey.bind(mod, "r", hs.reload)
 
-local usbWatcher = hs.usb.watcher.new(function (data)
+local usbWatcher = hs.usb.watcher.new(function(data)
   if data.productName == "Moonlander Mark I" then
     if data.eventType == "added" then
       hs.keycodes.setLayout("U.S.")
