@@ -48,6 +48,7 @@ require("lazy").setup({
 
       -- Unfocused background color duplicated in tmux config
       vim.api.nvim_set_hl(0, "NormalNC", {bg = "#000a13"})
+      vim.api.nvim_set_hl(0, "NvimTreeNormalNC", {link = "NormalNC"})
     end,
   },
 

@@ -51,3 +51,10 @@ vim.opt.statusline = table.concat({
   "%03.(%c%) %07.(%l/%L%)",
   "%( %y%)",
 })
+
+vim.api.nvim_create_autocmd("BufWinEnter", {
+  pattern = "*NvimTree*",
+  callback = function()
+    vim.opt_local.statusline = "NvimTree"
+  end,
+})
