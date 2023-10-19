@@ -23,6 +23,11 @@ require("lazy").setup({
   "davidxmoody/vim-indent-object",
 
   {
+    "folke/zen-mode.nvim",
+    opts = {window = {backdrop = 0, width = 90, options = {signcolumn = "no"}}},
+  },
+
+  {
     "SirVer/ultisnips",
     init = function()
       vim.keymap.set({"n", "x", "o"}, "<C-F>", "<Nop>")
@@ -178,24 +183,7 @@ require("lazy").setup({
     build = ":TSUpdate",
     main = "nvim-treesitter.configs",
     opts = {
-      ensure_installed = {
-        "typescript",
-        "tsx",
-        "javascript",
-        "svelte",
-        "graphql",
-        "python",
-        "regex",
-        "jsdoc",
-        "html",
-        "bash",
-        "json",
-        "yaml",
-        "css",
-        "lua",
-      },
-      sync_install = false,
-      auto_install = false,
+      auto_install = true,
       highlight = {enable = true},
       indent = {enable = true},
     },

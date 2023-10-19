@@ -80,6 +80,10 @@ vim.keymap.set(nxo, "<C-d>", ":q<CR>")
 vim.keymap.set("n", "-", ":NvimTreeFindFile<CR>")
 vim.keymap.set("n", "g-", ":NvimTreeToggle<CR>")
 
+-- Zen mode
+
+vim.keymap.set("n", "<leader>z", ":ZenMode<CR>", {silent = true})
+
 -- Selection
 
 vim.keymap.set("x", "-", "<Plug>VSurround")
