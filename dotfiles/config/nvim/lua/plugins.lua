@@ -38,7 +38,7 @@ require("lazy").setup({
     config = function()
       vim.cmd("colorscheme nightfly")
 
-      vim.api.nvim_set_hl(0, "CustomModifiedFlag", {bg = "Red", fg = "White"})
+      vim.api.nvim_set_hl(0, "ModifiedFlag", {bg = "#ff5874", fg = "White"})
       vim.api.nvim_set_hl(0, "Pmenu", {bg = "#1d3b53"})
 
       -- For focused windows, use the "default" background color (from tmux). This

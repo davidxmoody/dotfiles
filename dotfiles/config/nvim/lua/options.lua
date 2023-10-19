@@ -43,18 +43,20 @@ vim.api.nvim_create_autocmd("VimResized", {command = "wincmd ="})
 vim.opt.formatoptions = "rqn1j"
 vim.opt.textwidth = 79
 
-vim.opt.statusline = table.concat({
-  "%<%f",
-  " %h%q%r",
-  "%#CustomModifiedFlag#%m%*",
-  "%= ",
-  "%03.(%c%) %07.(%l/%L%)",
-  "%( %y%)",
-})
+function CustomStatusline()
+  if (vim.bo.filetype == "NvimTree") then
+    return "NvimTree"
+  end
 
-vim.api.nvim_create_autocmd("BufWinEnter", {
-  pattern = "*NvimTree*",
-  callback = function()
-    vim.opt_local.statusline = "NvimTree"
-  end,
-})
+  return table.concat({
+    vim.bo.modified and "%#ModifiedFlag#" or "",
+    "%<%f",
+    "%*",
+    " %h%q%r",
+    "%= ",
+    "%03.(%c%) %07.(%l/%L%)",
+    "%( %y%)",
+  })
+end
+
+vim.opt.statusline = "%{%v:lua.CustomStatusline()%}"
