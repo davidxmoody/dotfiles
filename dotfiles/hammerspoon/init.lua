@@ -33,26 +33,38 @@ local function createFocusFunction(bundleID)
   end
 end
 
-local function focusNextOtherWindow()
-  for k, win in pairs(hs.window.orderedWindows()) do
-    local bundleID = win:application():bundleID()
+local function moveBrowser()
+  local win = getMainWindow(bundleIDs.browser)
+  if win then
+    local screen = win:screen()
+    local nextScreen = screen:next()
 
-    if k ~= 1 and bundleID ~= bundleIDs.browser and bundleID ~=
-      bundleIDs.terminal and bundleID ~= bundleIDs.hammerspoon then
-      win:focus()
+    if screen:id() == nextScreen:id() then
       return
+    end
+
+    if nextScreen:name() == "Built-in Retina Display" then
+      win:move(nextScreen:frame(), nextScreen, true, 0)
+      win:focus()
+
+    elseif nextScreen:name() == "DELL S2719DC" then
+      local currentFrame = win:frame()
+      local nextScreenFrame = nextScreen:frame()
+      local frame = hs.geometry.rect(nextScreenFrame.x + 0.5 *
+                                       (nextScreenFrame.w - currentFrame.w),
+                      nextScreenFrame.y, currentFrame.w, nextScreenFrame.h)
+      win:move(frame, nextScreen, true, 0)
+      win:focus()
     end
   end
 end
 
 local mod = {"command", "option", "shift"}
 
-hs.hotkey.bind(mod, "1", focusNextOtherWindow)
-hs.hotkey.bind(mod, "2", createFocusFunction(bundleIDs.browser))
-hs.hotkey.bind(mod, "3", createFocusFunction(bundleIDs.browser))
+hs.hotkey.bind(mod, "1", createFocusFunction(bundleIDs.browser))
+hs.hotkey.bind(mod, "2", moveBrowser)
+-- hs.hotkey.bind(mod, "3", createFocusFunction(bundleIDs.browser))
 hs.hotkey.bind(mod, "4", createFocusFunction(bundleIDs.terminal))
-
-hs.hotkey.bind(mod, "r", hs.reload)
 
 local usbWatcher = hs.usb.watcher.new(function(data)
   if data.productName == "Moonlander Mark I" then
@@ -65,5 +77,3 @@ local usbWatcher = hs.usb.watcher.new(function(data)
 end)
 
 usbWatcher:start()
-
-hs.alert.show("Hammerspoon loaded")
