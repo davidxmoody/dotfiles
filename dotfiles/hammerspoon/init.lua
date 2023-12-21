@@ -61,10 +61,10 @@ end
 
 local mod = {"command", "option", "shift"}
 
-hs.hotkey.bind(mod, "1", createFocusFunction(bundleIDs.browser))
-hs.hotkey.bind(mod, "2", moveBrowser)
--- hs.hotkey.bind(mod, "3", createFocusFunction(bundleIDs.browser))
-hs.hotkey.bind(mod, "4", createFocusFunction(bundleIDs.terminal))
+hs.hotkey.bind(mod, "1", moveBrowser)
+hs.hotkey.bind(mod, "2", createFocusFunction(bundleIDs.browser))
+hs.hotkey.bind(mod, "3", createFocusFunction(bundleIDs.terminal))
+hs.hotkey.bind(mod, "4", moveBrowser)
 
 local usbWatcher = hs.usb.watcher.new(function(data)
   if data.productName == "Moonlander Mark I" then
