@@ -23,6 +23,20 @@ require("lazy").setup({
   "davidxmoody/vim-indent-object",
 
   {
+    "dccsillag/magma-nvim",
+    build = ":UpdateRemotePlugins",
+    config = function()
+      vim.keymap.set("n", "<leader>r",
+        "nvim_exec('MagmaEvaluateOperator', v:true)", {expr = true})
+      vim.keymap.set("n", "<leader>rr", ":MagmaEvaluateLine<CR>")
+      vim.keymap.set("x", "<leader>r", ":<C-U>MagmaEvaluateVisual<CR>")
+      vim.keymap.set("n", "<leader>R", ":MagmaReevaluateCell<CR>")
+      vim.keymap.set("n", "<leader>rd", ":MagmaDelete<CR>")
+      vim.keymap.set("n", "<leader>rp", ":MagmaInit python3<CR>")
+    end,
+  },
+
+  {
     "folke/zen-mode.nvim",
     opts = {window = {backdrop = 0, width = 90, options = {signcolumn = "no"}}},
   },

@@ -193,11 +193,11 @@ vim.keymap.set(nxo, "ga",
   ":.s/true\\|false/\\=submatch(0)=='true'?'false':'true'/g<CR>:nohlsearch<CR>",
   {silent = true})
 
-vim.keymap
-  .set("n", "<leader>r", [[:%s/\<<C-R><C-W>\>/<C-R><C-W>/g<Left><Left>]])
+-- vim.keymap
+--   .set("n", "<leader>r", [[:%s/\<<C-R><C-W>\>/<C-R><C-W>/g<Left><Left>]])
 
-vim.keymap.set("x", "<leader>r",
-  [["zy:%s/\<<C-R><C-R>z\>/<C-R><C-R>z/g<Left><Left>]])
+-- vim.keymap.set("x", "<leader>r",
+--   [["zy:%s/\<<C-R><C-R>z\>/<C-R><C-R>z/g<Left><Left>]])
 
 vim.keymap.set(nxo, "<leader>f", ":Neoformat<CR>")
 
