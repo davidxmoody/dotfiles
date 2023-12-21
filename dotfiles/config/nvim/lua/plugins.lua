@@ -235,7 +235,7 @@ require("lazy").setup({
 
   {
     "junegunn/fzf.vim",
-    dependencies = {{"junegunn/fzf", run = "./install --bin"}},
+    dependencies = {{"junegunn/fzf", build = "./install --bin"}},
   },
   {"ojroques/nvim-lspfuzzy", opts = {}},
 
