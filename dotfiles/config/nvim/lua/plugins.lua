@@ -1,3 +1,8 @@
+package.path = package.path .. ";" .. vim.fn.expand("$HOME") ..
+                 "/.luarocks/share/lua/5.1/?/init.lua;"
+package.path = package.path .. ";" .. vim.fn.expand("$HOME") ..
+                 "/.luarocks/share/lua/5.1/?.lua;"
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -22,19 +27,59 @@ require("lazy").setup({
   "mattn/emmet-vim",
   "davidxmoody/vim-indent-object",
 
+  -- {
+  --   "dccsillag/magma-nvim",
+  --   build = ":UpdateRemotePlugins",
+  --   config = function()
+  --     vim.keymap.set("n", "<leader>r",
+  --       "nvim_exec('MagmaEvaluateOperator', v:true)", {expr = true})
+  --     vim.keymap.set("n", "<leader>rr", ":MagmaEvaluateLine<CR>")
+  --     vim.keymap.set("x", "<leader>r", ":<C-U>MagmaEvaluateVisual<CR>")
+  --     vim.keymap.set("n", "<leader>R", ":MagmaReevaluateCell<CR>")
+  --     vim.keymap.set("n", "<leader>rd", ":MagmaDelete<CR>")
+  --     vim.keymap.set("n", "<leader>rp", ":MagmaInit python3<CR>")
+  --   end,
+  -- },
+
   {
-    "dccsillag/magma-nvim",
+    "3rd/image.nvim",
+    opts = {
+      backend = "kitty",
+      max_width = 100,
+      max_height = 12,
+      max_height_window_percentage = math.huge,
+      max_width_window_percentage = math.huge,
+      window_overlap_clear_enabled = true,
+      window_overlap_clear_ft_ignore = {"cmp_menu", "cmp_docs", ""},
+    },
+  },
+
+  {
+    "benlubas/molten-nvim",
     build = ":UpdateRemotePlugins",
-    config = function()
-      vim.keymap.set("n", "<leader>r",
-        "nvim_exec('MagmaEvaluateOperator', v:true)", {expr = true})
-      vim.keymap.set("n", "<leader>rr", ":MagmaEvaluateLine<CR>")
-      vim.keymap.set("x", "<leader>r", ":<C-U>MagmaEvaluateVisual<CR>")
-      vim.keymap.set("n", "<leader>R", ":MagmaReevaluateCell<CR>")
-      vim.keymap.set("n", "<leader>rd", ":MagmaDelete<CR>")
-      vim.keymap.set("n", "<leader>rp", ":MagmaInit python3<CR>")
+    dependencies = {"3rd/image.nvim"},
+    init = function()
+      vim.g.molten_image_provider = "image.nvim"
+      vim.g.molten_output_win_max_height = 20
+      vim.g.molten_auto_open_output = false
+      vim.g.molten_virt_text_output = true
+
+      vim.keymap.set("n", "mi", ":MoltenInit python3<CR>")
+      vim.keymap.set("n", "m", ":MoltenEvaluateOperator<CR>")
+      -- vim.keymap.set("n", "m", "nvim_exec('MoltenEvaluateOperator', v:true)",
+      --   {expr = true})
+      vim.keymap.set("n", "mm", ":MoltenEvaluateLine<CR>")
+      vim.keymap.set("x", "m", ":<C-U>MoltenEvaluateVisual<CR>")
+      vim.keymap.set("n", "M", ":MoltenReevaluateCell<CR>")
+      vim.keymap.set("n", "md", ":MoltenDelete<CR>")
     end,
   },
+
+  -- {
+  --   "michaelb/sniprun",
+  --   build = "sh ./install.sh",
+  --   opts = {display = {"Classic", "VirtualTextOk"}},
+  -- },
 
   {
     "folke/zen-mode.nvim",
