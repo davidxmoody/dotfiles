@@ -91,6 +91,7 @@ alias gstu='git stash save -u'
 alias gstp='git stash pop'
 alias gsta='git stash apply'
 alias gsts='git stash show -p'
+alias gstsu='git show "stash@{0}^3"'
 alias gstd='git stash drop'
 gsti() {
   (

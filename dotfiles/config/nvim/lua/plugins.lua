@@ -42,11 +42,68 @@ require("lazy").setup({
   -- },
 
   {
+    "echasnovski/mini.nvim",
+    config = function()
+      require("mini.ai").setup({
+        custom_textobjects = {
+          c = function(ai_type)
+            local cell_marker = "^# %%"
+            local start_line = vim.fn.search(cell_marker, "bcnW")
+
+            if start_line == 0 then
+              start_line = 1
+            else
+              if ai_type == "i" then
+                start_line = start_line + 1
+              end
+            end
+
+            local end_line = vim.fn.search(cell_marker, "nW") - 1
+            if end_line == -1 then
+              end_line = vim.fn.line("$")
+            end
+
+            local last_col = math.max(vim.fn.getline(end_line):len(), 1)
+
+            local from = {line = start_line, col = 1}
+            local to = {line = end_line, col = last_col}
+
+            return {from = from, to = to, vis_mode = "V"}
+          end,
+        },
+      })
+    end,
+  },
+
+  {
+    "jpalardy/vim-slime",
+    init = function()
+      vim.g.slime_target = "tmux"
+      vim.g.slime_no_mappings = 1
+      vim.g.slime_dont_ask_default = 1
+      vim.g.slime_bracketed_paste = 1
+      if (vim.env.TMUX) then
+        vim.g.slime_default_config = {
+          socket_name = vim.env.TMUX:gsub(",.*", ""),
+          target_pane = ":.2",
+        }
+      end
+
+      vim.keymap.set("x", "<leader>p", "<Plug>SlimeRegionSend")
+      vim.keymap.set("n", "<leader>p", function()
+        local view = vim.fn.winsaveview()
+        vim.cmd.normal("vac p")
+        vim.fn.winrestview(view)
+      end)
+    end,
+  },
+
+  {
     "3rd/image.nvim",
     opts = {
       backend = "kitty",
       max_width = 100,
-      max_height = 12,
+      max_height = 30,
       max_height_window_percentage = math.huge,
       max_width_window_percentage = math.huge,
       window_overlap_clear_enabled = true,
@@ -60,9 +117,9 @@ require("lazy").setup({
     dependencies = {"3rd/image.nvim"},
     init = function()
       vim.g.molten_image_provider = "image.nvim"
-      vim.g.molten_output_win_max_height = 20
       vim.g.molten_auto_open_output = false
       vim.g.molten_virt_text_output = true
+      vim.g.molten_virt_text_max_lines = 30
 
       vim.keymap.set("n", "mi", ":MoltenInit python3<CR>")
       vim.keymap.set("n", "m", ":MoltenEvaluateOperator<CR>")
@@ -256,7 +313,7 @@ require("lazy").setup({
     config = function()
       local nvim_lsp = require("lspconfig")
 
-      local servers = {"tsserver", "svelte", "eslint", "lua_ls", "pyright"}
+      local servers = {"tsserver", "svelte", "eslint", "lua_ls", "pylsp"}
 
       for _, lsp in ipairs(servers) do
         nvim_lsp[lsp].setup({
