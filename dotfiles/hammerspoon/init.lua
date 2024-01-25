@@ -1,6 +1,6 @@
 local bundleIDs = {
   browser = "com.google.Chrome",
-  terminal = "com.googlecode.iterm2",
+  terminal = "net.kovidgoyal.kitty",
   hammerspoon = "org.hammerspoon.Hammerspoon",
 }
 
