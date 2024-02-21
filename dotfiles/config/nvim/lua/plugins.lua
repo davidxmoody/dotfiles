@@ -1,3 +1,4 @@
+-- TODO can I remove this?
 package.path = package.path .. ";" .. vim.fn.expand("$HOME") ..
                  "/.luarocks/share/lua/5.1/?/init.lua;"
 package.path = package.path .. ";" .. vim.fn.expand("$HOME") ..
@@ -108,16 +109,16 @@ require("lazy").setup({
   {
     "jpalardy/vim-slime",
     init = function()
-      vim.g.slime_target = "tmux"
+      vim.g.slime_target = "kitty"
       vim.g.slime_no_mappings = 1
-      vim.g.slime_dont_ask_default = 1
+      -- vim.g.slime_dont_ask_default = 1
       vim.g.slime_bracketed_paste = 1
-      if (vim.env.TMUX) then
-        vim.g.slime_default_config = {
-          socket_name = vim.env.TMUX:gsub(",.*", ""),
-          target_pane = ":.2",
-        }
-      end
+      -- if (vim.env.TMUX) then
+      --   vim.g.slime_default_config = {
+      --     socket_name = vim.env.TMUX:gsub(",.*", ""),
+      --     target_pane = ":.2",
+      --   }
+      -- end
 
       vim.keymap.set("x", "<leader>p", "<Plug>SlimeRegionSend")
       vim.keymap.set("n", "<leader>p", function()
@@ -195,11 +196,11 @@ require("lazy").setup({
       -- For focused windows, use the "default" background color (from tmux). This
       -- means the current Vim window will be highlighted only if the tmux pane that
       -- vim is running in is also currently active.
-      vim.api.nvim_set_hl(0, "Normal", {bg = "NONE"})
+      -- vim.api.nvim_set_hl(0, "Normal", {bg = "NONE"})
 
       -- Unfocused background color duplicated in tmux config
-      vim.api.nvim_set_hl(0, "NormalNC", {bg = "#000a13"})
-      vim.api.nvim_set_hl(0, "NvimTreeNormalNC", {link = "NormalNC"})
+      -- vim.api.nvim_set_hl(0, "NormalNC", {bg = "#000a13"})
+      -- vim.api.nvim_set_hl(0, "NvimTreeNormalNC", {link = "NormalNC"})
     end,
   },
 
@@ -263,12 +264,20 @@ require("lazy").setup({
   },
 
   {
-    "christoomey/vim-tmux-navigator",
+    "knubie/vim-kitty-navigator",
+    build = "cp ./*.py ~/.config/kitty/",
     init = function()
-      vim.g.tmux_navigator_no_mappings = 1
-      vim.g.tmux_navigator_disable_when_zoomed = 1
+      vim.g.kitty_navigator_no_mappings = 1
     end,
   },
+
+  -- {
+  --   "christoomey/vim-tmux-navigator",
+  --   init = function()
+  --     vim.g.tmux_navigator_no_mappings = 1
+  --     vim.g.tmux_navigator_disable_when_zoomed = 1
+  --   end,
+  -- },
 
   {
     "kyazdani42/nvim-tree.lua",
