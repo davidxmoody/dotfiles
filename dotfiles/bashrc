@@ -35,6 +35,15 @@ __prompt_command() {
     git_status+=" $last_job_num"
   fi
 
+  local venv=""
+  if [[ ! -z "$VIRTUAL_ENV" ]]; then
+    if [[ "$PWD" =~ "${VIRTUAL_ENV%/.venv}"* ]]; then
+      venv=" (VENV)"
+    else
+      venv=" ($VIRTUAL_ENV_PROMPT)"
+    fi
+  fi
+
   local color_bg_1="0"
   local color_fg_1="7"
 
@@ -51,6 +60,7 @@ __prompt_command() {
   new_ps1+="\[\e[0m\e[4${color_bg_2}m\e[3${color_bg_1}m\]"
   new_ps1+="$arrow_char"
   new_ps1+="\[\e[3${color_fg_2}m\]"
+  new_ps1+="$venv"
   new_ps1+=" $git_status "
   new_ps1+="\[\e[0m\e[3${color_bg_2}m\]"
   new_ps1+="$arrow_char"
@@ -110,6 +120,8 @@ add_to_path "$HOME/.bin"
 add_to_path "$HOME/.local/bin"
 
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
+
+export POETRY_CONFIG_DIR="$HOME/.config/pypoetry"
 
 # Source other files ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
