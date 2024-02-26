@@ -24,48 +24,37 @@ arrow_char=$'\uE0B0'
 
 __prompt_command() {
   local last_exit_status="$?"
-  local last_job_num="$(jobs | tail -n1 | cut -f1 -d"+")"
 
-  if [ -n "$TMUX" ]; then
-    tmux select-pane -T "$(tmux-get-pane-title)"
-  fi
+  local bg1="0"
+  local fg1="255"
 
-  local git_status="$(git-short-status)"
-  if [ ! -z "$last_job_num" ]; then
-    git_status+=" $last_job_num"
+  local bg2="93"
+  local fg2="255"
+
+  local bg3="117"
+  local fg3="232"
+
+  if [[ "$last_exit_status" -ne "0" ]] && [[ "$last_exit_status" -ne "130" ]]; then
+    bg2="160"
+    bg3="202"
   fi
 
   local venv=""
   if [[ ! -z "$VIRTUAL_ENV" ]]; then
     if [[ "$PWD" =~ "${VIRTUAL_ENV%/.venv}"* ]]; then
-      venv=" (VENV)"
+      venv="venv"
     else
-      venv=" ($VIRTUAL_ENV_PROMPT)"
+      venv="$VIRTUAL_ENV_PROMPT"
     fi
   fi
 
-  local color_bg_1="0"
-  local color_fg_1="7"
-
-  local color_bg_2="4"
-  local color_fg_2="0"
-
-  if [ "$last_exit_status" -ne "0" -a "$last_exit_status" -ne "130" ]; then
-    color_bg_2="1"
-  fi
-
   local new_ps1=
-  new_ps1+="\[\e[4${color_bg_1}m\e[3${color_fg_1}m\]"
-  new_ps1+=" \w "
-  new_ps1+="\[\e[0m\e[4${color_bg_2}m\e[3${color_bg_1}m\]"
-  new_ps1+="$arrow_char"
-  new_ps1+="\[\e[3${color_fg_2}m\]"
-  new_ps1+="$venv"
-  new_ps1+=" $git_status "
-  new_ps1+="\[\e[0m\e[3${color_bg_2}m\]"
-  new_ps1+="$arrow_char"
-  new_ps1+="\[\e[0m\]"
-  new_ps1+=" "
+  new_ps1+="\[\e[38;5;${fg1}m\e[48;5;${bg1}m\] \w "
+  new_ps1+="\[\e[38;5;${bg1}m\e[48;5;${bg2}m\]${arrow_char} "
+  new_ps1+="\[\e[38;5;${fg2}m\e[48;5;${bg2}m\]${venv} "
+  new_ps1+="\[\e[38;5;${bg2}m\e[48;5;${bg3}m\]${arrow_char} "
+  new_ps1+="\[\e[38;5;${fg3}m\e[48;5;${bg3}m\]$(git-short-status) "
+  new_ps1+="\[\e[0m\e[38;5;${bg3}m\]${arrow_char}\[\e[0m\] "
 
   PS1="$new_ps1"
 }
