@@ -14,15 +14,6 @@ t() {
 
 mkcd() { mkdir "$@" && cd "$@"; }
 
-mkalias() {
-  local full_string=$*
-  local alias_name=${full_string%%=*}
-  local alias_result=${full_string#*=}
-  local alias_command="alias $alias_name='$alias_result'"
-
-  eval "$alias_command" && alias "$alias_name" | tee -a "$HOME/.bash_aliases"
-}
-
 mkp() {
   local new_project_path=$(mkproject "$@")
   [[ ! -z "$new_project_path" ]] && cd "$new_project_path"
@@ -49,19 +40,7 @@ gG() { GIT_PAGER="less '+/$1'" git log -p -G "$1"; }
 alias gd='git diff'
 alias gdc='git diff --cached'
 alias gdt='git diff --text'
-ga() {
-  if [[ $# == 0 ]]; then
-    (
-      cd "$(git rev-parse --show-toplevel)" &&
-        git status -sb -uall |
-        fzf --ansi --header-lines=1 --multi --preview='git diff {2}' |
-          sed 's/^.. //' |
-          xargs -d '\n' git add
-    )
-  else
-    git add "$@"
-  fi
-}
+alias ga='git add'
 alias gaa='git add -A :/'
 alias gaac='gaa && git commit'
 gcm() {
@@ -75,13 +54,11 @@ gcm() {
   fi
 }
 alias gaacm='gaa && gcm'
-alias gaaca='git add -A :/ && git commit --amend'
-alias gaacane='git add -A :/ && git commit --amend --no-edit'
+alias gamend='git commit --amend --no-edit'
 alias gco='git checkout'
 alias gm='git merge'
 alias gff='git merge --ff-only'
 alias gf='git fetch origin --prune && git --no-pager lg @{upstream} ^HEAD'
-alias gpl='git pull && git --no-pager lg HEAD@{1}..'
 alias gps='git push'
 alias gr='git rebase'
 alias gri='git rebase -i @{u}'
@@ -92,38 +69,13 @@ alias gsta='git stash apply'
 alias gsts='git stash show -p'
 alias gstsu='git show "stash@{0}^3"'
 alias gstd='git stash drop'
-gsti() {
-  (
-    cd "$(git rev-parse --show-toplevel)" &&
-      git status -sb -uall |
-      fzf --ansi --header-lines=1 --multi --preview='git diff {2}' |
-        sed 's/^.. //' |
-        xargs -d '\n' git stash push --include-untracked --
-  )
-}
 alias glm='git lg --author="$(git config user.name)"'
-alias gdp='git diff ORIG_HEAD -- package.json'
 alias groot='cd "$(git rev-parse --show-toplevel)"'
-alias gitcountdiff='git --no-pager diff --color=never | grep -v -E "^(\+\+\+|---) "| grep -E "^(-|\+)" | count'
-alias gitcopydiff='git --no-pager diff --color=never | tee >(pbcopy) && echo -e "\nCopied!"'
-alias gitcopyhead='git --no-pager show --color=never | tee >(pbcopy) && echo -e "\nCopied!"'
 alias gw='git show'
 alias gwt='git show --text'
-gwm() {
-  local last_commit_hash=$(git log --max-count=1 --author="$(git config user.name)" --pretty=format:'%H')
-  if [ -n "$last_commit_hash" ]; then
-    git show "$last_commit_hash" "$@"
-  else
-    echo "Could not find any commits by author: $(git config user.name)" >&2
-    return 1
-  fi
-}
 alias gy='git-show-yesterday'
 alias gyy='git-projects-recent-commits'
 alias gg='git-fetch-all-projects'
-alias gunl='git ls-files -v | grep ^h | col2'
-alias guna='git update-index --assume-unchanged'
-alias gunr='git update-index --no-assume-unchanged'
 
 ggl() {
   (
@@ -134,17 +86,6 @@ ggl() {
       echo "$(git-short-status)	${proj_dir}" | expand -t8
     done
   )
-}
-
-gclone() {
-  local git_repo=$1
-  local project_dir=${2-p}
-  [ -z "$git_repo" ] && echo "Please enter the name of a git repository" && return 1
-
-  (
-    cd "$HOME/${project_dir}" &&
-      git clone git@bitbucket.org:candide-garden-app/${git_repo}.git
-  ) && cd "$HOME/${project_dir}/${git_repo}"
 }
 
 fetch_repo_list() {
@@ -182,16 +123,7 @@ nit() { npm install --save-dev "@types/$1"; }
 alias nr='npm-run-script'
 alias ns='npm start'
 alias nb='npm run build'
-alias podi='([ -d ios ] && cd ios; pod install)'
-alias npi='ni && podi'
-
-alias publish='git push && npm publish'
-alias ng='npm run generate-types'
-alias ngd='npm run generate-db-types'
-
 alias nc='npm-check -u'
-alias tsw='tsc -w --noEmit'
-nodei() { node -i -e "$(< "${1-/dev/null}")"; }
 
 # Diary ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -204,10 +136,7 @@ alias ds='diary search'
 
 alias vim='nvim'
 alias v='nvim'
-alias vv='(cd "$RC_DIR" && nvim dotfiles/config/nvim/init.lua)'
-alias vb='(cd "$RC_DIR" && nvim dotfiles/bash_aliases)'
-alias vbl='nvim ~/.bashrc-local'
-alias vp='v package.json'
+alias vv='(cd "$RC_DIR" && nvim "+:NvimTreeOpen")'
 alias v-='v -'
 
 # cd shortcuts ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -257,8 +186,6 @@ alias tsize='echo "$(tput cols)x$(tput lines)"'
 alias watchtsize='while true; do tsize; sleep 0.1; done | uniq'
 alias copywithoutnewline='tr -d \\n | pbcopy'
 alias copyuuid='uuidgen | tr "[:upper:]" "[:lower:]" | copywithoutnewline'
-alias py='python3'
-alias timestamps="gawk '{ print strftime(\"[%Y-%m-%d %H:%M:%S]\"), \$0 }'"
 alias tree='tree -I "node_modules|package-lock.json"'
 https-proxy() { http-server /dev/null -p 443 --ssl --cert "$LOCAL_SSL_CERT" --key "$LOCAL_SSL_KEY" -P http://localhost:${1-4000}; }
 alias tnode='node --no-warnings --loader ts-node/esm --es-module-specifier-resolution=node'
