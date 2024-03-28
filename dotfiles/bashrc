@@ -48,7 +48,7 @@ __prompt_command() {
     fi
   fi
 
-  local new_ps1=
+  local new_ps1="\[\e]0;$(tmux-get-pane-title)\a\]"
   new_ps1+="\[\e[38;5;${fg1}m\e[48;5;${bg1}m\] \w "
   new_ps1+="\[\e[38;5;${bg1}m\e[48;5;${bg2}m\]${arrow_char} "
   new_ps1+="\[\e[38;5;${fg2}m\e[48;5;${bg2}m\]${venv} "
