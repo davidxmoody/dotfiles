@@ -380,6 +380,11 @@ require("lazy").setup({
               },
               telemetry = {enable = false},
             },
+            python = {
+              analysis = {
+                diagnosticSeverityOverrides = {reportUnusedExpression = "none"},
+              },
+            },
           },
         })
       end
