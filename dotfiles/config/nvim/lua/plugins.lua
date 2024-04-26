@@ -4,6 +4,8 @@ package.path = package.path .. ";" .. vim.fn.expand("$HOME") ..
 package.path = package.path .. ";" .. vim.fn.expand("$HOME") ..
                  "/.luarocks/share/lua/5.1/?.lua;"
 
+vim.g.python3_host_prog = vim.fn.expand("~/p/dotfiles/.venv/bin/python3")
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -27,6 +29,59 @@ require("lazy").setup({
   "lambdalisue/suda.vim",
   "mattn/emmet-vim",
   "davidxmoody/vim-indent-object",
+
+  {
+    "quarto-dev/quarto-nvim",
+    opts = {
+      lspFeatures = {languages = {"python", "bash", "html", "lua"}},
+      codeRunner = {enabled = true, default_method = "slime"},
+    },
+    ft = "quarto",
+    keys = {
+      {"<leader>qa", ":QuartoActivate<cr>", desc = "quarto activate"},
+      {
+        "<leader>qp",
+        ":lua require'quarto'.quartoPreview()<cr>",
+        desc = "quarto preview",
+      },
+      {
+        "<leader>qq",
+        ":lua require'quarto'.quartoClosePreview()<cr>",
+        desc = "quarto close",
+      },
+      {"<leader>qh", ":QuartoHelp ", desc = "quarto help"},
+      {"<leader>qe", ":lua require'otter'.export()<cr>", desc = "quarto export"},
+      {
+        "<leader>qE",
+        ":lua require'otter'.export(true)<cr>",
+        desc = "quarto export overwrite",
+      },
+      {"<leader>qrr", ":QuartoSendAbove<cr>", desc = "quarto run to cursor"},
+      {"<leader>qra", ":QuartoSendAll<cr>", desc = "quarto run all"},
+      -- {"<leader>p", ":QuartoSend<cr>", desc = "quarto run cell"},
+      -- {"<leader><cr>", ":SlimeSend<cr>", desc = "send code chunk"},
+      -- {"<c-cr>", ":SlimeSend<cr>", desc = "send code chunk"},
+      -- {"<c-cr>", "<esc>:SlimeSend<cr>i", mode = "i", desc = "send code chunk"},
+      -- {
+      --   "<c-cr>",
+      --   "<Plug>SlimeRegionSend<cr>",
+      --   mode = "v",
+      --   desc = "send code chunk",
+      -- },
+      -- {
+      --   "<cr>",
+      --   "<Plug>SlimeRegionSend<cr>",
+      --   mode = "v",
+      --   desc = "send code chunk",
+      -- },
+      -- {"<leader>ctr", ":split term://R<cr>", desc = "terminal: R"},
+      -- {"<leader>cti", ":split term://ipython<cr>", desc = "terminal: ipython"},
+      -- {"<leader>ctp", ":split term://python<cr>", desc = "terminal: python"},
+      -- {"<leader>ctj", ":split term://julia<cr>", desc = "terminal: julia"},
+    },
+  },
+
+  {"jmbuhr/otter.nvim", opts = {buffers = {set_filetype = true}}},
 
   -- {
   --   "dccsillag/magma-nvim",
@@ -107,7 +162,7 @@ require("lazy").setup({
       vim.keymap.set("x", "<leader>p", "<Plug>SlimeRegionSend")
       vim.keymap.set("n", "<leader>p", function()
         local view = vim.fn.winsaveview()
-        vim.cmd.normal("vac p")
+        vim.cmd.normal("vic p")
         vim.fn.winrestview(view)
       end)
     end,
@@ -135,8 +190,9 @@ require("lazy").setup({
       vim.g.molten_auto_open_output = false
       vim.g.molten_virt_text_output = true
       vim.g.molten_virt_text_max_lines = 30
+      -- vim.g.molten_wrap_output = false
 
-      vim.keymap.set("n", "mi", ":MoltenInit python3<CR>")
+      vim.keymap.set("n", "mi", ":MoltenInit<CR>")
       vim.keymap.set("n", "m", ":MoltenEvaluateOperator<CR>")
       -- vim.keymap.set("n", "m", "nvim_exec('MoltenEvaluateOperator', v:true)",
       --   {expr = true})
@@ -394,6 +450,7 @@ require("lazy").setup({
       "hrsh7th/cmp-cmdline",
       "hrsh7th/cmp-buffer",
       "windwp/nvim-autopairs",
+      "jmbuhr/otter.nvim",
     },
     config = function()
       vim.opt.completeopt = "menuone,noselect"
@@ -437,6 +494,7 @@ require("lazy").setup({
           end,
         }),
         sources = cmp.config.sources({
+          {name = "otter"},
           {name = "nvim_lsp"},
           {name = "ultisnips"},
           {name = "path"},
