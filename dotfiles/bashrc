@@ -39,16 +39,16 @@ __prompt_command() {
     bg3="202"
   fi
 
+  local venv=""
   if [[ -z "$VIRTUAL_ENV" && -f ".venv/bin/activate" ]]; then
     if [[ "$(dirname "$PWD")" == "$P_DIR" ]] &&
       grep -q "^.*\t$(basename "$PWD")\$" "$HOME/.project-list.tsv"; then
       source ".venv/bin/activate"
     else
-      echo "Untrusted .venv available"
+      venv="Untrusted venv available"
     fi
   fi
 
-  local venv=""
   if [[ ! -z "$VIRTUAL_ENV" ]]; then
     if [[ "$PWD" =~ "${VIRTUAL_ENV%/.venv}"* ]]; then
       venv="venv"
