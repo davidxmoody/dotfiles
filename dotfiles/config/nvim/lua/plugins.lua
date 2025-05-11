@@ -392,7 +392,7 @@ require("lazy").setup({
     config = function()
       local nvim_lsp = require("lspconfig")
 
-      local servers = {"tsserver", "svelte", "eslint", "lua_ls", "pyright"}
+      local servers = {"ts_ls", "svelte", "eslint", "lua_ls", "pyright"}
 
       for _, lsp in ipairs(servers) do
         nvim_lsp[lsp].setup({
