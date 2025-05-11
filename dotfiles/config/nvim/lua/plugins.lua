@@ -26,76 +26,10 @@ require("lazy").setup({
   "tpope/vim-speeddating",
   "tpope/vim-surround",
   "tpope/vim-commentary",
+  "tpope/vim-fugitive",
   "lambdalisue/suda.vim",
   "mattn/emmet-vim",
   "davidxmoody/vim-indent-object",
-
-  {
-    "quarto-dev/quarto-nvim",
-    opts = {
-      lspFeatures = {languages = {"python", "bash", "html", "lua"}},
-      codeRunner = {enabled = true, default_method = "slime"},
-    },
-    ft = "quarto",
-    keys = {
-      {"<leader>qa", ":QuartoActivate<cr>", desc = "quarto activate"},
-      {
-        "<leader>qp",
-        ":lua require'quarto'.quartoPreview()<cr>",
-        desc = "quarto preview",
-      },
-      {
-        "<leader>qq",
-        ":lua require'quarto'.quartoClosePreview()<cr>",
-        desc = "quarto close",
-      },
-      {"<leader>qh", ":QuartoHelp ", desc = "quarto help"},
-      {"<leader>qe", ":lua require'otter'.export()<cr>", desc = "quarto export"},
-      {
-        "<leader>qE",
-        ":lua require'otter'.export(true)<cr>",
-        desc = "quarto export overwrite",
-      },
-      {"<leader>qrr", ":QuartoSendAbove<cr>", desc = "quarto run to cursor"},
-      {"<leader>qra", ":QuartoSendAll<cr>", desc = "quarto run all"},
-      -- {"<leader>p", ":QuartoSend<cr>", desc = "quarto run cell"},
-      -- {"<leader><cr>", ":SlimeSend<cr>", desc = "send code chunk"},
-      -- {"<c-cr>", ":SlimeSend<cr>", desc = "send code chunk"},
-      -- {"<c-cr>", "<esc>:SlimeSend<cr>i", mode = "i", desc = "send code chunk"},
-      -- {
-      --   "<c-cr>",
-      --   "<Plug>SlimeRegionSend<cr>",
-      --   mode = "v",
-      --   desc = "send code chunk",
-      -- },
-      -- {
-      --   "<cr>",
-      --   "<Plug>SlimeRegionSend<cr>",
-      --   mode = "v",
-      --   desc = "send code chunk",
-      -- },
-      -- {"<leader>ctr", ":split term://R<cr>", desc = "terminal: R"},
-      -- {"<leader>cti", ":split term://ipython<cr>", desc = "terminal: ipython"},
-      -- {"<leader>ctp", ":split term://python<cr>", desc = "terminal: python"},
-      -- {"<leader>ctj", ":split term://julia<cr>", desc = "terminal: julia"},
-    },
-  },
-
-  {"jmbuhr/otter.nvim", opts = {buffers = {set_filetype = true}}},
-
-  -- {
-  --   "dccsillag/magma-nvim",
-  --   build = ":UpdateRemotePlugins",
-  --   config = function()
-  --     vim.keymap.set("n", "<leader>r",
-  --       "nvim_exec('MagmaEvaluateOperator', v:true)", {expr = true})
-  --     vim.keymap.set("n", "<leader>rr", ":MagmaEvaluateLine<CR>")
-  --     vim.keymap.set("x", "<leader>r", ":<C-U>MagmaEvaluateVisual<CR>")
-  --     vim.keymap.set("n", "<leader>R", ":MagmaReevaluateCell<CR>")
-  --     vim.keymap.set("n", "<leader>rd", ":MagmaDelete<CR>")
-  --     vim.keymap.set("n", "<leader>rp", ":MagmaInit python3<CR>")
-  --   end,
-  -- },
 
   {
     "echasnovski/mini.nvim",
@@ -150,15 +84,7 @@ require("lazy").setup({
     init = function()
       vim.g.slime_target = "kitty"
       vim.g.slime_no_mappings = 1
-      -- vim.g.slime_dont_ask_default = 1
       vim.g.slime_bracketed_paste = 1
-      -- if (vim.env.TMUX) then
-      --   vim.g.slime_default_config = {
-      --     socket_name = vim.env.TMUX:gsub(",.*", ""),
-      --     target_pane = ":.2",
-      --   }
-      -- end
-
       vim.keymap.set("x", "<leader>p", "<Plug>SlimeRegionSend")
       vim.keymap.set("n", "<leader>p", function()
         local view = vim.fn.winsaveview()
@@ -182,34 +108,6 @@ require("lazy").setup({
   },
 
   {
-    "benlubas/molten-nvim",
-    build = ":UpdateRemotePlugins",
-    dependencies = {"3rd/image.nvim"},
-    init = function()
-      vim.g.molten_image_provider = "image.nvim"
-      vim.g.molten_auto_open_output = false
-      vim.g.molten_virt_text_output = true
-      vim.g.molten_virt_text_max_lines = 30
-      -- vim.g.molten_wrap_output = false
-
-      vim.keymap.set("n", "mi", ":MoltenInit<CR>")
-      vim.keymap.set("n", "m", ":MoltenEvaluateOperator<CR>")
-      -- vim.keymap.set("n", "m", "nvim_exec('MoltenEvaluateOperator', v:true)",
-      --   {expr = true})
-      vim.keymap.set("n", "mm", ":MoltenEvaluateLine<CR>")
-      vim.keymap.set("x", "m", ":<C-U>MoltenEvaluateVisual<CR>")
-      vim.keymap.set("n", "M", ":MoltenReevaluateCell<CR>")
-      vim.keymap.set("n", "md", ":MoltenDelete<CR>")
-    end,
-  },
-
-  -- {
-  --   "michaelb/sniprun",
-  --   build = "sh ./install.sh",
-  --   opts = {display = {"Classic", "VirtualTextOk"}},
-  -- },
-
-  {
     "folke/zen-mode.nvim",
     opts = {window = {backdrop = 0, width = 90, options = {signcolumn = "no"}}},
   },
@@ -229,18 +127,8 @@ require("lazy").setup({
     "bluz71/vim-nightfly-guicolors",
     config = function()
       vim.cmd("colorscheme nightfly")
-
       vim.api.nvim_set_hl(0, "ModifiedFlag", {bg = "#ff5874", fg = "White"})
       vim.api.nvim_set_hl(0, "Pmenu", {bg = "#1d3b53"})
-
-      -- For focused windows, use the "default" background color (from tmux). This
-      -- means the current Vim window will be highlighted only if the tmux pane that
-      -- vim is running in is also currently active.
-      -- vim.api.nvim_set_hl(0, "Normal", {bg = "NONE"})
-
-      -- Unfocused background color duplicated in tmux config
-      -- vim.api.nvim_set_hl(0, "NormalNC", {bg = "#000a13"})
-      -- vim.api.nvim_set_hl(0, "NvimTreeNormalNC", {link = "NormalNC"})
     end,
   },
 
@@ -263,7 +151,6 @@ require("lazy").setup({
     end,
   },
 
-  "tpope/vim-fugitive",
   {
     "lewis6991/gitsigns.nvim",
     opts = {
@@ -310,14 +197,6 @@ require("lazy").setup({
       vim.g.kitty_navigator_no_mappings = 1
     end,
   },
-
-  -- {
-  --   "christoomey/vim-tmux-navigator",
-  --   init = function()
-  --     vim.g.tmux_navigator_no_mappings = 1
-  --     vim.g.tmux_navigator_disable_when_zoomed = 1
-  --   end,
-  -- },
 
   {
     "kyazdani42/nvim-tree.lua",
@@ -383,8 +262,6 @@ require("lazy").setup({
       indent = {enable = true},
     },
   },
-
-  "jparise/vim-graphql",
 
   {
     "neovim/nvim-lspconfig",
