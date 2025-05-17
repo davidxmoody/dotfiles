@@ -89,7 +89,7 @@ ggl() {
 }
 
 fetch_repo_list() {
-  curl https://api.github.com/users/davidxmoody/repos 2> /dev/null |
+  curl "https://api.github.com/users/davidxmoody/repos?per_page=100" 2> /dev/null |
     jq -r '.[].name' > ~/.github-repos
 }
 
