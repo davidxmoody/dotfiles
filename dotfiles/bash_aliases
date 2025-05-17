@@ -90,7 +90,7 @@ ggl() {
 
 fetch_repo_list() {
   curl "https://api.github.com/users/davidxmoody/repos?per_page=100" 2> /dev/null |
-    jq -r '.[].name' > ~/.github-repos
+    jq -r '.[] | "\(.pushed_at)\t\(.name)"' | sort -r | cut -f2 > ~/.github-repos
 }
 
 clone() {
@@ -99,7 +99,7 @@ clone() {
     fetch_repo_list
   fi
 
-  local repo=$(cat ~/.github-repos | fzf --select-1 --query "$*")
+  local repo=$(grep -vxFf <(ls "$P_DIR") ~/.github-repos | fzf --select-1 --query "$*")
 
   if [ -n "$repo" ]; then
     if [ ! -d "$P_DIR/$repo" ]; then
