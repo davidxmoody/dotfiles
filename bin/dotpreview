@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-
-set -e
-
-mkdir -p /tmp/dotpreview
-outfile=/tmp/dotpreview/$(basename "${1%.dot}").png
-
-dot -Tpng "$1" -o "$outfile" && open "$outfile"
