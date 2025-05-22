@@ -132,7 +132,7 @@ alias de='diary edit'
 alias dl='diary list'
 alias ds='diary search'
 
-# Vim ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Neovim ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 alias vim='nvim'
 alias v='nvim'
@@ -146,7 +146,8 @@ alias b='cd - >/dev/null'
 alias cdp='cd "$P_DIR"'
 alias cdt='cd "$TMP_DIR"'
 alias cdd='cd "$DIARY_DIR"'
-alias cdl='cd ~/Downloads'
+alias cdl='cd "$HOME/Downloads"'
+alias cdi='cd "$ICLOUD_DIR"'
 alias pd='p dotfiles'
 
 # Data hacks ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -191,3 +192,4 @@ https-proxy() { http-server /dev/null -p 443 --ssl --cert "$LOCAL_SSL_CERT" --ke
 alias tnode='node --no-warnings --loader ts-node/esm --es-module-specifier-resolution=node'
 alias im='(cd "$P_DIR/self-tracking" && poetry run python -m self_tracking.importers.all)'
 alias ipyd='(cd "$P_DIR/self-tracking" && poetry run ipython --TerminalIPythonApp.exec_lines="import self_tracking.data as d; import pandas as pd; import numpy as np; import plotly.express as px")'
+alias generate-photos-data='osxphotos --json dump | jq "[.[].date | split(\"T\") | .[0]] | sort_by(.)"'

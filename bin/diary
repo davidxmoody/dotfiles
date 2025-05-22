@@ -69,7 +69,7 @@ diary_words() {
 
 diary_backup() {
   local commit="$(git rev-parse --short HEAD)"
-  local backup_file="$HOME/Downloads/diary-backup-$(date +%F)-$commit.zip"
+  local backup_file="$ICLOUD_DIR/Documents/diary-backups/diary-backup-$(date +%F)-$commit.zip"
 
   if [[ -f "$backup_file" ]]; then
     echo "Backup file already exists: '$backup_file'" >&2
