@@ -49,10 +49,15 @@ local function setupAutoCapitalization()
   })
 end
 
+local function setupHeaderTimes()
+  vim.cmd({cmd = "inoreabbrev", args = {"##", "<C-R>=strftime('## %H:%M')<CR>"}})
+end
+
 vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {
   pattern = "diary-*.md",
   callback = function()
     defineCustomAbbreviations()
     setupAutoCapitalization()
+    setupHeaderTimes()
   end,
 })
