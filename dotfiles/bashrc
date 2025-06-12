@@ -110,6 +110,8 @@ add_to_manp "/usr/local/opt/gnu-sed/libexec/gnuman"
 add_to_path "/opt/homebrew/opt/gnu-sed/libexec/gnubin"
 add_to_manp "/opt/homebrew/opt/gnu-sed/libexec/gnuman"
 
+add_to_path "/opt/homebrew/opt/openjdk/bin"
+
 export N_PREFIX="$HOME/.n"
 add_to_path "$N_PREFIX/bin"
 
