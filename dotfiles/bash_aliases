@@ -173,6 +173,19 @@ alias brewi='brew-install-fzf'
 alias brewu='brew-upgrade-fzf'
 alias ta='tmux-attach-fzf'
 
+# Python ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+im() {
+  type deactivate &> /dev/null && deactivate
+  cd "$P_DIR/self-tracking"
+  poetry run python -m self_tracking.importers.all
+}
+
+ipyd() {
+  type deactivate &> /dev/null && deactivate
+  cd "$P_DIR/self-tracking"
+  poetry run python ipython --TerminalIPythonApp.exec_lines="import self_tracking.data as d; import pandas as pd; import numpy as np; import plotly.express as px"
+}
+
 # Misc ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 alias u='ls -FCBH --group-directories-first --color=auto --hide node_modules'
@@ -190,6 +203,4 @@ alias copyuuid='uuidgen | tr "[:upper:]" "[:lower:]" | copywithoutnewline'
 alias tree='tree -I "node_modules|package-lock.json"'
 https-proxy() { http-server /dev/null -p 443 --ssl --cert "$LOCAL_SSL_CERT" --key "$LOCAL_SSL_KEY" -P http://localhost:${1-4000}; }
 alias tnode='node --no-warnings --loader ts-node/esm --es-module-specifier-resolution=node'
-alias im='(cd "$P_DIR/self-tracking" && poetry run python -m self_tracking.importers.all)'
-alias ipyd='(cd "$P_DIR/self-tracking" && poetry run ipython --TerminalIPythonApp.exec_lines="import self_tracking.data as d; import pandas as pd; import numpy as np; import plotly.express as px")'
 alias generate-photos-data='osxphotos --json dump | jq "[.[].date | split(\"T\") | .[0]] | sort_by(.)"'
