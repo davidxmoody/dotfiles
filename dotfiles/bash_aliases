@@ -175,15 +175,19 @@ alias ta='tmux-attach-fzf'
 
 # Python ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 im() {
-  type deactivate &> /dev/null && deactivate
-  cd "$P_DIR/self-tracking"
-  poetry run python -m self_tracking.importers.all
+  (
+    type deactivate &> /dev/null && deactivate
+    cd "$P_DIR/self-tracking"
+    poetry run python -m self_tracking.importers.all
+  )
 }
 
 ipyd() {
-  type deactivate &> /dev/null && deactivate
-  cd "$P_DIR/self-tracking"
-  poetry run python ipython --TerminalIPythonApp.exec_lines="import self_tracking.data as d; import pandas as pd; import numpy as np; import plotly.express as px"
+  (
+    type deactivate &> /dev/null && deactivate
+    cd "$P_DIR/self-tracking"
+    poetry run ipython --TerminalIPythonApp.exec_lines="import self_tracking.data as d; import pandas as pd; import numpy as np; import plotly.express as px"
+  )
 }
 
 # Misc ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
