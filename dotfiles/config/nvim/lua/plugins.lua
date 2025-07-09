@@ -104,6 +104,17 @@ require("lazy").setup({
       max_width_window_percentage = math.huge,
       window_overlap_clear_enabled = true,
       window_overlap_clear_ft_ignore = {"cmp_menu", "cmp_docs", ""},
+      integrations = {
+        markdown = {
+          resolve_image_path = function(document_path, image_path, fallback)
+            if vim.startswith(image_path, "/") then
+              return vim.fn.getcwd() .. image_path
+            else
+              return fallback(document_path, image_path)
+            end
+          end,
+        },
+      },
     },
   },
 
