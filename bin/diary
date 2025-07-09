@@ -2,16 +2,16 @@
 
 set -e
 
-if [[ ! -d "$DIARY_DIR" || ! -d "$DIARY_DIR/entries" ]]; then
-  echo "\$DIARY_DIR/entries does not exist" >&2
+if [[ ! -d "$DIARY_DIR" ]]; then
+  echo "\$DIARY_DIR does not exist" >&2
   exit 1
 fi
 
-cd "$DIARY_DIR/entries"
+cd "$DIARY_DIR"
 
 diary_new() {
-  subdir=$(date +%Y/%m/%d)
-  filename=diary-$(date +%H-%M).md
+  subdir="entries/$(date +%Y/%m/%d)"
+  filename="diary-$(date +%H-%M).md"
   mkdir -p "$subdir"
 
   nvim "+:ZenMode" "+norm a## " "+startinsert!" "$subdir/$filename"
@@ -20,17 +20,17 @@ diary_new() {
 }
 
 diary_edit() {
-  last_year=$(ls -r | head -n1)
-  last_month=$(ls -r "$last_year" | head -n1)
-  last_day=$(ls -r "$last_year/$last_month" | head -n1)
-  last_entry=$(ls -r "$last_year/$last_month/$last_day" | head -n1)
+  last_year=$(ls -r "entries" | head -n1)
+  last_month=$(ls -r "entries/$last_year" | head -n1)
+  last_day=$(ls -r "entries/$last_year/$last_month" | head -n1)
+  last_entry=$(ls -r "entries/$last_year/$last_month/$last_day" | head -n1)
 
-  nvim "$last_year/$last_month/$last_day/$last_entry"
+  nvim "entries/$last_year/$last_month/$last_day/$last_entry"
 }
 
 diary_fzf_show_provided() {
   terminal_width=$(tput cols)
-  preview_width=$((terminal_width - 33))
+  preview_width=$((terminal_width - 41))
 
   terminal_height=$(tput lines)
   before_context=$(((terminal_height - 2) / 3))
@@ -42,29 +42,13 @@ diary_fzf_show_provided() {
 }
 
 diary_list() {
-  last_year=$(ls -r | head -n1)
-  sorted_files=$(rg --files "$last_year" | sort -r)
+  last_year=$(ls -r "entries" | head -n1)
+  sorted_files=$(rg --files "entries/$last_year" | sort -r)
   diary_fzf_show_provided <<< "$sorted_files"
 }
 
 diary_search() {
-  rg -l --sortr path "$1" | diary_fzf_show_provided "$@"
-}
-
-diary_random() {
-  files=$(rg --files | shuf -n40)
-  sorted_files=$(wc -w $files | head -n-1 | sort -nr | awk '{print $2}')
-  diary_fzf_show_provided <<< "$sorted_files"
-}
-
-diary_words() {
-  local limit=${1-50}
-
-  find -iname '*.md' | xargs cat |
-    tr -sc "[A-Z][a-z][0-9]'" '[\012*]' | tr '[A-Z]' '[a-z]' |
-    sed 's/\bi\b/I/' |
-    sort | uniq -c | sort -nr |
-    head -n "$limit"
+  rg -l --sortr path "$1" "entries" | diary_fzf_show_provided "$@"
 }
 
 diary_backup() {
@@ -100,17 +84,11 @@ case "$command" in
   search)
     diary_search "$@"
     ;;
-  random)
-    diary_random "$@"
-    ;;
-  words)
-    diary_words "$@"
-    ;;
   backup)
     diary_backup "$@"
     ;;
   *)
-    echo "commands: new|edit|list|random|words|backup" >&2
+    echo "commands: new|edit|list|search|backup" >&2
     exit 1
     ;;
 esac
