@@ -67,9 +67,9 @@ hs.hotkey.bind(mod, "3", createFocusFunction(bundleIDs.terminal))
 hs.hotkey.bind(mod, "4", moveBrowser)
 
 local usbWatcher = hs.usb.watcher.new(function(data)
-  if data.productName == "Moonlander Mark I" then
+  if data.productName == "Voyager" then
     if data.eventType == "added" then
-      hs.keycodes.setLayout("U.S.")
+      hs.keycodes.setLayout("British")
     else
       hs.keycodes.setLayout("Programmer Dvorak")
     end
