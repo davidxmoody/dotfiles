@@ -411,16 +411,15 @@ require("lazy").setup({
     "sbdchd/neoformat",
     config = function()
       vim.g.shfmt_opt = "-i 2 -sr -ci"
+      vim.g.neoformat_enabled_typescript = {"prettier"}
+      vim.g.neoformat_enabled_typescriptreact = {"prettier"}
       vim.g.neoformat_typescript_prettier = {
         exe = "./node_modules/.bin/prettier",
         args = {"--write", "--config .prettierrc"},
         replace = 1,
       }
-      vim.g.neoformat_typescriptreact_prettier = {
-        exe = "./node_modules/.bin/prettier",
-        args = {"--write", "--config .prettierrc"},
-        replace = 1,
-      }
+      vim.g.neoformat_typescriptreact_prettier = vim.g
+                                                   .neoformat_typescript_prettier
     end,
   },
 })

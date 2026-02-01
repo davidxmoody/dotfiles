@@ -138,6 +138,7 @@ alias vim='nvim'
 alias v='nvim'
 alias vv='(cd "$RC_DIR" && nvim "+:NvimTreeOpen")'
 alias v-='v -'
+alias vp='v package.json'
 
 # cd shortcuts ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
