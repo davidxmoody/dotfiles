@@ -274,52 +274,6 @@ require("lazy").setup({
     },
   },
 
-  {
-    "neovim/nvim-lspconfig",
-    dependencies = "hrsh7th/cmp-nvim-lsp",
-    config = function()
-      local nvim_lsp = require("lspconfig")
-
-      local servers = {"ts_ls", "svelte", "eslint", "lua_ls", "pyright"}
-
-      for _, lsp in ipairs(servers) do
-        nvim_lsp[lsp].setup({
-          on_attach = function(client)
-            if client.name == "svelte" then
-              vim.api.nvim_create_autocmd("BufWritePost", {
-                pattern = {"*.js", "*.ts"},
-                callback = function(ctx)
-                  client.notify("$/onDidChangeTsOrJsFile", {uri = ctx.file})
-                end,
-              })
-            end
-          end,
-          capabilities = require("cmp_nvim_lsp").default_capabilities(),
-          settings = {
-            Lua = {
-              runtime = {version = "LuaJIT"},
-              diagnostics = {globals = {"vim", "hs"}},
-              workspace = {
-                library = {
-                  vim.fn.expand("$VIMRUNTIME/lua"),
-                  vim.fn.expand("$VIMRUNTIME/lua/vim/lsp"),
-                  "/Applications/Hammerspoon.app/Contents/Resources/extensions/hs/",
-                },
-              },
-              telemetry = {enable = false},
-            },
-            python = {
-              analysis = {
-                diagnosticSeverityOverrides = {reportUnusedExpression = "none"},
-              },
-            },
-          },
-        })
-      end
-
-      vim.diagnostic.config({float = {border = "single", source = true}})
-    end,
-  },
 
   {
     "junegunn/fzf.vim",
@@ -328,6 +282,9 @@ require("lazy").setup({
   {"ojroques/nvim-lspfuzzy", opts = {}},
 
   {"windwp/nvim-autopairs", opts = {}},
+
+  -- Load early for native LSP config
+  {"hrsh7th/cmp-nvim-lsp", lazy = false},
 
   {
     "hrsh7th/nvim-cmp",

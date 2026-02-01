@@ -1,4 +1,5 @@
 require("options")
 require("plugins")
+require("lsp")
 require("keymapping")
 require("word_processor")
