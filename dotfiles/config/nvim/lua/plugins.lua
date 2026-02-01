@@ -107,6 +107,10 @@ require("lazy").setup({
       integrations = {
         markdown = {
           resolve_image_path = function(document_path, image_path, fallback)
+            if image_path:lower():match("%.gif$") then
+              return nil
+            end
+
             if vim.startswith(image_path, "/") then
               return vim.fn.getcwd() .. image_path
             else
@@ -273,7 +277,6 @@ require("lazy").setup({
       indent = {enable = true},
     },
   },
-
 
   {
     "junegunn/fzf.vim",
