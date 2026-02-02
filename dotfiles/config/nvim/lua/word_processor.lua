@@ -55,7 +55,7 @@ local function setupHeaderTimes()
 end
 
 vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {
-  pattern = "diary-*.md",
+  pattern = "diary.md",
   callback = function()
     defineCustomAbbreviations()
     setupAutoCapitalization()
