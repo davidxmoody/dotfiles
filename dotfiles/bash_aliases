@@ -127,8 +127,7 @@ alias nc='npm-check -u'
 
 # Diary ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-alias dn='diary new'
-alias de='diary edit'
+alias dt='diary today'
 alias dl='diary list'
 alias ds='diary search'
 

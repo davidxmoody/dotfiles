@@ -9,28 +9,22 @@ fi
 
 cd "$DIARY_DIR"
 
-diary_new() {
+diary_today() {
   subdir="entries/$(date +%Y/%m/%d)"
-  filename="diary-$(date +%H-%M).md"
+  filepath="$subdir/diary.md"
   mkdir -p "$subdir"
 
-  nvim "+:ZenMode" "+norm a## " "+startinsert!" "$subdir/$filename"
-
-  rmdir --ignore-fail-on-non-empty "$subdir"
-}
-
-diary_edit() {
-  last_year=$(ls -r "entries" | head -n1)
-  last_month=$(ls -r "entries/$last_year" | head -n1)
-  last_day=$(ls -r "entries/$last_year/$last_month" | head -n1)
-  last_entry=$(ls -r "entries/$last_year/$last_month/$last_day" | head -n1)
-
-  nvim "entries/$last_year/$last_month/$last_day/$last_entry"
+  if [[ -f "$filepath" ]]; then
+    nvim "+:ZenMode" "$filepath"
+  else
+    echo "## $(date +%H:%M) " > "$filepath"
+    nvim "+:ZenMode" "+norm G$" "+startinsert!" "$filepath"
+  fi
 }
 
 diary_fzf_show_provided() {
   terminal_width=$(tput cols)
-  preview_width=$((terminal_width - 41))
+  preview_width=$((terminal_width - 35))
 
   terminal_height=$(tput lines)
   before_context=$(((terminal_height - 2) / 3))
@@ -72,11 +66,8 @@ command=$1
 shift
 
 case "$command" in
-  new)
-    diary_new "$@"
-    ;;
-  edit)
-    diary_edit "$@"
+  today)
+    diary_today "$@"
     ;;
   list)
     diary_list "$@"
@@ -88,7 +79,7 @@ case "$command" in
     diary_backup "$@"
     ;;
   *)
-    echo "commands: new|edit|list|search|backup" >&2
+    echo "commands: today|list|search|backup" >&2
     exit 1
     ;;
 esac
