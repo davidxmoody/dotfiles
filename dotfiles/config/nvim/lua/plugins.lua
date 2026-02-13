@@ -139,11 +139,14 @@ require("lazy").setup({
   },
 
   {
-    "bluz71/vim-nightfly-guicolors",
-    config = function()
-      vim.cmd("colorscheme nightfly")
-      vim.api.nvim_set_hl(0, "ModifiedFlag", {bg = "#ff5874", fg = "White"})
-      vim.api.nvim_set_hl(0, "Pmenu", {bg = "#1d3b53"})
+    "catppuccin/nvim",
+    name = "catppuccin",
+    lazy = false,
+    priority = 1000,
+    opts = {dim_inactive = {enabled = true}},
+    config = function(_, opts)
+      require("catppuccin").setup(opts)
+      vim.cmd.colorscheme("catppuccin")
     end,
   },
 

@@ -1,0 +1,16 @@
+theme = Catppuccin Mocha
+font-size = 14
+
+mouse-hide-while-typing = true
+
+keybind = ctrl+r>c=new_window
+
+keybind = ctrl+r>h=new_split:left
+keybind = ctrl+r>t=new_split:down
+keybind = ctrl+r>n=new_split:up
+keybind = ctrl+r>s=new_split:right
+
+keybind = ctrl+h=goto_split:left
+keybind = ctrl+t=goto_split:down
+keybind = ctrl+n=goto_split:up
+keybind = ctrl+s=goto_split:right
