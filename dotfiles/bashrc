@@ -26,17 +26,17 @@ __prompt_command() {
   local last_exit_status="$?"
 
   local bg1="0"
-  local fg1="255"
+  local fg1="7"
 
-  local bg2="93"
-  local fg2="255"
+  local bg2="6"
+  local fg2="0"
 
-  local bg3="117"
-  local fg3="232"
+  local bg3="4"
+  local fg3="0"
 
   if [[ "$last_exit_status" -ne "0" ]] && [[ "$last_exit_status" -ne "130" ]]; then
-    bg2="160"
-    bg3="202"
+    bg3="88"
+    fg3="7"
   fi
 
   local venv=""
@@ -70,7 +70,7 @@ __prompt_command() {
 
 PROMPT_COMMAND=__prompt_command
 
-PS2="\[\e[30m\]$arrow_char\[\e[0m\] "
+PS2="\[\e[38;5;0m\]$arrow_char\[\e[0m\] "
 
 # Common dirs/files ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
