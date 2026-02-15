@@ -143,7 +143,7 @@ require("lazy").setup({
     name = "catppuccin",
     lazy = false,
     priority = 1000,
-    opts = {dim_inactive = {enabled = true}},
+    opts = {auto_integrations = true, dim_inactive = {enabled = true}},
     config = function(_, opts)
       require("catppuccin").setup(opts)
       vim.cmd.colorscheme("catppuccin")

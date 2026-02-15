@@ -49,7 +49,7 @@ function CustomStatusline()
   end
 
   return table.concat({
-    vim.bo.modified and "%#ModifiedFlag#" or "",
+    vim.bo.modified and "%#CurSearch#" or "",
     "%<%f",
     "%*",
     " %h%q%r",
