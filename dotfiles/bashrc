@@ -29,15 +29,12 @@ __prompt_command() {
   local bg1="0"
   local fg1="7"
 
-  local bg2="6"
+  local bg2="4"
   local fg2="0"
 
-  local bg3="4"
-  local fg3="0"
-
   if [[ "$last_exit_status" -ne "0" ]] && [[ "$last_exit_status" -ne "130" ]]; then
-    bg3="88"
-    fg3="7"
+    bg2="88"
+    fg2="7"
   fi
 
   local venv=""
@@ -46,26 +43,24 @@ __prompt_command() {
       grep -q "^.*\t$(basename "$PWD")\$" "$HOME/.project-list.tsv"; then
       source ".venv/bin/activate"
     else
-      venv="Untrusted venv available"
+      venv=" (Untrusted venv available)"
     fi
   fi
 
   if [[ ! -z "$VIRTUAL_ENV" ]]; then
     if [[ "$PWD" =~ "${VIRTUAL_ENV%/.venv}"* ]]; then
-      venv="venv"
+      venv=" (venv)"
     else
-      venv="$VIRTUAL_ENV_PROMPT"
+      venv=" ($VIRTUAL_ENV_PROMPT)"
     fi
   fi
 
   local new_ps1="\[\e]0;$(tmux-get-pane-title)\a\]"
   new_ps1+="\[\e[38;5;${bg1}m\]${left_rounded_char}"
-  new_ps1+="\[\e[38;5;${fg1}m\e[48;5;${bg1}m\]\w "
+  new_ps1+="\[\e[38;5;${fg1}m\e[48;5;${bg1}m\]\w${venv} "
   new_ps1+="\[\e[38;5;${bg1}m\e[48;5;${bg2}m\]${right_arrow_char} "
-  new_ps1+="\[\e[38;5;${fg2}m\e[48;5;${bg2}m\]${venv} "
-  new_ps1+="\[\e[38;5;${bg2}m\e[48;5;${bg3}m\]${right_arrow_char} "
-  new_ps1+="\[\e[38;5;${fg3}m\e[48;5;${bg3}m\]$(git-short-status) "
-  new_ps1+="\[\e[0m\e[38;5;${bg3}m\]${right_arrow_char}\[\e[0m\] "
+  new_ps1+="\[\e[38;5;${fg2}m\e[48;5;${bg2}m\]$(git-short-status) "
+  new_ps1+="\[\e[0m\e[38;5;${bg2}m\]${right_arrow_char}\[\e[0m\] "
 
   PS1="$new_ps1"
 }
