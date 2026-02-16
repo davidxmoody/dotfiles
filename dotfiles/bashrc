@@ -20,7 +20,8 @@ export EDITOR=nvim
 
 # Bash prompt ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-arrow_char=$'\uE0B0'
+left_rounded_char=$'\uE0B6'
+right_arrow_char=$'\uE0B0'
 
 __prompt_command() {
   local last_exit_status="$?"
@@ -58,19 +59,20 @@ __prompt_command() {
   fi
 
   local new_ps1="\[\e]0;$(tmux-get-pane-title)\a\]"
-  new_ps1+="\[\e[38;5;${fg1}m\e[48;5;${bg1}m\] \w "
-  new_ps1+="\[\e[38;5;${bg1}m\e[48;5;${bg2}m\]${arrow_char} "
+  new_ps1+="\[\e[38;5;${bg1}m\]${left_rounded_char}"
+  new_ps1+="\[\e[38;5;${fg1}m\e[48;5;${bg1}m\]\w "
+  new_ps1+="\[\e[38;5;${bg1}m\e[48;5;${bg2}m\]${right_arrow_char} "
   new_ps1+="\[\e[38;5;${fg2}m\e[48;5;${bg2}m\]${venv} "
-  new_ps1+="\[\e[38;5;${bg2}m\e[48;5;${bg3}m\]${arrow_char} "
+  new_ps1+="\[\e[38;5;${bg2}m\e[48;5;${bg3}m\]${right_arrow_char} "
   new_ps1+="\[\e[38;5;${fg3}m\e[48;5;${bg3}m\]$(git-short-status) "
-  new_ps1+="\[\e[0m\e[38;5;${bg3}m\]${arrow_char}\[\e[0m\] "
+  new_ps1+="\[\e[0m\e[38;5;${bg3}m\]${right_arrow_char}\[\e[0m\] "
 
   PS1="$new_ps1"
 }
 
 PROMPT_COMMAND=__prompt_command
 
-PS2="\[\e[38;5;0m\]$arrow_char\[\e[0m\] "
+PS2="\[\e[38;5;0m\]${left_rounded_char}\[\e[38;5;7m\e[48;5;0m\]...\[\e[0m\e[38;5;0m\]${right_arrow_char}\[\e[0m\] "
 
 # Common dirs/files ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
