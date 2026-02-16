@@ -82,9 +82,14 @@ require("lazy").setup({
   {
     "jpalardy/vim-slime",
     init = function()
-      vim.g.slime_target = "kitty"
+      vim.g.slime_target = "tmux"
       vim.g.slime_no_mappings = 1
+      vim.g.slime_dont_ask_default = 1
       vim.g.slime_bracketed_paste = 1
+      vim.g.slime_default_config = {
+        socket_name = vim.fn.split(vim.env.TMUX or "", ",")[1] or "",
+        target_pane = "{right}",
+      }
       vim.keymap.set("x", "<leader>p", "<Plug>SlimeRegionSend")
       vim.keymap.set("n", "<leader>p", function()
         local view = vim.fn.winsaveview()
@@ -92,34 +97,6 @@ require("lazy").setup({
         vim.fn.winrestview(view)
       end)
     end,
-  },
-
-  {
-    "3rd/image.nvim",
-    opts = {
-      backend = "kitty",
-      max_width = 100,
-      max_height = 30,
-      max_height_window_percentage = math.huge,
-      max_width_window_percentage = math.huge,
-      window_overlap_clear_enabled = true,
-      window_overlap_clear_ft_ignore = {"cmp_menu", "cmp_docs", ""},
-      integrations = {
-        markdown = {
-          resolve_image_path = function(document_path, image_path, fallback)
-            if image_path:lower():match("%.gif$") then
-              return nil
-            end
-
-            if vim.startswith(image_path, "/") then
-              return vim.fn.getcwd() .. image_path
-            else
-              return fallback(document_path, image_path)
-            end
-          end,
-        },
-      },
-    },
   },
 
   {
@@ -143,7 +120,16 @@ require("lazy").setup({
     name = "catppuccin",
     lazy = false,
     priority = 1000,
-    opts = {auto_integrations = true, dim_inactive = {enabled = true}},
+    opts = {
+      auto_integrations = true,
+      transparent_background = true,
+      custom_highlights = function(colors)
+        return {
+          NormalNC = {bg = colors.mantle},
+          ModifiedFlag = {bg = colors.red, fg = colors.base},
+        }
+      end,
+    },
     config = function(_, opts)
       require("catppuccin").setup(opts)
       vim.cmd.colorscheme("catppuccin")
@@ -209,10 +195,9 @@ require("lazy").setup({
   },
 
   {
-    "knubie/vim-kitty-navigator",
-    build = "cp ./*.py ~/.config/kitty/",
+    "christoomey/vim-tmux-navigator",
     init = function()
-      vim.g.kitty_navigator_no_mappings = 1
+      vim.g.tmux_navigator_no_mappings = 1
     end,
   },
 
