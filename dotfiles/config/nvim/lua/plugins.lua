@@ -229,9 +229,28 @@ require("lazy").setup({
           })
         end
 
-        map("<CR>", api.node.open.edit)
-        map("i", api.node.open.edit)
-        map("<2-LeftMouse>", api.node.open.edit)
+        local image_exts = {
+          png = true,
+          jpg = true,
+          jpeg = true,
+          gif = true,
+          bmp = true,
+          webp = true,
+          svg = true,
+        }
+        local function open_or_edit()
+          local node = api.tree.get_node_under_cursor()
+          local ext = node.name:match("%.(%w+)$")
+          if ext and image_exts[ext:lower()] then
+            api.node.run.system()
+          else
+            api.node.open.edit()
+          end
+        end
+
+        map("<CR>", open_or_edit)
+        map("i", open_or_edit)
+        map("<2-LeftMouse>", open_or_edit)
         map("<Tab>", api.node.open.preview)
         map("g<CR>", api.tree.change_root_to_node)
         map("gi", api.tree.change_root_to_node)
