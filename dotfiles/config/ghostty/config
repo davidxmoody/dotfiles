@@ -1,6 +1,7 @@
 command = /opt/homebrew/bin/tmux
 theme = Catppuccin Mocha
 font-size = 14
+font-feature = -calt, -liga, -dlig
 mouse-hide-while-typing = true
 macos-option-as-alt = left
 macos-titlebar-style = transparent
