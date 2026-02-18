@@ -126,6 +126,10 @@ require("lazy").setup({
       custom_highlights = function(colors)
         return {
           NormalNC = {bg = colors.mantle},
+          StatusLineNC = {bg = colors.mantle},
+          WinSeparator = {bg = colors.mantle},
+          NvimTreeNormalNC = {bg = colors.mantle},
+          NvimTreeWinSeparator = {bg = colors.mantle},
           ModifiedFlag = {bg = colors.red, fg = colors.base},
         }
       end,
