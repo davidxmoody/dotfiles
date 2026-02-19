@@ -118,7 +118,7 @@ add_to_path "$HOME/.local/bin"
 
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 
-export POETRY_CONFIG_DIR="$HOME/.config/pypoetry"
+export XDG_CONFIG_HOME="$HOME/.config"
 
 # Source other files ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
