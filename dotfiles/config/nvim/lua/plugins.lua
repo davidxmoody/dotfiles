@@ -16,7 +16,6 @@ vim.g.mapleader = " "
 require("lazy").setup({
   "tpope/vim-fugitive",
   "lambdalisue/suda.vim",
-  "mattn/emmet-vim",
   "davidxmoody/vim-indent-object",
 
   {
@@ -382,18 +381,23 @@ require("lazy").setup({
   },
 
   {
-    "sbdchd/neoformat",
-    config = function()
-      vim.g.shfmt_opt = "-i 2 -sr -ci"
-      vim.g.neoformat_enabled_typescript = {"prettier"}
-      vim.g.neoformat_enabled_typescriptreact = {"prettier"}
-      vim.g.neoformat_typescript_prettier = {
-        exe = "./node_modules/.bin/prettier",
-        args = {"--write", "--config .prettierrc"},
-        replace = 1,
-      }
-      vim.g.neoformat_typescriptreact_prettier = vim.g
-                                                   .neoformat_typescript_prettier
-    end,
+    "stevearc/conform.nvim",
+    opts = {
+      formatters_by_ft = {
+        typescript = {"prettier"},
+        typescriptreact = {"prettier"},
+        javascript = {"prettier"},
+        javascriptreact = {"prettier"},
+        json = {"prettier"},
+        css = {"prettier"},
+        html = {"prettier"},
+        sh = {"shfmt"},
+        bash = {"shfmt"},
+        python = {"black"},
+        lua = {"lua-format"},
+      },
+      formatters = {shfmt = {prepend_args = {"-i", "2", "-sr", "-ci"}}},
+      format_on_save = {timeout_ms = 500},
+    },
   },
 })

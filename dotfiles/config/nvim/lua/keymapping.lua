@@ -185,7 +185,7 @@ vim.keymap.set(nxo, "ga",
 -- vim.keymap.set("x", "<leader>r",
 --   [["zy:%s/\<<C-R><C-R>z\>/<C-R><C-R>z/g<Left><Left>]])
 
-vim.keymap.set(nxo, "<leader>f", ":Neoformat<CR>")
+vim.keymap.set(nxo, "<leader>f", function() require("conform").format() end)
 
 vim.keymap.set("x", "<leader>x",
   [["lc<C-R>=substitute(system('node -p', @l), '\n\+$', '', '')<CR><ESC>]])
