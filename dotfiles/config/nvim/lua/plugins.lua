@@ -14,10 +14,6 @@ vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = " "
 
 require("lazy").setup({
-  "tpope/vim-repeat",
-  "tpope/vim-speeddating",
-  "tpope/vim-surround",
-  "tpope/vim-commentary",
   "tpope/vim-fugitive",
   "lambdalisue/suda.vim",
   "mattn/emmet-vim",
@@ -52,6 +48,19 @@ require("lazy").setup({
 
             return {from = from, to = to, vis_mode = "V"}
           end,
+        },
+      })
+
+      require("mini.surround").setup({
+        mappings = {
+          add = "-",
+          delete = "d-",
+          replace = "c-",
+          find = "",
+          find_left = "",
+          highlight = "",
+          suffix_last = "",
+          suffix_next = "",
         },
       })
 

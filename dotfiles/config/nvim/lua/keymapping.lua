@@ -77,7 +77,6 @@ vim.keymap.set(nxo, "<leader>u", "ZZ")
 vim.keymap.set(nxo, "<leader>b", "<C-^>")
 vim.keymap.set(nxo, "<C-d>", ":q<CR>")
 
-vim.keymap.set("n", "-", ":NvimTreeFindFile<CR>")
 vim.keymap.set("n", "g-", ":NvimTreeToggle<CR>")
 
 -- Zen mode
@@ -85,8 +84,6 @@ vim.keymap.set("n", "g-", ":NvimTreeToggle<CR>")
 vim.keymap.set("n", "<leader>z", ":ZenMode<CR>", {silent = true})
 
 -- Selection
-
-vim.keymap.set("x", "-", "<Plug>VSurround")
 
 vim.keymap.set(nxo, "<leader>v", "Vii", {remap = true})
 vim.keymap.set(nxo, "<leader>V", "ggVG")
