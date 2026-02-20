@@ -292,10 +292,56 @@ require("lazy").setup({
   },
 
   {
-    "junegunn/fzf.vim",
-    dependencies = {{"junegunn/fzf", build = "./install --bin"}},
+    "nvim-telescope/telescope.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      {"nvim-telescope/telescope-fzf-native.nvim", build = "make"},
+    },
+    config = function()
+      local telescope = require("telescope")
+      local previewers = require("telescope.previewers")
+      telescope.setup({
+        defaults = {
+          layout_strategy = "vertical",
+          mappings = {
+            i = {
+              ["<C-A>"] = function()
+                vim.api.nvim_input("<Home>")
+              end,
+              ["<C-E>"] = function()
+                vim.api.nvim_input("<End>")
+              end,
+              ["<M-b>"] = function()
+                vim.api.nvim_input("<S-Left>")
+              end,
+              ["<M-f>"] = function()
+                vim.api.nvim_input("<S-Right>")
+              end,
+              ["<M-BS>"] = function()
+                vim.api.nvim_input("<C-w>")
+              end,
+              ["<C-D>"] = function()
+                vim.api.nvim_input("<Del>")
+              end,
+            },
+          },
+        },
+        pickers = {
+          git_status = {
+            previewer = previewers.new_termopen_previewer({
+              get_command = function(entry)
+                if entry.status == "??" then
+                  return {"delta", "--paging=never", "/dev/null", entry.path}
+                end
+                return {"git", "diff", "HEAD", "--", entry.path}
+              end,
+            }),
+          },
+        },
+      })
+      telescope.load_extension("fzf")
+    end,
   },
-  {"ojroques/nvim-lspfuzzy", opts = {}},
 
   {"windwp/nvim-autopairs", opts = {}},
 

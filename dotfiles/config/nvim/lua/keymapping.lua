@@ -25,19 +25,12 @@ vim.keymap.set("n", "+", ":update<CR>")
 
 -- Consistent text navigation
 
-vim.keymap.set(nxo, "<M-B>", "b")
-vim.keymap.set(nxo, "<M-F>", "w")
-
-vim.keymap.set("i", "<M-B>", "<S-Left>")
-vim.keymap.set("i", "<M-F>", "<S-Right>")
-vim.keymap.set("i", "<M-BS>", "<C-w>")
-vim.keymap.set("i", "<C-D>", "<Del>")
-
-vim.keymap.set("c", "<C-A>", "<Home>")
-vim.keymap.set("c", "<M-B>", "<S-Left>")
-vim.keymap.set("c", "<M-F>", "<S-Right>")
-vim.keymap.set("c", "<M-BS>", "<C-w>")
-vim.keymap.set("c", "<C-D>", "<Del>")
+vim.keymap.set({"i", "c"}, "<C-A>", "<Home>")
+vim.keymap.set({"i", "c"}, "<C-E>", "<End>")
+vim.keymap.set({"i", "c"}, "<M-b>", "<S-Left>")
+vim.keymap.set({"i", "c"}, "<M-f>", "<S-Right>")
+vim.keymap.set({"i", "c"}, "<M-BS>", "<C-w>")
+vim.keymap.set({"i", "c"}, "<C-D>", "<Del>")
 
 -- Joining
 
@@ -63,16 +56,18 @@ vim.keymap.set("n", "gs", vim.lsp.buf.code_action)
 vim.keymap.set("n", "gS", vim.diagnostic.open_float)
 vim.keymap.set("n", "_", vim.diagnostic.goto_next)
 
--- FZF
+-- Telescope
 
-vim.keymap.set(nxo, "<leader>e", ":Files<CR>")
-vim.keymap.set(nxo, "<leader>E", ":Buffers<CR>")
-vim.keymap.set(nxo, "<leader>o", ":GFiles?<CR>")
-vim.keymap.set(nxo, "<leader>a", ":Rg<space>")
-vim.keymap.set(nxo, "<leader>A", ":Rg<space><Up><CR>")
-vim.keymap.set(nxo, "<leader>i",
-  ":Rg<space>/<C-R>=fnameescape(expand('%:t:r'))<CR><CR>")
-vim.keymap.set(nxo, "<leader>B", ":History<CR>")
+local builtin = require("telescope.builtin")
+vim.keymap.set(nxo, "<leader>e", builtin.find_files)
+vim.keymap.set(nxo, "<leader>E", builtin.buffers)
+vim.keymap.set(nxo, "<leader>o", builtin.git_status)
+vim.keymap.set(nxo, "<leader>a", builtin.live_grep)
+vim.keymap.set(nxo, "<leader>A", builtin.resume)
+vim.keymap.set(nxo, "<leader>i", function()
+  builtin.live_grep({default_text = "/" .. vim.fn.expand("%:t:r")})
+end)
+vim.keymap.set(nxo, "<leader>B", builtin.oldfiles)
 
 -- File navigation
 
@@ -93,8 +88,15 @@ vim.keymap.set(nxo, "<leader>V", "ggVG")
 
 -- Jumping
 
-vim.keymap.set(nxo, "o", function() require("flash").jump() end)
-vim.keymap.set(nxo, "O", function() require("flash").treesitter() end)
+vim.keymap.set(nxo, "o", function()
+  require("flash").jump()
+end)
+vim.keymap.set(nxo, "O", function()
+  require("flash").treesitter()
+end)
+
+vim.keymap.set(nxo, "(", "[h", {remap = true})
+vim.keymap.set(nxo, ")", "]h", {remap = true})
 
 -- Search
 
@@ -104,9 +106,18 @@ vim.keymap.set(nxo, "gj", "gn")
 vim.keymap.set(nxo, "gJ", "gN")
 
 vim.keymap.set("n", "*", "/\\C\\<<C-R><C-W>\\><CR>")
-vim.keymap.set("n", "<leader>*", ":Rg <C-R><C-W><CR>")
-vim.keymap.set("x", "*", "\"zy/<C-R><C-R>z<CR>")
-vim.keymap.set("x", "<leader>*", "\"zy:Rg <C-R><C-R>z<CR>")
+vim.keymap.set("n", "<leader>*", function()
+  builtin.grep_string({search = vim.fn.expand("<cword>")})
+end)
+local function get_visual_selection()
+  return table.concat(vim.fn.getregion(vim.fn.getpos("v"), vim.fn.getpos(".")))
+end
+vim.keymap.set("x", "*", function()
+  vim.fn.search(get_visual_selection())
+end)
+vim.keymap.set("x", "<leader>*", function()
+  builtin.grep_string({search = get_visual_selection()})
+end)
 
 -- Entering insertion
 
@@ -141,20 +152,29 @@ vim.keymap.set("n", "<C-T>", ":TmuxNavigateDown<CR>", {silent = true})
 vim.keymap.set("n", "<C-N>", ":TmuxNavigateUp<CR>", {silent = true})
 vim.keymap.set("n", "<C-S>", ":TmuxNavigateRight<CR>", {silent = true})
 
-vim.keymap.set({"x", "s"}, "<C-H>", "<Esc>:TmuxNavigateLeft<CR>", {silent = true})
-vim.keymap.set({"x", "s"}, "<C-T>", "<Esc>:TmuxNavigateDown<CR>", {silent = true})
+vim.keymap.set({"x", "s"}, "<C-H>", "<Esc>:TmuxNavigateLeft<CR>",
+  {silent = true})
+vim.keymap.set({"x", "s"}, "<C-T>", "<Esc>:TmuxNavigateDown<CR>",
+  {silent = true})
 vim.keymap.set({"x", "s"}, "<C-N>", "<Esc>:TmuxNavigateUp<CR>", {silent = true})
-vim.keymap.set({"x", "s"}, "<C-S>", "<Esc>:TmuxNavigateRight<CR>", {silent = true})
+vim.keymap.set({"x", "s"}, "<C-S>", "<Esc>:TmuxNavigateRight<CR>",
+  {silent = true})
 
-vim.keymap.set("i", "<C-H>", "<Right><Esc>:TmuxNavigateLeft<CR>", {silent = true})
-vim.keymap.set("i", "<C-T>", "<Right><Esc>:TmuxNavigateDown<CR>", {silent = true})
+vim.keymap.set("i", "<C-H>", "<Right><Esc>:TmuxNavigateLeft<CR>",
+  {silent = true})
+vim.keymap.set("i", "<C-T>", "<Right><Esc>:TmuxNavigateDown<CR>",
+  {silent = true})
 vim.keymap.set("i", "<C-N>", "<Right><Esc>:TmuxNavigateUp<CR>", {silent = true})
-vim.keymap.set("i", "<C-S>", "<Right><Esc>:TmuxNavigateRight<CR>", {silent = true})
+vim.keymap.set("i", "<C-S>", "<Right><Esc>:TmuxNavigateRight<CR>",
+  {silent = true})
 
-vim.keymap.set("t", "<C-H>", "<C-\\><C-N>:TmuxNavigateLeft<CR>", {silent = true})
-vim.keymap.set("t", "<C-T>", "<C-\\><C-N>:TmuxNavigateDown<CR>", {silent = true})
+vim.keymap
+  .set("t", "<C-H>", "<C-\\><C-N>:TmuxNavigateLeft<CR>", {silent = true})
+vim.keymap
+  .set("t", "<C-T>", "<C-\\><C-N>:TmuxNavigateDown<CR>", {silent = true})
 vim.keymap.set("t", "<C-N>", "<C-\\><C-N>:TmuxNavigateUp<CR>", {silent = true})
-vim.keymap.set("t", "<C-S>", "<C-\\><C-N>:TmuxNavigateRight<CR>", {silent = true})
+vim.keymap.set("t", "<C-S>", "<C-\\><C-N>:TmuxNavigateRight<CR>",
+  {silent = true})
 
 vim.keymap.set("c", "<C-H>", "<Nop>")
 vim.keymap.set("c", "<C-T>", "<Nop>")
@@ -177,7 +197,9 @@ vim.keymap.set(nxo, "ga",
   "<cmd>silent! .s/\\Ctrue\\|false/\\=submatch(0)=='true'?'false':'true'/g<CR><cmd>silent! .s/\\CTrue\\|False/\\=submatch(0)=='True'?'False':'True'/g<CR><cmd>nohlsearch<CR>",
   {silent = true})
 
-vim.keymap.set(nxo, "<leader>f", function() require("conform").format() end)
+vim.keymap.set(nxo, "<leader>f", function()
+  require("conform").format()
+end)
 
 vim.keymap.set("x", "<leader>x",
   [["lc<C-R>=substitute(system('node -p', @l), '\n\+$', '', '')<CR><ESC>]])

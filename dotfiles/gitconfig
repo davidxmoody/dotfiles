@@ -3,7 +3,7 @@
   email = david@davidxmoody.com
 [core]
   editor = nvim
-  pager = diff-so-fancy | less --tabs=1,5
+  pager = delta
   excludesfile = ~/.gitignore_global
   attributesfile = ~/.gitattributes_global
   ignorecase = false
@@ -21,5 +21,12 @@
   rebase = true
 [color]
   ui = always
+[interactive]
+  diffFilter = delta --color-only
+[delta]
+  navigate = true
+  dark = true
+[merge]
+  conflictstyle = zdiff3
 [init]
-	defaultBranch = main
+  defaultBranch = main
