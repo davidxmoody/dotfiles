@@ -4,8 +4,6 @@ package.path = package.path .. ";" .. vim.fn.expand("$HOME") ..
 package.path = package.path .. ";" .. vim.fn.expand("$HOME") ..
                  "/.luarocks/share/lua/5.1/?.lua;"
 
-vim.g.python3_host_prog = vim.fn.expand("~/p/dotfiles/.venv/bin/python3")
-
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -105,13 +103,24 @@ require("lazy").setup({
   },
 
   {
-    "SirVer/ultisnips",
-    init = function()
-      vim.keymap.set({"n", "x", "o"}, "<C-F>", "<Nop>")
-      vim.keymap.set({"n", "x", "o"}, "<C-B>", "<Nop>")
-      vim.g.UltiSnipsExpandTrigger = "<C-F>"
-      vim.g.UltiSnipsJumpForwardTrigger = "<C-F>"
-      vim.g.UltiSnipsJumpBackwardTrigger = "<C-B>"
+    "L3MON4D3/LuaSnip",
+    config = function()
+      require("luasnip.loaders.from_snipmate").lazy_load()
+      require("luasnip.loaders.from_lua").lazy_load()
+
+      local ls = require("luasnip")
+
+      vim.keymap.set({"i", "s"}, "<C-F>", function()
+        if ls.expand_or_jumpable() then
+          ls.expand_or_jump()
+        end
+      end, {silent = true})
+
+      vim.keymap.set({"i", "s"}, "<C-B>", function()
+        if ls.jumpable(-1) then
+          ls.jump(-1)
+        end
+      end, {silent = true})
     end,
   },
 
@@ -303,7 +312,7 @@ require("lazy").setup({
   {
     "hrsh7th/nvim-cmp",
     dependencies = {
-      "quangnguyen30192/cmp-nvim-ultisnips",
+      "saadparwaiz1/cmp_luasnip",
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-cmdline",
@@ -319,7 +328,7 @@ require("lazy").setup({
       cmp.setup({
         snippet = {
           expand = function(args)
-            vim.fn["UltiSnips#Anon"](args.body)
+            require("luasnip").lsp_expand(args.body)
           end,
         },
         window = {
@@ -355,7 +364,7 @@ require("lazy").setup({
         sources = cmp.config.sources({
           {name = "otter"},
           {name = "nvim_lsp"},
-          {name = "ultisnips"},
+          {name = "luasnip"},
           {name = "path"},
         }, {{name = "buffer"}}),
       })
