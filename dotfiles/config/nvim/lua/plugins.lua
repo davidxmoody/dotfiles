@@ -175,7 +175,6 @@ require("lazy").setup({
         map("v", "<leader>ga", function()
           gs.stage_hunk {vim.fn.line("."), vim.fn.line("v")}
         end)
-        map("n", "<leader>gA", gs.undo_stage_hunk)
 
         map("n", "<leader>gu", gs.reset_hunk)
         map("v", "<leader>gu", function()
@@ -192,8 +191,8 @@ require("lazy").setup({
 
         map("n", "<leader>gd", gs.diffthis)
 
-        map("n", "]h", gs.next_hunk)
-        map("n", "[h", gs.prev_hunk)
+        map("n", ")", gs.next_hunk)
+        map("n", "(", gs.prev_hunk)
 
         map({"o", "x"}, "ih", ":<C-U>Gitsigns select_hunk<CR>")
       end,
@@ -256,8 +255,8 @@ require("lazy").setup({
         map("<Tab>", api.node.open.preview)
         map("g<CR>", api.tree.change_root_to_node)
         map("gi", api.tree.change_root_to_node)
-        map("[h", api.node.navigate.git.prev)
-        map("]h", api.node.navigate.git.next)
+        map(")", api.node.navigate.git.next)
+        map("(", api.node.navigate.git.prev)
         map("a", api.fs.create)
         map("d", api.fs.remove)
         map("x", api.fs.cut)

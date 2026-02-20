@@ -1,4 +1,5 @@
 local nxo = {"n", "x", "o"}
+local builtin = require("telescope.builtin")
 
 vim.keymap.set(nxo, "<Space>", "<Nop>")
 
@@ -47,18 +48,18 @@ vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
 
 -- LSP
 
-vim.keymap.set("n", "gd", vim.lsp.buf.definition)
-vim.keymap.set("n", "gD", vim.lsp.buf.type_definition)
+vim.keymap.set("n", "gd", builtin.lsp_definitions)
+vim.keymap.set("n", "gD", builtin.lsp_type_definitions)
 vim.keymap.set("n", "gl", vim.lsp.buf.hover)
-vim.keymap.set("n", "gr", vim.lsp.buf.references)
+vim.keymap.set("n", "gr", builtin.lsp_references)
 vim.keymap.set("n", "gR", vim.lsp.buf.rename)
 vim.keymap.set("n", "gs", vim.lsp.buf.code_action)
 vim.keymap.set("n", "gS", vim.diagnostic.open_float)
-vim.keymap.set("n", "_", vim.diagnostic.goto_next)
+vim.keymap.set("n", "_", function()
+  vim.diagnostic.jump({count = 1})
+end)
 
 -- Telescope
-
-local builtin = require("telescope.builtin")
 vim.keymap.set(nxo, "<leader>e", builtin.find_files)
 vim.keymap.set(nxo, "<leader>E", builtin.buffers)
 vim.keymap.set(nxo, "<leader>o", builtin.git_status)
@@ -94,9 +95,6 @@ end)
 vim.keymap.set(nxo, "O", function()
   require("flash").treesitter()
 end)
-
-vim.keymap.set(nxo, "(", "[h", {remap = true})
-vim.keymap.set(nxo, ")", "]h", {remap = true})
 
 -- Search
 
@@ -201,8 +199,12 @@ vim.keymap.set(nxo, "<leader>f", function()
   require("conform").format()
 end)
 
-vim.keymap.set("x", "<leader>x",
-  [["lc<C-R>=substitute(system('node -p', @l), '\n\+$', '', '')<CR><ESC>]])
+vim.keymap.set("x", "<leader>x", function()
+  local text = get_visual_selection()
+  local result = vim.fn.system({"node", "-p"}, text)
+  result = result:gsub("\n+$", "")
+  vim.cmd("normal! c" .. result)
+end)
 
 vim.keymap.set("x", "@", ":normal @", {remap = false})
 

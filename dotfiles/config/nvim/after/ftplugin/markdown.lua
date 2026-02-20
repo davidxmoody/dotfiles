@@ -15,7 +15,6 @@ vim.opt_local.spell = true
 vim.opt_local.softtabstop = 0
 vim.opt_local.smarttab = false
 vim.opt_local.autoindent = false
-vim.opt_local.smartindent = false
 vim.opt_local.scrolloff = 0
 
 vim.keymap.set("n", "<C-K>", "cl<CR><CR><Esc>", {buffer = true})
