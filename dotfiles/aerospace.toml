@@ -126,6 +126,9 @@ on-mode-changed = []
     alt-minus = 'resize smart -50'
     alt-slash = 'resize smart +50'
 
+
+    alt-f = ['layout floating tiling', 'mode main']
+
     # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
     alt-1 = 'workspace 1'
     alt-2 = 'workspace 2'
@@ -214,3 +217,6 @@ on-mode-changed = []
     # sticky is not yet supported https://github.com/nikitabobko/AeroSpace/issues/2
     #s = ['layout sticky tiling', 'mode main']
 
+[[on-window-detected]]
+if.app-id = 'com.apple.Preview'
+run = 'layout floating'
