@@ -59,6 +59,7 @@ require("lazy").setup({
           find = "",
           find_left = "",
           highlight = "",
+          update_n_lines = "",
           suffix_last = "",
           suffix_next = "",
         },
@@ -142,7 +143,8 @@ require("lazy").setup({
           WinSeparator = {bg = colors.mantle},
           NvimTreeNormalNC = {bg = colors.mantle},
           NvimTreeWinSeparator = {bg = colors.mantle},
-          ModifiedFlag = {bg = colors.red, fg = colors.base},
+          ModifiedFlag = {bg = colors.peach, fg = colors.base},
+          FlashLabel = {bg = colors.red, fg = colors.mantle},
         }
       end,
     },
@@ -153,22 +155,11 @@ require("lazy").setup({
   },
 
   {
-    "justinmk/vim-sneak",
-    init = function()
-      vim.g["sneak#absolute_dir"] = 1
-      vim.g["sneak#use_ic_scs"] = 1
-    end,
-  },
-  {
-    "easymotion/vim-easymotion",
-    config = function()
-      vim.g["EasyMotion_smartcase"] = 1
-      vim.g["EasyMotion_do_mapping"] = 0
-      vim.g["EasyMotion_enter_jump_first"] = 1
-      vim.g["EasyMotion_space_jump_first"] = 1
-      vim.g["EasyMotion_use_upper"] = 1
-      vim.g["EasyMotion_keys"] = "TNSRHLDMGYCWFPBVUOAIE"
-    end,
+    "folke/flash.nvim",
+    opts = {
+      labels = "tnhsdcrglfwvmzbeouaipyjqkx",
+      modes = {char = {enabled = false}},
+    },
   },
 
   {

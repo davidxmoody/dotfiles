@@ -16,6 +16,9 @@ vim.keymap.set(nxo, "S", "$")
 vim.keymap.set(nxo, "gt", "gj")
 vim.keymap.set(nxo, "gn", "gk")
 
+vim.keymap.set(nxo, "l", "t")
+vim.keymap.set(nxo, "L", "T")
+
 vim.keymap.set("i", "+", "<Right><Esc>")
 vim.keymap.set({"x", "s"}, "+", "<Esc>")
 vim.keymap.set("n", "+", ":update<CR>")
@@ -90,13 +93,8 @@ vim.keymap.set(nxo, "<leader>V", "ggVG")
 
 -- Jumping
 
-vim.keymap.set(nxo, "o", "<Plug>(easymotion-overwin-f2)")
-vim.keymap.set(nxo, "f", "<Plug>Sneak_f")
-vim.keymap.set(nxo, "F", "<Plug>Sneak_F")
-vim.keymap.set(nxo, "l", "<Plug>Sneak_t")
-vim.keymap.set(nxo, "L", "<Plug>Sneak_T")
-vim.keymap.set(nxo, "(", "<Plug>Sneak_,")
-vim.keymap.set(nxo, ")", "<Plug>Sneak_;")
+vim.keymap.set(nxo, "o", function() require("flash").jump() end)
+vim.keymap.set(nxo, "O", function() require("flash").treesitter() end)
 
 -- Search
 
