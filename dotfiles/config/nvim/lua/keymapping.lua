@@ -108,8 +108,6 @@ vim.keymap.set("n", "<leader>*", ":Rg <C-R><C-W><CR>")
 vim.keymap.set("x", "*", "\"zy/<C-R><C-R>z<CR>")
 vim.keymap.set("x", "<leader>*", "\"zy:Rg <C-R><C-R>z<CR>")
 
-vim.keymap.set("n", "gx", "/export<CR>")
-
 -- Entering insertion
 
 vim.keymap.set(nxo, ",", "A")
@@ -179,34 +177,28 @@ vim.keymap.set(nxo, "ga",
   "<cmd>silent! .s/\\Ctrue\\|false/\\=submatch(0)=='true'?'false':'true'/g<CR><cmd>silent! .s/\\CTrue\\|False/\\=submatch(0)=='True'?'False':'True'/g<CR><cmd>nohlsearch<CR>",
   {silent = true})
 
--- vim.keymap
---   .set("n", "<leader>r", [[:%s/\<<C-R><C-W>\>/<C-R><C-W>/g<Left><Left>]])
-
--- vim.keymap.set("x", "<leader>r",
---   [["zy:%s/\<<C-R><C-R>z\>/<C-R><C-R>z/g<Left><Left>]])
-
 vim.keymap.set(nxo, "<leader>f", function() require("conform").format() end)
 
 vim.keymap.set("x", "<leader>x",
   [["lc<C-R>=substitute(system('node -p', @l), '\n\+$', '', '')<CR><ESC>]])
 
-vim.cmd([[
-  function! ExecuteMacroOverVisualRange()
-    echo "@".getcmdline()
-    execute ":'<,'>normal @".nr2char(getchar())
-  endfunction
-]])
-vim.keymap.set("x", "@", ":<C-u>call ExecuteMacroOverVisualRange()<CR>")
+vim.keymap.set("x", "@", ":normal @", {remap = false})
 
 -- Commands
 
-vim.api.nvim_create_user_command("Cppath", "let @+ = expand(\"%:p\")", {})
+vim.api.nvim_create_user_command("Cppath", function()
+  vim.fn.setreg("+", vim.fn.expand("%:p"))
+end, {})
 
-vim.api.nvim_create_user_command("Opdir",
-  ":silent exec \"!open \" . fnameescape(expand(\"%:p:h\"))", {})
+vim.api.nvim_create_user_command("Opdir", function()
+  vim.fn.system({"open", vim.fn.expand("%:p:h")})
+end, {})
 
-vim.api.nvim_create_user_command("Opfile",
-  ":silent exec \"!open \" . fnameescape(expand(\"%:p\"))", {})
+vim.api.nvim_create_user_command("Opfile", function()
+  vim.fn.system({"open", vim.fn.expand("%:p")})
+end, {})
 
-vim.api.nvim_create_user_command("Remove",
-  "call delete(expand(\"%\")) | bdelete!", {})
+vim.api.nvim_create_user_command("Remove", function()
+  os.remove(vim.fn.expand("%"))
+  vim.cmd("bdelete!")
+end, {})

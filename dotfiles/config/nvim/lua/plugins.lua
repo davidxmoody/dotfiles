@@ -208,8 +208,8 @@ require("lazy").setup({
   },
 
   {
-    "kyazdani42/nvim-tree.lua",
-    dependencies = "kyazdani42/nvim-web-devicons",
+    "nvim-tree/nvim-tree.lua",
+    dependencies = "nvim-tree/nvim-web-devicons",
     opts = {
       renderer = {
         add_trailing = true,
@@ -299,9 +299,6 @@ require("lazy").setup({
 
   {"windwp/nvim-autopairs", opts = {}},
 
-  -- Load early for native LSP config
-  {"hrsh7th/cmp-nvim-lsp", lazy = false},
-
   {
     "hrsh7th/nvim-cmp",
     dependencies = {
@@ -311,11 +308,8 @@ require("lazy").setup({
       "hrsh7th/cmp-cmdline",
       "hrsh7th/cmp-buffer",
       "windwp/nvim-autopairs",
-      "jmbuhr/otter.nvim",
     },
     config = function()
-      vim.opt.completeopt = "menuone,noselect"
-
       local cmp = require("cmp")
 
       cmp.setup({
@@ -329,8 +323,6 @@ require("lazy").setup({
           documentation = cmp.config.window.bordered(),
         },
         mapping = cmp.mapping.preset.insert({
-          -- ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-          -- ["<C-f>"] = cmp.mapping.scroll_docs(4),
           ["<C-Space>"] = cmp.mapping.complete(),
           ["<CR>"] = function(fallback)
             if cmp.visible() then
@@ -355,7 +347,6 @@ require("lazy").setup({
           end,
         }),
         sources = cmp.config.sources({
-          {name = "otter"},
           {name = "nvim_lsp"},
           {name = "luasnip"},
           {name = "path"},
