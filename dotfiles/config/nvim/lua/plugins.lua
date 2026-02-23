@@ -16,7 +16,6 @@ vim.g.mapleader = " "
 require("lazy").setup({
   "tpope/vim-fugitive",
   "lambdalisue/suda.vim",
-  "davidxmoody/vim-indent-object",
 
   {
     "echasnovski/mini.nvim",

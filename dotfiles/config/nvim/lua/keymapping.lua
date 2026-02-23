@@ -84,7 +84,34 @@ vim.keymap.set("n", "<leader>z", ":ZenMode<CR>", {silent = true})
 
 -- Selection
 
-vim.keymap.set(nxo, "<leader>v", "Vii", {remap = true})
+vim.keymap.set("n", "<leader>v", function()
+  local cur = vim.fn.line(".")
+  local indent = vim.fn.indent(cur)
+  if indent == 0 then
+    return
+  end
+  local top, bot = cur, cur
+  local last_line = vim.fn.line("$")
+  while top > 1 and
+    (vim.fn.indent(top - 1) >= indent or vim.fn.getline(top - 1):match("^%s*$")) do
+    top = top - 1
+  end
+  while bot < last_line and
+    (vim.fn.indent(bot + 1) >= indent or vim.fn.getline(bot + 1):match("^%s*$")) do
+    bot = bot + 1
+  end
+  -- Trim blank lines from edges
+  while top < bot and vim.fn.getline(top):match("^%s*$") do
+    top = top + 1
+  end
+  while bot > top and vim.fn.getline(bot):match("^%s*$") do
+    bot = bot - 1
+  end
+  vim.fn.cursor(top, 0)
+  vim.cmd("normal! V")
+  vim.fn.cursor(bot, 0)
+end)
+
 vim.keymap.set(nxo, "<leader>V", "ggVG")
 
 -- Jumping
