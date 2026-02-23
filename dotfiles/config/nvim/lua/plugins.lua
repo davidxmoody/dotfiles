@@ -63,6 +63,8 @@ require("lazy").setup({
         },
       })
 
+      require("mini.pairs").setup()
+
       require("mini.hipatterns").setup({
         highlighters = {
           hex_color = require("mini.hipatterns").gen_highlighter.hex_color(),
@@ -341,8 +343,6 @@ require("lazy").setup({
     end,
   },
 
-  {"windwp/nvim-autopairs", opts = {}},
-
   {
     "hrsh7th/nvim-cmp",
     dependencies = {
@@ -351,7 +351,6 @@ require("lazy").setup({
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-cmdline",
       "hrsh7th/cmp-buffer",
-      "windwp/nvim-autopairs",
     },
     config = function()
       local cmp = require("cmp")
@@ -410,8 +409,6 @@ require("lazy").setup({
       cmp.setup.filetype({"markdown", "help"},
         {completion = {autocomplete = false}})
 
-      local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-      cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
     end,
   },
 
