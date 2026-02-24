@@ -203,7 +203,7 @@ on-mode-changed = []
     # See: https://nikitabobko.github.io/AeroSpace/commands#mode
     alt-shift-semicolon = 'mode service'
 
-    alt-m = 'exec-and-forget kitty --single-instance'
+    alt-m = 'exec-and-forget open -na Ghostty'
     alt-w = 'exec-and-forget open -na "Google Chrome" --args --new-window'
 
 # 'service' binding mode declaration.
