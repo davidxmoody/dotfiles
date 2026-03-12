@@ -42,7 +42,7 @@ local function setupAutoCapitalization()
     buffer = 0,
     callback = function()
       if vim.fn.search(
-        "\\v^%#|^\\s*-\\s+%#|^#+\\s+%#|^#+\\s+\\d\\d:\\d\\d\\s+%#|[.!?]\\s+%#",
+        "\\v^%#|^\\s*-\\s+%#|^\\s*-\\s+\\[.\\]\\s+%#|^#+\\s+%#|^#+\\s+\\d\\d:\\d\\d\\s+%#|[.!?]\\s+%#",
         "bcnW", vim.fn.line(".")) ~= 0 then
         vim.v.char = string.upper(vim.v.char)
       end
