@@ -182,6 +182,14 @@ im() {
   )
 }
 
+h() {
+  (
+    type deactivate &> /dev/null && deactivate
+    cd "$P_DIR/self-tracking"
+    poetry run python -m self_tracking.analysis.habits
+  )
+}
+
 ipyd() {
   (
     type deactivate &> /dev/null && deactivate

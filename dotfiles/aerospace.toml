@@ -106,16 +106,23 @@ on-mode-changed = []
     alt-z = 'layout accordion horizontal vertical'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#focus
-    alt-h = 'focus left'
-    alt-t = 'focus down'
-    alt-n = 'focus up'
-    alt-s = 'focus right'
+    # alt-h = 'focus left'
+    # alt-t = 'focus down'
+    # alt-n = 'focus up'
+    # alt-s = 'focus right'
+
+    alt-h = 'exec-and-forget aerospace focus --boundaries-action fail left || aerospace focus-monitor left'
+    alt-t = 'exec-and-forget aerospace focus --boundaries-action fail down || aerospace focus-monitor down'
+    alt-n = 'exec-and-forget aerospace focus --boundaries-action fail up || aerospace focus-monitor up'
+    alt-s = 'exec-and-forget aerospace focus --boundaries-action fail right || aerospace focus-monitor right'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#move
     alt-g = 'move left'
     alt-c = 'move down'
     alt-r = 'move up'
     alt-l = 'move right'
+
+    alt-b = 'move-node-to-monitor --wrap-around --focus-follows-window next'
 
     alt-cmd-h = ['join-with left', 'mode main']
     alt-cmd-t = ['join-with down', 'mode main']
