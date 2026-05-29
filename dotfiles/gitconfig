@@ -26,6 +26,7 @@
 [delta]
   navigate = true
   dark = true
+  paging = always
 [merge]
   conflictstyle = zdiff3
 [init]
