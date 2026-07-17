@@ -238,6 +238,10 @@ vim.keymap.set("x", "@", ":normal @", {remap = false})
 -- Commands
 
 vim.api.nvim_create_user_command("Cppath", function()
+  vim.fn.setreg("+", vim.fn.expand("%:."))
+end, {})
+
+vim.api.nvim_create_user_command("Cppathabs", function()
   vim.fn.setreg("+", vim.fn.expand("%:p"))
 end, {})
 
