@@ -58,3 +58,15 @@ function CustomStatusline()
 end
 
 vim.opt.statusline = "%{%v:lua.CustomStatusline()%}"
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+  group = vim.api.nvim_create_augroup("auto_create_dir", {clear = true}),
+  callback = function(event)
+    -- skip URLs / non-file buffers (e.g. oil://, fugitive://)
+    if event.match:match("^%w%w+:[\\/][\\/]") then
+      return
+    end
+    local file = vim.uv.fs_realpath(event.match) or event.match
+    vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
+  end,
+})
