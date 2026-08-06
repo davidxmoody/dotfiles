@@ -10,15 +10,11 @@ fi
 cd "$DIARY_DIR"
 
 diary_today() {
-  subdir="entries/$(date +%Y/%m/%d)"
-  filepath="$subdir/diary.md"
-  mkdir -p "$subdir"
-
+  filepath="entries/$(date +%Y/%m/%d)/diary.md"
   if [[ -f "$filepath" ]]; then
     nvim "+:ZenMode" "$filepath"
   else
-    echo "## $(date +%H:%M) " > "$filepath"
-    nvim "+:ZenMode" "+norm G$" "+startinsert!" "$filepath"
+    nvim "+:ZenMode" "+norm a## " "+startinsert!" "$filepath"
   fi
 }
 
