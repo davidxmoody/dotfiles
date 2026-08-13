@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+#
+# git-count-regex
+# Print the number of occurrences of a regex across all git-tracked files,
+# walking commits newest -> oldest and stopping at the first commit that
+# has zero occurrences.
+#
+# Usage:
+#   ./git-count-regex <regex> [git-rev-list-options...]
+#
+# Examples:
+#   ./git-count-regex 'TODO'
+#   ./git-count-regex 'func\s+\w+' --all
+#   ./git-count-regex 'foo|bar' main
+#
+# Output is tab-separated: short-hash <TAB> ISO-date <TAB> occurrence-count
+
+set -uo pipefail
+
+if [ "$#" -lt 1 ]; then
+  echo "Usage: $0 <regex> [git-rev-list-options...]" >&2
+  exit 1
+fi
+
+pattern=$1
+shift
+
+# Default to the current branch's history if no revisions/options are given.
+if [ "$#" -eq 0 ]; then
+  set -- HEAD
+fi
+
+printf 'commit\tdate\tcount\n'
+
+# Fed via process substitution (not a pipe) so `break` stops the whole script.
+while read -r commit; do
+  # `git grep -o` prints one line per match, so `wc -l` = total occurrences.
+  #   -o  only the matched text (counts occurrences, not matching lines)
+  #   -I  skip binary files
+  #   -E  POSIX extended regex (swap for -P if your git has PCRE)
+  # git grep exits 1 when nothing matches; that's not an error here, so the
+  # absence of `set -e` lets the count fall through to 0.
+  count=$(git grep -oIE -e "$pattern" "$commit" 2> /dev/null | wc -l | tr -d '[:space:]')
+  date=$(git show -s --format=%cI "$commit")
+  printf '%s\t%s\t%s\n' "${commit:0:12}" "$date" "$count"
+
+  # Stop at the first commit with no occurrences (the zero row is shown so
+  # you can see where it dropped off).
+  [ "$count" -eq 0 ] && break
+done < <(git rev-list "$@")
