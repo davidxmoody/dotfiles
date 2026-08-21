@@ -29,6 +29,15 @@
 #   -u DATE   Stop after this date (YYYY-MM-DD), inclusive.
 #   -l LOCALE Locale passed to yap (default: en-GB)
 #   -w N      Wrap blockquote text at N columns; 0 to disable (default: 80)
+#   -p SECS   Start a new paragraph when speech pauses for this long.
+#             0 disables paragraph splitting (default: 1.5). Needs python3.
+#   -M N      Minimum words in a paragraph before a pause may break it
+#             (default: 20)
+#   -T N      Target paragraph length in words, used to break up runs that
+#             have no usable pauses — e.g. audio recorded with automatic
+#             silence removal. Breaks snap to the nearest sentence end,
+#             discourse marker ("anyway", "so", "later"), or clause comma.
+#             0 disables length splitting (default: 110).
 #   -f        Force: replace the blockquote beneath each link with a fresh
 #             transcript. Destructive — see the resuming note above.
 #   -n        Dry run: report what would happen, write nothing
@@ -49,18 +58,24 @@ UNTIL=""
 FORCE=0
 DRYRUN=0
 WRAP=80
+PAUSE="1.5"
+MINWORDS=20
+TARGET=110
 
 usage() {
   sed -n '3,45p' "$0" | sed 's/^# \{0,1\}//'
   exit "${1:-0}"
 }
 
-while getopts ":s:u:l:w:fnh" opt; do
+while getopts ":s:u:l:w:p:M:T:fnh" opt; do
   case "$opt" in
     s) START="$OPTARG" ;;
     u) UNTIL="$OPTARG" ;;
     l) LOCALE="$OPTARG" ;;
     w) WRAP="$OPTARG" ;;
+    p) PAUSE="$OPTARG" ;;
+    M) MINWORDS="$OPTARG" ;;
+    T) TARGET="$OPTARG" ;;
     f) FORCE=1 ;;
     n) DRYRUN=1 ;;
     h) usage 0 ;;
@@ -91,6 +106,28 @@ DIARY_DIR="${DIARY_DIR%/}"
   echo "-w needs a number" >&2
   exit 2
 }
+[[ "$PAUSE" =~ ^[0-9]+(\.[0-9]+)?$ ]] || {
+  echo "-p needs a number" >&2
+  exit 2
+}
+[[ "$MINWORDS" =~ ^[0-9]+$ ]] || {
+  echo "-M needs a number" >&2
+  exit 2
+}
+[[ "$TARGET" =~ ^[0-9]+$ ]] || {
+  echo "-T needs a number" >&2
+  exit 2
+}
+
+PARAGRAPHS=1
+if [[ ("$PAUSE" == "0" || "$PAUSE" == "0.0") && "$TARGET" == "0" ]]; then
+  PARAGRAPHS=0
+fi
+if [[ $PARAGRAPHS -eq 1 ]] && ! command -v python3 > /dev/null 2>&1; then
+  echo "python3 not found — paragraph splitting disabled." >&2
+  echo "(Install Xcode command line tools, or pass -p 0 to silence this.)" >&2
+  PARAGRAPHS=0
+fi
 
 for d in "$START" "$UNTIL"; do
   [[ -z "$d" || "$d" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]] || {
@@ -107,6 +144,295 @@ command -v yap > /dev/null 2>&1 || {
 
 TMP_DIR="$(mktemp -d)"
 trap 'rm -rf "$TMP_DIR"' EXIT
+
+PARAS_PY="$TMP_DIR/paras.py"
+cat > "$PARAS_PY" << 'PYEOF'
+#!/usr/bin/env python3
+"""Turn yap's JSON output into text with paragraph breaks at speech pauses.
+
+Usage: paras.py <json-file> <gap-seconds> <min-words>
+
+Reads word (or segment) timings, starts a new paragraph wherever the silence
+between two words exceeds <gap-seconds>, and writes plain text with blank
+lines between paragraphs. Never alters the words themselves.
+
+If the JSON carries no usable timings, falls back to grouping sentences.
+"""
+import json
+import re
+import sys
+
+TEXT_KEYS = ("text", "word", "substring", "content", "transcript")
+START_KEYS = ("start", "startTime", "start_time", "from", "begin", "offset",
+              "timestamp", "time")
+END_KEYS = ("end", "endTime", "end_time", "to", "finish")
+DUR_KEYS = ("duration", "dur", "length")
+
+
+def to_seconds(v):
+    """Coerce the many shapes a timestamp arrives in into float seconds."""
+    if isinstance(v, bool):
+        return None
+    if isinstance(v, (int, float)):
+        return float(v)
+    if isinstance(v, str):
+        try:
+            return float(v)
+        except ValueError:
+            m = re.match(r"^(?:(\d+):)?(\d+):(\d+(?:\.\d+)?)$", v.strip())
+            if m:
+                h = float(m.group(1) or 0)
+                return h * 3600 + float(m.group(2)) * 60 + float(m.group(3))
+            return None
+    if isinstance(v, dict):
+        # CMTime-style {"value": 1500, "timescale": 1000}
+        if "value" in v and "timescale" in v:
+            try:
+                ts = float(v["timescale"])
+                return float(v["value"]) / ts if ts else None
+            except (TypeError, ValueError):
+                return None
+        for k in ("seconds", "secs", "value"):
+            if k in v:
+                return to_seconds(v[k])
+    return None
+
+
+def extract(node):
+    """Pull (text, start, end) out of a dict, or None if it isn't a timed item."""
+    text = None
+    for k in TEXT_KEYS:
+        if isinstance(node.get(k), str):
+            text = node[k]
+            break
+    if text is None or not text.strip():
+        return None
+
+    start = None
+    for k in START_KEYS:
+        if k in node:
+            start = to_seconds(node[k])
+            if start is not None:
+                break
+    if start is None:
+        return None
+
+    end = None
+    for k in END_KEYS:
+        if k in node:
+            end = to_seconds(node[k])
+            if end is not None:
+                break
+    if end is None:
+        for k in DUR_KEYS:
+            if k in node:
+                d = to_seconds(node[k])
+                if d is not None:
+                    end = start + d
+                    break
+    if end is None or end < start:
+        end = start
+    return (text, start, end)
+
+
+def collect(data):
+    """Group timed items by the JSON key they live under; return the biggest.
+
+    Word-level lists are longer than segment-level ones, so 'most items' picks
+    the finest granularity available without knowing the schema in advance.
+    """
+    groups = {}
+
+    def walk(node, keyname):
+        if isinstance(node, dict):
+            for k, v in node.items():
+                walk(v, k)
+            item = extract(node)
+            if item:
+                groups.setdefault(keyname, []).append(item)
+        elif isinstance(node, list):
+            for v in node:
+                walk(v, keyname)
+
+    walk(data, "_root")
+    if not groups:
+        return []
+    best = max(groups.values(), key=len)
+    return sorted(best, key=lambda x: x[1])
+
+
+def find_plain_text(data):
+    """Longest string under a text-ish key, for the no-timings fallback."""
+    best = ""
+
+    def walk(node):
+        nonlocal best
+        if isinstance(node, dict):
+            for k, v in node.items():
+                if k in TEXT_KEYS and isinstance(v, str) and len(v) > len(best):
+                    best = v
+                walk(v)
+        elif isinstance(node, list):
+            for v in node:
+                walk(v)
+
+    walk(data)
+    return best
+
+
+def join_words(words):
+    s = " ".join(w.strip() for w in words if w.strip())
+    s = re.sub(r"\s+", " ", s)
+    s = re.sub(r"\s+([,.;:!?%)\]])", r"\1", s)
+    s = re.sub(r"([(\[])\s+", r"\1", s)
+    s = re.sub(r"\s+('(?:s|t|re|ve|ll|d|m))\b", r"\1", s)
+    return s.strip()
+
+
+# Words that typically begin a new thought in spoken diary narration. Used as
+# fallback break points when speech has no pauses and no punctuation.
+MARKERS = [
+    ("anyway",), ("anyhow",), ("so",), ("and", "then"), ("then",), ("but",),
+    ("okay",), ("ok",), ("right",), ("well",), ("also",), ("plus",),
+    ("meanwhile",), ("afterwards",), ("later",), ("eventually",), ("finally",),
+    ("basically",), ("actually",), ("honestly",), ("obviously",),
+    ("oh",), ("i", "mean"), ("you", "know"), ("i", "guess"), ("i", "suppose"),
+    ("today",), ("tonight",), ("yesterday",), ("tomorrow",),
+    ("this", "morning"), ("this", "afternoon"), ("this", "evening"),
+    ("last", "night"), ("after", "that"), ("before", "that"),
+    ("in", "the", "end"), ("at", "some", "point"), ("the", "thing", "is"),
+    ("another", "thing"), ("first",), ("next",), ("second",), ("third",),
+    ("speaking", "of"), ("on", "top", "of", "that"), ("that", "reminds", "me"),
+]
+MAX_MARKER = max(len(m) for m in MARKERS)
+
+
+def bare(tok):
+    """Lowercase a token with surrounding punctuation stripped."""
+    return re.sub(r"^[^\w']+|[^\w']+$", "", tok).lower()
+
+
+def boundary_rank(tokens, i):
+    """How good a paragraph break before tokens[i] would be. 0 = unusable."""
+    if i <= 0 or i >= len(tokens):
+        return 0
+    prev = tokens[i - 1].rstrip()
+    if prev.endswith((".", "!", "?", '."', '?"', '!"', ".)", "?)", "!)")):
+        return 4
+    for m in MARKERS:
+        if len(m) <= MAX_MARKER and tuple(bare(t) for t in tokens[i:i + len(m)]) == m:
+            return 3
+    if prev.endswith((",", ";", ":", "\u2014", "-")):
+        return 2
+    return 0
+
+
+def refine(tokens, target):
+    """Split an over-long run of tokens into target-sized paragraphs.
+
+    Looks for the best available boundary in a window around each target
+    position, preferring sentence ends, then discourse markers, then clause
+    punctuation. Falls back to a hard cut only when nothing else is on offer.
+    """
+    if target <= 0 or len(tokens) <= target * 1.5:
+        return [tokens]
+
+    out, start, n = [], 0, len(tokens)
+    while n - start > target * 1.5:
+        ideal = start + target
+        lo = start + max(1, int(target * 0.6))
+        hi = min(n, start + int(target * 1.4))
+        best = None
+        for i in range(lo, hi):
+            r = boundary_rank(tokens, i)
+            if r:
+                cand = (-r, abs(i - ideal), i)
+                if best is None or cand < best:
+                    best = cand
+        idx = best[2] if best else min(ideal, n)
+        if idx <= start:
+            break
+        out.append(tokens[start:idx])
+        start = idx
+    if start < n:
+        out.append(tokens[start:])
+    return out
+
+
+def main():
+    path = sys.argv[1]
+    gap = float(sys.argv[2])
+    min_words = int(sys.argv[3])
+    target = int(sys.argv[4]) if len(sys.argv) > 4 else 110
+
+    with open(path, "r", encoding="utf-8") as fh:
+        raw = fh.read()
+
+    try:
+        data = json.loads(raw)
+    except json.JSONDecodeError:
+        data = None
+
+    items = collect(data) if data is not None else []
+
+    if items and gap > 0:
+        # Guard against millisecond timebases being read as seconds.
+        span = items[-1][2] - items[0][1]
+        if span > 36000:
+            items = [(t, s / 1000.0, e / 1000.0) for (t, s, e) in items]
+
+        groups, cur, prev_end, prev_text = [], [], None, ""
+        for text, start, end in items:
+            if prev_end is not None and len(cur) >= min_words:
+                # A pause after a finished sentence is a real paragraph break;
+                # mid-sentence it is usually hesitation, so ask for more.
+                sentence_end = prev_text.rstrip().endswith((".", "!", "?", '."', '?"', '!"'))
+                needed = gap if sentence_end else gap * 1.75
+                if (start - prev_end) >= needed:
+                    groups.append(cur)
+                    cur = []
+            cur.append(text)
+            prev_end = end
+            prev_text = text
+        if cur:
+            groups.append(cur)
+    elif items:
+        # Pause splitting switched off; keep the words, split by length only.
+        groups = [[t for (t, _s, _e) in items]]
+    else:
+        text = find_plain_text(data) if data is not None else raw
+        if not text.strip():
+            return
+        groups = [text.split()]
+
+    from_pauses = len(groups)
+
+    # Break up anything still over-long (silence-removed audio lands here).
+    final = []
+    for g in groups:
+        final.extend(refine(g, target))
+
+    paras = [join_words(g) for g in final]
+    paras = [p for p in paras if p]
+    if not paras:
+        return
+
+    if from_pauses > 1 and len(paras) > from_pauses:
+        mode = "mixed"
+    elif from_pauses > 1:
+        mode = "pauses"
+    elif len(paras) > 1:
+        mode = "length"
+    else:
+        mode = "single"
+    sys.stderr.write("mode=%s\n" % mode)
+
+    print("\n\n".join(paras))
+
+
+if __name__ == "__main__":
+    main()
+PYEOF
 
 # ------------------------------------------------------------------ helpers --
 
@@ -212,14 +538,35 @@ while IFS= read -r md; do
       printf '%s' "  $name  ... "
       start=$SECONDS
       txt="$TMP_DIR/yap.txt"
+      raw="$TMP_DIR/yap.json"
       : > "$txt"
+      : > "$raw"
 
-      if ! yap transcribe "$path" --locale "$LOCALE" --txt -o "$txt" \
-        < /dev/null > /dev/null 2> "$TMP_DIR/yap.err"; then
+      if [[ $PARAGRAPHS -eq 1 ]]; then
+        yap transcribe "$path" --locale "$LOCALE" --json --word-timestamps \
+          -o "$raw" < /dev/null > /dev/null 2> "$TMP_DIR/yap.err"
+        rc=$?
+      else
+        yap transcribe "$path" --locale "$LOCALE" --txt \
+          -o "$txt" < /dev/null > /dev/null 2> "$TMP_DIR/yap.err"
+        rc=$?
+      fi
+
+      if [[ $rc -ne 0 ]]; then
         echo "FAILED"
         sed 's/^/      /' "$TMP_DIR/yap.err" >&2
         audio_failed=$((audio_failed + 1))
         continue
+      fi
+
+      if [[ $PARAGRAPHS -eq 1 ]]; then
+        if ! python3 "$PARAS_PY" "$raw" "$PAUSE" "$MINWORDS" "$TARGET" > "$txt" \
+          2> "$TMP_DIR/paras.err"; then
+          echo "FAILED (paragraph split)"
+          sed 's/^/      /' "$TMP_DIR/paras.err" >&2
+          audio_failed=$((audio_failed + 1))
+          continue
+        fi
       fi
 
       if [[ ! -s "$txt" ]]; then
@@ -236,7 +583,13 @@ while IFS= read -r md; do
       here=$((here + 1))
       inserted=$((inserted + 1))
       audio_done=$((audio_done + 1))
-      echo "ok  ($((SECONDS - start))s, $(wc -w < "$txt" | tr -d ' ') words)"
+      nparas=$(grep -c '^[[:space:]]*$' "$txt")
+      nparas=$((nparas + 1))
+      mode=""
+      [[ $PARAGRAPHS -eq 1 ]] &&
+        mode="$(sed -n 's/^mode=//p' "$TMP_DIR/paras.err" 2> /dev/null | tail -1)"
+      [[ -n "$mode" ]] && mode=", $mode"
+      echo "ok  ($((SECONDS - start))s, $(wc -w < "$txt" | tr -d ' ') words, ${nparas} para${mode})"
     done 4< <(printf '%s\n' "$links")
 
     [[ $here -gt 0 ]] || continue
@@ -250,10 +603,10 @@ while IFS= read -r md; do
     # Swallow any blank lines that followed; we set the spacing ourselves.
     while [[ $i -lt $n && -z "${lines[$i]}" ]]; do i=$((i + 1)); done
 
-    # Two blank lines before the next content. If nothing follows, the
-    # transcript ends the file and gets no trailing blanks at all.
+    # One blank line before the next content. If nothing follows, the
+    # transcript ends the file and gets no trailing blank at all.
     if [[ $i -lt $n ]]; then
-      printf '\n\n' >> "$out"
+      printf '\n' >> "$out"
     fi
   done
 
