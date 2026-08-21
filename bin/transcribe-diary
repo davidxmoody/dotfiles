@@ -1,0 +1,285 @@
+#!/usr/bin/env bash
+#
+# transcribe-diary.sh — transcribe audio embedded in a dated markdown diary
+#
+# Walks $DIARY_DIR/entries/YYYY/MM/DD/diary.md in ascending date order, finds
+# markdown image links pointing at .m4a files, transcribes each with yap
+# (Apple's on-device Speech framework), and inserts the transcript as a
+# blockquote directly beneath the link:
+#
+#     ![](audio-19-35.m4a)
+#
+#     > Woke up late again...
+#
+# Requires: yap  (brew install yap)  — macOS 26+ on Apple Silicon
+#
+# RESUMING: an audio link is considered already transcribed if the line below
+# it (allowing one blank line) starts with ">". So re-running skips finished
+# work and picks up where it left off. The corollary is that a blockquote you
+# wrote yourself directly beneath an audio link will suppress transcription of
+# that clip — put a blank line and any other text between them to avoid this.
+#
+# Usage:
+#   ./transcribe-diary.sh [options] [diary-dir]
+#
+#   diary-dir defaults to $DIARY_DIR.
+#
+# Options:
+#   -s DATE   Start from this date (YYYY-MM-DD), inclusive. For resuming.
+#   -u DATE   Stop after this date (YYYY-MM-DD), inclusive.
+#   -l LOCALE Locale passed to yap (default: en-GB)
+#   -w N      Wrap blockquote text at N columns; 0 to disable (default: 80)
+#   -f        Force: replace the blockquote beneath each link with a fresh
+#             transcript. Destructive — see the resuming note above.
+#   -n        Dry run: report what would happen, write nothing
+#   -h        Help
+#
+# Examples:
+#   ./transcribe-diary.sh -n                 # dry run over everything
+#   ./transcribe-diary.sh                    # transcribe everything
+#   ./transcribe-diary.sh -s 2021-06-14      # resume from that date
+#   ./transcribe-diary.sh -s 2019-01-01 -u 2019-12-31
+#
+
+set -uo pipefail
+
+LOCALE="en-GB"
+START=""
+UNTIL=""
+FORCE=0
+DRYRUN=0
+WRAP=80
+
+usage() {
+  sed -n '3,45p' "$0" | sed 's/^# \{0,1\}//'
+  exit "${1:-0}"
+}
+
+while getopts ":s:u:l:w:fnh" opt; do
+  case "$opt" in
+    s) START="$OPTARG" ;;
+    u) UNTIL="$OPTARG" ;;
+    l) LOCALE="$OPTARG" ;;
+    w) WRAP="$OPTARG" ;;
+    f) FORCE=1 ;;
+    n) DRYRUN=1 ;;
+    h) usage 0 ;;
+    :)
+      echo "Option -$OPTARG requires an argument." >&2
+      exit 2
+      ;;
+    \?)
+      echo "Unknown option: -$OPTARG" >&2
+      exit 2
+      ;;
+  esac
+done
+shift $((OPTIND - 1))
+
+DIARY_DIR="${1:-${DIARY_DIR:-}}"
+DIARY_DIR="${DIARY_DIR%/}"
+
+[[ -n "$DIARY_DIR" ]] || {
+  echo "No diary directory. Set \$DIARY_DIR or pass one as an argument." >&2
+  exit 2
+}
+[[ -d "$DIARY_DIR/entries" ]] || {
+  echo "Not found: $DIARY_DIR/entries" >&2
+  exit 1
+}
+[[ "$WRAP" =~ ^[0-9]+$ ]] || {
+  echo "-w needs a number" >&2
+  exit 2
+}
+
+for d in "$START" "$UNTIL"; do
+  [[ -z "$d" || "$d" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]] || {
+    echo "Dates must look like YYYY-MM-DD (got: $d)" >&2
+    exit 2
+  }
+done
+
+command -v yap > /dev/null 2>&1 || {
+  echo "yap not found. Install it with:  brew install yap" >&2
+  echo "(Requires macOS 26 or later on Apple Silicon.)" >&2
+  exit 1
+}
+
+TMP_DIR="$(mktemp -d)"
+trap 'rm -rf "$TMP_DIR"' EXIT
+
+# ------------------------------------------------------------------ helpers --
+
+ends_with_newline() {
+  [[ -s "$1" ]] || return 0
+  [[ "$(tail -c 1 "$1" | wc -l | tr -d ' ')" == "1" ]]
+}
+
+# Emit "> "-prefixed lines, optionally wrapped, with blank lines as bare ">".
+quote_file() {
+  local txt="$1"
+  if [[ "$WRAP" -gt 0 ]]; then
+    fold -s -w "$WRAP" "$txt"
+  else
+    cat "$txt"
+  fi | sed -e 's/[[:space:]]*$//' -e 's/^/> /' -e 's/^> $/>/'
+}
+
+# ---------------------------------------------------------------- main loop --
+
+files_seen=0
+files_changed=0
+audio_total=0
+audio_done=0
+audio_skipped=0
+audio_failed=0
+audio_missing=0
+
+while IFS= read -r md; do
+  rel="${md#"$DIARY_DIR"/entries/}"
+  date="${rel%/diary.md}"
+  date="${date//\//-}"
+
+  [[ "$date" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]] || continue
+  [[ -n "$START" && "$date" < "$START" ]] && continue
+  [[ -n "$UNTIL" && "$date" > "$UNTIL" ]] && continue
+
+  grep -qE '!\[[^]]*\]\([^)]+\.m4a\)' "$md" || continue
+
+  files_seen=$((files_seen + 1))
+  dir="$(dirname "$md")"
+  echo "$date"
+
+  # Read the whole file into an array so we can look ahead. (No mapfile: macOS
+  # still ships bash 3.2.)
+  lines=()
+  while IFS= read -r l || [[ -n "$l" ]]; do
+    lines+=("$l")
+  done 3< "$md" 0<&3
+
+  n=${#lines[@]}
+  out="$TMP_DIR/out.md"
+  : > "$out"
+  inserted=0
+  i=0
+
+  while [[ $i -lt $n ]]; do
+    line="${lines[$i]}"
+    printf '%s\n' "$line" >> "$out"
+    i=$((i + 1))
+
+    links="$(grep -oE '!\[[^]]*\]\([^)]+\.m4a\)' <<< "$line")"
+    [[ -n "$links" ]] || continue
+
+    # Is there already a blockquote directly beneath (allowing one blank line)?
+    k=$i
+    [[ $k -lt $n && -z "${lines[$k]}" ]] && k=$((k + 1))
+    existing=0
+    [[ $k -lt $n && "${lines[$k]}" == ">"* ]] && existing=1
+
+    if [[ $existing -eq 1 && $FORCE -eq 0 ]]; then
+      while IFS= read -r link <&4; do
+        [[ -n "$link" ]] || continue
+        audio_total=$((audio_total + 1))
+        audio_skipped=$((audio_skipped + 1))
+        a="${link#*](}"
+        a="${a%)}"
+        echo "  $(basename "$a")  already done"
+      done 4< <(printf '%s\n' "$links")
+      continue
+    fi
+
+    here=0
+    while IFS= read -r link <&4; do
+      [[ -n "$link" ]] || continue
+      audio="${link#*](}"
+      audio="${audio%)}"
+      name="$(basename "$audio")"
+      audio_total=$((audio_total + 1))
+
+      path="$dir/$audio"
+      if [[ ! -f "$path" ]]; then
+        echo "  $name  MISSING, skipped"
+        audio_missing=$((audio_missing + 1))
+        continue
+      fi
+
+      if [[ $DRYRUN -eq 1 ]]; then
+        echo "  $name  would transcribe"
+        continue
+      fi
+
+      printf '%s' "  $name  ... "
+      start=$SECONDS
+      txt="$TMP_DIR/yap.txt"
+      : > "$txt"
+
+      if ! yap transcribe "$path" --locale "$LOCALE" --txt -o "$txt" \
+        < /dev/null > /dev/null 2> "$TMP_DIR/yap.err"; then
+        echo "FAILED"
+        sed 's/^/      /' "$TMP_DIR/yap.err" >&2
+        audio_failed=$((audio_failed + 1))
+        continue
+      fi
+
+      if [[ ! -s "$txt" ]]; then
+        echo "empty, skipped"
+        audio_failed=$((audio_failed + 1))
+        continue
+      fi
+
+      {
+        echo ""
+        quote_file "$txt"
+      } >> "$out"
+
+      here=$((here + 1))
+      inserted=$((inserted + 1))
+      audio_done=$((audio_done + 1))
+      echo "ok  ($((SECONDS - start))s, $(wc -w < "$txt" | tr -d ' ') words)"
+    done 4< <(printf '%s\n' "$links")
+
+    [[ $here -gt 0 ]] || continue
+
+    if [[ $existing -eq 1 ]]; then
+      # -f: skip past the blockquote we just replaced.
+      while [[ $k -lt $n && "${lines[$k]}" == ">"* ]]; do k=$((k + 1)); done
+      i=$k
+    fi
+
+    # Swallow any blank lines that followed; we set the spacing ourselves.
+    while [[ $i -lt $n && -z "${lines[$i]}" ]]; do i=$((i + 1)); done
+
+    # Two blank lines before the next content. If nothing follows, the
+    # transcript ends the file and gets no trailing blanks at all.
+    if [[ $i -lt $n ]]; then
+      printf '\n\n' >> "$out"
+    fi
+  done
+
+  [[ $inserted -eq 0 ]] && continue
+  [[ $DRYRUN -eq 1 ]] && continue
+
+  # Match the original's trailing-newline state, to keep git diffs clean.
+  if ! ends_with_newline "$md"; then
+    perl -0777 -pe 's/\n+\z//' < "$out" > "$out.fixed" && mv "$out.fixed" "$out"
+  fi
+
+  cp "$out" "$md"
+  files_changed=$((files_changed + 1))
+  echo "  wrote $inserted transcript(s)"
+
+done < <(find "$DIARY_DIR/entries" -type f -name diary.md | sort)
+
+echo
+[[ $DRYRUN -eq 1 ]] && echo "DRY RUN — nothing was written"
+echo "entries with audio:  $files_seen"
+echo "entries modified:    $files_changed"
+echo "audio links found:   $audio_total"
+echo "  transcribed:       $audio_done"
+echo "  already done:      $audio_skipped"
+echo "  missing file:      $audio_missing"
+echo "  failed:            $audio_failed"
+
+[[ $audio_failed -gt 0 ]] && exit 1
+exit 0
